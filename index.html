@@ -21,8 +21,8 @@
 }
 
 :root {
-  --bg-void: #08020c;
-  --bg-deep: #14051b;
+  --bg-void: #07020a;
+  --bg-deep: #120418;
   --rose-primary: #f472b6;
   --rose-light: #ffe4e6;
   --rose-blush: #fecdd3;
@@ -33,9 +33,9 @@
   --ink: #fff1f2;
   --ink-dim: #f5d6e2;
   --ink-faint: #ad8a9d;
-  --glass-bg: rgba(26, 9, 34, 0.76);
+  --glass-bg: rgba(24, 8, 31, 0.78);
   --glass-border: rgba(244, 114, 182, 0.32);
-  --glass-specular: rgba(255, 255, 255, 0.3);
+  --glass-specular: rgba(255, 255, 255, 0.25);
   --serif-title: 'Cinzel', Georgia, serif;
   --serif-body: 'Cormorant Garamond', Garamond, serif;
   --sans: 'Montserrat', -apple-system, sans-serif;
@@ -66,7 +66,7 @@ button {
 }
 svg { display: block; }
 
-/* Холсты звездного фона */
+/* Холсты фонового пространства */
 #space-canvas, #sparkle-trail {
   position: fixed;
   inset: 0;
@@ -75,7 +75,7 @@ svg { display: block; }
   pointer-events: none;
 }
 #space-canvas { z-index: 1; }
-#sparkle-trail { z-index: 999; }
+#sparkle-trail { z-index: 950; }
 
 .nebula {
   position: fixed;
@@ -100,12 +100,12 @@ svg { display: block; }
 }
 
 /* ============================================================
-   ВРАТА ПЕРВОЗДАННОГО СВЕТА (WELCOME GATE)
+   ВРАТА ПЕРВОЗДАННОГО СВЕТА
    ============================================================ */
 #gate {
   position: fixed;
   inset: 0;
-  z-index: 900;
+  z-index: 920;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -226,7 +226,7 @@ svg { display: block; }
 .scene {
   position: relative;
   min-height: 100dvh;
-  height: auto;
+  height: 100dvh;
   width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -234,27 +234,34 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: calc(max(16px, env(safe-area-inset-top)) + 8px) max(16px, env(safe-area-inset-right)) calc(max(22px, env(safe-area-inset-bottom)) + 16px) max(16px, env(safe-area-inset-left));
+  padding: calc(max(16px, env(safe-area-inset-top)) + 8px) max(16px, env(safe-area-inset-right)) calc(max(20px, env(safe-area-inset-bottom)) + 12px) max(16px, env(safe-area-inset-left));
   overflow-y: auto;
   overflow-x: hidden;
-  gap: 16px;
+  gap: 12px;
 }
 .scene::-webkit-scrollbar { display: none; }
 
+#s-letter {
+  height: auto;
+  min-height: 100dvh;
+}
+
+/* Плавное проявление элементов без разрушения базовых трансформаций */
 .rise {
   opacity: 0;
   filter: blur(8px);
-  transform: translateY(22px) scale(0.98);
+  transform: translateY(22px) rotate(var(--rot, 0deg)) scale(0.98);
   transition: opacity 1.1s var(--ease-silk), filter 1.1s var(--ease-silk), transform 1.1s var(--ease-silk);
   transition-delay: calc(var(--d, 0) * 1s);
+  will-change: transform, opacity, filter;
 }
 .scene.in-view .rise {
   opacity: 1;
   filter: blur(0);
-  transform: translateY(0) scale(1);
+  transform: translateY(0) rotate(var(--rot, 0deg)) scale(1);
 }
 
-/* КВЕСТ-БАННЕРЫ И ПЛАВНЫЕ КНОПКИ ПЕРЕХОДА */
+/* КВЕСТ-БАННЕРЫ И КНОПКИ */
 .quest-hud {
   width: 100%;
   max-width: 480px;
@@ -262,7 +269,7 @@ svg { display: block; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 10px 20px;
+  padding: 10px 18px;
   background: rgba(36, 12, 45, 0.78);
   border: 1px solid var(--glass-border);
   border-radius: 30px;
@@ -308,7 +315,7 @@ svg { display: block; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 30px;
+  padding: 13px 28px;
   background: linear-gradient(135deg, rgba(244, 114, 182, 0.42), rgba(217, 70, 239, 0.34));
   border: 1px solid var(--rose-light);
   border-radius: 30px;
@@ -326,7 +333,6 @@ svg { display: block; }
   transition: opacity 0.9s var(--ease-silk), transform 0.9s var(--ease-silk), box-shadow 0.9s var(--ease-silk);
   flex-shrink: 0;
   z-index: 30;
-  margin-top: 8px;
 }
 .quest-next-btn.active {
   opacity: 1;
@@ -346,7 +352,7 @@ svg { display: block; }
   background: radial-gradient(circle at 50% 50%, rgba(24, 8, 33, 0.97), rgba(8, 2, 12, 0.99));
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  z-index: 80;
+  z-index: 60;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -377,11 +383,11 @@ svg { display: block; }
 }
 
 /* ============================================================
-   КАРТОЧКИ ВОСПОМИНАНИЙ
+   КАРТОЧКИ ВОСПОМИНАНИЙ И ПИНЫ
    ============================================================ */
 .photo-card {
   --w: clamp(150px, 42vw, 200px);
-  --h: clamp(195px, 56vw, 265px);
+  --h: clamp(195px, 56vw, 260px);
   position: relative;
   width: var(--w);
   height: var(--h);
@@ -396,21 +402,23 @@ svg { display: block; }
   display: flex;
   flex-direction: column;
 }
-.photo-card::before {
-  content: '🌸';
+.photo-card__pin {
   position: absolute;
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 14px;
-  line-height: 1;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(30, 10, 38, 0.92);
+  border: 1px solid var(--rose-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 0 8px var(--rose-primary));
-  z-index: 5;
+  font-size: 13px;
+  line-height: 1;
+  box-shadow: 0 0 12px var(--rose-glow);
+  z-index: 10;
 }
 .photo-card__view {
   position: relative;
@@ -502,7 +510,6 @@ svg { display: block; }
 }
 .star-node {
   cursor: pointer;
-  transform-origin: center;
 }
 .star-node circle.core {
   fill: #fff;
@@ -516,11 +523,13 @@ svg { display: block; }
   fill: var(--rose-light);
   pointer-events: none;
   font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
 }
 .star-node.lit circle.core {
   fill: var(--rose-bright);
   filter: drop-shadow(0 0 16px #fff);
-  transform: scale(1.35);
+  r: 7.5;
 }
 .star-node.error circle.core {
   fill: #f43f5e;
@@ -547,8 +556,6 @@ svg { display: block; }
   gap: clamp(12px, 3.5vw, 26px);
   width: 100%;
 }
-.mem-duo-row .photo-card:first-child { transform: rotate(-2deg); }
-.mem-duo-row .photo-card:last-child { transform: rotate(2deg); }
 
 #s-mem2 .center-quote {
   font-family: var(--serif-body);
@@ -574,7 +581,7 @@ svg { display: block; }
   font-size: 1.4rem;
   color: var(--rose-light);
   text-shadow: 0 0 15px var(--rose-bright);
-  will-change: transform;
+  animation: sparkPureFloat 3s infinite ease-in-out alternate;
 }
 .memory-rune-spark::before {
   content: '';
@@ -584,6 +591,10 @@ svg { display: block; }
   background: radial-gradient(circle, rgba(244, 114, 182, 0.45) 0%, transparent 70%);
   animation: haloBreathe 2.2s infinite alternate;
 }
+@keyframes sparkPureFloat {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(0, -10px, 0); }
+}
 @keyframes haloBreathe {
   from { transform: scale(0.85); opacity: 0.4; }
   to { transform: scale(1.4); opacity: 0.95); }
@@ -592,37 +603,7 @@ svg { display: block; }
   opacity: 0;
   pointer-events: none;
   transform: scale(0.1) !important;
-  transition: all 0.5s ease;
-}
-
-.secret-popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
-  width: 90%;
-  max-width: 380px;
-  padding: 26px;
-  background: var(--glass-bg);
-  border: 1px solid var(--rose-primary);
-  border-radius: 22px;
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 45px var(--rose-glow);
-  font-family: var(--serif-body);
-  font-size: 1.25rem;
-  line-height: 1.6;
-  text-align: center;
-  color: var(--ink);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.5s var(--ease-silk), transform 0.5s var(--ease-elastic);
-  z-index: 100;
-}
-.secret-popup.active {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 /* ============================================================
@@ -704,12 +685,12 @@ svg { display: block; }
   max-width: 460px;
   display: flex;
   flex-direction: column;
-  gap: clamp(9px, 1.7vh, 14px);
+  gap: clamp(8px, 1.6vh, 13px);
   margin: auto 0;
 }
 .orbit-pill {
   position: relative;
-  padding: clamp(10px, 1.7vh, 14px) clamp(16px, 4vw, 24px);
+  padding: clamp(9px, 1.6vh, 13px) clamp(14px, 3.8vw, 22px);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(244, 114, 182, 0.05));
   border: 1px solid var(--glass-border);
   border-radius: 40px;
@@ -717,13 +698,15 @@ svg { display: block; }
   -webkit-backdrop-filter: blur(18px);
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(0.98rem, 3.2vw, 1.22rem);
+  font-size: clamp(0.92rem, 3vw, 1.15rem);
+  line-height: 1.3;
   color: var(--ink-dim);
   cursor: pointer;
   transition: all 0.4s var(--ease-silk);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 .orbit-pill.awakened {
@@ -746,6 +729,7 @@ svg { display: block; }
   color: var(--rose-primary);
   font-style: normal;
   font-weight: 600;
+  flex-shrink: 0;
 }
 .orbit-pill.awakened .orbit-pill-badge {
   color: #fff;
@@ -753,7 +737,7 @@ svg { display: block; }
 }
 
 /* ============================================================
-   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (БЕЗ LAYOUT REFLOW)
+   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (ПЛАВНЫЙ ПОЛЕТ)
    ============================================================ */
 #s-hunt .hunt-container {
   position: relative;
@@ -830,16 +814,8 @@ svg { display: block; }
 }
 
 /* ============================================================
-   СЦЕНА VI: СВЯЩЕННОЕ ПИСЬМО (ТЕРМО-СУРГУЧ)
+   СЦЕНА VI: СВЯЩЕННОЕ ПИСЬМО
    ============================================================ */
-#s-letter {
-  min-height: 100dvh;
-  height: auto;
-  justify-content: flex-start;
-  gap: 18px;
-  padding-top: calc(max(24px, env(safe-area-inset-top)) + 6px);
-  padding-bottom: calc(max(32px, env(safe-area-inset-bottom)) + 14px);
-}
 .letter-parchment {
   max-width: 550px;
   width: 100%;
@@ -867,9 +843,6 @@ svg { display: block; }
   letter-spacing: 0.25em;
   font-size: 0.82rem;
   line-height: 1.2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   white-space: nowrap;
 }
 
@@ -915,8 +888,6 @@ svg { display: block; }
   font-family: var(--serif-title);
   font-size: 1.9rem;
   line-height: 1;
-  text-align: center;
-  padding-top: 1px;
   transition: transform 0.3s ease;
 }
 .wax-seal-progress-svg {
@@ -932,7 +903,6 @@ svg { display: block; }
   stroke-width: 3.5;
   stroke-dasharray: 283;
   stroke-dashoffset: 283;
-  transition: stroke-dashoffset 0.08s linear;
 }
 .wax-seal-hint {
   font-family: var(--sans);
@@ -1070,10 +1040,43 @@ svg { display: block; }
   100% { transform: scale(0.97); box-shadow: 0 0 45px 12px var(--rose-glow); }
 }
 
+/* ============================================================
+   МОДАЛЬНЫЕ ОКНА В КОРНЕ BODY (ВЫСШИЙ Z-INDEX БЕЗ ОБРЕЗКИ)
+   ============================================================ */
+.secret-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  width: 90%;
+  max-width: 380px;
+  padding: 26px;
+  background: var(--glass-bg);
+  border: 1px solid var(--rose-primary);
+  border-radius: 22px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 45px var(--rose-glow);
+  font-family: var(--serif-body);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-silk), transform 0.5s var(--ease-elastic);
+  z-index: 850;
+}
+.secret-popup.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+
 .celestial-gift-modal {
   position: fixed;
   inset: 0;
-  z-index: 950;
+  z-index: 900;
   background: radial-gradient(circle at 50% 50%, #2c0b36 0%, #08020f 100%);
   display: flex;
   align-items: center;
@@ -1221,32 +1224,33 @@ svg { display: block; }
         <g class="star-node" data-idx="0" transform="translate(30, 95)">
           <circle class="hitbox" r="26"></circle>
           <circle class="core" r="5"></circle>
-          <text x="-4" y="-12">I</text>
+          <text y="-14">I</text>
         </g>
         <g class="star-node" data-idx="1" transform="translate(80, 45)">
           <circle class="hitbox" r="26"></circle>
           <circle class="core" r="5.5"></circle>
-          <text x="-6" y="-12">II</text>
+          <text y="-14">II</text>
         </g>
         <g class="star-node" data-idx="2" transform="translate(135, 85)">
           <circle class="hitbox" r="26"></circle>
           <circle class="core" r="5"></circle>
-          <text x="-8" y="-12">III</text>
+          <text y="-14">III</text>
         </g>
         <g class="star-node" data-idx="3" transform="translate(185, 35)">
           <circle class="hitbox" r="26"></circle>
           <circle class="core" r="5.5"></circle>
-          <text x="-7" y="-12">IV</text>
+          <text y="-14">IV</text>
         </g>
         <g class="star-node" data-idx="4" transform="translate(235, 75)">
           <circle class="hitbox" r="26"></circle>
           <circle class="core" r="6.5"></circle>
-          <text x="-6" y="-14">V</text>
+          <text y="-14">V</text>
         </g>
       </svg>
     </div>
 
     <div class="photo-card rise" style="--d:0.3">
+      <div class="photo-card__pin">🌸</div>
       <div class="photo-card__view">
         <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80" alt="Первый миг" loading="eager">
       </div>
@@ -1279,7 +1283,8 @@ svg { display: block; }
 
     <div class="field-wrap">
       <div class="mem-duo-row">
-        <div class="photo-card rise" style="--d:0.1">
+        <div class="photo-card rise" style="--d:0.1; --rot: -2deg;">
+          <div class="photo-card__pin">🌸</div>
           <div class="memory-rune-spark" id="spark-1" style="top: -12px; right: -12px;">✦</div>
           <div class="photo-card__view">
             <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Взгляд" loading="lazy">
@@ -1290,8 +1295,9 @@ svg { display: block; }
           </div>
         </div>
 
-        <div class="photo-card rise" style="--d:0.2">
-          <div class="memory-rune-spark" id="spark-2" style="bottom: -12px; left: -12px;">✦</div>
+        <div class="photo-card rise" style="--d:0.2; --rot: 2deg;">
+          <div class="photo-card__pin">🌸</div>
+          <div class="memory-rune-spark" id="spark-2" style="bottom: -12px; left: -12px; animation-delay: 1.5s;">✦</div>
           <div class="photo-card__view">
             <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80" alt="Тепло" loading="lazy">
           </div>
@@ -1303,12 +1309,8 @@ svg { display: block; }
       </div>
 
       <div class="center-quote rise" style="position: relative;">
-        <div class="memory-rune-spark" id="spark-3" style="top: -18px; left: 50%; margin-left: -24px;">✦</div>
+        <div class="memory-rune-spark" id="spark-3" style="top: -24px; left: 50%; margin-left: -24px; animation-delay: 0.8s;">✦</div>
         <p>Ты превращаешь самые простые дни в страницы волшебной книги.</p>
-      </div>
-
-      <div class="secret-popup" id="secret-popup-modal">
-        «Среди миллиардов людей во Вселенной есть те, чей свет виден даже с закрытыми глазами. Ты — мой свет.»
       </div>
     </div>
 
@@ -1331,6 +1333,7 @@ svg { display: block; }
 
     <div class="frost-scratch-box rise" style="--d:0.1">
       <div class="photo-card">
+        <div class="photo-card__pin">🌸</div>
         <div class="photo-card__view">
           <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Скрытое воспоминание" loading="lazy">
           <div class="hidden-beacon-star" id="beacon-1" style="left: 28%; top: 26%;">★</div>
@@ -1394,7 +1397,7 @@ svg { display: block; }
     </button>
   </section>
 
-  <!-- ГЛАВА 5: СВЕТЛЯЧКИ (ОПТИМИЗИРОВАННЫЙ ПОЛЕТ) -->
+  <!-- ГЛАВА 5: СВЕТЛЯЧКИ -->
   <section class="scene" id="s-hunt">
     <div class="scene-curtain" id="curtain-s5">
       <p>«Орбиты души ещё молчат...»</p>
@@ -1517,17 +1520,23 @@ svg { display: block; }
     <h2 class="final-title rise" style="--d:0.1">В самом сердце созвездия</h2>
 
     <button class="cosmic-orb-btn" id="cosmic-orb-trigger" aria-label="открыть подарок"></button>
-
-    <div class="celestial-gift-modal" id="celestial-gift-dialog">
-      <div class="gift-halo-avatar">
-        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-      </div>
-      <p>[Здесь твой сюрприз для Зарины: приглашение в особенное путешествие, билеты, координаты тайного романтического свидания или сокровенные слова]</p>
-      <button class="gift-modal-close" id="gift-modal-dismiss">🌸 вернуться к звёздам 🌸</button>
-    </div>
   </section>
 
 </main>
+
+<!-- ПЛАВАЮЩИЙ МОДАЛЬНЫЙ ДИАЛОГ СЕКРЕТА (ГЛАВА 2) -->
+<div class="secret-popup" id="secret-popup-modal">
+  «Среди миллиардов людей во Вселенной есть те, чей свет виден даже с закрытыми глазами. Ты — мой свет.»
+</div>
+
+<!-- ФИНАЛЬНЫЙ ПОДАРОК ВСЕЛЕННОЙ (ГЛАВА 8) -->
+<div class="celestial-gift-modal" id="celestial-gift-dialog">
+  <div class="gift-halo-avatar">
+    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+  </div>
+  <p>[Здесь твой сюрприз для Зарины: приглашение в особенное путешествие, билеты, координаты романтического вечера или сокровенные слова]</p>
+  <button class="gift-modal-close" id="gift-modal-dismiss">🌸 вернуться к звёздам 🌸</button>
+</div>
 
 <!-- КНОПКА ЗВУКА -->
 <button id="audio-control" aria-label="управление звуком">
@@ -1547,11 +1556,12 @@ svg { display: block; }
   'use strict';
 
   /* ============================================================
-     1. АУДИОДВИЖОК: МЯГКИЕ ПОЛИФОНИЧЕСКИЕ КОЛОКОЛЬЧИКИ
+     1. АУДИОДВИЖОК: МЯГКИЕ ПОЛИФОНИЧЕСКИЕ ТОНА
      ============================================================ */
   var audioState = null;
   var audioBtn = document.getElementById('audio-control');
   var gate = document.getElementById('gate');
+  var storyContainer = document.getElementById('story');
   var chimeScale = [587.33, 659.25, 739.99, 880.00, 987.77, 1174.66, 1318.51, 1479.98];
 
   function playTone(freq, gainLevel, dur) {
@@ -1643,16 +1653,14 @@ svg { display: block; }
   });
 
   /* ============================================================
-     2. ДРАМАТУРГИЯ ПОБЕДЫ (ПЛАВНЫЙ И РИТМИЧНЫЙ ПЕРЕХОД)
+     2. ПЛАВНАЯ ОРКЕСТРОВКА ПОБЕДЫ В ЭТАПАХ
      ============================================================ */
   function orchestrateStageSuccess(hudEl, hudTxtEl, solvedMsg, nextBtnEl, curtainEl, chordFreqs, onComplete) {
-    // 1. Мягко растворяем текущий текст подсказки
     if (hudTxtEl) {
       hudTxtEl.style.opacity = '0';
       hudTxtEl.style.transform = 'translateY(-3px)';
     }
 
-    // 2. HUD плавно меняет цвет и проявляет текст победы
     setTimeout(function() {
       if (hudEl) hudEl.classList.add('solved');
       if (hudTxtEl) {
@@ -1662,17 +1670,14 @@ svg { display: block; }
       }
     }, 350);
 
-    // 3. Звучит гармонический аккорд победы
     setTimeout(function() {
       if (chordFreqs) playChord(chordFreqs, 0.07);
     }, 600);
 
-    // 4. Тает туманная завеса следующей главы
     setTimeout(function() {
       if (curtainEl) curtainEl.classList.add('unlocked');
     }, 850);
 
-    // 5. Неспешно и грациозно всплывает кнопка перехода
     setTimeout(function() {
       if (nextBtnEl) nextBtnEl.classList.add('active');
       if (onComplete) onComplete();
@@ -1680,14 +1685,20 @@ svg { display: block; }
   }
 
   /* ============================================================
-     3. КАНВАС ЗВЕЗД И ОПТИМИЗИРОВАННЫХ ИСКР
+     3. КАНВАС ЗВЕЗД И ИСКР (БЕЗ ДЕРГАНИЙ ПРИ РЕСАЙЗЕ)
      ============================================================ */
   (function(){
     var canvas = document.getElementById('space-canvas');
     var ctx = canvas.getContext('2d');
     var w = 0, h = 0, dpr = 1, stars = [], meteors = [];
+    var lastW = 0;
 
     function resize() {
+      var curW = window.innerWidth;
+      // Игнорируем скачки высоты на смартфонах при скрытии адресной строки
+      if (Math.abs(curW - lastW) < 5 && stars.length > 0) return;
+      lastW = curW;
+
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = window.innerWidth;
       h = window.innerHeight;
@@ -1764,12 +1775,12 @@ svg { display: block; }
     requestAnimationFrame(render);
   })();
 
-  /* ХОЛСТ ЧАСТИЦ С ПОТОЛКОМ НАГРУЗКИ */
+  /* ХОЛСТ СЛЕДА ИСКР (СТРОГИЙ БЮДЖЕТ ПРОИЗВОДИТЕЛЬНОСТИ) */
   (function(){
     var canvas = document.getElementById('sparkle-trail');
     var ctx = canvas.getContext('2d');
     var w = 0, h = 0, dpr = 1, particles = [];
-    var MAX_PARTICLES = 140;
+    var MAX_PARTICLES = 130;
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1806,9 +1817,9 @@ svg { display: block; }
     var lastTrailX = 0, lastTrailY = 0, lastTrailTime = 0;
     function addSparkle(x, y) {
       var now = Date.now();
-      if (now - lastTrailTime < 32) return;
+      if (now - lastTrailTime < 35) return;
       var dist = Math.hypot(x - lastTrailX, y - lastTrailY);
-      if (dist < 8) return;
+      if (dist < 10) return;
       lastTrailTime = now;
       lastTrailX = x;
       lastTrailY = y;
@@ -1854,7 +1865,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     4. НАБЛЮДАТЕЛЬ ЗА СЦЕНАМИ И СКРОЛЛ
+     4. НАБЛЮДАТЕЛЬ ЗА СЦЕНАМИ И БЕСШОВНЫЙ СКРОЛЛ
      ============================================================ */
   var sceneObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
@@ -1872,8 +1883,12 @@ svg { display: block; }
     btn.addEventListener('click', function(){
       var targetId = this.getAttribute('data-next');
       var targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        targetEl.scrollIntoView({ behavior: 'smooth' });
+      if (targetEl && storyContainer) {
+        // Бесшовный скролл без конфликтов с CSS Snap
+        storyContainer.scrollTo({
+          top: targetEl.offsetTop,
+          behavior: 'smooth'
+        });
       }
     });
   });
@@ -1936,7 +1951,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     6. КВЕСТ 2: 3 ПАРИРУЮЩИЕ ИСКРЫ ПАМЯТИ
+     6. КВЕСТ 2: 3 ИСКРЫ ПАМЯТИ
      ============================================================ */
   (function(){
     var sparks = [
@@ -1951,18 +1966,6 @@ svg { display: block; }
     var hud = document.getElementById('hud-q2');
     var hudTxt = document.getElementById('txt-q2');
     var curtainS3 = document.getElementById('curtain-s3');
-
-    function floatSparks(now) {
-      var t = now / 1000;
-      sparks.forEach(function(spark, i){
-        if (spark.getAttribute('data-collected') === 'true') return;
-        var dy = Math.sin(t * 1.8 + i * 2) * 8;
-        var dx = Math.cos(t * 1.5 + i * 2) * 6;
-        spark.style.transform = 'translate3d(' + dx.toFixed(1) + 'px, ' + dy.toFixed(1) + 'px, 0)';
-      });
-      requestAnimationFrame(floatSparks);
-    }
-    requestAnimationFrame(floatSparks);
 
     sparks.forEach(function(spark){
       spark.addEventListener('click', function(e){
@@ -2019,6 +2022,7 @@ svg { display: block; }
     var beaconsFound = [false, false, false];
     var foundCount = 0;
     var scratchedPixels = 0;
+    var lastX = 0, lastY = 0;
     var dpr = 1;
 
     function initCanvas() {
@@ -2085,28 +2089,37 @@ svg { display: block; }
       checkClearedPercentage();
     }
 
-    function scratch(e) {
-      if (!isDrawing) return;
-      var rect = canvas.getBoundingClientRect();
-      var x = e.clientX - rect.left;
-      var y = e.clientY - rect.top;
-
+    function scratch(x, y) {
       ctx2d.save();
       ctx2d.globalCompositeOperation = 'destination-out';
       ctx2d.beginPath();
-      ctx2d.arc(x, y, 32, 0, Math.PI * 2);
-      ctx2d.fill();
+      ctx2d.moveTo(lastX, lastY);
+      ctx2d.lineTo(x, y);
+      ctx2d.lineCap = 'round';
+      ctx2d.lineWidth = 55;
+      ctx2d.stroke();
       ctx2d.restore();
 
+      lastX = x;
+      lastY = y;
       checkBeacons(x, y);
     }
 
     canvas.addEventListener('pointerdown', function(e){
       isDrawing = true;
       try { canvas.setPointerCapture(e.pointerId); } catch(err) {}
-      scratch(e);
+      var rect = canvas.getBoundingClientRect();
+      lastX = e.clientX - rect.left;
+      lastY = e.clientY - rect.top;
+      scratch(lastX, lastY);
     });
-    canvas.addEventListener('pointermove', scratch);
+
+    canvas.addEventListener('pointermove', function(e){
+      if (!isDrawing) return;
+      var rect = canvas.getBoundingClientRect();
+      scratch(e.clientX - rect.left, e.clientY - rect.top);
+    });
+
     function stopScratch(e) {
       isDrawing = false;
       try { canvas.releasePointerCapture(e.pointerId); } catch(err) {}
@@ -2161,7 +2174,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     9. КВЕСТ 5: СВЕТЛЯЧКИ (БЕЗ LAYOUT REFLOW)
+     9. КВЕСТ 5: СВЕТЛЯЧКИ (ИНТЕРПОЛИРОВАННАЯ ЭВАЗИЯ)
      ============================================================ */
   (function(){
     var container = document.getElementById('hunt-container');
@@ -2187,17 +2200,19 @@ svg { display: block; }
     window.addEventListener('resize', updateContainerSize, { passive: true });
     updateContainerSize();
 
-    var flyPositions = flies.map(function(_, i){
+    var flyStates = flies.map(function(_, i){
       return {
-        baseX: (0.18 + (i % 3) * 0.32) * cw,
-        baseY: (0.22 + Math.floor(i / 3) * 0.44) * ch,
+        baseX: (0.16 + (i % 3) * 0.34) * cw,
+        baseY: (0.2 + Math.floor(i / 3) * 0.44) * ch,
         ampX: 14 + Math.random() * 8,
         ampY: 10 + Math.random() * 8,
         freqX: 0.6 + Math.random() * 0.4,
         freqY: 0.5 + Math.random() * 0.4,
         phase: i * 1.4,
-        currX: 0,
-        currY: 0
+        evadeX: 0,
+        evadeY: 0,
+        targetEvadeX: 0,
+        targetEvadeY: 0
       };
     });
 
@@ -2206,16 +2221,43 @@ svg { display: block; }
       for (var i = 0; i < flies.length; i++) {
         var el = flies[i];
         if (el.getAttribute('data-captured') === 'true') continue;
-        var p = flyPositions[i];
-        var x = p.baseX + Math.sin(t * p.freqX + p.phase) * p.ampX;
-        var y = p.baseY + Math.cos(t * p.freqY + p.phase) * p.ampY;
-        p.currX = x;
-        p.currY = y;
+        var p = flyStates[i];
+
+        // Мягкая интерполяция эвазии
+        p.evadeX += (p.targetEvadeX - p.evadeX) * 0.08;
+        p.evadeY += (p.targetEvadeY - p.evadeY) * 0.08;
+
+        var x = p.baseX + Math.sin(t * p.freqX + p.phase) * p.ampX + p.evadeX;
+        var y = p.baseY + Math.cos(t * p.freqY + p.phase) * p.ampY + p.evadeY;
+
         el.style.transform = 'translate3d(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px, 0)';
       }
       requestAnimationFrame(flyLoop);
     }
     requestAnimationFrame(flyLoop);
+
+    container.addEventListener('pointermove', function(e){
+      var cRect = container.getBoundingClientRect();
+      var mx = e.clientX - cRect.left;
+      var my = e.clientY - cRect.top;
+
+      flyStates.forEach(function(p, i){
+        if (flies[i].getAttribute('data-captured') === 'true') return;
+        var curX = p.baseX + p.evadeX;
+        var curY = p.baseY + p.evadeY;
+        var dist = Math.hypot(mx - curX, my - curY);
+
+        if (dist < 55) {
+          var angle = Math.atan2(curY - my, curX - mx);
+          p.targetEvadeX = Math.cos(angle) * 32;
+          p.targetEvadeY = Math.sin(angle) * 32;
+          setTimeout(function(){
+            p.targetEvadeX = 0;
+            p.targetEvadeY = 0;
+          }, 350);
+        }
+      });
+    }, { passive: true });
 
     flies.forEach(function(fly){
       fly.addEventListener('click', function(e){
@@ -2256,7 +2298,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     10. КВЕСТ 6: СУРГУЧНАЯ ТЕРМО-ПЕЧАТЬ (2.0 СЕК)
+     10. КВЕСТ 6: СУРГУЧНАЯ ПЕЧАТЬ (ПОСТОЯННЫЙ ТАЙМИНГ)
      ============================================================ */
   (function(){
     var pressBtn = document.getElementById('wax-press-btn');
@@ -2380,7 +2422,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     12. КВЕСТ 8: СЕРДЦЕ СОЗВЕЗДИЯ (ЗАЩИТА ОТ СПАМА И РИТМ)
+     12. КВЕСТ 8: СЕРДЦЕ СОЗВЕЗДИЯ (АНТИ-СПАМ ЗАЩИТА)
      ============================================================ */
   (function(){
     var orb = document.getElementById('cosmic-orb-trigger');
@@ -2398,7 +2440,7 @@ svg { display: block; }
       if (isOrbFinished) return;
 
       var now = Date.now();
-      // Защита от спама: не чаще одного раза в 450 мс (в ритме биения сердца)
+      // Подавление спам-кликов чаще чем 450 мс
       if (now - lastTapTime < 450) {
         orb.style.transform = 'scale(0.96)';
         setTimeout(function(){ orb.style.transform = ''; }, 140);
@@ -2411,7 +2453,6 @@ svg { display: block; }
       pulseCountEl.textContent = taps;
 
       var rect = orb.getBoundingClientRect();
-      // Строго фиксированное и дозированное число партиклов
       if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10 + taps * 4);
       playTone(587.33 * Math.pow(1.15, taps), 0.055, 1.5);
       triggerHaptic(18 * taps);
