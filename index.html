@@ -2,134 +2,220 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <title>Для Зарины ✨</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   ПЕРЕМЕННЫЕ И БАЗОВАЯ СИСТЕМА
+   ДИЗАЙН-СИСТЕМА И БАЗОВЫЕ ПАРАМЕТРЫ
    ============================================================ */
-*, *::before, *::after { box-sizing: border-box; }
-html, body {
-  height: 100%;
-  width: 100%;
+*, *::before, *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  touch-action: manipulation;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 :root {
-  --bg-sky: #090916;
-  --bg-deep: #130f26;
-  --bg-aurora: #1e1338;
-  --gold: #e9c47e;
-  --gold-bright: #ffe29f;
-  --gold-glow: rgba(233, 196, 126, 0.45);
-  --gold-rgb: 233, 196, 126;
-  --starlight: #dbe7ff;
-  --rose-glow: rgba(235, 148, 178, 0.22);
+  --bg-void: #05040a;
+  --bg-deep: #0c0919;
+  --gold-primary: #e6c280;
+  --gold-light: #fff2d1;
+  --gold-glow: rgba(230, 194, 128, 0.45);
+  --gold-halo: rgba(255, 230, 160, 0.15);
+  --rose-mist: rgba(244, 114, 182, 0.16);
+  --violet-mist: rgba(147, 51, 234, 0.20);
+  --cyan-mist: rgba(56, 189, 248, 0.14);
   --ink: #fdfbf7;
-  --ink-dim: #c5c0d8;
-  --ink-faint: #847c9e;
-  --glass-bg: rgba(25, 20, 46, 0.65);
-  --glass-border: rgba(233, 196, 126, 0.3);
-  --serif: 'Cormorant Garamond', Georgia, serif;
+  --ink-dim: #c8c3dc;
+  --ink-faint: #81789c;
+  --glass-bg: rgba(18, 14, 36, 0.65);
+  --glass-border: rgba(230, 194, 128, 0.28);
+  --glass-specular: rgba(255, 255, 255, 0.12);
+  --serif-title: 'Cinzel', Georgia, serif;
+  --serif-body: 'Cormorant Garamond', Garamond, serif;
   --sans: 'Montserrat', -apple-system, sans-serif;
-  --ease-fairy: cubic-bezier(.2,.8,.3,1);
+  --ease-celestial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-elastic: cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 
-body {
-  background: radial-gradient(circle at 50% 0%, #1c1438 0%, #0c0a1f 55%, #060511 100%);
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-void);
   color: var(--ink);
   font-family: var(--sans);
   overflow: hidden;
+  touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  overscroll-behavior: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-h1, h2, h3, p { margin: 0; }
-button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; outline: none; }
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
 svg { display: block; }
-::selection { background: rgba(233, 196, 126, 0.35); color: #fff; }
+::selection { background: rgba(230, 194, 128, 0.35); color: #fff; }
 
-#magic-dust {
-  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+/* Холсты звёздного окружения */
+#space-canvas, #dust-canvas, #sparkle-trail {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
+#space-canvas { z-index: 1; }
+#dust-canvas { z-index: 2; }
+#sparkle-trail { z-index: 999; }
 
-#aurora {
-  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+/* Оптическая туманность */
+.nebula {
+  position: fixed;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  z-index: 1;
+  pointer-events: none;
   background: 
-    radial-gradient(ellipse at 80% 20%, var(--rose-glow) 0%, transparent 55%),
-    radial-gradient(ellipse at 20% 80%, rgba(120, 150, 255, 0.16) 0%, transparent 60%);
-  filter: blur(40px);
+    radial-gradient(ellipse 65% 45% at 80% 20%, var(--violet-mist) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 50% at 20% 80%, var(--rose-mist) 0%, transparent 65%),
+    radial-gradient(ellipse 70% 60% at 50% 50%, var(--cyan-mist) 0%, transparent 75%);
+  filter: blur(50px);
+  animation: auroraBreathe 18s ease-in-out infinite alternate;
+  opacity: 0.85;
+  will-change: transform, opacity;
+}
+@keyframes auroraBreathe {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
+  50% { transform: scale(1.05) translate(-1%, 2%); opacity: 0.95; }
+  100% { transform: scale(0.98) translate(1%, -1%); opacity: 0.75; }
 }
 
 /* ============================================================
-   ВРАТА (ENTRY GATE)
+   ВРАТА ПЕРВОЗДАННОГО СВЕТА (PORTAL GATE)
    ============================================================ */
 #gate {
-  position: fixed; inset: 0; z-index: 600;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 50% 40%, #1d163a 0%, #0a0818 100%);
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 45%, #181133 0%, #06040d 100%);
   cursor: pointer;
-  transition: opacity 1.6s var(--ease-fairy), visibility 1.6s;
+  transition: opacity 1.4s var(--ease-celestial), visibility 1.4s;
   padding: 2rem;
   text-align: center;
 }
-#gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+#gate.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
-.gate__halo {
-  width: 86px; height: 86px;
+.astrolabe-portal {
+  position: relative;
+  width: clamp(120px, 25vw, 150px);
+  height: clamp(120px, 25vw, 150px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.2rem;
+}
+.astrolabe-ring {
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--gold-bright) 0%, rgba(233,196,126,0.15) 60%, transparent 70%);
-  filter: drop-shadow(0 0 22px var(--gold-glow));
-  margin-bottom: 2rem;
-  animation: pulseOrb 3.5s ease-in-out infinite alternate;
+  border: 1px dashed rgba(230, 194, 128, 0.4);
+  animation: spinSlow 32s linear infinite;
 }
-@keyframes pulseOrb {
-  0% { transform: scale(0.92); opacity: 0.7; }
-  100% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 35px var(--gold-bright)); }
+.astrolabe-ring:nth-child(2) {
+  inset: 14px;
+  border: 1px solid rgba(255, 242, 209, 0.25);
+  border-left-color: var(--gold-primary);
+  border-right-color: var(--gold-primary);
+  animation: spinSlow 20s linear infinite reverse;
+}
+.astrolabe-ring:nth-child(3) {
+  inset: 28px;
+  border: 1px dotted rgba(230, 194, 128, 0.6);
+  animation: spinSlow 12s linear infinite;
+}
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+
+.gate__crystal {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, var(--gold-light) 35%, var(--gold-primary) 70%, transparent 100%);
+  box-shadow: 0 0 40px 10px var(--gold-glow), inset 0 0 8px #fff;
+  animation: crystalPulse 3s ease-in-out infinite alternate;
+}
+@keyframes crystalPulse {
+  0% { transform: scale(0.92); box-shadow: 0 0 25px 6px var(--gold-glow); }
+  100% { transform: scale(1.12); box-shadow: 0 0 55px 16px var(--gold-light); }
 }
 
-#gate__text {
-  font-family: var(--serif);
-  font-size: clamp(1.4rem, 5vw, 2.3rem);
-  letter-spacing: 0.03em;
+.gate__title {
+  font-family: var(--serif-title);
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  letter-spacing: 0.16em;
   color: var(--ink);
-  text-shadow: 0 0 25px rgba(233,196,126,0.3);
-  animation: gateFloat 2.4s var(--ease-fairy) forwards;
+  text-shadow: 0 0 30px rgba(230, 194, 128, 0.5);
+  animation: textFloatIn 1.8s var(--ease-celestial) forwards;
 }
-@keyframes gateFloat {
-  from { opacity: 0; transform: translateY(18px); filter: blur(8px); }
+.gate__subtitle {
+  font-family: var(--serif-body);
+  font-size: clamp(1.1rem, 3.5vw, 1.45rem);
+  font-style: italic;
+  color: var(--gold-primary);
+  margin-top: 0.8rem;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+}
+@keyframes textFloatIn {
+  from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
   to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
-#gate__hint {
-  position: absolute; bottom: max(8%, env(safe-area-inset-bottom, 20px));
-  font-size: 0.76rem;
-  letter-spacing: 0.2em;
+.gate__cta {
+  position: absolute;
+  bottom: max(6%, env(safe-area-inset-bottom, 24px));
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   opacity: 0;
-  animation: fadeIn 1.8s ease 1.6s forwards;
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: fadeInDelayed 1.4s ease 1.2s forwards;
 }
-@keyframes fadeIn { to { opacity: 0.85; } }
-#gate__hint::after {
-  content: '✦';
-  font-size: 0.85rem;
-  color: var(--gold-bright);
-  animation: floatSparkle 2s ease-in-out infinite;
+@keyframes fadeInDelayed { to { opacity: 0.85; } }
+.gate__cta-icon {
+  font-size: 1rem;
+  color: var(--gold-primary);
+  animation: bounceLight 2.2s infinite ease-in-out;
 }
-@keyframes floatSparkle {
-  0%, 100% { transform: translateY(0) scale(0.85); opacity: 0.5; }
-  50% { transform: translateY(5px) scale(1.2); opacity: 1; }
+@keyframes bounceLight {
+  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 2px var(--gold-light)); }
+  50% { transform: translateY(5px); filter: drop-shadow(0 0 10px var(--gold-light)); }
 }
 
 /* ============================================================
-   СКРОЛЛ-КОНТЕЙНЕР
+   СКРОЛЛ-ХОЛСТ И ОСНОВНАЯ СТРУКТУРА СЦЕН
    ============================================================ */
 #story {
   height: 100dvh;
@@ -138,17 +224,17 @@ svg { display: block; }
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
   scrollbar-width: none;
-  visibility: hidden;
   position: relative;
   z-index: 10;
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 #story::-webkit-scrollbar { display: none; }
-body.started #story { visibility: visible; }
 
 .scene {
   position: relative;
   height: 100dvh;
+  min-height: 100dvh;
   width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -156,87 +242,112 @@ body.started #story { visibility: visible; }
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: clamp(20px, 6vh, 48px) clamp(16px, 5vw, 40px);
+  padding: clamp(24px, 5vh, 48px) clamp(16px, 4vw, 40px);
 }
 
-/* Появление и параллакс без конфликта стилей */
+/* Плавный эффект подъёма элементов (.rise) */
 .rise {
   --px: 0px;
   --py: 0px;
   --rx: 0deg;
   --ry: 0deg;
+  --rot: 0deg;
   opacity: 0;
   filter: blur(8px);
-  transform: translate3d(var(--px), calc(var(--py) + 24px), 0) scale(0.96) rotate(var(--rot, 0deg));
-  transition: opacity 1.3s var(--ease-fairy), filter 1.3s var(--ease-fairy), transform 1.3s var(--ease-fairy);
+  transform: translate3d(var(--px), calc(var(--py) + 24px), 0) rotate(var(--rot)) scale(0.96);
+  transition: opacity 1.2s var(--ease-celestial), filter 1.2s var(--ease-celestial), transform 1.2s var(--ease-celestial);
   transition-delay: calc(var(--d, 0) * 1s);
-  will-change: transform, opacity;
+  will-change: transform, opacity, filter;
 }
 .scene.in-view .rise {
   opacity: 1;
   filter: blur(0);
-  transform: translate3d(var(--px), var(--py), 0) perspective(750px) rotateX(var(--rx)) rotateY(var(--ry)) rotate(var(--rot, 0deg)) scale(1);
+  transform: translate3d(var(--px), var(--py), 0) rotate(var(--rot)) scale(1);
 }
 
 /* ============================================================
-   КАРТОЧКИ-ПОЛАРОИДЫ
+   ЛЮКСОВЫЕ КАРТОЧКИ С 3D ПАРАЛЛАКСОМ
    ============================================================ */
-.photo {
+.photo-card {
+  --w: 210px;
+  --h: 280px;
+  --card-rx: 0deg;
+  --card-ry: 0deg;
   position: relative;
-  width: var(--w, 200px);
-  height: var(--h, 260px);
+  width: var(--w);
+  height: var(--h);
   flex-shrink: 0;
-  padding: 8px 8px 0;
-  background: linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.05));
+  padding: 10px 10px 8px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.02) 100%);
   border: 1px solid var(--glass-border);
-  border-radius: 12px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 16px 40px -10px rgba(0,0,0,0.6), 0 0 20px rgba(233,196,126,0.12);
-  display: flex; flex-direction: column;
+  border-radius: 16px;
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: 0 20px 45px -10px rgba(0,0,0,0.7), 0 0 25px rgba(230, 194, 128, 0.12), inset 0 1px 1px var(--glass-specular);
+  display: flex;
+  flex-direction: column;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
-.photo::before {
-  content: '✧';
-  position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-  color: var(--gold-bright); font-size: 12px;
-  text-shadow: 0 0 8px var(--gold);
+.photo-card::before {
+  content: '✦';
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--gold-light);
+  font-size: 13px;
+  text-shadow: 0 0 10px var(--gold-primary);
+  z-index: 5;
 }
-.photo__pic {
+.photo-card__view {
   position: relative;
   flex: 1;
-  border-radius: 6px;
+  border-radius: 10px;
   overflow: hidden;
-  background: 
-    radial-gradient(circle at 50% 30%, rgba(138, 92, 246, 0.25), transparent 70%),
-    linear-gradient(160deg, #1d1838, #110d24);
+  background: linear-gradient(155deg, #1d1538, #0c081d);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
-.photo__sheen {
-  position: absolute; inset: -100%;
-  background: linear-gradient(115deg, transparent 40%, rgba(255, 241, 205, 0.2) 50%, transparent 60%);
-  animation: sheenFairytale 8s ease-in-out infinite;
+.photo-card__view img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 1.2s var(--ease-celestial);
 }
-@keyframes sheenFairytale {
-  0%, 100% { transform: translate(-25%, -25%); }
-  50% { transform: translate(25%, 25%); }
+.photo-card:hover .photo-card__view img {
+  transform: scale(1.05);
 }
-.photo__margin {
-  min-height: 36px;
-  display: flex; align-items: center; justify-content: space-between;
+.photo-card__sheen {
+  position: absolute;
+  inset: -150%;
+  background: linear-gradient(110deg, transparent 40%, rgba(255, 246, 222, 0.22) 50%, transparent 60%);
+  animation: cosmicSheen 10s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes cosmicSheen {
+  0%, 100% { transform: translate(-30%, -30%); }
+  50% { transform: translate(30%, 30%); }
+}
+.photo-card__footer {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 4px 2px;
   gap: 8px;
-  padding: 6px 2px 6px;
 }
-.photo__frame {
-  font-family: var(--sans);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  color: var(--gold);
+.photo-card__tag {
+  font-family: var(--serif-title);
+  font-size: 0.65rem;
+  letter-spacing: 0.16em;
+  color: var(--gold-primary);
   font-weight: 600;
 }
-.photo__cap {
-  font-family: var(--serif);
+.photo-card__caption {
+  font-family: var(--serif-body);
   font-style: italic;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: var(--ink-dim);
   text-align: right;
   white-space: nowrap;
@@ -244,649 +355,1030 @@ body.started #story { visibility: visible; }
   text-overflow: ellipsis;
 }
 
-.edit {
-  color: var(--gold-bright) !important;
-  text-shadow: 0 0 10px var(--gold-glow);
-  border-bottom: 1px dashed rgba(233,196,126,0.5);
+.edit-hint {
+  position: relative;
+  border-bottom: 1px dashed rgba(230, 194, 128, 0.4);
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
-.edit::before { content: '✏️ '; }
+.edit-hint:hover {
+  color: #fff;
+  border-color: var(--gold-light);
+}
 
 /* ============================================================
-   СЦЕНА 1
+   СЦЕНА I: СОЗВЕЗДИЕ НАЧАЛА
    ============================================================ */
-#s-open { flex-direction: column; gap: 2.5vh; }
-#s-open .symbol {
-  width: 80px; height: 80px;
-  overflow: visible;
-  filter: drop-shadow(0 0 14px var(--gold-bright));
-}
-#s-open .symbol .beam {
-  fill: none; stroke: var(--gold); stroke-width: 1.2; stroke-linecap: round; opacity: 0.8;
-}
-#s-open .symbol .b1 { stroke-dasharray: 40; stroke-dashoffset: 40; animation: beamDraw .7s var(--ease-fairy) .3s forwards; }
-#s-open .symbol .b2 { stroke-dasharray: 40; stroke-dashoffset: 40; animation: beamDraw .7s var(--ease-fairy) .8s forwards; }
-#s-open .symbol .b3 { stroke-dasharray: 40; stroke-dashoffset: 40; animation: beamDraw .7s var(--ease-fairy) 1.2s forwards; }
-#s-open .symbol .b4 { stroke-dasharray: 40; stroke-dashoffset: 40; animation: beamDraw .7s var(--ease-fairy) 1.6s forwards; }
-@keyframes beamDraw { to { stroke-dashoffset: 0; } }
-
-#s-open .symbol .star { fill: #fff; filter: drop-shadow(0 0 4px var(--gold-bright)); }
-#s-open .symbol .core {
-  fill: var(--gold-bright);
-  animation: corePulse 2.5s ease-in-out infinite;
-}
-@keyframes corePulse {
-  0%, 100% { r: 3; filter: drop-shadow(0 0 6px var(--gold-bright)); }
-  50% { r: 4.5; filter: drop-shadow(0 0 16px #fff); }
-}
-
-#s-open .date {
-  font-size: 0.78rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--gold);
-}
-#s-open .memory {
-  display: flex; flex-direction: column; align-items: center; gap: 14px;
+#s-open {
+  flex-direction: column;
+  gap: clamp(14px, 2.5vh, 24px);
   text-align: center;
 }
-#s-open .memory-phrase {
-  font-family: var(--serif);
-  font-size: clamp(1.15rem, 4.2vw, 1.75rem);
-  font-style: italic;
-  max-width: 18em;
-  color: var(--ink);
-  line-height: 1.4;
-  text-shadow: 0 0 20px rgba(255,255,255,0.15);
+.constellation-sign {
+  width: clamp(75px, 16vw, 105px);
+  height: clamp(75px, 16vw, 105px);
+  filter: drop-shadow(0 0 14px var(--gold-glow));
+}
+.constellation-sign line {
+  stroke: var(--gold-primary);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  transition: stroke-dashoffset 1.4s var(--ease-celestial);
+}
+.scene.in-view .constellation-sign line { stroke-dashoffset: 0; }
+.constellation-sign circle {
+  fill: #fff;
+  filter: drop-shadow(0 0 6px var(--gold-light));
+}
+.constellation-sign circle.hub {
+  fill: var(--gold-light);
+  animation: hubStarlight 2.6s ease-in-out infinite alternate;
+}
+@keyframes hubStarlight {
+  0% { r: 3.5; filter: drop-shadow(0 0 6px var(--gold-primary)); }
+  100% { r: 5; filter: drop-shadow(0 0 16px #fff); }
 }
 
-/* ============================================================
-   СЦЕНА 2
-   ============================================================ */
-#s-mem2 .field {
-  position: relative; width: 100%; height: 100%;
-  max-width: 650px; margin: 0 auto;
+#s-open .chapter-date {
+  font-family: var(--serif-title);
+  font-size: clamp(0.72rem, 2.2vw, 0.85rem);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-primary);
 }
-#s-mem2 .photo.a1 {
-  position: absolute; top: 4%; left: 2%;
-  --w: clamp(130px, 36vw, 185px);
-  --h: clamp(170px, 48vw, 245px);
+#s-open .photo-card {
+  --w: clamp(180px, 50vw, 220px);
+  --h: clamp(240px, 66vw, 290px);
 }
-#s-mem2 .photo.a2 {
-  position: absolute; bottom: 6%; right: 2%;
-  --w: clamp(140px, 40vw, 200px);
-  --h: clamp(185px, 52vw, 265px);
-  z-index: 2;
-}
-#s-mem2 .text-block {
-  position: absolute; top: 43%; left: 4%; right: 4%;
-  z-index: 3;
-}
-#s-mem2 .text-block p {
-  font-family: var(--serif);
+#s-open .moment-lead {
+  font-family: var(--serif-body);
+  font-size: clamp(1.15rem, 4vw, 1.7rem);
   font-style: italic;
-  font-size: clamp(1.2rem, 4.2vw, 1.7rem);
+  max-width: 22em;
   line-height: 1.45;
   color: var(--ink);
-  max-width: 13em;
-  text-shadow: 0 0 25px rgba(233,196,126,0.3);
-}
-#s-mem2 .magic-spark {
-  position: absolute; bottom: 33%; left: 14%;
-  width: 44px; height: 44px;
-  display: flex; align-items: center; justify-content: center;
-  z-index: 4;
-}
-#s-mem2 .magic-spark::after {
-  content: '✦';
-  font-size: 1.4rem;
-  color: var(--gold-bright);
-  filter: drop-shadow(0 0 10px var(--gold-bright));
-  animation: sparkDance 2.4s ease-in-out infinite alternate;
-}
-@keyframes sparkDance {
-  0% { transform: scale(0.9) rotate(0deg); }
-  100% { transform: scale(1.35) rotate(45deg); filter: drop-shadow(0 0 22px #fff); }
-}
-
-#s-mem2 .note {
-  position: absolute; bottom: 25%; left: 5%; right: 5%;
-  max-width: 320px; margin: 0 auto;
-  padding: 16px 20px;
-  background: var(--glass-bg);
-  border: 1px solid var(--gold);
-  border-radius: 12px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 25px var(--gold-glow);
-  font-family: var(--serif);
-  font-size: 1.05rem;
-  line-height: 1.55;
-  color: var(--ink);
-  opacity: 0; transform: translateY(12px) scale(0.95);
-  transition: all 0.5s var(--ease-fairy);
-  pointer-events: none;
-  z-index: 10;
-}
-#s-mem2 .note.shown { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-
-/* ============================================================
-   СЦЕНА 3
-   ============================================================ */
-#s-mem3 { flex-direction: column; gap: 2.5vh; }
-.reveal-wrap {
-  position: relative;
-  --w: clamp(210px, 58vw, 260px);
-  --h: clamp(280px, 76vw, 340px);
-  width: var(--w); height: var(--h);
-  border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 30px var(--rose-glow);
-}
-.reveal-wrap .photo { position: absolute; inset: 0; width: 100%; height: 100%; }
-.reveal-wrap canvas {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  border-radius: 12px;
-  touch-action: none;
-  cursor: pointer;
-  z-index: 10;
-}
-#s-mem3 .caption {
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(1.1rem, 3.8vw, 1.35rem); color: var(--gold-bright);
-  text-align: center; max-width: 20em;
-  opacity: 0; transform: translateY(10px);
-  transition: all 1.2s var(--ease-fairy);
-}
-#s-mem3 .caption.shown { opacity: 1; transform: translateY(0); }
-#s-mem3 .swipe-hint {
-  font-size: 0.76rem; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--ink-dim);
-  display: flex; align-items: center; gap: 6px;
-  transition: opacity 0.6s ease;
-}
-
-/* ============================================================
-   СЦЕНА 4
-   ============================================================ */
-#s-about .field {
-  position: relative; width: 100%; height: 100%; max-width: 650px;
-  display: flex; flex-direction: column; justify-content: space-evenly;
-}
-#s-about .note-line {
-  position: relative;
-  padding: 10px 18px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(233, 196, 126, 0.22);
-  border-radius: 30px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: clamp(0.95rem, 3.4vw, 1.25rem);
-  color: var(--ink-dim);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  max-width: 88%;
-}
-#s-about .note-line::before {
-  content: '✦ ';
-  color: var(--gold-bright);
-  font-style: normal;
-}
-#s-about .n1, #s-about .n3, #s-about .n5 { align-self: flex-start; }
-#s-about .n2, #s-about .n4 { align-self: flex-end; text-align: right; }
-
-/* ============================================================
-   СЦЕНА 5 (ОХОТА ЗА СВЕТЛЯЧКАМИ + ЗАМОК)
-   ============================================================ */
-#s-hunt .field { position: relative; width: 100%; height: 100%; max-width: 700px; }
-#s-hunt .lead {
-  position: absolute; top: 4%; left: 0; right: 0; text-align: center;
-  font-family: var(--serif);
-  font-size: clamp(1rem, 3.6vw, 1.25rem); font-style: italic;
-  color: var(--gold-bright);
-  opacity: 0; transition: opacity 1s var(--ease-fairy), transform 0.4s ease;
   padding: 0 10px;
 }
-#s-hunt .lead.shown { opacity: 1; }
-#s-hunt .lead.warn {
-  transform: scale(1.05);
-  color: #fff;
-  text-shadow: 0 0 15px var(--gold-bright);
+
+/* ============================================================
+   СЦЕНА II: СОКРОВЕННЫЙ ОСКОЛОК ВРЕМЕНИ
+   ============================================================ */
+#s-mem2 .field-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+#s-mem2 .mem-desktop-layout {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-.hotspot {
-  position: absolute;
-  width: 50px; height: 50px;
-  transform: translate(-50%, -50%);
-  display: flex; align-items: center; justify-content: center;
-  z-index: 5;
+@media (min-width: 651px) {
+  #s-mem2 .photo-card.p1 {
+    position: absolute;
+    top: 4%;
+    left: 4%;
+    --w: clamp(160px, 26vw, 210px);
+    --h: clamp(210px, 34vw, 275px);
+  }
+  #s-mem2 .photo-card.p2 {
+    position: absolute;
+    bottom: 5%;
+    right: 4%;
+    --w: clamp(165px, 27vw, 215px);
+    --h: clamp(215px, 35vw, 280px);
+    z-index: 2;
+  }
+  #s-mem2 .center-quote {
+    position: absolute;
+    top: 42%;
+    left: 8%;
+    right: 8%;
+    z-index: 3;
+    pointer-events: none;
+    text-align: center;
+  }
+  #s-mem2 .secret-medallion {
+    position: absolute;
+    bottom: 30%;
+    left: 18%;
+    z-index: 4;
+  }
 }
-.hotspot__dot {
-  width: 18px; height: 18px;
+
+@media (max-width: 650px) {
+  #s-mem2 .mem-desktop-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 12px;
+  }
+  #s-mem2 .photo-card.p1 {
+    --w: 160px; --h: 205px;
+    align-self: flex-start;
+    margin-left: 10px;
+  }
+  #s-mem2 .photo-card.p2 {
+    --w: 160px; --h: 205px;
+    align-self: flex-end;
+    margin-right: 10px;
+  }
+  #s-mem2 .center-quote {
+    text-align: center;
+    padding: 0 8px;
+    order: 2;
+  }
+  #s-mem2 .secret-medallion {
+    margin: -10px 0;
+    order: 3;
+  }
+}
+
+#s-mem2 .center-quote p {
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  line-height: 1.45;
+  color: var(--ink);
+  max-width: 16em;
+  margin: 0 auto;
+  text-shadow: 0 0 25px rgba(230, 194, 128, 0.4);
+}
+
+.secret-medallion {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 10%, var(--gold-bright) 60%, transparent 90%);
-  box-shadow: 0 0 18px 5px var(--gold-bright);
-  animation: fireflyGlow 2.5s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(230,194,128,0.2) 0%, transparent 70%);
 }
-@keyframes fireflyGlow {
-  0% { transform: scale(0.85); opacity: 0.65; }
-  100% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 24px 7px #fff; }
+.secret-medallion::after {
+  content: '✦';
+  font-size: 1.6rem;
+  color: var(--gold-light);
+  filter: drop-shadow(0 0 10px var(--gold-light));
+  animation: medallionOrbit 3s ease-in-out infinite alternate;
 }
-.hotspot.found .hotspot__dot {
-  animation: none;
-  background: var(--gold);
-  width: 8px; height: 8px;
-  box-shadow: 0 0 10px var(--gold);
+@keyframes medallionOrbit {
+  0% { transform: scale(0.9) rotate(0deg); }
+  100% { transform: scale(1.25) rotate(60deg); filter: drop-shadow(0 0 20px #fff); }
 }
 
-.hotspot__frag {
-  position: absolute; bottom: 125%;
-  width: max-content; max-width: clamp(190px, 60vw, 250px);
-  padding: 12px 16px;
+.secret-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.92);
+  width: 90%;
+  max-width: 360px;
+  padding: 22px 24px;
   background: var(--glass-bg);
-  border: 1px solid var(--gold);
-  border-radius: 12px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  font-family: var(--serif);
-  font-size: 0.95rem; line-height: 1.45; color: var(--ink);
-  opacity: 0; pointer-events: none;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 20px var(--gold-glow);
-  transition: all 0.5s var(--ease-fairy);
-  z-index: 10;
+  border: 1px solid var(--gold-primary);
+  border-radius: 18px;
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--gold-glow);
+  font-family: var(--serif-body);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-celestial), transform 0.4s var(--ease-elastic);
+  z-index: 50;
 }
-/* Адаптивная привязка подсказок к границам экрана */
-.hotspot.align-left .hotspot__frag { left: -10px; transform: translateY(6px); }
-.hotspot.align-right .hotspot__frag { right: -10px; transform: translateY(6px); }
-.hotspot.found .hotspot__frag { opacity: 1; transform: translateY(0); }
-
-#s-hunt .h1 { top: 22%; left: 22%; }
-#s-hunt .h2 { top: 34%; right: 8%; transform: translate(50%, -50%); }
-#s-hunt .h3 { top: 52%; left: 16%; }
-#s-hunt .h4 { top: 68%; right: 10%; transform: translate(50%, -50%); }
-#s-hunt .h5 { top: 80%; left: 35%; }
-
-#s-hunt .progress {
-  position: absolute; bottom: 6%; left: 0; right: 0;
-  display: flex; justify-content: center; gap: 8px;
-}
-#s-hunt .progress i {
-  width: 24px; height: 4px; border-radius: 4px; background: rgba(255,255,255,0.15);
-  transition: background 0.5s ease, box-shadow 0.5s ease;
-}
-#s-hunt .progress i.done {
-  background: var(--gold-bright);
-  box-shadow: 0 0 12px var(--gold-bright);
-}
-
-#s-hunt .proceed {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.8);
-  width: 76px; height: 76px; border-radius: 50%;
-  border: 1px solid var(--gold-bright);
-  background: radial-gradient(circle, rgba(233,196,126,0.3) 0%, transparent 70%);
-  opacity: 0; pointer-events: none;
-  transition: all 0.8s var(--ease-fairy);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem; color: var(--gold-bright);
-  z-index: 15;
-}
-#s-hunt .proceed.ready {
-  opacity: 1; pointer-events: auto; transform: translate(-50%,-50%) scale(1);
-  box-shadow: 0 0 45px 10px var(--gold-glow);
-  animation: pulseOrb 2s ease-in-out infinite alternate;
+.secret-popup.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
 }
 
 /* ============================================================
-   СЦЕНА 6 (ПИСЬМО)
+   СЦЕНА III: ЗВЁЗДНАЯ ВУАЛЬ (СКРЕТЧ-КАРТОЧКА)
+   ============================================================ */
+#s-mem3 {
+  flex-direction: column;
+  gap: clamp(14px, 2.5vh, 22px);
+  text-align: center;
+}
+.frost-scratch-box {
+  position: relative;
+  --w: clamp(210px, 58vw, 270px);
+  --h: clamp(280px, 78vw, 360px);
+  width: var(--w);
+  height: var(--h);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 35px var(--rose-mist);
+}
+.frost-scratch-box .photo-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.frost-scratch-box canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  touch-action: none;
+  cursor: grab;
+  z-index: 10;
+  transition: opacity 1.2s var(--ease-celestial);
+}
+.frost-scratch-box canvas:active { cursor: grabbing; }
+
+#s-mem3 .scratch-prompt {
+  font-family: var(--sans);
+  font-size: clamp(0.68rem, 2vw, 0.78rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  transition: opacity 0.6s ease;
+}
+#s-mem3 .scratch-story {
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: clamp(1.15rem, 3.8vw, 1.45rem);
+  color: var(--gold-light);
+  max-width: 22em;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s var(--ease-celestial), transform 1s var(--ease-celestial);
+  padding: 0 14px;
+}
+#s-mem3 .scratch-story.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   СЦЕНА IV: ОРБИТЫ ДУШИ
+   ============================================================ */
+#s-about .orbit-field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 10px 0;
+}
+.orbit-pill {
+  position: relative;
+  padding: clamp(10px, 2vh, 14px) clamp(16px, 4vw, 24px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(230, 194, 128, 0.25);
+  border-radius: 40px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: clamp(1rem, 3.5vw, 1.35rem);
+  color: var(--ink-dim);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  max-width: 88%;
+  transition: transform 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+}
+.orbit-pill:hover {
+  transform: scale(1.02) translateX(4px);
+  border-color: var(--gold-primary);
+  color: #fff;
+}
+.orbit-pill::before {
+  content: '✦ ';
+  color: var(--gold-light);
+  font-style: normal;
+  margin-right: 4px;
+}
+.orbit-pill.left { align-self: flex-start; }
+.orbit-pill.right { align-self: flex-end; text-align: right; }
+
+/* ============================================================
+   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (ИНТЕРАКТИВ БЕЗ ДЁРГАНИЯ)
+   ============================================================ */
+#s-hunt .hunt-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 720px;
+}
+#s-hunt .hunt-quest-hud {
+  position: absolute;
+  top: 4%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--serif-body);
+  font-size: clamp(1.05rem, 3.8vw, 1.35rem);
+  font-style: italic;
+  color: var(--gold-light);
+  opacity: 0;
+  transition: opacity 1s var(--ease-celestial), color 0.4s ease, transform 0.4s ease;
+  padding: 0 16px;
+  z-index: 10;
+}
+#s-hunt .hunt-quest-hud.active { opacity: 1; }
+#s-hunt .hunt-quest-hud.alert {
+  color: #fff;
+  transform: scale(1.05);
+  text-shadow: 0 0 20px var(--gold-primary);
+}
+
+.firefly-entity {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  margin-left: -27px;
+  margin-top: -27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+  cursor: pointer;
+  touch-action: none;
+  will-change: transform, left, top;
+}
+.firefly-core {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 20%, var(--gold-light) 60%, transparent 95%);
+  box-shadow: 0 0 20px 6px var(--gold-light);
+  animation: fireflyShine 2.2s ease-in-out infinite alternate;
+}
+@keyframes fireflyShine {
+  0% { transform: scale(0.8); opacity: 0.7; box-shadow: 0 0 14px 4px var(--gold-primary); }
+  100% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 26px 8px #fff; }
+}
+
+.firefly-entity.captured {
+  pointer-events: none;
+}
+.firefly-entity.captured .firefly-core {
+  animation: none;
+  background: var(--gold-primary);
+  width: 8px;
+  height: 8px;
+  box-shadow: 0 0 8px var(--gold-primary);
+}
+
+.firefly-bubble {
+  position: absolute;
+  bottom: 125%;
+  width: max-content;
+  max-width: clamp(210px, 65vw, 280px);
+  padding: 12px 16px;
+  background: var(--glass-bg);
+  border: 1px solid var(--gold-primary);
+  border-radius: 14px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  font-family: var(--serif-body);
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 20px var(--gold-glow);
+  transform: translateY(8px) scale(0.95);
+  transition: opacity 0.4s var(--ease-celestial), transform 0.4s var(--ease-elastic);
+  z-index: 30;
+}
+.firefly-entity.captured .firefly-bubble {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hunt-progress-line {
+  position: absolute;
+  bottom: 6%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 20;
+}
+.hunt-progress-dot {
+  width: 26px;
+  height: 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.16);
+  transition: background 0.6s ease, box-shadow 0.6s ease;
+}
+.hunt-progress-dot.active {
+  background: var(--gold-light);
+  box-shadow: 0 0 14px var(--gold-light);
+}
+
+.portal-key {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-light);
+  background: radial-gradient(circle, rgba(230,194,128,0.4) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-celestial), box-shadow 0.8s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: var(--gold-light);
+  z-index: 40;
+}
+.portal-key.ready {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+  box-shadow: 0 0 45px 12px var(--gold-glow);
+  animation: keyPulse 2.2s ease-in-out infinite alternate;
+}
+@keyframes keyPulse {
+  0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 30px 8px var(--gold-glow); }
+  100% { transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 0 55px 18px var(--gold-light); }
+}
+
+/* ============================================================
+   СЦЕНА VI: СВЯЩЕННОЕ ПИСЬМО (СУРГУЧНАЯ ПЕЧАТЬ)
    ============================================================ */
 #s-letter {
-  align-items: flex-start;
   height: auto;
   min-height: 100dvh;
-  padding: clamp(60px, 12vh, 100px) clamp(16px, 5vw, 40px);
-  background: radial-gradient(ellipse at 50% 30%, #1a1236 0%, #0c091d 80%);
+  align-items: center;
+  padding: clamp(60px, 10vh, 100px) clamp(16px, 4vw, 36px);
+  background: radial-gradient(ellipse at 50% 25%, #1b1236 0%, #06040d 85%);
   scroll-snap-align: start;
 }
-#s-letter .letter-wrapper {
-  max-width: 600px;
+.letter-parchment {
+  max-width: 620px;
   width: 100%;
   margin: 0 auto;
-  padding: clamp(1.6rem, 5vw, 3rem);
-  background: rgba(25, 18, 44, 0.76);
-  border: 1px solid var(--gold);
-  border-radius: 16px;
+  padding: clamp(1.8rem, 5.5vw, 3.2rem);
+  background: rgba(20, 15, 38, 0.78);
+  border: 1px solid var(--gold-primary);
+  border-radius: 20px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 35px var(--gold-glow);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.7), 0 0 40px var(--gold-glow);
   position: relative;
 }
-#s-letter .letter-wrapper::before {
-  content: '✧ ✦ ✧';
-  position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-  background: #1a1236; padding: 0 12px;
-  color: var(--gold-bright); letter-spacing: 0.2em; font-size: 0.85rem;
+.letter-parchment::before {
+  content: '✦ ✧ ✦';
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #171030;
+  padding: 0 14px;
+  color: var(--gold-light);
+  letter-spacing: 0.28em;
+  font-size: 0.85rem;
 }
-#s-letter .letter p {
-  font-family: var(--serif);
+
+.wax-seal-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12, 9, 22, 0.94);
+  border-radius: 20px;
+  z-index: 50;
+  cursor: pointer;
+  transition: opacity 0.8s var(--ease-celestial), visibility 0.8s;
+  padding: 20px;
+  text-align: center;
+}
+.wax-seal-wrapper.broken {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.wax-seal {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ab2346 0%, #681026 80%);
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 30px rgba(171, 35, 70, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  font-family: var(--serif-title);
+  font-size: 1.8rem;
+  transition: transform 0.4s var(--ease-elastic);
+}
+.wax-seal:hover { transform: scale(1.08) rotate(4deg); }
+.wax-seal-hint {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-top: 16px;
+}
+
+.letter-content p {
+  font-family: var(--serif-body);
   font-size: clamp(1.1rem, 3.8vw, 1.4rem);
   line-height: 1.8;
   color: var(--ink-dim);
   margin-bottom: 1.2em;
-  opacity: 0; filter: blur(6px); transform: translateY(14px);
-  transition: opacity 1.2s var(--ease-fairy), filter 1.2s var(--ease-fairy), transform 1.2s var(--ease-fairy);
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(14px);
+  transition: opacity 1s var(--ease-celestial), filter 1s var(--ease-celestial), transform 1s var(--ease-celestial);
 }
-#s-letter .letter p.shown { opacity: 1; filter: blur(0); transform: translateY(0); }
-#s-letter .letter p:first-child {
-  color: var(--gold-bright);
+.letter-content p.revealed {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+.letter-content p:first-child {
+  color: var(--gold-light);
+  font-family: var(--serif-title);
   font-size: clamp(1.5rem, 5vw, 2.1rem);
-  font-style: italic;
+  letter-spacing: 0.06em;
 }
-#s-letter .letter .sign { text-align: right; color: var(--gold); font-size: 1.3rem; margin-top: 1.8em; margin-bottom: 0; }
+.letter-content .dropcap {
+  float: left;
+  font-family: var(--serif-title);
+  font-size: 3.5rem;
+  line-height: 0.8;
+  margin: 6px 10px 0 0;
+  color: var(--gold-primary);
+  text-shadow: 0 0 14px var(--gold-glow);
+}
+.letter-content .letter-author {
+  text-align: right;
+  color: var(--gold-primary);
+  font-family: var(--serif-body);
+  font-size: 1.4rem;
+  font-style: italic;
+  margin-top: 1.8rem;
+  margin-bottom: 0;
+}
 
 /* ============================================================
-   СЦЕНА 7 (БУДУЩЕЕ)
+   СЦЕНА VII: НЕБЕСНЫЕ ФОНАРИКИ
    ============================================================ */
-#s-future .field {
-  position: relative; width: 100%; height: 100%; max-width: 650px;
-  display: flex; flex-direction: column; justify-content: space-around;
+#s-future .future-grid-field {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
-.plans-grid {
+.sky-lanterns-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(12px, 3vh, 24px);
+  gap: clamp(12px, 2.5vh, 22px);
   width: 100%;
 }
-.plan {
-  padding: clamp(14px, 2.5vh, 20px) 14px;
+.sky-lantern {
+  padding: clamp(14px, 2.4vh, 20px) 14px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 20px rgba(233,196,126,0.12);
-  font-family: var(--serif);
+  border-radius: 16px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(230, 194, 128, 0.1);
+  font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(0.92rem, 3vw, 1.1rem); line-height: 1.45; color: var(--ink);
+  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
+  line-height: 1.4;
+  color: var(--ink);
   text-align: center;
-  animation: lanternFloat 6s ease-in-out infinite alternate;
+  cursor: pointer;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
+  animation: lanternSway 6s ease-in-out infinite alternate;
 }
-.plan:nth-child(even) { animation-delay: 1.8s; }
-.plan:nth-child(3) { animation-delay: 3s; }
-.plan.full-span { grid-column: span 2; max-width: 280px; margin: 0 auto; width: 100%; }
-@keyframes lanternFloat {
-  0% { transform: translateY(0px) rotate(-1deg); }
+.sky-lantern:nth-child(even) { animation-delay: 2s; }
+.sky-lantern:nth-child(3) { animation-delay: 3.5s; }
+.sky-lantern.full {
+  grid-column: span 2;
+  max-width: 320px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@keyframes lanternSway {
+  0% { transform: translateY(0px) rotate(-1.5deg); }
   100% { transform: translateY(-12px) rotate(1.5deg); }
 }
-.plan.empty {
-  border: 1px dashed var(--gold);
-  color: var(--gold-bright);
+.sky-lantern.lit {
+  border-color: var(--gold-light);
+  box-shadow: 0 12px 40px rgba(230, 194, 128, 0.35), inset 0 0 18px rgba(230, 194, 128, 0.2);
+  color: #fff;
 }
-.plan.empty .q { font-size: 1.4rem; color: var(--gold); display: block; margin-bottom: 2px; }
-#s-future .heading {
+.sky-lantern.mystery {
+  border: 1px dashed var(--gold-primary);
+  color: var(--gold-light);
+}
+
+#s-future .future-caption {
   text-align: center;
-  font-family: var(--serif); font-style: italic; color: var(--gold);
-  font-size: clamp(1rem, 3.6vw, 1.25rem);
+  font-family: var(--serif-body);
+  font-style: italic;
+  color: var(--gold-primary);
+  font-size: clamp(1.05rem, 3.5vw, 1.35rem);
 }
 
 /* ============================================================
-   СЦЕНА 8 (ФИНАЛ)
+   СЦЕНА VIII: ФИНАЛ И ДАР ВСЕЛЕННОЙ
    ============================================================ */
-#s-final { flex-direction: column; gap: 4vh; }
-#s-final .line1 {
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(1.35rem, 5vw, 2.2rem);
-  color: var(--ink);
-  text-shadow: 0 0 25px rgba(233,196,126,0.3);
+#s-final {
+  flex-direction: column;
+  gap: clamp(24px, 4.5vh, 40px);
   text-align: center;
 }
-#s-final .glow {
-  width: 76px; height: 76px; border-radius: 50%;
-  border: 1px solid var(--gold-bright);
-  background: radial-gradient(circle, #fff 0%, var(--gold-bright) 45%, transparent 70%);
-  opacity: 0; pointer-events: none;
-  transition: all 1.5s var(--ease-fairy);
+#s-final .final-title {
+  font-family: var(--serif-title);
+  font-size: clamp(1.4rem, 4.8vw, 2.2rem);
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-shadow: 0 0 30px rgba(230,194,128,0.4);
 }
-#s-final .glow.ready {
-  opacity: 1; pointer-events: auto;
+.cosmic-orb-btn {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-light);
+  background: radial-gradient(circle, #fff 0%, var(--gold-light) 40%, var(--gold-primary) 70%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.4s var(--ease-celestial), transform 0.4s ease;
+  cursor: pointer;
+}
+.cosmic-orb-btn.ready {
+  opacity: 1;
+  pointer-events: auto;
   box-shadow: 0 0 60px 18px var(--gold-glow);
-  animation: pulseOrb 2.6s ease-in-out infinite alternate;
+  animation: finalOrbThrob 2.8s ease-in-out infinite alternate;
+}
+@keyframes finalOrbThrob {
+  0% { transform: scale(0.93); box-shadow: 0 0 35px 8px var(--gold-glow); }
+  100% { transform: scale(1.15); box-shadow: 0 0 75px 22px var(--gold-light); }
 }
 
-#s-final .gift {
-  position: fixed; inset: 0; z-index: 700;
-  background: radial-gradient(circle at 50% 50%, #1d1538 0%, #090715 100%);
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 20px;
-  padding: clamp(24px, 6vh, 48px) clamp(20px, 6vw, 40px);
+.celestial-gift-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  background: radial-gradient(circle at 50% 50%, #1a1133 0%, #06040d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: clamp(24px, 5vh, 48px) clamp(20px, 5vw, 40px);
   text-align: center;
-  opacity: 0; visibility: hidden; pointer-events: none;
-  transition: opacity 0.8s var(--ease-fairy), visibility 0.8s;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.6s var(--ease-celestial), visibility 0.6s;
   overflow-y: auto;
 }
-#s-final .gift.shown { opacity: 1; visibility: visible; pointer-events: auto; }
-#s-final .gift-frame {
-  width: 120px; height: 120px; flex-shrink: 0;
+.celestial-gift-modal.shown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.gift-halo-avatar {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
   border-radius: 50%;
-  border: 1px solid var(--gold);
-  background: radial-gradient(circle, rgba(233,196,126,0.22) 0%, transparent 70%);
-  box-shadow: 0 0 40px var(--gold-glow);
-  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--gold-primary);
+  background: radial-gradient(circle, rgba(230,194,128,0.25) 0%, transparent 75%);
+  box-shadow: 0 0 45px var(--gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#s-final .gift-frame svg { width: 50px; height: 50px; stroke: var(--gold-bright); fill: none; stroke-width: 1.2; }
-#s-final .gift p {
-  font-family: var(--serif); font-style: italic;
-  font-size: clamp(1.15rem, 4vw, 1.45rem); color: var(--ink); max-width: 24em; line-height: 1.6;
-}
-#s-final .gift .close {
-  font-family: var(--sans);
-  font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.18em;
-  color: var(--gold); margin-top: 10px; cursor: pointer;
+.gift-halo-avatar svg {
+  width: 48px;
+  height: 48px;
+  stroke: var(--gold-light);
+  fill: none;
+  stroke-width: 1.4;
 }
 
-/* КНОПКА ЗВУКА */
-#mute {
-  position: fixed; right: 20px; bottom: max(20px, env(safe-area-inset-bottom));
-  z-index: 500;
-  width: 42px; height: 42px;
-  border: 1px solid var(--gold);
+.celestial-gift-modal p {
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: clamp(1.15rem, 4vw, 1.5rem);
+  color: var(--ink);
+  max-width: 25em;
+  line-height: 1.6;
+}
+.gift-modal-close {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--gold-primary);
+  margin-top: 12px;
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid rgba(230, 194, 128, 0.35);
+  border-radius: 30px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.gift-modal-close:hover {
+  background: rgba(230, 194, 128, 0.15);
+  border-color: var(--gold-primary);
+}
+
+/* ============================================================
+   ПЛАВАЮЩИЙ АУДИОПЛЕЕР
+   ============================================================ */
+#audio-control {
+  position: fixed;
+  right: 20px;
+  bottom: max(20px, env(safe-area-inset-bottom, 20px));
+  z-index: 800;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--gold-primary);
   border-radius: 50%;
   background: var(--glass-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  box-shadow: 0 0 16px var(--gold-glow);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.8s ease;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 0 20px var(--gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.3s ease;
 }
-#mute.shown { opacity: 0.9; pointer-events: auto; }
-#mute svg { width: 18px; height: 18px; stroke: var(--gold-bright); fill: none; stroke-width: 1.5; }
-#mute .off-line { display: none; }
-#mute.muted .on-lines { display: none; }
-#mute.muted .off-line { display: block; }
+#audio-control.shown {
+  opacity: 0.95;
+  pointer-events: auto;
+}
+#audio-control:hover { transform: scale(1.08); }
+#audio-control svg {
+  width: 19px;
+  height: 19px;
+  stroke: var(--gold-light);
+  fill: none;
+  stroke-width: 1.5;
+}
+#audio-control .icon-muted { display: none; }
+#audio-control.muted .icon-playing { display: none; }
+#audio-control.muted .icon-muted { display: block; }
 </style>
 </head>
 <body>
 
-<div id="aurora"></div>
-<canvas id="magic-dust"></canvas>
+<!-- АТМОСФЕРНЫЕ ХОЛСТЫ -->
+<div class="nebula"></div>
+<canvas id="space-canvas"></canvas>
+<canvas id="dust-canvas"></canvas>
+<canvas id="sparkle-trail"></canvas>
 
 <!-- ВРАТА -->
 <div id="gate">
-  <div class="gate__halo"></div>
-  <p id="gate__text">В этой сказке каждая глава — о тебе</p>
-  <p id="gate__hint">прикоснись к звёздам</p>
+  <div class="astrolabe-portal">
+    <div class="astrolabe-ring"></div>
+    <div class="astrolabe-ring"></div>
+    <div class="astrolabe-ring"></div>
+    <div class="gate__crystal"></div>
+  </div>
+  <h1 class="gate__title">ДЛЯ ЗАРИНЫ</h1>
+  <p class="gate__subtitle">история, написанная мерцанием звёзд</p>
+  <div class="gate__cta">
+    <span class="gate__cta-icon">✦</span>
+    <span>прикоснись к тайне</span>
+  </div>
 </div>
 
-<!-- ИСТОРИЯ -->
+<!-- ОСНОВНАЯ ИСТОРИЯ -->
 <main id="story">
 
-  <!-- ГЛАВА 1 -->
+  <!-- ГЛАВА 1: ЗАРОЖДЕНИЕ -->
   <section class="scene" id="s-open">
-    <svg class="symbol" viewBox="0 0 120 120" data-parallax="6">
-      <line class="beam b1" x1="25" y1="85" x2="45" y2="55"></line>
-      <line class="beam b2" x1="45" y1="55" x2="70" y2="65"></line>
-      <line class="beam b3" x1="70" y1="65" x2="90" y2="35"></line>
-      <line class="beam b4" x1="90" y1="35" x2="60" y2="20"></line>
-      <circle class="star" cx="25" cy="85" r="2.2"></circle>
-      <circle class="star" cx="45" cy="55" r="2.4"></circle>
-      <circle class="star" cx="70" cy="65" r="2.2"></circle>
-      <circle class="star" cx="90" cy="35" r="2.6"></circle>
-      <circle class="star core" cx="60" cy="20" r="3.5"></circle>
+    <svg class="constellation-sign" viewBox="0 0 120 120">
+      <line x1="25" y1="90" x2="50" y2="60"></line>
+      <line x1="50" y1="60" x2="75" y2="70"></line>
+      <line x1="75" y1="70" x2="95" y2="35"></line>
+      <line x1="95" y1="35" x2="60" y2="20"></line>
+      <circle cx="25" cy="90" r="2.5"></circle>
+      <circle cx="50" cy="60" r="2.8"></circle>
+      <circle cx="75" cy="70" r="2.5"></circle>
+      <circle cx="95" cy="35" r="3"></circle>
+      <circle class="hub" cx="60" cy="20" r="4.5"></circle>
     </svg>
-    <p class="date rise" style="--d:.3">
-      <span class="edit">[дата, которая важна вам двоим]</span>
+    <p class="chapter-date rise" style="--d:0.2">
+      <span class="edit-hint">[14 февраля • день, когда зажёгся свет]</span>
     </p>
-    <div class="memory">
-      <div class="photo rise" style="--d:.6;--rot:-2deg" data-parallax="8" data-tilt="1">
-        <div class="photo__pic"><div class="photo__sheen"></div></div>
-        <div class="photo__margin">
-          <span class="photo__frame">ГЛАВА I</span>
-          <span class="photo__cap edit">[первый момент]</span>
-        </div>
+    <div class="photo-card rise" style="--d:0.4;--rot:-1.5deg" data-tilt="1">
+      <div class="photo-card__view">
+        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80" alt="Первый миг" loading="eager">
+        <div class="photo-card__sheen"></div>
       </div>
-      <p class="memory-phrase rise" style="--d:.9">
-        <span class="edit">[короткая фраза о том, как зажглась эта история]</span>
-      </p>
+      <div class="photo-card__footer">
+        <span class="photo-card__tag">ГЛАВА I</span>
+        <span class="photo-card__caption edit-hint">[первая улыбка]</span>
+      </div>
     </div>
+    <p class="moment-lead rise" style="--d:0.7">
+      <span class="edit-hint">«С того самого мгновения даже тишина рядом с тобой наполнилась смыслом...»</span>
+    </p>
   </section>
 
-  <!-- ГЛАВА 2 -->
+  <!-- ГЛАВА 2: СОКРОВЕННЫЙ ОСКОЛОК -->
   <section class="scene" id="s-mem2">
-    <div class="field">
-      <div class="photo a1 rise" style="--d:0;--rot:-3deg" data-parallax="10" data-tilt="1">
-        <div class="photo__pic"><div class="photo__sheen"></div></div>
-        <div class="photo__margin">
-          <span class="photo__frame">ГЛАВА II</span>
-          <span class="photo__cap edit">[деталь]</span>
+    <div class="field-wrap">
+      <div class="mem-desktop-layout">
+        <div class="photo-card p1 rise" style="--d:0;--rot:-3deg" data-tilt="1">
+          <div class="photo-card__view">
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Взгляд" loading="lazy">
+            <div class="photo-card__sheen"></div>
+          </div>
+          <div class="photo-card__footer">
+            <span class="photo-card__tag">ГЛАВА II</span>
+            <span class="photo-card__caption edit-hint">[твой смех]</span>
+          </div>
         </div>
-      </div>
-      <div class="text-block rise" style="--d:.3">
-        <p><span class="edit">[фраза, которая изменила всё вокруг]</span></p>
-      </div>
-      <div class="photo a2 rise" style="--d:.5;--rot:3deg" data-parallax="12" data-tilt="1">
-        <div class="photo__pic"><div class="photo__sheen"></div></div>
-        <div class="photo__margin">
-          <span class="photo__frame">ГЛАВА III</span>
-          <span class="photo__cap edit">[момент]</span>
+
+        <div class="center-quote rise" style="--d:0.3">
+          <p><span class="edit-hint">Ты превращаешь самые простые дни в страницы волшебной книги.</span></p>
         </div>
+
+        <div class="photo-card p2 rise" style="--d:0.5;--rot:3deg" data-tilt="1">
+          <div class="photo-card__view">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80" alt="Тепло" loading="lazy">
+            <div class="photo-card__sheen"></div>
+          </div>
+          <div class="photo-card__footer">
+            <span class="photo-card__tag">ГЛАВА III</span>
+            <span class="photo-card__caption edit-hint">[вечер под звёздами]</span>
+          </div>
+        </div>
+
+        <button class="secret-medallion rise" style="--d:0.8" aria-label="открыть тайну" data-secret-trigger></button>
       </div>
-      <button class="magic-spark rise" style="--d:.9" aria-label="открыть тайну" data-note></button>
-      <div class="note" data-note-panel>
-        <span class="edit">[сокровенное послание — то, о чём молчат слова]</span>
+
+      <div class="secret-popup" data-secret-modal>
+        <span class="edit-hint">«Среди миллиардов людей во Вселенной есть те, чей свет виден даже с закрытыми глазами. Ты — мой свет.»</span>
       </div>
     </div>
   </section>
 
-  <!-- ГЛАВА 3 -->
+  <!-- ГЛАВА 3: ЗВЁЗДНАЯ ВУАЛЬ (СКРЕТЧ) -->
   <section class="scene" id="s-mem3">
-    <div class="reveal-wrap rise" style="--d:0">
-      <div class="photo">
-        <div class="photo__pic"><div class="photo__sheen"></div></div>
-        <div class="photo__margin">
-          <span class="photo__frame">ГЛАВА IV</span>
-          <span class="photo__cap edit">[то, что спрятано под звёздами]</span>
+    <div class="frost-scratch-box rise" style="--d:0">
+      <div class="photo-card">
+        <div class="photo-card__view">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Скрытое воспоминание" loading="lazy">
+          <div class="photo-card__sheen"></div>
+        </div>
+        <div class="photo-card__footer">
+          <span class="photo-card__tag">ГЛАВА IV</span>
+          <span class="photo-card__caption edit-hint">[неизгладимый миг]</span>
         </div>
       </div>
-      <canvas data-scratch></canvas>
+      <canvas data-scratch-layer></canvas>
     </div>
-    <p class="swipe-hint rise" style="--d:.3" data-swipe-hint>✦ коснись и растопи звёздную вуаль ✦</p>
-    <p class="caption" data-scratch-caption><span class="edit">[что случилось в этот незабываемый миг]</span></p>
+    <p class="scratch-prompt rise" style="--d:0.3" data-scratch-hint>✦ сотри звёздную пыль прикосновением ✦</p>
+    <p class="scratch-story" data-scratch-text><span class="edit-hint">[Тот день на закате, когда время просто остановилось для нас двоих]</span></p>
   </section>
 
-  <!-- ГЛАВА 4 -->
+  <!-- ГЛАВА 4: ЧЕРТЫ ДУШИ -->
   <section class="scene" id="s-about">
-    <div class="field">
-      <p class="note-line n1 rise" style="--d:0"><span class="edit">[та черта, которую замечаешь только ты]</span></p>
-      <p class="note-line n2 rise" style="--d:.2"><span class="edit">[фраза, от которой всегда теплеет внутри]</span></p>
-      <p class="note-line n3 rise" style="--d:.4"><span class="edit">[то, как она улыбается своим мыслям]</span></p>
-      <p class="note-line n4 rise" style="--d:.6"><span class="edit">[только ваша общая шутка или воспоминание]</span></p>
-      <p class="note-line n5 rise" style="--d:.8"><span class="edit">[самая любимая деталь в её смехе]</span></p>
+    <div class="orbit-field">
+      <div class="orbit-pill left rise" style="--d:0"><span class="edit-hint">То, как искренне ты радуешься мелочам</span></div>
+      <div class="orbit-pill right rise" style="--d:0.15"><span class="edit-hint">Твой голос, возвращающий душевное спокойствие</span></div>
+      <div class="orbit-pill left rise" style="--d:0.3"><span class="edit-hint">Неповторимая нежность в каждом твоём взгляде</span></div>
+      <div class="orbit-pill right rise" style="--d:0.45"><span class="edit-hint">Наши понятные только нам двоим шутки</span></div>
+      <div class="orbit-pill left rise" style="--d:0.6"><span class="edit-hint">Твоя удивительная способность согревать словом</span></div>
     </div>
   </section>
 
-  <!-- ГЛАВА 5 -->
+  <!-- ГЛАВА 5: ОХОТА НА СВЕТЛЯЧКОВ (ИНТЕРАКТИВ) -->
   <section class="scene" id="s-hunt">
-    <div class="field">
-      <p class="lead" data-hunt-lead>Поймай светлячков: в них спрятаны сокровенные искры</p>
-      <button class="hotspot h1 align-left" data-hotspot aria-label="поймать светлячка">
-        <span class="hotspot__dot"></span>
-        <span class="hotspot__frag"><span class="edit">[искра памяти №1]</span></span>
-      </button>
-      <button class="hotspot h2 align-right" data-hotspot aria-label="поймать светлячка">
-        <span class="hotspot__dot"></span>
-        <span class="hotspot__frag"><span class="edit">[искра памяти №2]</span></span>
-      </button>
-      <button class="hotspot h3 align-left" data-hotspot aria-label="поймать светлячка">
-        <span class="hotspot__dot"></span>
-        <span class="hotspot__frag"><span class="edit">[искра памяти №3]</span></span>
-      </button>
-      <button class="hotspot h4 align-right" data-hotspot aria-label="поймать светлячка">
-        <span class="hotspot__dot"></span>
-        <span class="hotspot__frag"><span class="edit">[искра памяти №4]</span></span>
-      </button>
-      <button class="hotspot h5 align-left" data-hotspot aria-label="поймать светлячка">
-        <span class="hotspot__dot"></span>
-        <span class="hotspot__frag"><span class="edit">[искра памяти №5]</span></span>
-      </button>
-      <div class="progress" data-progress>
-        <i></i><i></i><i></i><i></i><i></i>
+    <div class="hunt-container">
+      <p class="hunt-quest-hud" data-hunt-hud>Поймай 5 блуждающих светлячков, чтобы открыть путь к сердцу сказки</p>
+
+      <div class="firefly-entity" data-firefly data-index="0">
+        <div class="firefly-core"></div>
+        <div class="firefly-bubble"><span class="edit-hint">[Искра I: Твоя улыбка освещает мой мир]</span></div>
       </div>
-      <button class="proceed" data-proceed aria-label="открыть письмо">✦</button>
+      <div class="firefly-entity" data-firefly data-index="1">
+        <div class="firefly-core"></div>
+        <div class="firefly-bubble"><span class="edit-hint">[Искра II: Твой смех — моя любимая музыка]</span></div>
+      </div>
+      <div class="firefly-entity" data-firefly data-index="2">
+        <div class="firefly-core"></div>
+        <div class="firefly-bubble"><span class="edit-hint">[Искра III: С тобой я дома в любой точке земли]</span></div>
+      </div>
+      <div class="firefly-entity" data-firefly data-index="3">
+        <div class="firefly-core"></div>
+        <div class="firefly-bubble"><span class="edit-hint">[Искра IV: Каждая мечта обретает смысл]</span></div>
+      </div>
+      <div class="firefly-entity" data-firefly data-index="4">
+        <div class="firefly-core"></div>
+        <div class="firefly-bubble"><span class="edit-hint">[Искра V: Ты — самое прекрасное чудо]</span></div>
+      </div>
+
+      <div class="hunt-progress-line" data-hunt-bars>
+        <div class="hunt-progress-dot"></div>
+        <div class="hunt-progress-dot"></div>
+        <div class="hunt-progress-dot"></div>
+        <div class="hunt-progress-dot"></div>
+        <div class="hunt-progress-dot"></div>
+      </div>
+
+      <button class="portal-key" data-hunt-unlock aria-label="открыть послание">✦</button>
     </div>
   </section>
 
-  <!-- ГЛАВА 6: ПИСЬМО -->
+  <!-- ГЛАВА 6: СОКРОВЕННОЕ ПИСЬМО -->
   <section class="scene" id="s-letter">
-    <div class="letter-wrapper">
-      <div class="letter" data-letter>
+    <div class="letter-parchment">
+      <div class="wax-seal-wrapper" data-wax-seal>
+        <div class="wax-seal">✦</div>
+        <span class="wax-seal-hint">коснись печати, чтобы открыть</span>
+      </div>
+
+      <div class="letter-content" data-letter-body>
         <p>Зарина,</p>
-        <p>Если ты читаешь эти строки — значит, все звёздные искры собраны. Это потребовало времени, но настоящая магия никогда не спешит.</p>
-        <p>Мне хотелось соткать для тебя то, что нельзя просто скопировать или подарить кому-то ещё. Что-то живое, сотканное из тёплых воспоминаний и существующее только в нашей собственной вселенной.</p>
-        <p class="edit">[здесь — твоё искреннее письмо, признание или обещание, написанное от всего сердца]</p>
-        <p>Иногда слова теряются в суете. Но здесь, среди звёздной тишины, они звучат именно так, как я чувствую.</p>
-        <p>Это не конец сказки, а лишь её прекрасное продолжение.</p>
-        <p class="sign edit">[твоё имя]</p>
+        <p><span class="dropcap">Е</span>сли ты читаешь это письмо — значит, все рассеянные светлячки нашли путь домой. Настоящее волшебство не требует спешки: оно расцветает в моменты чуткости и внимания.</p>
+        <p>Мне хотелось подарить тебе нечто неподвластное времени. Не просто открытку или слова, а целое звёздное убежище, сотканное исключительно ради тебя и твоей улыбки.</p>
+        <p class="edit-hint">[Здесь напиши самое важное: слова, которые ты бережёшь для неё, искреннюю благодарность за её присутствие в твоей жизни, клятву или обещание всегда быть рядом.]</p>
+        <p>В мире, который вечно куда-то спешит, ты остаёшься моим самым глубоким спокойствием и вдохновением.</p>
+        <p>Эта сказка не имеет последней страницы, ведь мы пишем её каждый день.</p>
+        <p class="letter-author edit-hint">[Твоё имя или «Всегда твой»]</p>
       </div>
     </div>
   </section>
 
-  <!-- ГЛАВА 7: БУДУЩЕЕ -->
+  <!-- ГЛАВА 7: НЕБО ЖЕЛАНИЙ (ФОНАРИКИ) -->
   <section class="scene" id="s-future">
-    <div class="field">
-      <div class="plans-grid">
-        <div class="plan"><span class="edit">[путешествие мечты]</span></div>
-        <div class="plan"><span class="edit">[уютный вечер для двоих]</span></div>
-        <div class="plan"><span class="edit">[маленькая мечта]</span></div>
-        <div class="plan empty"><span class="q">✧</span><span>наша новая тайна</span></div>
-        <div class="plan empty full-span"><span class="q">✧</span><span>неизведанное чудо</span></div>
+    <div class="future-grid-field">
+      <div class="sky-lanterns-grid">
+        <div class="sky-lantern" data-lantern><span class="edit-hint">[Встретить рассвет на берегу океана]</span></div>
+        <div class="sky-lantern" data-lantern><span class="edit-hint">[Сбежать в уютный домик в горах]</span></div>
+        <div class="sky-lantern" data-lantern><span class="edit-hint">[Танцевать под тёплым дождём]</span></div>
+        <div class="sky-lantern mystery" data-lantern><span>✧ наше общее сокровенное желание ✧</span></div>
+        <div class="sky-lantern full mystery" data-lantern><span>✧ миллион новых счастливых дорог ✧</span></div>
       </div>
-      <p class="heading">самые чудесные главы ещё впереди...</p>
+      <p class="future-caption">прикоснись к фонарику, чтобы зажечь мечту...</p>
     </div>
   </section>
 
-  <!-- ГЛАВА 8: ФИНАЛ -->
+  <!-- ГЛАВА 8: ФИНАЛ И ПОДАРОК -->
   <section class="scene" id="s-final">
-    <p class="line1 rise" style="--d:0" data-final-line>Загляни в сердце сказки</p>
-    <button class="glow" data-final-glow aria-label="открыть подарок"></button>
-    <div class="gift" data-gift>
-      <div class="gift-frame">
+    <h2 class="final-title rise" style="--d:0">В самом сердце созвездия</h2>
+    <button class="cosmic-orb-btn" data-final-trigger aria-label="открыть подарок"></button>
+    
+    <div class="celestial-gift-modal" data-gift-dialog>
+      <div class="gift-halo-avatar">
         <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
       </div>
-      <p><span class="edit">[здесь — настоящий подарок: билеты, приглашение, координаты свидания или сюрприз]</span></p>
-      <p class="close" data-gift-close>✦ прикоснись, чтобы вернуться к звёздам ✦</p>
+      <p><span class="edit-hint">[Здесь твой сюрприз: билеты на концерт любимой группы, путешествие, координаты романтического вечера или тайное признание]</span></p>
+      <button class="gift-modal-close" data-gift-dismiss>✦ вернуться к звёздам ✦</button>
     </div>
   </section>
 
 </main>
 
-<button id="mute" aria-label="звук">
-  <svg class="on-lines" viewBox="0 0 24 24">
+<!-- КНОПКА ЗВУКА -->
+<button id="audio-control" aria-label="управление звуком">
+  <svg class="icon-playing" viewBox="0 0 24 24">
     <path d="M4 10v4h4l5 4V6L8 10H4z"/>
     <path d="M16.5 9a4 4 0 0 1 0 6"/>
+    <path d="M19.5 6a8 8 0 0 1 0 12"/>
   </svg>
-  <svg class="off-line" viewBox="0 0 24 24">
+  <svg class="icon-muted" viewBox="0 0 24 24">
     <path d="M4 10v4h4l5 4V6L8 10H4z"/>
-    <path d="M15 9l5 6M20 9l-5 6"/>
+    <path d="M16 10l5 5M21 10l-5 5"/>
   </svg>
 </button>
 
@@ -894,415 +1386,582 @@ body.started #story { visibility: visible; }
 (function(){
   'use strict';
 
-  /* 0. ЗВУКОВОЙ ДВИЖОК */
-  var gate = document.getElementById('gate');
-  var muteBtn = document.getElementById('mute');
+  /* ============================================================
+     1. АУДИОДВИЖОК: СИНТЕЗАТОР И ПЕНТАТОНИЧЕСКИЙ КОСМОС
+     ============================================================ */
   var audioState = null;
-  var chimeTimer = null;
-  var chimePitches = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+  var audioBtn = document.getElementById('audio-control');
+  var gate = document.getElementById('gate');
+  var chimeFrequencies = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98]; // C5 - E5 - G5 - C6 - E6 - G6
 
-  function playChime(freq, customGain) {
+  function playHarmonicChime(freq, gainLevel) {
     if (!audioState || audioState.muted) return;
-    var ctx = audioState.ctx;
-    var osc = ctx.createOscillator();
-    var g = ctx.createGain();
-    osc.type = 'sine';
-    osc.frequency.value = freq;
+    try {
+      var ctx = audioState.ctx;
+      var now = ctx.currentTime;
 
-    var now = ctx.currentTime;
-    g.gain.setValueAtTime(0, now);
-    g.gain.linearRampToValueAtTime(customGain || 0.04, now + 0.03);
-    g.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
 
-    osc.connect(g);
-    g.connect(audioState.master);
-    osc.start(now);
-    osc.stop(now + 2.1);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(gainLevel || 0.05, now + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.00001, now + 2.4);
+
+      osc.connect(gain);
+      gain.connect(audioState.master);
+      osc.start(now);
+      osc.stop(now + 2.5);
+    } catch(e) {}
   }
 
-  function scheduleFairytaleChimes(){
+  function scheduleCelestialAmbience() {
     if (!audioState) return;
-    var f = chimePitches[Math.floor(Math.random() * chimePitches.length)];
-    playChime(f, 0.025);
-    chimeTimer = setTimeout(scheduleFairytaleChimes, 3500 + Math.random() * 4500);
+    var f = chimeFrequencies[Math.floor(Math.random() * chimeFrequencies.length)];
+    playHarmonicChime(f, 0.025);
+    setTimeout(scheduleCelestialAmbience, 3200 + Math.random() * 3800);
   }
 
-  function initAudio(){
+  function initAudioEngine() {
     if (audioState) return;
     try {
-      var Ctx = window.AudioContext || window.webkitAudioContext;
-      var ctx = new Ctx();
-      if (ctx.state === 'suspended') { ctx.resume(); }
+      var AudioCtx = window.AudioContext || window.webkitAudioContext;
+      var ctx = new AudioCtx();
+      if (ctx.state === 'suspended') ctx.resume();
 
       var master = ctx.createGain();
-      master.gain.value = 0;
+      master.gain.setValueAtTime(0.0001, ctx.currentTime);
+      master.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 3);
       master.connect(ctx.destination);
-      master.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 2.5);
 
-      // Атмосферный небесный фон
-      [261.63, 329.63, 392.00].forEach(function(f){
+      // Гармонический дрон
+      [130.81, 196.00, 261.63, 329.63].forEach(function(freq, i){
         var osc = ctx.createOscillator();
         var g = ctx.createGain();
-        var flt = ctx.createBiquadFilter();
-        osc.type = 'sine';
-        osc.frequency.value = f;
-        flt.type = 'lowpass';
-        flt.frequency.value = 450;
-        g.gain.value = 0.08;
-        osc.connect(flt);
-        flt.connect(g);
+        var filter = ctx.createBiquadFilter();
+        osc.type = i % 2 === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(380, ctx.currentTime);
+
+        g.gain.setValueAtTime(0.04 / (i + 1), ctx.currentTime);
+        osc.connect(filter);
+        filter.connect(g);
         g.connect(master);
         osc.start();
       });
 
       audioState = { ctx: ctx, master: master, muted: false };
-      setTimeout(scheduleFairytaleChimes, 1500);
-    } catch(e) { audioState = null; }
+      setTimeout(scheduleCelestialAmbience, 1500);
+    } catch(e) {
+      audioState = null;
+    }
   }
 
-  function toggleMute(){
+  function toggleAudioMute() {
     if (!audioState) return;
     audioState.muted = !audioState.muted;
-    var target = audioState.muted ? 0 : 0.06;
-    audioState.master.gain.linearRampToValueAtTime(target, audioState.ctx.currentTime + 0.4);
-    muteBtn.classList.toggle('muted', audioState.muted);
+    var now = audioState.ctx.currentTime;
+    var target = audioState.muted ? 0.0001 : 0.07;
+    audioState.master.gain.setValueAtTime(audioState.master.gain.value, now);
+    audioState.master.gain.linearRampToValueAtTime(target, now + 0.3);
+    audioBtn.classList.toggle('muted', audioState.muted);
   }
-  muteBtn.addEventListener('click', toggleMute);
+  audioBtn.addEventListener('click', toggleAudioMute);
+
+  function triggerHaptic(duration) {
+    if ('vibrate' in navigator) {
+      try { navigator.vibrate(duration || 18); } catch(e) {}
+    }
+  }
 
   gate.addEventListener('click', function(){
-    initAudio();
-    playChime(1046.5, 0.05);
+    initAudioEngine();
+    playHarmonicChime(1046.5, 0.06);
+    triggerHaptic(25);
     gate.classList.add('hidden');
-    document.body.classList.add('started');
-    setTimeout(function(){ muteBtn.classList.add('shown'); }, 1200);
+    setTimeout(function(){
+      audioBtn.classList.add('shown');
+    }, 1200);
   }, { once: true });
 
-  /* 1. ПОЯВЛЕНИЕ СЦЕН */
+  /* ============================================================
+     2. КАНВАС: ЗВЁЗДНОЕ НЕБО И МЕТЕОРЫ (RETINA-READY)
+     ============================================================ */
+  (function(){
+    var canvas = document.getElementById('space-canvas');
+    var ctx = canvas.getContext('2d');
+    var w = 0, h = 0, dpr = 1;
+    var stars = [], meteors = [];
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.scale(dpr, dpr);
+
+      var count = Math.min(140, Math.floor((w * h) / 10000));
+      stars = [];
+      for (var i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.5 + 0.35,
+          alpha: Math.random() * 0.7 + 0.3,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+    }
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+
+    function spawnMeteor() {
+      if (meteors.length < 2 && Math.random() < 0.015) {
+        meteors.push({
+          x: Math.random() * w,
+          y: Math.random() * (h * 0.4),
+          len: Math.random() * 100 + 60,
+          speed: Math.random() * 8 + 7,
+          angle: (Math.PI / 4) + (Math.random() - 0.5) * 0.2,
+          opacity: 1
+        });
+      }
+    }
+
+    function render(now) {
+      ctx.clearRect(0, 0, w, h);
+      var t = now / 1000;
+
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        var shimmer = 0.5 + 0.5 * Math.sin(t * 2 + s.phase);
+        ctx.fillStyle = 'rgba(255, 248, 230, ' + (s.alpha * shimmer).toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      spawnMeteor();
+      for (var j = meteors.length - 1; j >= 0; j--) {
+        var m = meteors[j];
+        var dx = Math.cos(m.angle) * m.len;
+        var dy = Math.sin(m.angle) * m.len;
+
+        var grad = ctx.createLinearGradient(m.x, m.y, m.x - dx, m.y - dy);
+        grad.addColorStop(0, 'rgba(255,255,255,' + m.opacity + ')');
+        grad.addColorStop(1, 'rgba(230,194,128,0)');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(m.x - dx, m.y - dy);
+        ctx.stroke();
+
+        m.x += Math.cos(m.angle) * m.speed;
+        m.y += Math.sin(m.angle) * m.speed;
+        m.opacity -= 0.018;
+
+        if (m.opacity <= 0 || m.x > w + 100 || m.y > h + 100) {
+          meteors.splice(j, 1);
+        }
+      }
+      requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
+  })();
+
+  /* ============================================================
+     3. ЗВЁЗДНАЯ ПЫЛЬЦА И ШЛЕЙФ КАСАНИЯ (INTERACTIVE PARTICLES)
+     ============================================================ */
+  (function(){
+    var canvas = document.getElementById('sparkle-trail');
+    var ctx = canvas.getContext('2d');
+    var w = 0, h = 0, dpr = 1;
+    var particles = [];
+
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resize, { passive: true });
+    resize();
+
+    window.addBurstAt = function(x, y, count) {
+      count = count || 12;
+      for (var i = 0; i < count; i++) {
+        var angle = Math.random() * Math.PI * 2;
+        var spd = Math.random() * 3 + 1;
+        particles.push({
+          x: x, y: y,
+          vx: Math.cos(angle) * spd,
+          vy: Math.sin(angle) * spd,
+          life: 1,
+          decay: Math.random() * 0.025 + 0.015,
+          size: Math.random() * 2.5 + 1.2
+        });
+      }
+    };
+
+    function addSparkle(x, y) {
+      for (var i = 0; i < 2; i++) {
+        particles.push({
+          x: x + (Math.random() - 0.5) * 6,
+          y: y + (Math.random() - 0.5) * 6,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: (Math.random() - 0.5) * 1.2 - 0.3,
+          life: 1,
+          decay: Math.random() * 0.03 + 0.02,
+          size: Math.random() * 2.2 + 0.8
+        });
+      }
+    }
+
+    window.addEventListener('pointermove', function(e){
+      addSparkle(e.clientX, e.clientY);
+    }, { passive: true });
+
+    function update() {
+      ctx.clearRect(0, 0, w, h);
+      for (var i = particles.length - 1; i >= 0; i--) {
+        var p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+
+        ctx.fillStyle = 'rgba(255, 235, 170, ' + p.life.toFixed(3) + ')';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  })();
+
+  /* ============================================================
+     4. НАБЛЮДАТЕЛЬ СЦЕН И ШЁЛКОВЫЙ 3D-TILT БЕЗ ДЁРГАНИЯ
+     ============================================================ */
   var sceneObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
-      if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
         var el = entry.target;
         el.classList.add('in-view');
-        armParallaxIn(el);
 
         if (el.id === 's-hunt') {
-          var lead = el.querySelector('[data-hunt-lead]');
-          setTimeout(function(){ lead.classList.add('shown'); }, 400);
-        } else if (el.id === 's-letter') {
-          var paras = el.querySelectorAll('.letter p');
-          paras.forEach(function(p, i){
-            setTimeout(function(){ p.classList.add('shown'); }, i * 450 + 150);
-          });
+          var hud = el.querySelector('[data-hunt-hud]');
+          if (hud) setTimeout(function(){ hud.classList.add('active'); }, 400);
         } else if (el.id === 's-final') {
           setTimeout(function(){
-            document.querySelector('[data-final-glow]').classList.add('ready');
-          }, 1800);
+            var orb = document.querySelector('[data-final-trigger]');
+            if (orb) orb.classList.add('ready');
+          }, 1200);
+        } else if (el.id === 's-mem3') {
+          if (window.refreshScratchCanvas) window.refreshScratchCanvas();
         }
-        sceneObserver.unobserve(el);
       }
     });
-  }, { threshold: [0, 0.35, 1] });
+  }, { threshold: [0.3] });
+
   document.querySelectorAll('.scene').forEach(function(s){ sceneObserver.observe(s); });
 
-  /* 2. СЦЕНА 2: ЗАПИСКА */
-  var noteBtn = document.querySelector('[data-note]');
-  var notePanel = document.querySelector('[data-note-panel]');
-  if (noteBtn) {
-    noteBtn.addEventListener('click', function(e){
+  // 3D-Tilt через CSS-переменные с математическим сглаживанием (LERP)
+  (function(){
+    var hasPointer = window.matchMedia('(pointer: fine)').matches;
+    if (!hasPointer) return;
+
+    var targetX = 0, targetY = 0;
+    var currentX = 0, currentY = 0;
+    var cards = document.querySelectorAll('[data-tilt]');
+
+    window.addEventListener('mousemove', function(e){
+      var cx = window.innerWidth / 2;
+      var cy = window.innerHeight / 2;
+      targetX = (e.clientX - cx) / cx; // -1 .. 1
+      targetY = (e.clientY - cy) / cy; // -1 .. 1
+    }, { passive: true });
+
+    function loopTilt() {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+
+      var rotY = (currentX * 10).toFixed(3) + 'deg';
+      var rotX = (-currentY * 10).toFixed(3) + 'deg';
+
+      for (var i = 0; i < cards.length; i++) {
+        cards[i].style.setProperty('--ry', rotY);
+        cards[i].style.setProperty('--rx', rotX);
+      }
+      requestAnimationFrame(loopTilt);
+    }
+    requestAnimationFrame(loopTilt);
+  })();
+
+  /* ============================================================
+     5. СЦЕНА II: ВСПЛЫВАЮЩИЙ МЕДАЛЬОН
+     ============================================================ */
+  (function(){
+    var medallion = document.querySelector('[data-secret-trigger]');
+    var secretPopup = document.querySelector('[data-secret-modal]');
+    if (!medallion || !secretPopup) return;
+
+    medallion.addEventListener('click', function(e){
       e.stopPropagation();
-      notePanel.classList.toggle('shown');
-      playChime(880, 0.04);
+      var rect = medallion.getBoundingClientRect();
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
+      secretPopup.classList.toggle('active');
+      playHarmonicChime(880, 0.05);
+      triggerHaptic(18);
     });
+
     document.addEventListener('click', function(e){
-      if (!notePanel.contains(e.target) && e.target !== noteBtn) {
-        notePanel.classList.remove('shown');
+      if (!secretPopup.contains(e.target) && e.target !== medallion) {
+        secretPopup.classList.remove('active');
       }
     });
-  }
+  })();
 
-  /* 3. СЦЕНА 3: СКРЕТЧ-СЛОЙ */
+  /* ============================================================
+     6. СЦЕНА III: ИДЕАЛЬНЫЙ СКРЕТЧ-СЛОЙ С КАЛИБРОВКОЙ
+     ============================================================ */
   (function(){
-    var wrap = document.querySelector('.reveal-wrap');
-    if (!wrap) return;
-    var canvas = wrap.querySelector('canvas[data-scratch]');
+    var box = document.querySelector('.frost-scratch-box');
+    if (!box) return;
+    var canvas = box.querySelector('[data-scratch-layer]');
     var ctx2d = canvas.getContext('2d');
-    var caption = document.querySelector('[data-scratch-caption]');
-    var hint = document.querySelector('[data-swipe-hint]');
-    var revealed = false;
-    var drawing = false;
-    var visited = {};
-    var visitedCount = 0;
-    var cols = 9, rows = 11;
-    var dpr = window.devicePixelRatio || 1;
+    var hint = document.querySelector('[data-scratch-hint]');
+    var story = document.querySelector('[data-scratch-text]');
+    var isErasing = false, cleared = false;
+    var dpr = 1;
+    var cells = 10;
+    var erasedMap = {};
+    var erasedTotal = 0;
 
-    function paintCosmicFrost(){
-      if (revealed || visitedCount > 0) return;
-      var w = canvas.clientWidth, h = canvas.clientHeight;
+    function initScratch() {
+      if (cleared) return;
+      var w = box.clientWidth;
+      var h = box.clientHeight;
       if (!w || !h) return;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
+
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx2d.setTransform(1, 0, 0, 1, 0, 0);
       ctx2d.scale(dpr, dpr);
 
       var grad = ctx2d.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, '#241b47');
-      grad.addColorStop(0.5, '#3a2761');
-      grad.addColorStop(1, '#1b1436');
+      grad.addColorStop(0, '#1c1538');
+      grad.addColorStop(0.5, '#2f2052');
+      grad.addColorStop(1, '#150e2a');
       ctx2d.fillStyle = grad;
       ctx2d.fillRect(0, 0, w, h);
 
-      ctx2d.fillStyle = 'rgba(255, 230, 160, 0.65)';
-      for(var i = 0; i < 35; i++){
-        var rx = Math.random() * w, ry = Math.random() * h;
+      // Искрящиеся ледяные звёзды
+      ctx2d.fillStyle = 'rgba(255, 235, 170, 0.6)';
+      for (var i = 0; i < 45; i++) {
         ctx2d.beginPath();
-        ctx2d.arc(rx, ry, Math.random() * 2, 0, Math.PI * 2);
+        ctx2d.arc(Math.random() * w, Math.random() * h, Math.random() * 2, 0, Math.PI * 2);
         ctx2d.fill();
       }
     }
+    window.refreshScratchCanvas = initScratch;
+    window.addEventListener('resize', initScratch, { passive: true });
 
-    function erase(x, y){
+    function scratchAt(x, y) {
       ctx2d.save();
       ctx2d.globalCompositeOperation = 'destination-out';
       ctx2d.beginPath();
-      ctx2d.arc(x, y, Math.max(canvas.clientWidth, canvas.clientHeight) * 0.16, 0, Math.PI * 2);
+      var radius = Math.max(canvas.clientWidth, canvas.clientHeight) * 0.16;
+      ctx2d.arc(x, y, radius, 0, Math.PI * 2);
       ctx2d.fill();
       ctx2d.restore();
 
-      var cx = Math.min(cols - 1, Math.max(0, Math.floor(x / canvas.clientWidth * cols)));
-      var cy = Math.min(rows - 1, Math.max(0, Math.floor(y / canvas.clientHeight * rows)));
-      var key = cx + '_' + cy;
-      if (!visited[key]) {
-        visited[key] = true;
-        visitedCount++;
-        if (visitedCount / (cols * rows) > 0.42) {
-          revealed = true;
-          canvas.style.transition = 'opacity 1s ease';
+      var cx = Math.min(cells - 1, Math.max(0, Math.floor(x / canvas.clientWidth * cells)));
+      var cy = Math.min(cells - 1, Math.max(0, Math.floor(y / canvas.clientHeight * cells)));
+      var key = cx + ':' + cy;
+      if (!erasedMap[key]) {
+        erasedMap[key] = true;
+        erasedTotal++;
+        if (erasedTotal / (cells * cells) > 0.42 && !cleared) {
+          cleared = true;
           canvas.style.opacity = '0';
           canvas.style.pointerEvents = 'none';
-          caption.classList.add('shown');
-          playChime(1318.5, 0.05);
+          if (story) story.classList.add('revealed');
+          playHarmonicChime(1318.5, 0.06);
+          triggerHaptic(35);
         }
       }
     }
 
-    function getCoords(e){
-      var rect = canvas.getBoundingClientRect();
-      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    function getPos(e) {
+      var r = canvas.getBoundingClientRect();
+      return { x: e.clientX - r.left, y: e.clientY - r.top };
     }
 
     canvas.addEventListener('pointerdown', function(e){
-      drawing = true;
+      isErasing = true;
+      try { canvas.setPointerCapture(e.pointerId); } catch(err) {}
       if (hint) hint.style.opacity = '0';
-      var pos = getCoords(e);
-      erase(pos.x, pos.y);
+      var pos = getPos(e);
+      scratchAt(pos.x, pos.y);
     });
     canvas.addEventListener('pointermove', function(e){
-      if (!drawing) return;
-      var pos = getCoords(e);
-      erase(pos.x, pos.y);
+      if (!isErasing) return;
+      var pos = getPos(e);
+      scratchAt(pos.x, pos.y);
     });
-    ['pointerup', 'pointercancel', 'pointerleave'].forEach(function(ev){
-      canvas.addEventListener(ev, function(){ drawing = false; });
-    });
-
-    window.addEventListener('resize', paintCosmicFrost);
-    setTimeout(paintCosmicFrost, 150);
+    function endScratch(e) {
+      isErasing = false;
+      try { canvas.releasePointerCapture(e.pointerId); } catch(err) {}
+    }
+    canvas.addEventListener('pointerup', endScratch);
+    canvas.addEventListener('pointercancel', endScratch);
   })();
 
-  /* 4. СЦЕНА 5: СВЕТЛЯЧКИ + БЛОКИРОВКА СКРОЛЛА */
+  /* ============================================================
+     7. СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (ПЛАВНАЯ ОРБИТАЛЬНАЯ ФИЗИКА)
+     ============================================================ */
   (function(){
-    var story = document.getElementById('story');
-    var huntScene = document.getElementById('s-hunt');
-    var hotspots = Array.prototype.slice.call(document.querySelectorAll('[data-hotspot]'));
-    var progressIcons = Array.prototype.slice.call(document.querySelectorAll('[data-progress] i'));
-    var proceedBtn = document.querySelector('[data-proceed]');
-    var lead = document.querySelector('[data-hunt-lead]');
-    var found = 0;
-    var huntUnlocked = false;
+    var fireflies = Array.prototype.slice.call(document.querySelectorAll('[data-firefly]'));
+    var progressDots = Array.prototype.slice.call(document.querySelectorAll('.hunt-progress-dot'));
+    var unlockBtn = document.querySelector('[data-hunt-unlock]');
+    var hud = document.querySelector('[data-hunt-hud]');
+    var capturedCount = 0;
 
-    // Подсветка при попытке пролистнуть мимо
-    function flashWarn(){
-      if (!lead) return;
-      lead.classList.add('warn');
-      setTimeout(function(){ lead.classList.remove('warn'); }, 700);
-    }
+    // Параметрические траектории (гармонические орбиты без дёргания)
+    var orbits = fireflies.map(function(_, i){
+      return {
+        baseX: 20 + (i % 3) * 30,
+        baseY: 25 + Math.floor(i / 3) * 35,
+        ampX: 12 + Math.random() * 8,
+        ampY: 10 + Math.random() * 8,
+        freqX: 0.6 + Math.random() * 0.4,
+        freqY: 0.5 + Math.random() * 0.4,
+        phase: (i * Math.PI) / 2.5
+      };
+    });
 
-    // Запрет прокрутки дальше Главы 5 до сбора всех искр
-    function handleScrollLock(){
-      if (huntUnlocked) return;
-      var huntTop = huntScene.offsetTop;
-      if (story.scrollTop > huntTop + 10) {
-        story.scrollTo({ top: huntTop, behavior: 'instant' });
-        flashWarn();
+    function loopFly(now) {
+      var t = now / 1000;
+      for (var i = 0; i < fireflies.length; i++) {
+        var el = fireflies[i];
+        if (el.classList.contains('captured')) continue;
+        var o = orbits[i];
+        var x = o.baseX + Math.sin(t * o.freqX + o.phase) * o.ampX;
+        var y = o.baseY + Math.cos(t * o.freqY + o.phase) * o.ampY;
+
+        el.style.left = x.toFixed(2) + '%';
+        el.style.top = y.toFixed(2) + '%';
       }
+      requestAnimationFrame(loopFly);
     }
-    story.addEventListener('scroll', handleScrollLock, { passive: true });
+    requestAnimationFrame(loopFly);
 
-    // Перехват свайпа/колеса вниз на сцене охоты
-    function blockAdvance(e){
-      if (huntUnlocked) return;
-      var huntTop = huntScene.offsetTop;
-      var isAtHunt = Math.abs(story.scrollTop - huntTop) < 30;
-      if (!isAtHunt) return;
-
-      var delta = e.deltaY || (e.touches && e.touches[0] ? -1 : 0);
-      if (e.type === 'wheel' && e.deltaY > 0) {
-        e.preventDefault();
-        flashWarn();
-      }
-    }
-    window.addEventListener('wheel', blockAdvance, { passive: false });
-
-    var touchStartY = 0;
-    story.addEventListener('touchstart', function(e){
-      touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-    story.addEventListener('touchmove', function(e){
-      if (huntUnlocked) return;
-      var huntTop = huntScene.offsetTop;
-      var isAtHunt = Math.abs(story.scrollTop - huntTop) < 25;
-      if (!isAtHunt) return;
-
-      var touchEndY = e.touches[0].clientY;
-      if (touchStartY - touchEndY > 20) { // Свайп вверх (попытка промотать вниз)
-        e.preventDefault();
-        flashWarn();
-      }
-    }, { passive: false });
-
-    // Сбор светлячков
-    hotspots.forEach(function(h){
-      h.addEventListener('click', function(e){
+    fireflies.forEach(function(fly){
+      fly.addEventListener('click', function(e){
         e.stopPropagation();
-        if (h.classList.contains('found')) return;
-        h.classList.add('found');
-        found++;
-        playChime(chimePitches[found % chimePitches.length], 0.05);
-        if (progressIcons[found - 1]) progressIcons[found - 1].classList.add('done');
+        if (fly.classList.contains('captured')) return;
+        fly.classList.add('captured');
+        capturedCount++;
 
-        if (found === hotspots.length) {
+        var rect = fly.getBoundingClientRect();
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
+        triggerHaptic(20);
+
+        playHarmonicChime(chimeFrequencies[capturedCount % chimeFrequencies.length], 0.06);
+        if (progressDots[capturedCount - 1]) {
+          progressDots[capturedCount - 1].classList.add('active');
+        }
+
+        if (capturedCount === fireflies.length) {
           setTimeout(function(){
-            proceedBtn.classList.add('ready');
-            playChime(1567.98, 0.06);
+            if (unlockBtn) unlockBtn.classList.add('ready');
+            playHarmonicChime(1567.98, 0.08);
+            triggerHaptic(40);
           }, 600);
         }
       });
     });
 
-    if (proceedBtn) {
-      proceedBtn.addEventListener('click', function(){
-        huntUnlocked = true;
+    if (unlockBtn) {
+      unlockBtn.addEventListener('click', function(){
         document.getElementById('s-letter').scrollIntoView({ behavior: 'smooth' });
       });
     }
   })();
 
-  /* 5. ФИНАЛ */
+  /* ============================================================
+     8. СЦЕНА VI: СУРГУЧНАЯ ПЕЧАТЬ И ПИСЬМО
+     ============================================================ */
   (function(){
-    var glow = document.querySelector('[data-final-glow]');
-    var gift = document.querySelector('[data-gift]');
-    var close = document.querySelector('[data-gift-close]');
-    if (!glow || !gift) return;
-    glow.addEventListener('click', function(){
-      gift.classList.add('shown');
-      playChime(1046.5, 0.07);
+    var seal = document.querySelector('[data-wax-seal]');
+    var letterBody = document.querySelector('[data-letter-body]');
+    if (!seal || !letterBody) return;
+
+    seal.addEventListener('click', function(){
+      var rect = seal.getBoundingClientRect();
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
+      seal.classList.add('broken');
+      playHarmonicChime(1046.5, 0.08);
+      triggerHaptic(45);
+
+      var paras = letterBody.querySelectorAll('p');
+      paras.forEach(function(p, idx){
+        setTimeout(function(){
+          p.classList.add('revealed');
+        }, idx * 400 + 150);
+      });
     });
-    close.addEventListener('click', function(){ gift.classList.remove('shown'); });
   })();
 
-  /* 6. ПАРАЛЛАКС БЕЗ КОНФЛИКТА С CSS */
-  var isFine = window.matchMedia('(pointer: fine)').matches;
-  var pointer = { x: 0, y: 0 };
-  if (isFine) {
-    window.addEventListener('pointermove', function(e){
-      pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
-    }, { passive: true });
-  }
-
-  var parallaxEls = [];
-  function armParallaxIn(scene){
-    var targets = scene.querySelectorAll('[data-parallax]');
-    targets.forEach(function(el){
-      var strength = parseFloat(el.getAttribute('data-parallax')) || 10;
-      var tilt = el.hasAttribute('data-tilt');
-      parallaxEls.push({ el: el, strength: strength, tilt: tilt, cx: 0, cy: 0, rx: 0, ry: 0, seed: Math.random() * 8 });
+  /* ============================================================
+     9. СЦЕНА VII: НЕБЕСНЫЕ ФОНАРИКИ
+     ============================================================ */
+  document.querySelectorAll('[data-lantern]').forEach(function(lantern){
+    lantern.addEventListener('click', function(){
+      this.classList.toggle('lit');
+      var rect = this.getBoundingClientRect();
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 6);
+      playHarmonicChime(880, 0.04);
+      triggerHaptic(15);
     });
-  }
+  });
 
-  function parallaxLoop(){
-    var t = performance.now() / 1000;
-    parallaxEls.forEach(function(p){
-      var tx = isFine ? pointer.x * p.strength : Math.sin(t * 0.4 + p.seed) * p.strength * 0.4;
-      var ty = isFine ? pointer.y * p.strength * 0.6 : Math.cos(t * 0.35 + p.seed) * p.strength * 0.3;
-      p.cx += (tx - p.cx) * 0.06;
-      p.cy += (ty - p.cy) * 0.06;
-
-      p.el.style.setProperty('--px', p.cx.toFixed(2) + 'px');
-      p.el.style.setProperty('--py', p.cy.toFixed(2) + 'px');
-
-      if (p.tilt && isFine) {
-        var trx = pointer.y * -6, try_ = pointer.x * 6;
-        p.rx += (trx - p.rx) * 0.06;
-        p.ry += (try_ - p.ry) * 0.06;
-        p.el.style.setProperty('--rx', p.rx.toFixed(2) + 'deg');
-        p.el.style.setProperty('--ry', p.ry.toFixed(2) + 'deg');
-      }
-    });
-    requestAnimationFrame(parallaxLoop);
-  }
-  requestAnimationFrame(parallaxLoop);
-
-  /* 7. ЧАСТИЦЫ ВОЛШЕБНОЙ ПЫЛИ */
+  /* ============================================================
+     10. СЦЕНА VIII: СФЕРА СЕРДЦА И ДИАЛОГ ПОДАРКА
+     ============================================================ */
   (function(){
-    var canvas = document.getElementById('magic-dust');
-    if (!canvas) return;
-    var ctx = canvas.getContext('2d');
-    var w = 0, h = 0, sparks = [];
+    var trigger = document.querySelector('[data-final-trigger]');
+    var modal = document.querySelector('[data-gift-dialog]');
+    var dismiss = document.querySelector('[data-gift-dismiss]');
+    if (!trigger || !modal) return;
 
-    function resize(){
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
-      var count = Math.min(45, Math.floor((w * h) / 22000));
-      sparks = [];
-      for(var i = 0; i < count; i++){
-        sparks.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 2 + 0.8,
-          vx: (Math.random() - 0.5) * 0.25,
-          vy: -Math.random() * 0.35 - 0.1,
-          alpha: Math.random() * 0.6 + 0.25,
-          seed: Math.random() * Math.PI * 2
-        });
-      }
-    }
-    resize();
-    window.addEventListener('resize', resize);
+    trigger.addEventListener('click', function(){
+      var rect = trigger.getBoundingClientRect();
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 25);
+      modal.classList.add('shown');
+      playHarmonicChime(1318.5, 0.09);
+      triggerHaptic([30, 60, 40]);
+    });
 
-    function loop(now){
-      ctx.clearRect(0, 0, w, h);
-      var t = now / 1000;
-      sparks.forEach(function(p){
-        p.x += p.vx + Math.sin(t * 0.6 + p.seed) * 0.2;
-        p.y += p.vy;
-        if (p.y < -10) { p.y = h + 10; p.x = Math.random() * w; }
-        if (p.x < -10) p.x = w + 10;
-        if (p.x > w + 10) p.x = -10;
-
-        var flicker = 0.65 + 0.35 * Math.sin(t * 2.2 + p.seed);
-        var curAlpha = p.alpha * flicker;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 226, 159,' + curAlpha.toFixed(3) + ')';
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = 'rgba(233, 196, 126, 0.7)';
-        ctx.fill();
-        ctx.shadowBlur = 0;
+    if (dismiss) {
+      dismiss.addEventListener('click', function(){
+        modal.classList.remove('shown');
       });
-      requestAnimationFrame(loop);
     }
-    requestAnimationFrame(loop);
   })();
 
 })();
