@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   ДИЗАЙН-СИСТЕМА: РОЗОВЫЙ КВАРЦ И НЕОНОВАЯ БЕЗДНА
+   ДИЗАЙН-СИСТЕМА: РОЗОВЫЙ КВАРЦ И НЕОНОВЫЙ КОСМОС
    ============================================================ */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -21,8 +21,8 @@
 }
 
 :root {
-  --bg-void: #09020d;
-  --bg-deep: #16061f;
+  --bg-void: #08020c;
+  --bg-deep: #14051b;
   --rose-primary: #f472b6;
   --rose-light: #ffe4e6;
   --rose-blush: #fecdd3;
@@ -31,15 +31,16 @@
   --rose-glow: rgba(244, 114, 182, 0.55);
   --rose-halo: rgba(251, 113, 133, 0.28);
   --ink: #fff1f2;
-  --ink-dim: #f3d5df;
+  --ink-dim: #f5d6e2;
   --ink-faint: #ad8a9d;
-  --glass-bg: rgba(28, 10, 36, 0.72);
+  --glass-bg: rgba(26, 9, 34, 0.76);
   --glass-border: rgba(244, 114, 182, 0.32);
   --glass-specular: rgba(255, 255, 255, 0.3);
   --serif-title: 'Cinzel', Georgia, serif;
   --serif-body: 'Cormorant Garamond', Garamond, serif;
   --sans: 'Montserrat', -apple-system, sans-serif;
   --ease-celestial: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-elastic: cubic-bezier(0.34, 1.35, 0.64, 1);
 }
 
@@ -65,7 +66,7 @@ button {
 }
 svg { display: block; }
 
-/* Холсты звёздной бездны */
+/* Холсты звездного фона */
 #space-canvas, #sparkle-trail {
   position: fixed;
   inset: 0;
@@ -84,12 +85,13 @@ svg { display: block; }
   z-index: 1;
   pointer-events: none;
   background: 
-    radial-gradient(ellipse 65% 55% at 75% 25%, rgba(244, 63, 94, 0.2) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 60% at 20% 75%, rgba(217, 70, 239, 0.16) 0%, transparent 60%),
-    radial-gradient(ellipse 70% 65% at 50% 50%, rgba(244, 114, 182, 0.14) 0%, transparent 75%);
-  filter: blur(60px);
+    radial-gradient(ellipse 65% 55% at 75% 25%, rgba(244, 63, 94, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 60% at 20% 75%, rgba(217, 70, 239, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 65% at 50% 50%, rgba(244, 114, 182, 0.12) 0%, transparent 75%);
+  filter: blur(65px);
   animation: nebulaFloat 24s ease-in-out infinite alternate;
-  opacity: 0.9;
+  opacity: 0.95;
+  transform: translateZ(0);
 }
 @keyframes nebulaFloat {
   0% { transform: scale(1) rotate(0deg); }
@@ -108,9 +110,9 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 45%, #250a2e 0%, #09020e 100%);
+  background: radial-gradient(circle at 50% 45%, #24092b 0%, #08020d 100%);
   cursor: pointer;
-  transition: opacity 1.3s var(--ease-celestial), visibility 1.3s;
+  transition: opacity 1.3s var(--ease-silk), visibility 1.3s;
   padding: max(20px, env(safe-area-inset-top)) 20px max(24px, env(safe-area-inset-bottom));
   text-align: center;
 }
@@ -133,9 +135,9 @@ svg { display: block; }
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px dashed rgba(244, 114, 182, 0.5);
+  border: 1px dashed rgba(244, 114, 182, 0.45);
   animation: spinSlow 34s linear infinite;
-  box-shadow: 0 0 25px rgba(244, 114, 182, 0.2);
+  box-shadow: 0 0 25px rgba(244, 114, 182, 0.18);
 }
 .astrolabe-ring:nth-child(2) {
   inset: 14px;
@@ -190,11 +192,12 @@ svg { display: block; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7px;
-  opacity: 0.88;
+  gap: 8px;
+  opacity: 0.9;
 }
 .gate__cta-icon {
   font-size: 1.2rem;
+  line-height: 1;
   color: var(--rose-bright);
   animation: bounceSoft 2.2s infinite ease-in-out;
 }
@@ -223,6 +226,7 @@ svg { display: block; }
 .scene {
   position: relative;
   min-height: 100dvh;
+  height: auto;
   width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -230,17 +234,18 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: calc(max(16px, env(safe-area-inset-top)) + 8px) max(16px, env(safe-area-inset-right)) calc(max(20px, env(safe-area-inset-bottom)) + 10px) max(16px, env(safe-area-inset-left));
+  padding: calc(max(16px, env(safe-area-inset-top)) + 8px) max(16px, env(safe-area-inset-right)) calc(max(22px, env(safe-area-inset-bottom)) + 16px) max(16px, env(safe-area-inset-left));
   overflow-y: auto;
   overflow-x: hidden;
+  gap: 16px;
 }
 .scene::-webkit-scrollbar { display: none; }
 
 .rise {
   opacity: 0;
   filter: blur(8px);
-  transform: translateY(24px) scale(0.98);
-  transition: opacity 1.1s var(--ease-celestial), filter 1.1s var(--ease-celestial), transform 1.1s var(--ease-celestial);
+  transform: translateY(22px) scale(0.98);
+  transition: opacity 1.1s var(--ease-silk), filter 1.1s var(--ease-silk), transform 1.1s var(--ease-silk);
   transition-delay: calc(var(--d, 0) * 1s);
 }
 .scene.in-view .rise {
@@ -249,43 +254,53 @@ svg { display: block; }
   transform: translateY(0) scale(1);
 }
 
-/* КВЕСТ-БАННЕРЫ И КНОПКИ */
+/* КВЕСТ-БАННЕРЫ И ПЛАВНЫЕ КНОПКИ ПЕРЕХОДА */
 .quest-hud {
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 9px 18px;
-  background: rgba(36, 13, 46, 0.75);
+  gap: 10px;
+  padding: 10px 20px;
+  background: rgba(36, 12, 45, 0.78);
   border: 1px solid var(--glass-border);
   border-radius: 30px;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  font-size: clamp(0.72rem, 2.7vw, 0.86rem);
+  font-size: clamp(0.74rem, 2.7vw, 0.88rem);
   letter-spacing: 0.08em;
   color: var(--rose-light);
   text-align: center;
   box-shadow: 0 8px 24px rgba(0,0,0,0.5), inset 0 1px 1px var(--glass-specular);
   z-index: 25;
   flex-shrink: 0;
-  transition: all 0.5s var(--ease-celestial);
+  transition: background-color 0.8s var(--ease-silk), border-color 0.8s var(--ease-silk), box-shadow 0.8s var(--ease-silk), color 0.8s var(--ease-silk);
 }
 .quest-hud.solved {
   border-color: var(--rose-bright);
   color: #fff;
-  background: rgba(58, 16, 68, 0.85);
-  box-shadow: 0 0 30px var(--rose-glow), inset 0 0 12px rgba(255, 255, 255, 0.3);
+  background: rgba(58, 15, 68, 0.88);
+  box-shadow: 0 0 32px var(--rose-glow), inset 0 0 14px rgba(255, 255, 255, 0.35);
 }
 .quest-hud-icon {
   color: var(--rose-bright);
-  font-size: 0.95rem;
-  animation: pulseIcon 2s infinite alternate;
+  font-size: 1rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulseIcon 2.2s infinite alternate;
+  flex-shrink: 0;
 }
 @keyframes pulseIcon {
-  from { opacity: 0.6; transform: scale(0.92); }
-  to { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 10px var(--rose-primary)); }
+  from { opacity: 0.65; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1.18); filter: drop-shadow(0 0 10px var(--rose-primary)); }
+}
+
+.quest-hud-text {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  display: inline-block;
 }
 
 .quest-next-btn {
@@ -293,13 +308,13 @@ svg { display: block; }
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 13px 28px;
-  background: linear-gradient(135deg, rgba(244, 114, 182, 0.4), rgba(217, 70, 239, 0.32));
+  padding: 14px 30px;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.42), rgba(217, 70, 239, 0.34));
   border: 1px solid var(--rose-light);
   border-radius: 30px;
   color: #fff;
   font-family: var(--sans);
-  font-size: clamp(0.74rem, 2.7vw, 0.86rem);
+  font-size: clamp(0.74rem, 2.7vw, 0.88rem);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 500;
@@ -307,29 +322,30 @@ svg { display: block; }
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(14px);
-  transition: opacity 0.6s var(--ease-celestial), transform 0.6s var(--ease-celestial);
+  transform: translateY(18px);
+  transition: opacity 0.9s var(--ease-silk), transform 0.9s var(--ease-silk), box-shadow 0.9s var(--ease-silk);
   flex-shrink: 0;
   z-index: 30;
+  margin-top: 8px;
 }
 .quest-next-btn.active {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
-  animation: btnPulseGlow 2.6s infinite ease-in-out;
+  animation: btnPulseGlow 3s infinite ease-in-out;
 }
 @keyframes btnPulseGlow {
   0%, 100% { box-shadow: 0 0 20px var(--rose-glow); transform: scale(1); }
-  50% { box-shadow: 0 0 38px rgba(251, 113, 133, 0.85); transform: scale(1.03); }
+  50% { box-shadow: 0 0 40px rgba(251, 113, 133, 0.85); transform: scale(1.03); }
 }
 
 /* ЗАВЕСА БЛОКИРОВКИ ГЛАВЫ */
 .scene-curtain {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(25, 9, 34, 0.96), rgba(9, 2, 13, 0.99));
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  background: radial-gradient(circle at 50% 50%, rgba(24, 8, 33, 0.97), rgba(8, 2, 12, 0.99));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   z-index: 80;
   display: flex;
   flex-direction: column;
@@ -337,7 +353,7 @@ svg { display: block; }
   justify-content: center;
   padding: 24px;
   text-align: center;
-  transition: opacity 0.9s var(--ease-celestial), visibility 0.9s;
+  transition: opacity 1.2s var(--ease-silk), visibility 1.2s;
 }
 .scene-curtain.unlocked {
   opacity: 0;
@@ -355,7 +371,7 @@ svg { display: block; }
 }
 .scene-curtain span {
   font-size: 0.74rem;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
@@ -364,14 +380,14 @@ svg { display: block; }
    КАРТОЧКИ ВОСПОМИНАНИЙ
    ============================================================ */
 .photo-card {
-  --w: clamp(145px, 42vw, 195px);
-  --h: clamp(190px, 56vw, 255px);
+  --w: clamp(150px, 42vw, 200px);
+  --h: clamp(195px, 56vw, 265px);
   position: relative;
   width: var(--w);
   height: var(--h);
   flex-shrink: 0;
   padding: 8px 8px 6px;
-  background: linear-gradient(145deg, rgba(255, 255, 255, 0.16) 0%, rgba(244, 114, 182, 0.08) 50%, rgba(10, 3, 15, 0.5) 100%);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.16) 0%, rgba(244, 114, 182, 0.08) 50%, rgba(10, 3, 15, 0.55) 100%);
   border: 1px solid var(--glass-border);
   border-radius: 18px;
   backdrop-filter: blur(20px);
@@ -383,10 +399,16 @@ svg { display: block; }
 .photo-card::before {
   content: '🌸';
   position: absolute;
-  top: -11px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 1;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   filter: drop-shadow(0 0 8px var(--rose-primary));
   z-index: 5;
 }
@@ -395,7 +417,7 @@ svg { display: block; }
   flex: 1;
   border-radius: 12px;
   overflow: hidden;
-  background: linear-gradient(155deg, #260f32, #0d0413);
+  background: linear-gradient(155deg, #240e30, #0c0412);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .photo-card__view img {
@@ -431,7 +453,7 @@ svg { display: block; }
 }
 
 /* ============================================================
-   СЦЕНА I: СОЗВЕЗДИЕ СЕРДЦА (УСЛОЖНЁННАЯ СВЯЗЬ)
+   СЦЕНА I: СОЗВЕЗДИЕ НАЧАЛА
    ============================================================ */
 #s-open .chapter-date {
   font-family: var(--serif-title);
@@ -552,11 +574,12 @@ svg { display: block; }
   font-size: 1.4rem;
   color: var(--rose-light);
   text-shadow: 0 0 15px var(--rose-bright);
+  will-change: transform;
 }
 .memory-rune-spark::before {
   content: '';
   position: absolute;
-  inset: 5px;
+  inset: 6px;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(244, 114, 182, 0.45) 0%, transparent 70%);
   animation: haloBreathe 2.2s infinite alternate;
@@ -568,7 +591,7 @@ svg { display: block; }
 .memory-rune-spark.collected {
   opacity: 0;
   pointer-events: none;
-  transform: scale(0.1);
+  transform: scale(0.1) !important;
   transition: all 0.5s ease;
 }
 
@@ -593,7 +616,7 @@ svg { display: block; }
   color: var(--ink);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.5s var(--ease-celestial), transform 0.5s var(--ease-elastic);
+  transition: opacity 0.5s var(--ease-silk), transform 0.5s var(--ease-elastic);
   z-index: 100;
 }
 .secret-popup.active {
@@ -630,7 +653,7 @@ svg { display: block; }
   touch-action: none;
   cursor: grab;
   z-index: 15;
-  transition: opacity 0.9s var(--ease-celestial);
+  transition: opacity 1.1s var(--ease-silk);
 }
 .hidden-beacon-star {
   position: absolute;
@@ -664,7 +687,7 @@ svg { display: block; }
   text-align: center;
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity 0.9s var(--ease-celestial), transform 0.9s var(--ease-celestial);
+  transition: opacity 0.9s var(--ease-silk), transform 0.9s var(--ease-silk);
   padding: 0 10px;
 }
 #s-mem3 .scratch-story.revealed {
@@ -673,12 +696,12 @@ svg { display: block; }
 }
 
 /* ============================================================
-   СЦЕНА IV: ОРБИТЫ ДУШИ (МЕЛОДИЧЕСКИЙ КАМЕРТОН)
+   СЦЕНА IV: ОРБИТЫ ДУШИ (КАМЕРТОН)
    ============================================================ */
 #s-about .orbit-field {
   position: relative;
   width: 100%;
-  max-width: 450px;
+  max-width: 460px;
   display: flex;
   flex-direction: column;
   gap: clamp(9px, 1.7vh, 14px);
@@ -697,7 +720,7 @@ svg { display: block; }
   font-size: clamp(0.98rem, 3.2vw, 1.22rem);
   color: var(--ink-dim);
   cursor: pointer;
-  transition: all 0.4s var(--ease-celestial);
+  transition: all 0.4s var(--ease-silk);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -730,7 +753,7 @@ svg { display: block; }
 }
 
 /* ============================================================
-   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (ФРАЗА СО СМЫСЛОМ)
+   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (БЕЗ LAYOUT REFLOW)
    ============================================================ */
 #s-hunt .hunt-container {
   position: relative;
@@ -746,21 +769,21 @@ svg { display: block; }
 
 .firefly-entity {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 54px;
   height: 54px;
-  margin-left: -27px;
-  margin-top: -27px;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 15;
   cursor: pointer;
   touch-action: none;
-  transition: transform 0.2s ease-out;
+  will-change: transform;
 }
 .firefly-core {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: radial-gradient(circle, #fff 25%, var(--rose-light) 55%, var(--rose-bright) 90%);
   box-shadow: 0 0 22px 7px var(--rose-bright);
@@ -774,7 +797,7 @@ svg { display: block; }
   pointer-events: none;
   opacity: 0.2;
   transform: scale(0.3) !important;
-  transition: all 0.5s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .hunt-ribbon {
@@ -785,11 +808,11 @@ svg { display: block; }
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 8px;
   padding: 6px 8px;
 }
 .hunt-slot {
-  padding: 6px 13px;
+  padding: 6px 14px;
   border-radius: 16px;
   border: 1px solid rgba(244, 114, 182, 0.25);
   background: rgba(30, 12, 40, 0.65);
@@ -815,32 +838,39 @@ svg { display: block; }
   justify-content: flex-start;
   gap: 18px;
   padding-top: calc(max(24px, env(safe-area-inset-top)) + 6px);
-  padding-bottom: calc(max(32px, env(safe-area-inset-bottom)) + 12px);
+  padding-bottom: calc(max(32px, env(safe-area-inset-bottom)) + 14px);
 }
 .letter-parchment {
   max-width: 550px;
   width: 100%;
   padding: clamp(1.6rem, 4.5vw, 2.6rem);
-  background: rgba(28, 11, 38, 0.88);
+  background: rgba(28, 11, 38, 0.9);
   border: 1px solid var(--rose-primary);
   border-radius: 24px;
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 45px var(--rose-glow);
   position: relative;
-  margin: 10px 0;
+  margin: 12px 0;
 }
 .letter-parchment::before {
   content: '🌸 ✧ 🌸';
   position: absolute;
-  top: -12px;
+  top: -13px;
   left: 50%;
   transform: translateX(-50%);
-  background: #200a29;
-  padding: 0 16px;
+  background: #1e0928;
+  padding: 2px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
   color: var(--rose-light);
   letter-spacing: 0.25em;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .wax-seal-wrapper {
@@ -854,7 +884,7 @@ svg { display: block; }
   border-radius: 24px;
   z-index: 50;
   cursor: pointer;
-  transition: opacity 0.85s var(--ease-celestial), visibility 0.85s;
+  transition: opacity 0.85s var(--ease-silk), visibility 0.85s;
   padding: 18px;
   text-align: center;
 }
@@ -884,6 +914,9 @@ svg { display: block; }
   color: #fff;
   font-family: var(--serif-title);
   font-size: 1.9rem;
+  line-height: 1;
+  text-align: center;
+  padding-top: 1px;
   transition: transform 0.3s ease;
 }
 .wax-seal-progress-svg {
@@ -918,7 +951,7 @@ svg { display: block; }
   margin-bottom: 1.15em;
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 0.85s var(--ease-celestial), transform 0.85s var(--ease-celestial);
+  transition: opacity 0.85s var(--ease-silk), transform 0.85s var(--ease-silk);
 }
 .letter-content p.revealed {
   opacity: 1;
@@ -974,7 +1007,7 @@ svg { display: block; }
   color: var(--ink);
   text-align: center;
   cursor: pointer;
-  transition: all 0.5s var(--ease-celestial);
+  transition: all 0.5s var(--ease-silk);
   animation: lanternBob 5.5s infinite ease-in-out alternate;
 }
 .sky-lantern:nth-child(even) { animation-delay: 1.6s; }
@@ -1008,7 +1041,7 @@ svg { display: block; }
 }
 
 /* ============================================================
-   СЦЕНА VIII: ФИНАЛ И ДАР ВСЕЛЕННОЙ
+   СЦЕНА VIII: ФИНАЛ И ПУЛЬСИРУЮЩИЙ ДАР
    ============================================================ */
 #s-final .final-title {
   font-family: var(--serif-title);
@@ -1020,8 +1053,8 @@ svg { display: block; }
 }
 .cosmic-orb-btn {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   border: 1.5px solid var(--rose-light);
   background: radial-gradient(circle, #fff 0%, var(--rose-light) 30%, var(--rose-primary) 70%, transparent 100%);
@@ -1041,7 +1074,7 @@ svg { display: block; }
   position: fixed;
   inset: 0;
   z-index: 950;
-  background: radial-gradient(circle at 50% 50%, #2e0d38 0%, #090210 100%);
+  background: radial-gradient(circle at 50% 50%, #2c0b36 0%, #08020f 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1052,7 +1085,7 @@ svg { display: block; }
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.7s var(--ease-celestial), visibility 0.7s;
+  transition: opacity 0.7s var(--ease-silk), visibility 0.7s;
   overflow-y: auto;
 }
 .celestial-gift-modal.shown {
@@ -1171,7 +1204,7 @@ svg { display: block; }
   <section class="scene" id="s-open">
     <div class="quest-hud" id="hud-q1">
       <span class="quest-hud-icon">🌸</span>
-      <span id="txt-q1">Озари созвездие: соедини звёзды по порядку (I → V)</span>
+      <span class="quest-hud-text" id="txt-q1">Озари созвездие: соедини звёзды по порядку (I → V)</span>
     </div>
 
     <p class="chapter-date rise" style="--d:0.1">
@@ -1188,7 +1221,7 @@ svg { display: block; }
         <g class="star-node" data-idx="0" transform="translate(30, 95)">
           <circle class="hitbox" r="26"></circle>
           <circle class="core" r="5"></circle>
-          <text x="-5" y="-12">I</text>
+          <text x="-4" y="-12">I</text>
         </g>
         <g class="star-node" data-idx="1" transform="translate(80, 45)">
           <circle class="hitbox" r="26"></circle>
@@ -1241,7 +1274,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q2">
       <span class="quest-hud-icon">🌸</span>
-      <span id="txt-q2">Поймай 3 парящие искры воспоминаний (<span id="spark-count">0</span>/3)</span>
+      <span class="quest-hud-text" id="txt-q2">Поймай 3 парящие искры воспоминаний (<span id="spark-count">0</span>/3)</span>
     </div>
 
     <div class="field-wrap">
@@ -1270,7 +1303,7 @@ svg { display: block; }
       </div>
 
       <div class="center-quote rise" style="position: relative;">
-        <div class="memory-rune-spark" id="spark-3" style="top: -18px; left: 50%; transform: translateX(-50%);">✦</div>
+        <div class="memory-rune-spark" id="spark-3" style="top: -18px; left: 50%; margin-left: -24px;">✦</div>
         <p>Ты превращаешь самые простые дни в страницы волшебной книги.</p>
       </div>
 
@@ -1293,7 +1326,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q3">
       <span class="quest-hud-icon">🌸</span>
-      <span id="txt-q3">Сотри иней вуали (>50%) и открой 3 маяка (<span id="beacon-count">0</span>/3)</span>
+      <span class="quest-hud-text" id="txt-q3">Сотри иней вуали и открой 3 маяка (<span id="beacon-count">0</span>/3)</span>
     </div>
 
     <div class="frost-scratch-box rise" style="--d:0.1">
@@ -1330,7 +1363,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q4">
       <span class="quest-hud-icon">🌸</span>
-      <span id="txt-q4">Камертон чувств: коснись качеств в порядке гармонии (I → V)</span>
+      <span class="quest-hud-text" id="txt-q4">Камертон чувств: коснись качеств в порядке гармонии (I → V)</span>
     </div>
 
     <div class="orbit-field">
@@ -1361,7 +1394,7 @@ svg { display: block; }
     </button>
   </section>
 
-  <!-- ГЛАВА 5: СВЕТЛЯЧКИ (ЛОВЛЯ СО СМЫСЛОМ) -->
+  <!-- ГЛАВА 5: СВЕТЛЯЧКИ (ОПТИМИЗИРОВАННЫЙ ПОЛЕТ) -->
   <section class="scene" id="s-hunt">
     <div class="scene-curtain" id="curtain-s5">
       <p>«Орбиты души ещё молчат...»</p>
@@ -1370,7 +1403,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q5">
       <span class="quest-hud-icon">🌸</span>
-      <span id="txt-q5">Поймай светлячков по очереди, чтобы сложить звёздную клятву</span>
+      <span class="quest-hud-text" id="txt-q5">Собери фразу: лови светлячков в порядке смысла</span>
     </div>
 
     <div class="hunt-container" id="hunt-container">
@@ -1413,7 +1446,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q6">
       <span class="quest-hud-icon">🌸</span>
-      <span id="txt-q6">Удерживай пальчик на печати (2.0 сек), чтобы растопить воск</span>
+      <span class="quest-hud-text" id="txt-q6">Удерживай печать (2 сек), чтобы растопить воск</span>
     </div>
 
     <div class="letter-parchment">
@@ -1452,7 +1485,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q7">
       <span class="quest-hud-icon">🌸</span>
-      <span id="txt-q7">Запусти 3 фонарика ввысь (<span id="lantern-count">0</span>/3), чтобы открыть главное</span>
+      <span class="quest-hud-text" id="txt-q7">Запусти 3 фонарика ввысь (<span id="lantern-count">0</span>/3), чтобы открыть главное</span>
     </div>
 
     <div class="sky-lanterns-grid">
@@ -1478,7 +1511,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q8">
       <span class="quest-hud-icon">🌸</span>
-      <span id="txt-q8">Прикоснись к сфере 3 раза в унисон её биению (<span id="pulse-count">0</span>/3)</span>
+      <span class="quest-hud-text" id="txt-q8">Коснись сферы 3 раза в унисон её пульсу (<span id="pulse-count">0</span>/3)</span>
     </div>
 
     <h2 class="final-title rise" style="--d:0.1">В самом сердце созвездия</h2>
@@ -1514,7 +1547,7 @@ svg { display: block; }
   'use strict';
 
   /* ============================================================
-     1. АУДИОДВИЖОК: ГАРМОНИЧЕСКИЕ ПЕНТАТОНИЧЕСКИЕ КОЛОКОЛЬЧИКИ
+     1. АУДИОДВИЖОК: МЯГКИЕ ПОЛИФОНИЧЕСКИЕ КОЛОКОЛЬЧИКИ
      ============================================================ */
   var audioState = null;
   var audioBtn = document.getElementById('audio-control');
@@ -1532,7 +1565,7 @@ svg { display: block; }
       osc.frequency.setValueAtTime(freq, now);
 
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.linearRampToValueAtTime(gainLevel || 0.05, now + 0.05);
+      gain.gain.linearRampToValueAtTime(gainLevel || 0.045, now + 0.05);
       gain.gain.exponentialRampToValueAtTime(0.00001, now + (dur || 2.0));
 
       osc.connect(gain);
@@ -1544,7 +1577,7 @@ svg { display: block; }
 
   function playChord(freqs, gainLevel) {
     freqs.forEach(function(f, i){
-      setTimeout(function(){ playTone(f, gainLevel || 0.04, 2.4); }, i * 110);
+      setTimeout(function(){ playTone(f, gainLevel || 0.038, 2.4); }, i * 110);
     });
   }
 
@@ -1568,7 +1601,7 @@ svg { display: block; }
         osc.frequency.setValueAtTime(freq, ctx.currentTime);
         filter.type = 'lowpass';
         filter.frequency.setValueAtTime(320, ctx.currentTime);
-        g.gain.setValueAtTime(0.035 / (i + 1), ctx.currentTime);
+        g.gain.setValueAtTime(0.03 / (i + 1), ctx.currentTime);
         osc.connect(filter);
         filter.connect(g);
         g.connect(master);
@@ -1598,16 +1631,56 @@ svg { display: block; }
     }
   }
 
+  var gateDismissed = false;
   gate.addEventListener('click', function(){
+    if (gateDismissed) return;
+    gateDismissed = true;
     initAudio();
     playTone(1174.66, 0.06, 2.5);
     triggerHaptic(25);
     gate.classList.add('hidden');
-    setTimeout(function(){ audioBtn.classList.add('shown'); }, 1300);
-  }, { once: true });
+    setTimeout(function(){ audioBtn.classList.add('shown'); }, 1200);
+  });
 
   /* ============================================================
-     2. КАНВАС ЗВЁЗД И НЕОНОВЫХ ИСКР
+     2. ДРАМАТУРГИЯ ПОБЕДЫ (ПЛАВНЫЙ И РИТМИЧНЫЙ ПЕРЕХОД)
+     ============================================================ */
+  function orchestrateStageSuccess(hudEl, hudTxtEl, solvedMsg, nextBtnEl, curtainEl, chordFreqs, onComplete) {
+    // 1. Мягко растворяем текущий текст подсказки
+    if (hudTxtEl) {
+      hudTxtEl.style.opacity = '0';
+      hudTxtEl.style.transform = 'translateY(-3px)';
+    }
+
+    // 2. HUD плавно меняет цвет и проявляет текст победы
+    setTimeout(function() {
+      if (hudEl) hudEl.classList.add('solved');
+      if (hudTxtEl) {
+        hudTxtEl.textContent = solvedMsg;
+        hudTxtEl.style.opacity = '1';
+        hudTxtEl.style.transform = 'translateY(0)';
+      }
+    }, 350);
+
+    // 3. Звучит гармонический аккорд победы
+    setTimeout(function() {
+      if (chordFreqs) playChord(chordFreqs, 0.07);
+    }, 600);
+
+    // 4. Тает туманная завеса следующей главы
+    setTimeout(function() {
+      if (curtainEl) curtainEl.classList.add('unlocked');
+    }, 850);
+
+    // 5. Неспешно и грациозно всплывает кнопка перехода
+    setTimeout(function() {
+      if (nextBtnEl) nextBtnEl.classList.add('active');
+      if (onComplete) onComplete();
+    }, 1100);
+  }
+
+  /* ============================================================
+     3. КАНВАС ЗВЕЗД И ОПТИМИЗИРОВАННЫХ ИСКР
      ============================================================ */
   (function(){
     var canvas = document.getElementById('space-canvas');
@@ -1620,9 +1693,10 @@ svg { display: block; }
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
       stars = [];
-      var count = Math.min(120, Math.floor((w * h) / 10000));
+      var count = Math.min(110, Math.floor((w * h) / 11000));
       for (var i = 0; i < count; i++) {
         stars.push({
           x: Math.random() * w,
@@ -1690,10 +1764,12 @@ svg { display: block; }
     requestAnimationFrame(render);
   })();
 
+  /* ХОЛСТ ЧАСТИЦ С ПОТОЛКОМ НАГРУЗКИ */
   (function(){
     var canvas = document.getElementById('sparkle-trail');
     var ctx = canvas.getContext('2d');
     var w = 0, h = 0, dpr = 1, particles = [];
+    var MAX_PARTICLES = 140;
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1701,39 +1777,52 @@ svg { display: block; }
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     }
     window.addEventListener('resize', resize, { passive: true });
     resize();
 
     window.addBurstAt = function(x, y, count) {
-      count = count || 16;
-      for (var i = 0; i < count; i++) {
+      count = count || 14;
+      var available = MAX_PARTICLES - particles.length;
+      if (available <= 0) return;
+      var toAdd = Math.min(count, available);
+
+      for (var i = 0; i < toAdd; i++) {
         var angle = Math.random() * Math.PI * 2;
-        var spd = Math.random() * 3.5 + 1.2;
+        var spd = Math.random() * 3.2 + 1.2;
         particles.push({
           x: x, y: y,
           vx: Math.cos(angle) * spd,
           vy: Math.sin(angle) * spd,
           life: 1,
-          decay: Math.random() * 0.025 + 0.015,
-          size: Math.random() * 2.5 + 1.2
+          decay: Math.random() * 0.024 + 0.016,
+          size: Math.random() * 2.4 + 1.2
         });
       }
     };
 
+    var lastTrailX = 0, lastTrailY = 0, lastTrailTime = 0;
     function addSparkle(x, y) {
-      for (var i = 0; i < 2; i++) {
-        particles.push({
-          x: x + (Math.random() - 0.5) * 8,
-          y: y + (Math.random() - 0.5) * 8,
-          vx: (Math.random() - 0.5) * 1.2,
-          vy: (Math.random() - 0.5) * 1.2 - 0.3,
-          life: 1,
-          decay: Math.random() * 0.03 + 0.02,
-          size: Math.random() * 2 + 0.8
-        });
-      }
+      var now = Date.now();
+      if (now - lastTrailTime < 32) return;
+      var dist = Math.hypot(x - lastTrailX, y - lastTrailY);
+      if (dist < 8) return;
+      lastTrailTime = now;
+      lastTrailX = x;
+      lastTrailY = y;
+
+      if (particles.length >= MAX_PARTICLES) return;
+      particles.push({
+        x: x + (Math.random() - 0.5) * 6,
+        y: y + (Math.random() - 0.5) * 6,
+        vx: (Math.random() - 0.5) * 1.2,
+        vy: (Math.random() - 0.5) * 1.2 - 0.3,
+        life: 1,
+        decay: Math.random() * 0.032 + 0.022,
+        size: Math.random() * 2 + 0.8
+      });
     }
 
     window.addEventListener('pointermove', function(e){
@@ -1765,7 +1854,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     3. НАБЛЮДАТЕЛЬ ЗА СЦЕНАМИ И ПЕРЕХОДЫ
+     4. НАБЛЮДАТЕЛЬ ЗА СЦЕНАМИ И СКРОЛЛ
      ============================================================ */
   var sceneObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
@@ -1790,11 +1879,12 @@ svg { display: block; }
   });
 
   /* ============================================================
-     4. КВЕСТ 1: СОЗВЕЗДИЕ НАЧАЛА (5 ЗВЁЗД)
+     5. КВЕСТ 1: СОЗВЕЗДИЕ НАЧАЛА (I -> V)
      ============================================================ */
   (function(){
     var nodes = document.querySelectorAll('.star-node');
     var expected = 0;
+    var isResetting = false;
     var lines = [
       document.getElementById('line-0-1'),
       document.getElementById('line-1-2'),
@@ -1809,6 +1899,8 @@ svg { display: block; }
     nodes.forEach(function(node){
       node.addEventListener('click', function(e){
         e.stopPropagation();
+        if (isResetting || expected >= 5) return;
+
         var idx = parseInt(this.getAttribute('data-idx'), 10);
         var rect = this.getBoundingClientRect();
 
@@ -1824,14 +1916,11 @@ svg { display: block; }
           expected++;
 
           if (expected === 5) {
-            hud.classList.add('solved');
-            hudTxt.textContent = '🌸 Созвездие озарено! Путь открыт 🌸';
-            nextBtn.classList.add('active');
-            curtainS2.classList.add('unlocked');
-            playChord([587.33, 739.99, 880.00, 1174.66], 0.07);
             triggerHaptic(45);
+            orchestrateStageSuccess(hud, hudTxt, '🌸 Созвездие озарено! Путь открыт 🌸', nextBtn, curtainS2, [587.33, 739.99, 880.00, 1174.66]);
           }
-        } else if (expected < 5) {
+        } else {
+          isResetting = true;
           nodes.forEach(function(n){ n.classList.add('error'); });
           playTone(260, 0.05, 0.4);
           triggerHaptic([30, 50, 30]);
@@ -1839,6 +1928,7 @@ svg { display: block; }
             nodes.forEach(function(n){ n.classList.remove('lit', 'error'); });
             lines.forEach(function(l){ l.classList.remove('lit'); });
             expected = 0;
+            isResetting = false;
           }, 450);
         }
       });
@@ -1846,7 +1936,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     5. КВЕСТ 2: 3 ПАРИРУЮЩИЕ ИСКРЫ ПАМЯТИ
+     6. КВЕСТ 2: 3 ПАРИРУЮЩИЕ ИСКРЫ ПАМЯТИ
      ============================================================ */
   (function(){
     var sparks = [
@@ -1862,14 +1952,13 @@ svg { display: block; }
     var hudTxt = document.getElementById('txt-q2');
     var curtainS3 = document.getElementById('curtain-s3');
 
-    // Плавная орбитальная анимация искр
     function floatSparks(now) {
       var t = now / 1000;
       sparks.forEach(function(spark, i){
-        if (spark.classList.contains('collected')) return;
+        if (spark.getAttribute('data-collected') === 'true') return;
         var dy = Math.sin(t * 1.8 + i * 2) * 8;
         var dx = Math.cos(t * 1.5 + i * 2) * 6;
-        spark.style.transform = 'translate(' + dx.toFixed(1) + 'px, ' + dy.toFixed(1) + 'px)';
+        spark.style.transform = 'translate3d(' + dx.toFixed(1) + 'px, ' + dy.toFixed(1) + 'px, 0)';
       });
       requestAnimationFrame(floatSparks);
     }
@@ -1878,40 +1967,37 @@ svg { display: block; }
     sparks.forEach(function(spark){
       spark.addEventListener('click', function(e){
         e.stopPropagation();
-        if (this.classList.contains('collected')) return;
+        if (this.getAttribute('data-collected') === 'true') return;
+        this.setAttribute('data-collected', 'true');
         this.classList.add('collected');
         collected++;
         countEl.textContent = collected;
 
         var rect = this.getBoundingClientRect();
-        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width/2, rect.top + rect.height/2, 16);
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width/2, rect.top + rect.height/2, 14);
         playTone(chimeScale[collected + 1], 0.05, 1.5);
         triggerHaptic(22);
 
         if (collected === 3) {
-          hud.classList.add('solved');
-          hudTxt.textContent = '🌸 Все искры памяти воссоединены 🌸';
-          popup.classList.add('active');
-          nextBtn.classList.add('active');
-          curtainS3.classList.add('unlocked');
-          playChord([659.25, 880.00, 1174.66, 1479.98], 0.07);
           triggerHaptic([30, 50]);
-
-          setTimeout(function(){
-            document.addEventListener('click', function popClose(evt){
-              if (!popup.contains(evt.target)) {
-                popup.classList.remove('active');
-                document.removeEventListener('click', popClose);
-              }
-            });
-          }, 400);
+          orchestrateStageSuccess(hud, hudTxt, '🌸 Все искры памяти воссоединены 🌸', nextBtn, curtainS3, [659.25, 880.00, 1174.66, 1479.98], function(){
+            popup.classList.add('active');
+            setTimeout(function(){
+              document.addEventListener('click', function popClose(evt){
+                if (!popup.contains(evt.target)) {
+                  popup.classList.remove('active');
+                  document.removeEventListener('click', popClose);
+                }
+              });
+            }, 400);
+          });
         }
       });
     });
   })();
 
   /* ============================================================
-     6. КВЕСТ 3: СКРЕТЧ-ВУАЛЬ И МАЯКИ
+     7. КВЕСТ 3: СКРЕТЧ-ВУАЛЬ И МАЯКИ
      ============================================================ */
   (function(){
     var box = document.querySelector('.frost-scratch-box');
@@ -1947,11 +2033,10 @@ svg { display: block; }
       ctx2d.setTransform(1, 0, 0, 1, 0, 0);
       ctx2d.scale(dpr, dpr);
 
-      // Глубокий градиент розового кварца
       var grad = ctx2d.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, '#2e0e3b');
-      grad.addColorStop(0.5, '#4f1754');
-      grad.addColorStop(1, '#1e072a');
+      grad.addColorStop(0, '#2b0c36');
+      grad.addColorStop(0.5, '#4a1550');
+      grad.addColorStop(1, '#1b0626');
       ctx2d.fillStyle = grad;
       ctx2d.fillRect(0, 0, w, h);
 
@@ -1968,18 +2053,13 @@ svg { display: block; }
     function checkClearedPercentage() {
       if (cleared) return;
       scratchedPixels++;
-      // Если маяки открыты и сделано достаточно штрихов (~40 касаний)
-      if (foundCount === 3 && scratchedPixels > 35) {
+      if (foundCount === 3 && scratchedPixels > 30) {
         cleared = true;
         canvas.style.opacity = '0';
         canvas.style.pointerEvents = 'none';
         story.classList.add('revealed');
-        hud.classList.add('solved');
-        hudTxt.textContent = '🌸 Вуаль рассеяна, маяки сияют 🌸';
-        nextBtn.classList.add('active');
-        curtainS4.classList.add('unlocked');
-        playChord([739.99, 987.77, 1318.51], 0.08);
         triggerHaptic([30, 60]);
+        orchestrateStageSuccess(hud, hudTxt, '🌸 Вуаль рассеяна, маяки сияют 🌸', nextBtn, curtainS4, [739.99, 987.77, 1318.51]);
       }
     }
 
@@ -2036,7 +2116,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     7. КВЕСТ 4: КАМЕРТОН ДУШИ (ПОСЛЕДОВАТЕЛЬНЫЙ РЕЗОНАНС)
+     8. КВЕСТ 4: КАМЕРТОН ДУШИ (I -> V)
      ============================================================ */
   (function(){
     var pills = document.querySelectorAll('.orbit-pill');
@@ -2045,9 +2125,11 @@ svg { display: block; }
     var hudTxt = document.getElementById('txt-q4');
     var curtainS5 = document.getElementById('curtain-s5');
     var expectedStep = 0;
+    var isPillsLocked = false;
 
     pills.forEach(function(pill){
       pill.addEventListener('click', function(){
+        if (isPillsLocked) return;
         var step = parseInt(this.getAttribute('data-step'), 10);
         var freq = parseFloat(this.getAttribute('data-freq'));
         var rect = this.getBoundingClientRect();
@@ -2060,21 +2142,18 @@ svg { display: block; }
           expectedStep++;
 
           if (expectedStep === pills.length) {
-            hud.classList.add('solved');
-            hudTxt.textContent = '🌸 Созвучие душ обретено 🌸';
-            nextBtn.classList.add('active');
-            curtainS5.classList.add('unlocked');
-            playChord([587.33, 739.99, 880.00, 987.77, 1174.66], 0.08);
             triggerHaptic(45);
+            orchestrateStageSuccess(hud, hudTxt, '🌸 Созвучие душ обретено 🌸', nextBtn, curtainS5, [587.33, 739.99, 880.00, 987.77, 1174.66]);
           }
-        } else if (expectedStep < pills.length && !this.classList.contains('awakened')) {
-          // Ошибка порядка — мягкое покачивание и сброс цепочки
+        } else if (!this.classList.contains('awakened')) {
+          isPillsLocked = true;
           this.classList.add('shake');
           playTone(280, 0.05, 0.35);
           triggerHaptic([25, 40]);
           setTimeout(function(){
             pills.forEach(function(p){ p.classList.remove('awakened', 'shake'); });
             expectedStep = 0;
+            isPillsLocked = false;
           }, 450);
         }
       });
@@ -2082,7 +2161,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     8. КВЕСТ 5: СВЕТЛЯЧКИ (ЛОВЛЯ СО СМЫСЛОМ)
+     9. КВЕСТ 5: СВЕТЛЯЧКИ (БЕЗ LAYOUT REFLOW)
      ============================================================ */
   (function(){
     var container = document.getElementById('hunt-container');
@@ -2100,15 +2179,25 @@ svg { display: block; }
     var curtainS6 = document.getElementById('curtain-s6');
     var nextRequiredIdx = 0;
 
-    var orbits = flies.map(function(_, i){
+    var cw = 300, ch = 280;
+    function updateContainerSize() {
+      cw = container.clientWidth || 300;
+      ch = container.clientHeight || 280;
+    }
+    window.addEventListener('resize', updateContainerSize, { passive: true });
+    updateContainerSize();
+
+    var flyPositions = flies.map(function(_, i){
       return {
-        baseX: 18 + (i % 3) * 32,
-        baseY: 22 + Math.floor(i / 3) * 44,
-        ampX: 12 + Math.random() * 8,
+        baseX: (0.18 + (i % 3) * 0.32) * cw,
+        baseY: (0.22 + Math.floor(i / 3) * 0.44) * ch,
+        ampX: 14 + Math.random() * 8,
         ampY: 10 + Math.random() * 8,
         freqX: 0.6 + Math.random() * 0.4,
         freqY: 0.5 + Math.random() * 0.4,
-        phase: i * 1.4
+        phase: i * 1.4,
+        currX: 0,
+        currY: 0
       };
     });
 
@@ -2116,44 +2205,27 @@ svg { display: block; }
       var t = now / 1000;
       for (var i = 0; i < flies.length; i++) {
         var el = flies[i];
-        if (el.classList.contains('captured')) continue;
-        var o = orbits[i];
-        var x = o.baseX + Math.sin(t * o.freqX + o.phase) * o.ampX;
-        var y = o.baseY + Math.cos(t * o.freqY + o.phase) * o.ampY;
-        el.style.left = x.toFixed(2) + '%';
-        el.style.top = y.toFixed(2) + '%';
+        if (el.getAttribute('data-captured') === 'true') continue;
+        var p = flyPositions[i];
+        var x = p.baseX + Math.sin(t * p.freqX + p.phase) * p.ampX;
+        var y = p.baseY + Math.cos(t * p.freqY + p.phase) * p.ampY;
+        p.currX = x;
+        p.currY = y;
+        el.style.transform = 'translate3d(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px, 0)';
       }
       requestAnimationFrame(flyLoop);
     }
     requestAnimationFrame(flyLoop);
 
-    // Ускользание при резком приближении указателя
-    container.addEventListener('pointermove', function(e){
-      var cRect = container.getBoundingClientRect();
-      var mx = e.clientX - cRect.left;
-      var my = e.clientY - cRect.top;
-
-      flies.forEach(function(fly){
-        if (fly.classList.contains('captured')) return;
-        var fx = fly.offsetLeft;
-        var fy = fly.offsetTop;
-        var dist = Math.hypot(mx - fx, my - fy);
-        if (dist < 40) {
-          var angle = Math.atan2(fy - my, fx - mx);
-          fly.style.transform = 'translate(' + (Math.cos(angle) * 18) + 'px, ' + (Math.sin(angle) * 18) + 'px)';
-          setTimeout(function(){ fly.style.transform = ''; }, 300);
-        }
-      });
-    }, { passive: true });
-
     flies.forEach(function(fly){
       fly.addEventListener('click', function(e){
         e.stopPropagation();
+        if (fly.getAttribute('data-captured') === 'true') return;
         var idx = parseInt(fly.getAttribute('data-idx'), 10);
         var word = fly.getAttribute('data-word');
 
-        // Нужно собирать фразу строго по порядку смысловых частей
         if (idx === nextRequiredIdx) {
+          fly.setAttribute('data-captured', 'true');
           fly.classList.add('captured');
           if (slots[idx]) {
             slots[idx].textContent = word;
@@ -2167,26 +2239,24 @@ svg { display: block; }
           triggerHaptic(20);
 
           if (nextRequiredIdx === flies.length) {
-            hud.classList.add('solved');
-            hudTxt.textContent = '🌸 Звёздное послание собрано воедино 🌸';
-            nextBtn.classList.add('active');
-            curtainS6.classList.add('unlocked');
-            playChord([659.25, 880.00, 1174.66, 1479.98], 0.08);
             triggerHaptic([30, 50]);
+            orchestrateStageSuccess(hud, hudTxt, '🌸 Звёздное послание собрано воедино 🌸', nextBtn, curtainS6, [659.25, 880.00, 1174.66, 1479.98]);
           }
         } else {
-          // Если нажал не на того светлячка
           playTone(280, 0.04, 0.3);
           triggerHaptic(25);
-          fly.style.transform = 'scale(0.8)';
-          setTimeout(function(){ fly.style.transform = ''; }, 250);
+          var core = fly.querySelector('.firefly-core');
+          if (core) {
+            core.style.transform = 'scale(0.7)';
+            setTimeout(function(){ core.style.transform = ''; }, 250);
+          }
         }
       });
     });
   })();
 
   /* ============================================================
-     9. КВЕСТ 6: СУРГУЧНАЯ ТЕРМО-ПЕЧАТЬ (2.0 СЕК)
+     10. КВЕСТ 6: СУРГУЧНАЯ ТЕРМО-ПЕЧАТЬ (2.0 СЕК)
      ============================================================ */
   (function(){
     var pressBtn = document.getElementById('wax-press-btn');
@@ -2202,9 +2272,10 @@ svg { display: block; }
     var startTime = 0, isHolding = false;
     var duration = 2000;
     var circumference = 283;
+    var isBroken = false;
 
     function frameProgress() {
-      if (!isHolding) return;
+      if (!isHolding || isBroken) return;
       var elapsed = Date.now() - startTime;
       var p = Math.min(1, elapsed / duration);
       progressCircle.style.strokeDashoffset = (circumference * (1 - p)).toFixed(1);
@@ -2217,6 +2288,7 @@ svg { display: block; }
     }
 
     function startHold(e) {
+      if (isBroken) return;
       e.preventDefault();
       isHolding = true;
       startTime = Date.now();
@@ -2227,7 +2299,7 @@ svg { display: block; }
     }
 
     function cancelHold() {
-      if (!isHolding) return;
+      if (!isHolding || isBroken) return;
       isHolding = false;
       progressCircle.style.strokeDashoffset = circumference;
       hint.textContent = 'удерживай чуть дольше';
@@ -2235,21 +2307,20 @@ svg { display: block; }
     }
 
     function meltSeal() {
+      if (isBroken) return;
+      isBroken = true;
       isHolding = false;
       sealWrapper.classList.add('broken');
-      hud.classList.add('solved');
-      hudTxt.textContent = '🌸 Письмо распечатано 🌸';
-      nextBtn.classList.add('active');
-      curtainS7.classList.add('unlocked');
 
       var rect = pressBtn.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 30);
-      playChord([587.33, 739.99, 880.00, 1174.66, 1479.98], 0.09);
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 28);
       triggerHaptic([30, 40, 60]);
 
-      var paras = letterBody.querySelectorAll('p');
-      paras.forEach(function(p, i){
-        setTimeout(function(){ p.classList.add('revealed'); }, i * 300 + 120);
+      orchestrateStageSuccess(hud, hudTxt, '🌸 Письмо распечатано 🌸', nextBtn, curtainS7, [587.33, 739.99, 880.00, 1174.66, 1479.98], function(){
+        var paras = letterBody.querySelectorAll('p');
+        paras.forEach(function(p, i){
+          setTimeout(function(){ p.classList.add('revealed'); }, i * 280 + 100);
+        });
       });
     }
 
@@ -2260,7 +2331,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     10. КВЕСТ 7: НЕБЕСНЫЕ ФОНАРИКИ
+     11. КВЕСТ 7: НЕБЕСНЫЕ ФОНАРИКИ
      ============================================================ */
   (function(){
     var minorLanterns = document.querySelectorAll('.sky-lantern[data-type="minor"]');
@@ -2275,20 +2346,20 @@ svg { display: block; }
 
     minorLanterns.forEach(function(lantern){
       lantern.addEventListener('click', function(){
-        if (this.classList.contains('lit')) return;
+        if (this.getAttribute('data-lit') === 'true') return;
+        this.setAttribute('data-lit', 'true');
         this.classList.add('lit');
         litCount++;
         countEl.textContent = litCount;
 
         var rect = this.getBoundingClientRect();
-        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 14);
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 12);
         playTone(chimeScale[litCount + 1], 0.05, 1.8);
         triggerHaptic(20);
 
         if (litCount === minorLanterns.length) {
           masterLantern.classList.add('unlocked');
           masterLanternTxt.textContent = '🌸 Наше общее сокровенное желание — быть счастливыми вместе 🌸';
-          hud.classList.add('solved');
           hudTxt.textContent = '🌸 Прикоснись к главному фонарику желаний 🌸';
           playChord([739.99, 987.77, 1174.66], 0.07);
           triggerHaptic(35);
@@ -2297,20 +2368,19 @@ svg { display: block; }
     });
 
     masterLantern.addEventListener('click', function(){
-      if (!this.classList.contains('unlocked') || this.classList.contains('lit')) return;
+      if (!this.classList.contains('unlocked') || this.getAttribute('data-lit') === 'true') return;
+      this.setAttribute('data-lit', 'true');
       this.classList.add('lit');
       var rect = this.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 26);
-      playChord([880.00, 1174.66, 1479.98], 0.09);
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 24);
       triggerHaptic([30, 60]);
-      nextBtn.classList.add('active');
-      curtainS8.classList.add('unlocked');
-      hudTxt.textContent = '🌸 Желание устремилось к звёздам! 🌸';
+
+      orchestrateStageSuccess(hud, hudTxt, '🌸 Желание устремилось к звёздам! 🌸', nextBtn, curtainS8, [880.00, 1174.66, 1479.98]);
     });
   })();
 
   /* ============================================================
-     11. КВЕСТ 8: СЕРДЦЕ СОЗВЕЗДИЯ (РИТМ СЕРДЦА)
+     12. КВЕСТ 8: СЕРДЦЕ СОЗВЕЗДИЯ (ЗАЩИТА ОТ СПАМА И РИТМ)
      ============================================================ */
   (function(){
     var orb = document.getElementById('cosmic-orb-trigger');
@@ -2319,24 +2389,43 @@ svg { display: block; }
     var pulseCountEl = document.getElementById('pulse-count');
     var hud = document.getElementById('hud-q8');
     var hudTxt = document.getElementById('txt-q8');
+    
     var taps = 0;
+    var isOrbFinished = false;
+    var lastTapTime = 0;
 
     orb.addEventListener('click', function(){
+      if (isOrbFinished) return;
+
+      var now = Date.now();
+      // Защита от спама: не чаще одного раза в 450 мс (в ритме биения сердца)
+      if (now - lastTapTime < 450) {
+        orb.style.transform = 'scale(0.96)';
+        setTimeout(function(){ orb.style.transform = ''; }, 140);
+        return;
+      }
+      lastTapTime = now;
+
       taps++;
+      if (taps > 3) taps = 3;
       pulseCountEl.textContent = taps;
+
       var rect = orb.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 12 * taps);
-      playTone(587.33 * Math.pow(1.15, taps), 0.06, 1.5);
-      triggerHaptic(22 * taps);
+      // Строго фиксированное и дозированное число партиклов
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10 + taps * 4);
+      playTone(587.33 * Math.pow(1.15, taps), 0.055, 1.5);
+      triggerHaptic(18 * taps);
 
       if (taps === 3) {
-        hud.classList.add('solved');
-        hudTxt.textContent = '🌸 Кристалл Вселенной пробуждён 🌸';
-        setTimeout(function(){
-          modal.classList.add('shown');
-          playChord([587.33, 739.99, 880.00, 1174.66, 1479.98], 0.1);
-          triggerHaptic([40, 70, 90]);
-        }, 450);
+        isOrbFinished = true;
+        orb.style.pointerEvents = 'none';
+
+        orchestrateStageSuccess(hud, hudTxt, '🌸 Кристалл Вселенной пробуждён 🌸', null, null, [587.33, 739.99, 880.00, 1174.66, 1479.98], function(){
+          setTimeout(function(){
+            modal.classList.add('shown');
+            triggerHaptic([35, 60, 80]);
+          }, 450);
+        });
       }
     });
 
