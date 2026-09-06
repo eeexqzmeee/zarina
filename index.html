@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   ДИЗАЙН-СИСТЕМА И БАЗОВЫЕ НАСТРОЙКИ
+   ДИЗАЙН-СИСТЕМА: РОЗОВЫЙ НЕОН, КОСМИЧЕСКИЙ ШЁЛК И ЗВЁЗДЫ
    ============================================================ */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -20,18 +20,20 @@
 }
 
 :root {
-  --bg-void: #05040a;
-  --gold-primary: #e6c280;
-  --gold-light: #fff2d1;
-  --gold-glow: rgba(230, 194, 128, 0.45);
-  --rose-mist: rgba(244, 114, 182, 0.16);
-  --violet-mist: rgba(147, 51, 234, 0.20);
-  --cyan-mist: rgba(56, 189, 248, 0.14);
-  --ink: #fdfbf7;
-  --ink-dim: #c8c3dc;
-  --glass-bg: rgba(18, 14, 36, 0.72);
-  --glass-border: rgba(230, 194, 128, 0.28);
-  --glass-specular: rgba(255, 255, 255, 0.12);
+  --bg-void: #07040c;
+  --bg-deep: #12071a;
+  --rose-primary: #f472b6;
+  --rose-light: #ffe4ef;
+  --rose-glow: rgba(244, 114, 182, 0.48);
+  --rose-halo: rgba(251, 113, 133, 0.22);
+  --rose-deep: #e11d48;
+  --violet-mist: rgba(168, 85, 247, 0.18);
+  --cyan-mist: rgba(56, 189, 248, 0.10);
+  --ink: #fdfafd;
+  --ink-dim: #d9cadf;
+  --glass-bg: rgba(28, 14, 38, 0.72);
+  --glass-border: rgba(244, 114, 182, 0.32);
+  --glass-specular: rgba(255, 255, 255, 0.15);
   --serif-title: 'Cinzel', Georgia, serif;
   --serif-body: 'Cormorant Garamond', Garamond, serif;
   --sans: 'Montserrat', -apple-system, sans-serif;
@@ -65,7 +67,7 @@ button {
   outline: none;
 }
 svg { display: block; }
-::selection { background: rgba(230, 194, 128, 0.35); color: #fff; }
+::selection { background: rgba(244, 114, 182, 0.38); color: #fff; }
 
 #space-canvas, #sparkle-trail {
   position: fixed;
@@ -86,16 +88,16 @@ svg { display: block; }
   pointer-events: none;
   background: 
     radial-gradient(ellipse 65% 45% at 80% 20%, var(--violet-mist) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 50% at 20% 80%, var(--rose-mist) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 50% at 20% 80%, var(--rose-glow) 0%, transparent 65%),
     radial-gradient(ellipse 70% 60% at 50% 50%, var(--cyan-mist) 0%, transparent 75%);
-  filter: blur(50px);
-  animation: auroraBreathe 18s ease-in-out infinite alternate;
-  opacity: 0.85;
+  filter: blur(55px);
+  animation: auroraBreathe 16s ease-in-out infinite alternate;
+  opacity: 0.88;
 }
 @keyframes auroraBreathe {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
-  50% { transform: scale(1.05) translate(-1%, 2%); opacity: 0.95; }
-  100% { transform: scale(0.98) translate(1%, -1%); opacity: 0.75; }
+  0% { transform: scale(1) translate(0, 0); opacity: 0.75; }
+  50% { transform: scale(1.06) translate(-1%, 2%); opacity: 0.95; }
+  100% { transform: scale(0.97) translate(1%, -1%); opacity: 0.8; }
 }
 
 /* ============================================================
@@ -109,7 +111,7 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 45%, #181133 0%, #06040d 100%);
+  background: radial-gradient(circle at 50% 45%, #240e32 0%, #07030c 100%);
   cursor: pointer;
   transition: opacity 1.4s var(--ease-celestial), visibility 1.4s;
   padding: 2rem;
@@ -133,19 +135,19 @@ svg { display: block; }
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px dashed rgba(230, 194, 128, 0.4);
+  border: 1px dashed rgba(244, 114, 182, 0.45);
   animation: spinSlow 32s linear infinite;
 }
 .astrolabe-ring:nth-child(2) {
   inset: 14px;
-  border: 1px solid rgba(255, 242, 209, 0.25);
-  border-left-color: var(--gold-primary);
-  border-right-color: var(--gold-primary);
+  border: 1px solid rgba(255, 228, 239, 0.3);
+  border-left-color: var(--rose-primary);
+  border-right-color: var(--rose-primary);
   animation: spinSlow 20s linear infinite reverse;
 }
 .astrolabe-ring:nth-child(3) {
   inset: 28px;
-  border: 1px dotted rgba(230, 194, 128, 0.6);
+  border: 1px dotted rgba(244, 114, 182, 0.65);
   animation: spinSlow 12s linear infinite;
 }
 @keyframes spinSlow { to { transform: rotate(360deg); } }
@@ -154,13 +156,13 @@ svg { display: block; }
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 0%, var(--gold-light) 35%, var(--gold-primary) 70%, transparent 100%);
-  box-shadow: 0 0 40px 10px var(--gold-glow), inset 0 0 8px #fff;
+  background: radial-gradient(circle, #fff 0%, var(--rose-light) 35%, var(--rose-primary) 70%, transparent 100%);
+  box-shadow: 0 0 42px 12px var(--rose-glow), inset 0 0 8px #fff;
   animation: crystalPulse 3s ease-in-out infinite alternate;
 }
 @keyframes crystalPulse {
-  0% { transform: scale(0.92); box-shadow: 0 0 25px 6px var(--gold-glow); }
-  100% { transform: scale(1.12); box-shadow: 0 0 55px 16px var(--gold-light); }
+  0% { transform: scale(0.92); box-shadow: 0 0 25px 6px var(--rose-glow); }
+  100% { transform: scale(1.12); box-shadow: 0 0 60px 18px var(--rose-light); }
 }
 
 .gate__title {
@@ -168,17 +170,17 @@ svg { display: block; }
   font-size: clamp(1.6rem, 5vw, 2.5rem);
   letter-spacing: 0.16em;
   color: var(--ink);
-  text-shadow: 0 0 30px rgba(230, 194, 128, 0.5);
+  text-shadow: 0 0 32px rgba(244, 114, 182, 0.55);
   animation: textFloatIn 1.8s var(--ease-celestial) forwards;
 }
 .gate__subtitle {
   font-family: var(--serif-body);
   font-size: clamp(1.1rem, 3.5vw, 1.45rem);
   font-style: italic;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   margin-top: 0.8rem;
   letter-spacing: 0.04em;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 @keyframes textFloatIn {
   from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
@@ -191,7 +193,7 @@ svg { display: block; }
   font-size: 0.72rem;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: var(--rose-light);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -202,12 +204,12 @@ svg { display: block; }
 @keyframes fadeInDelayed { to { opacity: 0.85; } }
 .gate__cta-icon {
   font-size: 1rem;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   animation: bounceLight 2.2s infinite ease-in-out;
 }
 @keyframes bounceLight {
-  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 2px var(--gold-light)); }
-  50% { transform: translateY(5px); filter: drop-shadow(0 0 10px var(--gold-light)); }
+  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 3px var(--rose-light)); }
+  50% { transform: translateY(5px); filter: drop-shadow(0 0 12px var(--rose-primary)); }
 }
 
 /* ============================================================
@@ -268,12 +270,12 @@ svg { display: block; }
   height: var(--h);
   flex-shrink: 0;
   padding: 10px 10px 8px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.02) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 100%);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
-  backdrop-filter: blur(20px) saturate(150%);
-  -webkit-backdrop-filter: blur(20px) saturate(150%);
-  box-shadow: 0 20px 45px -10px rgba(0,0,0,0.7), 0 0 25px rgba(230, 194, 128, 0.12), inset 0 1px 1px var(--glass-specular);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  box-shadow: 0 20px 45px -10px rgba(0,0,0,0.7), 0 0 26px var(--rose-glow), inset 0 1px 1px var(--glass-specular);
   display: flex;
   flex-direction: column;
   transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
@@ -286,9 +288,9 @@ svg { display: block; }
   top: -11px;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--gold-light);
+  color: var(--rose-light);
   font-size: 13px;
-  text-shadow: 0 0 10px var(--gold-primary);
+  text-shadow: 0 0 10px var(--rose-primary);
   z-index: 5;
 }
 .photo-card__view {
@@ -296,7 +298,7 @@ svg { display: block; }
   flex: 1;
   border-radius: 10px;
   overflow: hidden;
-  background: linear-gradient(155deg, #1d1538, #0c081d);
+  background: linear-gradient(155deg, #2a1138, #0e0416);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 .photo-card__view img {
@@ -308,7 +310,7 @@ svg { display: block; }
 .photo-card__sheen {
   position: absolute;
   inset: -150%;
-  background: linear-gradient(110deg, transparent 40%, rgba(255, 246, 222, 0.22) 50%, transparent 60%);
+  background: linear-gradient(110deg, transparent 40%, rgba(255, 228, 239, 0.25) 50%, transparent 60%);
   animation: cosmicSheen 10s ease-in-out infinite;
   pointer-events: none;
 }
@@ -328,7 +330,7 @@ svg { display: block; }
   font-family: var(--serif-title);
   font-size: 0.65rem;
   letter-spacing: 0.16em;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   font-weight: 600;
 }
 .photo-card__caption {
@@ -343,7 +345,7 @@ svg { display: block; }
 }
 .edit-hint {
   position: relative;
-  border-bottom: 1px dashed rgba(230, 194, 128, 0.4);
+  border-bottom: 1px dashed rgba(244, 114, 182, 0.45);
 }
 
 /* СЦЕНА I */
@@ -355,10 +357,10 @@ svg { display: block; }
 .constellation-sign {
   width: clamp(70px, 14vw, 95px);
   height: clamp(70px, 14vw, 95px);
-  filter: drop-shadow(0 0 14px var(--gold-glow));
+  filter: drop-shadow(0 0 14px var(--rose-glow));
 }
 .constellation-sign line {
-  stroke: var(--gold-primary);
+  stroke: var(--rose-primary);
   stroke-width: 1.5;
   stroke-linecap: round;
   stroke-dasharray: 60;
@@ -366,13 +368,13 @@ svg { display: block; }
   transition: stroke-dashoffset 1.4s var(--ease-celestial);
 }
 .scene.in-view .constellation-sign line { stroke-dashoffset: 0; }
-.constellation-sign circle { fill: #fff; filter: drop-shadow(0 0 6px var(--gold-light)); }
+.constellation-sign circle { fill: #fff; filter: drop-shadow(0 0 6px var(--rose-light)); }
 .constellation-sign circle.hub {
-  fill: var(--gold-light);
+  fill: var(--rose-light);
   animation: hubStarlight 2.6s ease-in-out infinite alternate;
 }
 @keyframes hubStarlight {
-  0% { r: 3.5; filter: drop-shadow(0 0 6px var(--gold-primary)); }
+  0% { r: 3.5; filter: drop-shadow(0 0 6px var(--rose-primary)); }
   100% { r: 5; filter: drop-shadow(0 0 16px #fff); }
 }
 #s-open .chapter-date {
@@ -380,7 +382,7 @@ svg { display: block; }
   font-size: clamp(0.72rem, 2.2vw, 0.85rem);
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
 }
 #s-open .photo-card {
   --w: clamp(170px, 46vw, 210px);
@@ -441,7 +443,7 @@ svg { display: block; }
   color: var(--ink);
   max-width: 16em;
   margin: 0 auto;
-  text-shadow: 0 0 25px rgba(230, 194, 128, 0.4);
+  text-shadow: 0 0 25px rgba(244, 114, 182, 0.45);
 }
 .secret-medallion {
   width: 46px;
@@ -451,13 +453,13 @@ svg { display: block; }
   justify-content: center;
   cursor: pointer;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(230,194,128,0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.25) 0%, transparent 70%);
 }
 .secret-medallion::after {
   content: '✦';
   font-size: 1.6rem;
-  color: var(--gold-light);
-  filter: drop-shadow(0 0 10px var(--gold-light));
+  color: var(--rose-light);
+  filter: drop-shadow(0 0 10px var(--rose-primary));
   animation: medallionOrbit 3s ease-in-out infinite alternate;
 }
 @keyframes medallionOrbit {
@@ -473,11 +475,11 @@ svg { display: block; }
   max-width: 360px;
   padding: 22px 24px;
   background: var(--glass-bg);
-  border: 1px solid var(--gold-primary);
+  border: 1px solid var(--rose-primary);
   border-radius: 18px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--gold-glow);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--rose-glow);
   font-family: var(--serif-body);
   font-size: 1.15rem;
   line-height: 1.6;
@@ -503,7 +505,7 @@ svg { display: block; }
   width: var(--w);
   height: var(--h);
   border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 35px var(--rose-mist);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 35px var(--rose-glow);
 }
 .frost-scratch-box .photo-card { position: absolute; inset: 0; width: 100%; height: 100%; }
 .frost-scratch-box canvas {
@@ -523,14 +525,14 @@ svg { display: block; }
   font-size: clamp(0.68rem, 2vw, 0.78rem);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: var(--rose-light);
   transition: opacity 0.6s ease;
 }
 #s-mem3 .scratch-story {
   font-family: var(--serif-body);
   font-style: italic;
   font-size: clamp(1.1rem, 3.8vw, 1.45rem);
-  color: var(--gold-light);
+  color: var(--rose-light);
   max-width: 22em;
   opacity: 0;
   transform: translateY(10px);
@@ -552,7 +554,7 @@ svg { display: block; }
   position: relative;
   padding: clamp(10px, 1.8vh, 14px) clamp(16px, 3.5vw, 24px);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(230, 194, 128, 0.25);
+  border: 1px solid rgba(244, 114, 182, 0.3);
   border-radius: 40px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -564,8 +566,8 @@ svg { display: block; }
   max-width: 90%;
   transition: transform 0.4s ease, border-color 0.4s ease, color 0.4s ease;
 }
-.orbit-pill:hover { transform: scale(1.02) translateX(4px); border-color: var(--gold-primary); color: #fff; }
-.orbit-pill::before { content: '✦ '; color: var(--gold-light); font-style: normal; margin-right: 4px; }
+.orbit-pill:hover { transform: scale(1.02) translateX(4px); border-color: var(--rose-primary); color: #fff; }
+.orbit-pill::before { content: '✦ '; color: var(--rose-light); font-style: normal; margin-right: 4px; }
 .orbit-pill.left { align-self: flex-start; }
 .orbit-pill.right { align-self: flex-end; text-align: right; }
 
@@ -587,7 +589,7 @@ svg { display: block; }
   font-family: var(--serif-body);
   font-size: clamp(1.05rem, 3.5vw, 1.3rem);
   font-style: italic;
-  color: var(--gold-light);
+  color: var(--rose-light);
   opacity: 0;
   transition: opacity 1s var(--ease-celestial);
   padding: 0 16px;
@@ -598,8 +600,8 @@ svg { display: block; }
 .hunt-flight-arena {
   position: relative;
   width: 100%;
-  height: 48%;
-  min-height: 220px;
+  flex: 1;
+  min-height: 160px;
 }
 
 .firefly-entity {
@@ -620,20 +622,19 @@ svg { display: block; }
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 20%, var(--gold-light) 60%, transparent 95%);
-  box-shadow: 0 0 20px 6px var(--gold-light);
+  background: radial-gradient(circle, #fff 20%, var(--rose-light) 60%, transparent 95%);
+  box-shadow: 0 0 22px 7px var(--rose-light);
   animation: fireflyShine 2.2s ease-in-out infinite alternate;
 }
 @keyframes fireflyShine {
-  0% { transform: scale(0.8); opacity: 0.7; box-shadow: 0 0 14px 4px var(--gold-primary); }
-  100% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 26px 8px #fff; }
+  0% { transform: scale(0.8); opacity: 0.7; box-shadow: 0 0 14px 4px var(--rose-primary); }
+  100% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 28px 8px #fff; }
 }
 .firefly-entity.captured {
   pointer-events: none;
   transition: opacity 0.4s ease;
 }
 
-/* ЗАРАНЕЕ ЗАГОТОВЛЕННЫЕ ПОЗИЦИИ-СЛОТЫ ДЛЯ ТЕКСТА */
 .hunt-slots-dock {
   width: 100%;
   display: flex;
@@ -644,8 +645,8 @@ svg { display: block; }
 .hunt-slot {
   height: clamp(38px, 6vh, 46px);
   border-radius: 24px;
-  border: 1px dashed rgba(230, 194, 128, 0.2);
-  background: rgba(18, 14, 36, 0.35);
+  border: 1px dashed rgba(244, 114, 182, 0.25);
+  background: rgba(28, 14, 38, 0.4);
   display: flex;
   align-items: center;
   padding: 0 16px;
@@ -653,19 +654,19 @@ svg { display: block; }
   transition: border-color 0.6s var(--ease-celestial), background 0.6s var(--ease-celestial), box-shadow 0.6s var(--ease-celestial);
 }
 .hunt-slot.filled {
-  border: 1px solid var(--gold-primary);
+  border: 1px solid var(--rose-primary);
   background: var(--glass-bg);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 18px var(--gold-glow);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 20px var(--rose-glow);
 }
 .hunt-slot__socket {
   font-size: 0.85rem;
-  color: rgba(230, 194, 128, 0.4);
+  color: rgba(244, 114, 182, 0.4);
   flex-shrink: 0;
   transition: color 0.4s ease, transform 0.4s ease;
 }
 .hunt-slot.filled .hunt-slot__socket {
-  color: var(--gold-light);
-  text-shadow: 0 0 10px var(--gold-primary);
+  color: var(--rose-light);
+  text-shadow: 0 0 10px var(--rose-primary);
   transform: scale(1.25);
 }
 .hunt-slot__text {
@@ -693,8 +694,8 @@ svg { display: block; }
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  border: 1px solid var(--gold-light);
-  background: radial-gradient(circle, rgba(230,194,128,0.4) 0%, transparent 70%);
+  border: 1.5px solid var(--rose-light);
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.4) 0%, transparent 70%);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-celestial);
@@ -702,38 +703,38 @@ svg { display: block; }
   align-items: center;
   justify-content: center;
   font-size: 1.8rem;
-  color: var(--gold-light);
+  color: var(--rose-light);
   z-index: 40;
 }
 .portal-key.ready {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
-  box-shadow: 0 0 45px 12px var(--gold-glow);
+  box-shadow: 0 0 45px 14px var(--rose-glow);
   animation: keyPulse 2.2s ease-in-out infinite alternate;
 }
 @keyframes keyPulse {
-  0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 30px 8px var(--gold-glow); }
-  100% { transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 0 55px 18px var(--gold-light); }
+  0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 30px 8px var(--rose-glow); }
+  100% { transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 0 55px 18px var(--rose-light); }
 }
 
 /* ============================================================
    СЦЕНА VI: ПИСЬМО С ЗАБЛОКИРОВАННОЙ ПЕЧАТЬЮ
    ============================================================ */
 #s-letter {
-  background: radial-gradient(ellipse at 50% 25%, #1b1236 0%, #06040d 85%);
+  background: radial-gradient(ellipse at 50% 25%, #251033 0%, #07030c 85%);
 }
 .letter-parchment {
   max-width: 620px;
   width: 100%;
   margin: 0 auto;
   padding: clamp(1.6rem, 4.5vw, 2.8rem);
-  background: rgba(20, 15, 38, 0.82);
-  border: 1px solid var(--gold-primary);
+  background: rgba(30, 14, 40, 0.82);
+  border: 1px solid var(--rose-primary);
   border-radius: 20px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  box-shadow: 0 30px 70px rgba(0,0,0,0.7), 0 0 40px var(--gold-glow);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.7), 0 0 42px var(--rose-glow);
   position: relative;
   max-height: calc(100dvh - clamp(40px, 8vh, 80px));
   overflow-y: auto;
@@ -747,9 +748,9 @@ svg { display: block; }
   top: -13px;
   left: 50%;
   transform: translateX(-50%);
-  background: #171030;
+  background: #251033;
   padding: 0 14px;
-  color: var(--gold-light);
+  color: var(--rose-light);
   letter-spacing: 0.28em;
   font-size: 0.85rem;
 }
@@ -761,7 +762,7 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(12, 9, 22, 0.95);
+  background: rgba(18, 8, 26, 0.95);
   border-radius: 20px;
   z-index: 50;
   cursor: pointer;
@@ -778,21 +779,21 @@ svg { display: block; }
   width: 86px;
   height: 86px;
   border-radius: 50%;
-  background: radial-gradient(circle, #ab2346 0%, #681026 80%);
-  border: 2px solid var(--gold-primary);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 30px rgba(171, 35, 70, 0.4);
+  background: radial-gradient(circle, #e11d48 0%, #881337 80%);
+  border: 2px solid var(--rose-primary);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 32px rgba(225, 29, 72, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold-light);
+  color: var(--rose-light);
   font-family: var(--serif-title);
   font-size: 1.8rem;
   transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s ease;
 }
 .wax-seal:hover { transform: scale(1.08) rotate(4deg); }
 .wax-seal-wrapper.locked .wax-seal {
-  background: radial-gradient(circle, #42304d 0%, #1e1528 80%);
-  border-color: rgba(230, 194, 128, 0.4);
+  background: radial-gradient(circle, #3b1836 0%, #1c0a1a 80%);
+  border-color: rgba(244, 114, 182, 0.4);
   box-shadow: 0 0 15px rgba(0,0,0,0.8);
 }
 .wax-seal-wrapper.locked.shake .wax-seal {
@@ -809,7 +810,7 @@ svg { display: block; }
   font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: var(--rose-light);
   margin-top: 16px;
   transition: color 0.3s ease;
 }
@@ -830,7 +831,7 @@ svg { display: block; }
 }
 .letter-content p.revealed { opacity: 1; filter: blur(0); transform: translateY(0); }
 .letter-content p:first-child {
-  color: var(--gold-light);
+  color: var(--rose-light);
   font-family: var(--serif-title);
   font-size: clamp(1.4rem, 4.5vw, 2rem);
   letter-spacing: 0.06em;
@@ -841,12 +842,12 @@ svg { display: block; }
   font-size: 3.2rem;
   line-height: 0.8;
   margin: 6px 10px 0 0;
-  color: var(--gold-primary);
-  text-shadow: 0 0 14px var(--gold-glow);
+  color: var(--rose-primary);
+  text-shadow: 0 0 14px var(--rose-glow);
 }
 .letter-content .letter-author {
   text-align: right;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   font-family: var(--serif-body);
   font-size: 1.35rem;
   font-style: italic;
@@ -882,7 +883,7 @@ svg { display: block; }
   border-radius: 16px;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(230, 194, 128, 0.1);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(244, 114, 182, 0.15);
   font-family: var(--serif-body);
   font-style: italic;
   font-size: clamp(0.95rem, 3vw, 1.15rem);
@@ -902,13 +903,12 @@ svg { display: block; }
   100% { transform: translateY(-10px) rotate(1.5deg); }
 }
 .sky-lantern.lit {
-  border-color: var(--gold-light);
-  box-shadow: 0 12px 40px rgba(230, 194, 128, 0.35), inset 0 0 18px rgba(230, 194, 128, 0.2);
+  border-color: var(--rose-light);
+  box-shadow: 0 12px 40px rgba(244, 114, 182, 0.45), inset 0 0 18px rgba(244, 114, 182, 0.25);
   color: #fff;
 }
-.sky-lantern.mystery { border: 1px dashed var(--gold-primary); color: var(--gold-light); }
+.sky-lantern.mystery { border: 1px dashed var(--rose-primary); color: var(--rose-light); }
 
-/* ЗОНА ПРЕВРАЩЕНИЯ НАДПИСИ В СЕРДЦЕ СОЗВЕЗДИЯ */
 .future-action-area {
   position: relative;
   min-height: 54px;
@@ -920,7 +920,7 @@ svg { display: block; }
   text-align: center;
   font-family: var(--serif-body);
   font-style: italic;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   font-size: clamp(1.05rem, 3.5vw, 1.35rem);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
@@ -942,10 +942,10 @@ svg { display: block; }
   gap: 10px;
   padding: 12px 28px;
   border-radius: 35px;
-  background: radial-gradient(circle, rgba(230,194,128,0.3) 0%, rgba(20,15,38,0.9) 100%);
-  border: 1.5px solid var(--gold-light);
-  box-shadow: 0 0 35px var(--gold-glow);
-  color: var(--gold-light);
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.35) 0%, rgba(28, 14, 38, 0.92) 100%);
+  border: 1.5px solid var(--rose-light);
+  box-shadow: 0 0 35px var(--rose-glow);
+  color: var(--rose-light);
   font-family: var(--serif-title);
   font-size: clamp(0.85rem, 3vw, 1.05rem);
   letter-spacing: 0.14em;
@@ -958,8 +958,8 @@ svg { display: block; }
   pointer-events: auto;
 }
 @keyframes heartThrob {
-  0% { transform: scale(0.96); box-shadow: 0 0 25px 6px var(--gold-glow); }
-  100% { transform: scale(1.06); box-shadow: 0 0 50px 16px var(--gold-light); }
+  0% { transform: scale(0.96); box-shadow: 0 0 25px 6px var(--rose-glow); }
+  100% { transform: scale(1.06); box-shadow: 0 0 52px 18px var(--rose-light); }
 }
 
 /* ============================================================
@@ -969,7 +969,7 @@ svg { display: block; }
   position: fixed;
   inset: 0;
   z-index: 950;
-  background: radial-gradient(circle at 50% 50%, rgba(26, 17, 51, 0.96) 0%, rgba(6, 4, 13, 0.98) 100%);
+  background: radial-gradient(circle at 50% 50%, rgba(36, 14, 50, 0.96) 0%, rgba(7, 3, 12, 0.98) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -994,14 +994,14 @@ svg { display: block; }
   width: 105px;
   height: 105px;
   border-radius: 50%;
-  border: 1px solid var(--gold-primary);
-  background: radial-gradient(circle, rgba(230,194,128,0.25) 0%, transparent 75%);
-  box-shadow: 0 0 45px var(--gold-glow);
+  border: 1px solid var(--rose-primary);
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 75%);
+  box-shadow: 0 0 45px var(--rose-glow);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.gift-halo-avatar svg { width: 46px; height: 46px; stroke: var(--gold-light); fill: none; stroke-width: 1.4; }
+.gift-halo-avatar svg { width: 46px; height: 46px; stroke: var(--rose-light); fill: none; stroke-width: 1.4; }
 .celestial-gift-modal p {
   font-family: var(--serif-body);
   font-style: italic;
@@ -1014,14 +1014,14 @@ svg { display: block; }
   font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.22em;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   margin-top: 10px;
   padding: 10px 22px;
-  border: 1px solid rgba(230, 194, 128, 0.35);
+  border: 1px solid rgba(244, 114, 182, 0.4);
   border-radius: 30px;
   transition: background 0.3s ease;
 }
-.gift-modal-close:hover { background: rgba(230, 194, 128, 0.15); }
+.gift-modal-close:hover { background: rgba(244, 114, 182, 0.2); }
 
 /* ПЛЕЕР */
 #audio-control {
@@ -1031,12 +1031,12 @@ svg { display: block; }
   z-index: 800;
   width: 44px;
   height: 44px;
-  border: 1px solid var(--gold-primary);
+  border: 1px solid var(--rose-primary);
   border-radius: 50%;
   background: var(--glass-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 0 20px var(--gold-glow);
+  box-shadow: 0 0 20px var(--rose-glow);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1045,7 +1045,7 @@ svg { display: block; }
   transition: opacity 0.8s ease, transform 0.3s ease;
 }
 #audio-control.shown { opacity: 0.95; pointer-events: auto; }
-#audio-control svg { width: 19px; height: 19px; stroke: var(--gold-light); fill: none; stroke-width: 1.5; }
+#audio-control svg { width: 19px; height: 19px; stroke: var(--rose-light); fill: none; stroke-width: 1.5; }
 #audio-control .icon-muted { display: none; }
 #audio-control.muted .icon-playing { display: none; }
 #audio-control.muted .icon-muted { display: block; }
@@ -1205,7 +1205,6 @@ svg { display: block; }
         </div>
       </div>
 
-      <!-- Фиксированные позиции для приземления -->
       <div class="hunt-slots-dock">
         <div class="hunt-slot" data-slot="0">
           <span class="hunt-slot__socket">✧</span>
@@ -1236,7 +1235,6 @@ svg { display: block; }
   <!-- ГЛАВА 6 (ПИСЬМО) -->
   <section class="scene" id="s-letter">
     <div class="letter-parchment">
-      <!-- Заблокировано до светлячков -->
       <div class="wax-seal-wrapper locked" data-wax-seal>
         <div class="wax-seal">
           <span class="seal-icon">🔒</span>
@@ -1267,7 +1265,6 @@ svg { display: block; }
         <div class="sky-lantern full mystery" data-lantern><span>✧ миллион счастливых дорог ✧</span></div>
       </div>
       
-      <!-- Зона трансформации надписи в сердце -->
       <div class="future-action-area">
         <p class="future-caption" data-future-caption>прикоснись к фонарику, чтобы зажечь мечту...</p>
         
@@ -1399,7 +1396,7 @@ svg { display: block; }
     }
   }
 
-  /* 2. КАНВАС КОСМОСА */
+  /* 2. КАНВАС ЗВЁЗДНОГО НЕБА */
   (function(){
     var canvas = document.getElementById('space-canvas');
     var ctx = canvas.getContext('2d');
@@ -1444,7 +1441,7 @@ svg { display: block; }
       for (var i = 0; i < stars.length; i++) {
         var s = stars[i];
         var shimmer = 0.5 + 0.5 * Math.sin(t * 2 + s.phase);
-        ctx.fillStyle = 'rgba(255, 248, 230, ' + (s.alpha * shimmer).toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(255, 230, 245, ' + (s.alpha * shimmer).toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
@@ -1456,7 +1453,7 @@ svg { display: block; }
         var dy = Math.sin(m.angle) * m.len;
         var grad = ctx.createLinearGradient(m.x, m.y, m.x - dx, m.y - dy);
         grad.addColorStop(0, 'rgba(255,255,255,' + m.opacity + ')');
-        grad.addColorStop(1, 'rgba(230,194,128,0)');
+        grad.addColorStop(1, 'rgba(244,114,182,0)');
         ctx.strokeStyle = grad;
         ctx.lineWidth = 1.5;
         ctx.beginPath();
@@ -1473,7 +1470,7 @@ svg { display: block; }
     requestAnimationFrame(render);
   })();
 
-  /* 3. ЗВЁЗДНЫЕ ИСКРЫ ПРИ КАСАНИИ */
+  /* 3. ЗВЁЗДНЫЕ ИСКРЫ (ШЛЕЙФ РОЗОВОГО СВЕТА) */
   (function(){
     var canvas = document.getElementById('sparkle-trail');
     var ctx = canvas.getContext('2d');
@@ -1510,7 +1507,7 @@ svg { display: block; }
         var p = particles[i];
         p.x += p.vx; p.y += p.vy; p.life -= p.decay;
         if (p.life <= 0) { particles.splice(i, 1); continue; }
-        ctx.fillStyle = 'rgba(255, 235, 170, ' + p.life.toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(255, 215, 235, ' + p.life.toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
         ctx.fill();
@@ -1567,7 +1564,7 @@ svg { display: block; }
     });
   })();
 
-  /* 6. ГЛАВА 3: УСЛОЖНЕННЫЙ СКРЕТЧ-СЛОЙ (ТРЕБУЕТСЯ 68% ОЧИСТКИ) */
+  /* 6. ГЛАВА 3: СКРЕТЧ-СЛОЙ С РОЗОВЫМ МЕРЦАНИЕМ */
   (function(){
     var box = document.querySelector('.frost-scratch-box');
     if (!box) return;
@@ -1594,13 +1591,13 @@ svg { display: block; }
       ctx2d.scale(dpr, dpr);
 
       var grad = ctx2d.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, '#1c1538');
-      grad.addColorStop(0.5, '#2f2052');
-      grad.addColorStop(1, '#150e2a');
+      grad.addColorStop(0, '#240d2d');
+      grad.addColorStop(0.5, '#421447');
+      grad.addColorStop(1, '#1a0720');
       ctx2d.fillStyle = grad;
       ctx2d.fillRect(0, 0, w, h);
 
-      ctx2d.fillStyle = 'rgba(255, 235, 170, 0.6)';
+      ctx2d.fillStyle = 'rgba(255, 215, 235, 0.65)';
       for (var i = 0; i < 50; i++) {
         ctx2d.beginPath();
         ctx2d.arc(Math.random() * w, Math.random() * h, Math.random() * 2, 0, Math.PI * 2);
@@ -1617,7 +1614,6 @@ svg { display: block; }
       if (cleared) return;
       var cw = canvas.clientWidth;
       var ch = canvas.clientHeight;
-      // Уменьшенный радиус кисти для тщательного стирания
       var radius = Math.max(cw, ch) * 0.085;
 
       ctx2d.save();
@@ -1644,8 +1640,7 @@ svg { display: block; }
         }
       }
 
-      // Раскрывается только после стирания 68% карточки
-      if ((erasedTotal / (cells * cells)) > 0.68 && !cleared) {
+      if ((erasedTotal / (cells * cells)) > 0.65 && !cleared) {
         cleared = true;
         canvas.style.opacity = '0';
         canvas.style.pointerEvents = 'none';
@@ -1680,7 +1675,7 @@ svg { display: block; }
     canvas.addEventListener('pointercancel', endScratch);
   })();
 
-  /* 7. ГЛАВА 5: СВЕТЛЯЧКИ БЕЗ ОБРЕЗАНИЙ И ПЕРЕЛЁТ В СЛОТЫ */
+  /* 7. ГЛАВА 5: СВЕТЛЯЧКИ И ПЕРЕЛЁТ В СЛОТЫ */
   var allFirefliesCaught = false;
 
   (function(){
@@ -1690,11 +1685,10 @@ svg { display: block; }
     var unlockBtn = document.querySelector('[data-hunt-unlock]');
     var capturedCount = 0;
 
-    // Траектории сдвинуты строго внутрь арены (без задевания краев)
     var orbits = fireflies.map(function(_, i){
       return {
-        baseX: 20 + (i % 3) * 28, // 20%, 48%, 76% (безопасный коридор)
-        baseY: 22 + Math.floor(i / 3) * 36, // 22%, 58%
+        baseX: 20 + (i % 3) * 28,
+        baseY: 22 + Math.floor(i / 3) * 36,
         ampX: 7 + Math.random() * 5,
         ampY: 6 + Math.random() * 5,
         freqX: 0.6 + Math.random() * 0.4,
@@ -1737,7 +1731,6 @@ svg { display: block; }
         var flyRect = fly.getBoundingClientRect();
         var slotRect = targetSlot.getBoundingClientRect();
 
-        // Полёт к заготовленной ячейке
         var dx = (slotRect.left + 16) - flyRect.left;
         var dy = (slotRect.top + slotRect.height / 2 - 25) - flyRect.top;
 
@@ -1759,7 +1752,6 @@ svg { display: block; }
 
         if (capturedCount === fireflies.length) {
           allFirefliesCaught = true;
-          // Разблокировка сургучной печати в Главе VI
           var sealWrapper = document.querySelector('[data-wax-seal]');
           if (sealWrapper) {
             sealWrapper.classList.remove('locked');
@@ -1782,7 +1774,7 @@ svg { display: block; }
     }
   })();
 
-  /* 8. ГЛАВА 6: СУРГУЧНАЯ ПЕЧАТЬ (ЗАБЛОКИРОВАНА ДО ПОИМКИ ВСЕХ СВЕТЛЯЧКОВ) */
+  /* 8. ГЛАВА 6: СУРГУЧНАЯ ПЕЧАТЬ */
   (function(){
     var seal = document.querySelector('[data-wax-seal]');
     var letterBody = document.querySelector('[data-letter-body]');
@@ -1790,13 +1782,12 @@ svg { display: block; }
 
     seal.addEventListener('click', function(){
       if (!allFirefliesCaught) {
-        // Эффект попытки взлома запечатанного письма
         seal.classList.add('shake');
         playHarmonicChime(329.63, 0.06);
         triggerHaptic([30, 40, 30]);
         var hint = seal.querySelector('.wax-seal-hint');
         hint.textContent = 'Звёзды скрыты! Сначала поймай светлячков';
-        hint.style.color = 'var(--gold-primary)';
+        hint.style.color = 'var(--rose-primary)';
         setTimeout(function(){
           seal.classList.remove('shake');
         }, 500);
@@ -1816,7 +1807,7 @@ svg { display: block; }
     });
   })();
 
-  /* 9. ГЛАВА 7: ФОНАРИКИ И ПОЯВЛЕНИЕ «СЕРДЦА СОЗВЕЗДИЯ» */
+  /* 9. ГЛАВА 7: ФОНАРИКИ И ПОЯВЛЕНИЕ СЕРДЦА СОЗВЕЗДИЯ */
   (function(){
     var lanterns = Array.prototype.slice.call(document.querySelectorAll('[data-lantern]'));
     var caption = document.querySelector('[data-future-caption]');
@@ -1834,7 +1825,6 @@ svg { display: block; }
           playHarmonicChime(chimeFrequencies[litCount % chimeFrequencies.length], 0.04);
           triggerHaptic(15);
 
-          // Когда зажглись ВСЕ фонарики — появляется Сердце Созвездия
           if (litCount === lanterns.length) {
             setTimeout(function(){
               if (caption) caption.classList.add('hidden');
