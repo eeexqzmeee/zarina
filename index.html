@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   ДИЗАЙН-СИСТЕМА И БАЗОВЫЕ ПАРАМЕТРЫ
+   ДИЗАЙН-СИСТЕМА И БАЗОВЫЕ НАСТРОЙКИ
    ============================================================ */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -21,18 +21,15 @@
 
 :root {
   --bg-void: #05040a;
-  --bg-deep: #0c0919;
   --gold-primary: #e6c280;
   --gold-light: #fff2d1;
   --gold-glow: rgba(230, 194, 128, 0.45);
-  --gold-halo: rgba(255, 230, 160, 0.15);
   --rose-mist: rgba(244, 114, 182, 0.16);
   --violet-mist: rgba(147, 51, 234, 0.20);
   --cyan-mist: rgba(56, 189, 248, 0.14);
   --ink: #fdfbf7;
   --ink-dim: #c8c3dc;
-  --ink-faint: #81789c;
-  --glass-bg: rgba(18, 14, 36, 0.65);
+  --glass-bg: rgba(18, 14, 36, 0.72);
   --glass-border: rgba(230, 194, 128, 0.28);
   --glass-specular: rgba(255, 255, 255, 0.12);
   --serif-title: 'Cinzel', Georgia, serif;
@@ -53,9 +50,8 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Разрешаем копирование памятного текста */
 .letter-content, .secret-popup, .celestial-gift-modal p, 
-.photo-card__caption, .moment-lead, .orbit-pill {
+.photo-card__caption, .moment-lead, .orbit-pill, .hunt-slot__text {
   user-select: text;
   -webkit-user-select: text;
 }
@@ -71,7 +67,6 @@ button {
 svg { display: block; }
 ::selection { background: rgba(230, 194, 128, 0.35); color: #fff; }
 
-/* Холсты звёздного окружения */
 #space-canvas, #sparkle-trail {
   position: fixed;
   inset: 0;
@@ -82,7 +77,6 @@ svg { display: block; }
 #space-canvas { z-index: 1; }
 #sparkle-trail { z-index: 999; }
 
-/* Оптическая туманность */
 .nebula {
   position: fixed;
   inset: -10%;
@@ -97,7 +91,6 @@ svg { display: block; }
   filter: blur(50px);
   animation: auroraBreathe 18s ease-in-out infinite alternate;
   opacity: 0.85;
-  will-change: transform, opacity;
 }
 @keyframes auroraBreathe {
   0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
@@ -106,7 +99,7 @@ svg { display: block; }
 }
 
 /* ============================================================
-   ВРАТА ПЕРВОЗДАННОГО СВЕТА (PORTAL GATE)
+   ВРАТА (PORTAL GATE)
    ============================================================ */
 #gate {
   position: fixed;
@@ -127,7 +120,6 @@ svg { display: block; }
   visibility: hidden;
   pointer-events: none;
 }
-
 .astrolabe-portal {
   position: relative;
   width: clamp(120px, 25vw, 150px);
@@ -219,43 +211,37 @@ svg { display: block; }
 }
 
 /* ============================================================
-   СКРОЛЛ-ХОЛСТ И ОСНОВНАЯ СТРУКТУРА СЦЕН
+   СКРОЛЛ-КОНТЕЙНЕР (1 СВАЙП = 1 СЕКЦИЯ)
    ============================================================ */
 #story {
   height: 100dvh;
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  scroll-snap-type: y proximity;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
   scrollbar-width: none;
   position: relative;
   z-index: 10;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
 #story::-webkit-scrollbar { display: none; }
 
 .scene {
   position: relative;
+  height: 100dvh;
   min-height: 100dvh;
+  max-height: 100dvh;
   width: 100%;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(32px, 6vh, 64px) clamp(16px, 4vw, 40px);
+  overflow: hidden;
+  padding: clamp(20px, 4vh, 40px) clamp(16px, 4vw, 36px);
 }
 
-@media (max-height: 720px) {
-  .scene {
-    min-height: 100dvh;
-    height: auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
-}
-
-/* Плавный эффект подъёма элементов (.rise) */
 .rise {
   --px: 0px;
   --py: 0px;
@@ -273,9 +259,7 @@ svg { display: block; }
   transform: translate3d(var(--px), var(--py), 0) rotate(var(--rot)) scale(1);
 }
 
-/* ============================================================
-   ЛЮКСОВЫЕ КАРТОЧКИ С 3D ПАРАЛЛАКСОМ
-   ============================================================ */
+/* КАРТОЧКИ С 3D TILT */
 .photo-card {
   --w: 210px;
   --h: 280px;
@@ -320,10 +304,6 @@ svg { display: block; }
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 1.2s var(--ease-celestial);
-}
-.photo-card:hover .photo-card__view img {
-  transform: scale(1.05);
 }
 .photo-card__sheen {
   position: absolute;
@@ -337,11 +317,11 @@ svg { display: block; }
   50% { transform: translate(30%, 30%); }
 }
 .photo-card__footer {
-  min-height: 38px;
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 4px 2px;
+  padding: 6px 4px 2px;
   gap: 8px;
 }
 .photo-card__tag {
@@ -361,28 +341,20 @@ svg { display: block; }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .edit-hint {
   position: relative;
   border-bottom: 1px dashed rgba(230, 194, 128, 0.4);
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
-.edit-hint:hover {
-  color: #fff;
-  border-color: var(--gold-light);
 }
 
-/* ============================================================
-   СЦЕНА I: СОЗВЕЗДИЕ НАЧАЛА
-   ============================================================ */
+/* СЦЕНА I */
 #s-open {
   flex-direction: column;
-  gap: clamp(14px, 2.5vh, 24px);
+  gap: clamp(12px, 2vh, 20px);
   text-align: center;
 }
 .constellation-sign {
-  width: clamp(75px, 16vw, 105px);
-  height: clamp(75px, 16vw, 105px);
+  width: clamp(70px, 14vw, 95px);
+  height: clamp(70px, 14vw, 95px);
   filter: drop-shadow(0 0 14px var(--gold-glow));
 }
 .constellation-sign line {
@@ -394,10 +366,7 @@ svg { display: block; }
   transition: stroke-dashoffset 1.4s var(--ease-celestial);
 }
 .scene.in-view .constellation-sign line { stroke-dashoffset: 0; }
-.constellation-sign circle {
-  fill: #fff;
-  filter: drop-shadow(0 0 6px var(--gold-light));
-}
+.constellation-sign circle { fill: #fff; filter: drop-shadow(0 0 6px var(--gold-light)); }
 .constellation-sign circle.hub {
   fill: var(--gold-light);
   animation: hubStarlight 2.6s ease-in-out infinite alternate;
@@ -406,7 +375,6 @@ svg { display: block; }
   0% { r: 3.5; filter: drop-shadow(0 0 6px var(--gold-primary)); }
   100% { r: 5; filter: drop-shadow(0 0 16px #fff); }
 }
-
 #s-open .chapter-date {
   font-family: var(--serif-title);
   font-size: clamp(0.72rem, 2.2vw, 0.85rem);
@@ -415,12 +383,12 @@ svg { display: block; }
   color: var(--gold-primary);
 }
 #s-open .photo-card {
-  --w: clamp(180px, 50vw, 220px);
-  --h: clamp(240px, 66vw, 290px);
+  --w: clamp(170px, 46vw, 210px);
+  --h: clamp(230px, 60vw, 280px);
 }
 #s-open .moment-lead {
   font-family: var(--serif-body);
-  font-size: clamp(1.15rem, 4vw, 1.7rem);
+  font-size: clamp(1.1rem, 3.8vw, 1.5rem);
   font-style: italic;
   max-width: 22em;
   line-height: 1.45;
@@ -428,93 +396,56 @@ svg { display: block; }
   padding: 0 10px;
 }
 
-/* ============================================================
-   СЦЕНА II: СОКРОВЕННЫЙ ОСКОЛОК ВРЕМЕНИ
-   ============================================================ */
+/* СЦЕНА II */
 #s-mem2 .field-wrap {
   position: relative;
   width: 100%;
   height: 100%;
   max-width: 800px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   align-items: center;
+  justify-content: center;
 }
 #s-mem2 .mem-desktop-layout {
   position: relative;
   width: 100%;
-  min-height: 480px;
+  height: 100%;
 }
-
 @media (min-width: 651px) {
-  #s-mem2 .card-wrap-p1 {
-    position: absolute;
-    top: 4%;
-    left: 4%;
-  }
-  #s-mem2 .card-wrap-p1 .photo-card {
-    --w: clamp(160px, 26vw, 210px);
-    --h: clamp(210px, 34vw, 275px);
-  }
-  #s-mem2 .card-wrap-p2 {
-    position: absolute;
-    bottom: 5%;
-    right: 4%;
-    z-index: 2;
-  }
-  #s-mem2 .card-wrap-p2 .photo-card {
-    --w: clamp(165px, 27vw, 215px);
-    --h: clamp(215px, 35vw, 280px);
-  }
-  #s-mem2 .center-quote {
-    position: absolute;
-    top: 42%;
-    left: 8%;
-    right: 8%;
-    z-index: 3;
-    pointer-events: none;
-    text-align: center;
-  }
-  #s-mem2 .secret-medallion {
-    position: absolute;
-    bottom: 30%;
-    left: 18%;
-    z-index: 4;
-  }
+  #s-mem2 .card-wrap-p1 { position: absolute; top: 6%; left: 4%; }
+  #s-mem2 .card-wrap-p1 .photo-card { --w: clamp(150px, 24vw, 200px); --h: clamp(200px, 32vw, 260px); }
+  #s-mem2 .card-wrap-p2 { position: absolute; bottom: 8%; right: 4%; z-index: 2; }
+  #s-mem2 .card-wrap-p2 .photo-card { --w: clamp(155px, 25vw, 205px); --h: clamp(205px, 33vw, 265px); }
+  #s-mem2 .center-quote { position: absolute; top: 40%; left: 8%; right: 8%; z-index: 3; pointer-events: none; text-align: center; }
+  #s-mem2 .secret-medallion { position: absolute; bottom: 32%; left: 16%; z-index: 4; }
 }
-
 @media (max-width: 650px) {
   #s-mem2 .mem-desktop-layout {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    gap: 16px;
-    min-height: auto;
   }
-  #s-mem2 .card-wrap-p1 { align-self: flex-start; margin-left: 10px; }
-  #s-mem2 .card-wrap-p1 .photo-card { --w: 160px; --h: 205px; }
-  #s-mem2 .card-wrap-p2 { align-self: flex-end; margin-right: 10px; }
-  #s-mem2 .card-wrap-p2 .photo-card { --w: 160px; --h: 205px; }
-  #s-mem2 .center-quote { text-align: center; padding: 0 8px; order: 2; }
-  #s-mem2 .secret-medallion { margin: 8px 0; order: 3; }
+  #s-mem2 .card-wrap-p1 { align-self: flex-start; margin-left: 6px; }
+  #s-mem2 .card-wrap-p1 .photo-card { --w: 145px; --h: 190px; }
+  #s-mem2 .card-wrap-p2 { align-self: flex-end; margin-right: 6px; }
+  #s-mem2 .card-wrap-p2 .photo-card { --w: 145px; --h: 190px; }
+  #s-mem2 .center-quote { text-align: center; order: 2; margin: 4px 0; }
+  #s-mem2 .secret-medallion { order: 3; margin: 4px 0; }
 }
-
 #s-mem2 .center-quote p {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.2rem, 4vw, 1.8rem);
-  line-height: 1.45;
+  font-size: clamp(1.15rem, 3.8vw, 1.65rem);
+  line-height: 1.4;
   color: var(--ink);
   max-width: 16em;
   margin: 0 auto;
   text-shadow: 0 0 25px rgba(230, 194, 128, 0.4);
 }
-
 .secret-medallion {
-  width: 48px;
-  height: 48px;
+  width: 46px;
+  height: 46px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -533,7 +464,6 @@ svg { display: block; }
   0% { transform: scale(0.9) rotate(0deg); }
   100% { transform: scale(1.25) rotate(60deg); filter: drop-shadow(0 0 20px #fff); }
 }
-
 .secret-popup {
   position: absolute;
   top: 50%;
@@ -545,8 +475,8 @@ svg { display: block; }
   background: var(--glass-bg);
   border: 1px solid var(--gold-primary);
   border-radius: 18px;
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--gold-glow);
   font-family: var(--serif-body);
   font-size: 1.15rem;
@@ -558,35 +488,24 @@ svg { display: block; }
   transition: opacity 0.4s var(--ease-celestial), transform 0.4s var(--ease-elastic);
   z-index: 50;
 }
-.secret-popup.active {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
-}
+.secret-popup.active { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
 
-/* ============================================================
-   СЦЕНА III: ЗВЁЗДНАЯ ВУАЛЬ (СКРЕТЧ-КАРТОЧКА)
-   ============================================================ */
+/* СЦЕНА III (СКРЕТЧ) */
 #s-mem3 {
   flex-direction: column;
-  gap: clamp(14px, 2.5vh, 22px);
+  gap: clamp(12px, 2vh, 18px);
   text-align: center;
 }
 .frost-scratch-box {
   position: relative;
-  --w: clamp(210px, 58vw, 270px);
-  --h: clamp(280px, 78vw, 360px);
+  --w: clamp(200px, 54vw, 260px);
+  --h: clamp(270px, 72vw, 345px);
   width: var(--w);
   height: var(--h);
   border-radius: 16px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 35px var(--rose-mist);
 }
-.frost-scratch-box .photo-card {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
+.frost-scratch-box .photo-card { position: absolute; inset: 0; width: 100%; height: 100%; }
 .frost-scratch-box canvas {
   position: absolute;
   inset: 0;
@@ -599,7 +518,6 @@ svg { display: block; }
   transition: opacity 0.8s var(--ease-celestial);
 }
 .frost-scratch-box canvas:active { cursor: grabbing; }
-
 #s-mem3 .scratch-prompt {
   font-family: var(--sans);
   font-size: clamp(0.68rem, 2vw, 0.78rem);
@@ -611,7 +529,7 @@ svg { display: block; }
 #s-mem3 .scratch-story {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.15rem, 3.8vw, 1.45rem);
+  font-size: clamp(1.1rem, 3.8vw, 1.45rem);
   color: var(--gold-light);
   max-width: 22em;
   opacity: 0;
@@ -619,26 +537,20 @@ svg { display: block; }
   transition: opacity 1s var(--ease-celestial), transform 1s var(--ease-celestial);
   padding: 0 14px;
 }
-#s-mem3 .scratch-story.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
+#s-mem3 .scratch-story.revealed { opacity: 1; transform: translateY(0); }
 
-/* ============================================================
-   СЦЕНА IV: ОРБИТЫ ДУШИ
-   ============================================================ */
+/* СЦЕНА IV */
 #s-about .orbit-field {
   position: relative;
   width: 100%;
-  max-width: 680px;
+  max-width: 660px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 10px 0;
+  gap: clamp(10px, 1.8vh, 16px);
 }
 .orbit-pill {
   position: relative;
-  padding: clamp(10px, 2vh, 14px) clamp(16px, 4vw, 24px);
+  padding: clamp(10px, 1.8vh, 14px) clamp(16px, 3.5vw, 24px);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
   border: 1px solid rgba(230, 194, 128, 0.25);
   border-radius: 40px;
@@ -646,70 +558,67 @@ svg { display: block; }
   -webkit-backdrop-filter: blur(16px);
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1rem, 3.5vw, 1.35rem);
+  font-size: clamp(0.95rem, 3.2vw, 1.3rem);
   color: var(--ink-dim);
   box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-  max-width: 88%;
+  max-width: 90%;
   transition: transform 0.4s ease, border-color 0.4s ease, color 0.4s ease;
 }
-.orbit-pill:hover {
-  transform: scale(1.02) translateX(4px);
-  border-color: var(--gold-primary);
-  color: #fff;
-}
-.orbit-pill::before {
-  content: '✦ ';
-  color: var(--gold-light);
-  font-style: normal;
-  margin-right: 4px;
-}
+.orbit-pill:hover { transform: scale(1.02) translateX(4px); border-color: var(--gold-primary); color: #fff; }
+.orbit-pill::before { content: '✦ '; color: var(--gold-light); font-style: normal; margin-right: 4px; }
 .orbit-pill.left { align-self: flex-start; }
 .orbit-pill.right { align-self: flex-end; text-align: right; }
 
 /* ============================================================
-   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (ИНТЕРАКТИВ НА GPU)
+   СЦЕНА V: СВЕТЛЯЧКИ + АВТОМАТИЧЕСКИЕ СОЗВЕЗДИЯ-СЛОТЫ
    ============================================================ */
 #s-hunt .hunt-container {
   position: relative;
   width: 100%;
-  height: clamp(380px, 70vh, 560px);
-  max-width: 720px;
-  overflow: hidden;
+  height: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 0 20px;
 }
 #s-hunt .hunt-quest-hud {
-  position: absolute;
-  top: 2%;
-  left: 0;
-  right: 0;
   text-align: center;
   font-family: var(--serif-body);
-  font-size: clamp(1.05rem, 3.8vw, 1.35rem);
+  font-size: clamp(1.05rem, 3.5vw, 1.3rem);
   font-style: italic;
   color: var(--gold-light);
   opacity: 0;
-  transition: opacity 1s var(--ease-celestial), color 0.4s ease;
+  transition: opacity 1s var(--ease-celestial);
   padding: 0 16px;
   z-index: 10;
 }
 #s-hunt .hunt-quest-hud.active { opacity: 1; }
 
+.hunt-flight-arena {
+  position: relative;
+  width: 100%;
+  height: 48%;
+  min-height: 220px;
+}
+
 .firefly-entity {
   position: absolute;
   top: 0;
   left: 0;
-  width: 54px;
-  height: 54px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 15;
+  z-index: 20;
   cursor: pointer;
   touch-action: none;
   will-change: transform;
 }
 .firefly-core {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: radial-gradient(circle, #fff 20%, var(--gold-light) 60%, transparent 95%);
   box-shadow: 0 0 20px 6px var(--gold-light);
@@ -719,67 +628,61 @@ svg { display: block; }
   0% { transform: scale(0.8); opacity: 0.7; box-shadow: 0 0 14px 4px var(--gold-primary); }
   100% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 26px 8px #fff; }
 }
-
 .firefly-entity.captured {
   pointer-events: none;
-}
-.firefly-entity.captured .firefly-core {
-  animation: none;
-  background: var(--gold-primary);
-  width: 8px;
-  height: 8px;
-  box-shadow: 0 0 8px var(--gold-primary);
+  transition: opacity 0.4s ease;
 }
 
-.firefly-bubble {
-  position: absolute;
-  bottom: 110%;
-  left: 50%;
-  transform: translateX(-50%) translateY(8px) scale(0.95);
-  width: max-content;
-  max-width: min(260px, 80vw);
-  padding: 10px 14px;
-  background: var(--glass-bg);
-  border: 1px solid var(--gold-primary);
-  border-radius: 14px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  font-family: var(--serif-body);
-  font-size: 1rem;
-  line-height: 1.4;
-  color: var(--ink);
-  opacity: 0;
-  pointer-events: none;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 20px var(--gold-glow);
-  transition: opacity 0.4s var(--ease-celestial), transform 0.4s var(--ease-elastic);
-  z-index: 30;
-  text-align: center;
-}
-.firefly-bubble.shown {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0) scale(1);
-}
-
-.hunt-progress-line {
-  position: absolute;
-  bottom: 4%;
-  left: 0;
-  right: 0;
+/* ЗАРАНЕЕ ЗАГОТОВЛЕННЫЕ ПОЗИЦИИ-СЛОТЫ ДЛЯ ТЕКСТА */
+.hunt-slots-dock {
+  width: 100%;
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  z-index: 20;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 15;
 }
-.hunt-progress-dot {
-  width: 26px;
-  height: 5px;
-  border-radius: 4px;
-  background: rgba(255, 255, 255, 0.16);
-  transition: background 0.6s ease, box-shadow 0.6s ease;
+.hunt-slot {
+  height: clamp(38px, 6vh, 46px);
+  border-radius: 24px;
+  border: 1px dashed rgba(230, 194, 128, 0.2);
+  background: rgba(18, 14, 36, 0.35);
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 12px;
+  transition: border-color 0.6s var(--ease-celestial), background 0.6s var(--ease-celestial), box-shadow 0.6s var(--ease-celestial);
 }
-.hunt-progress-dot.active {
-  background: var(--gold-light);
-  box-shadow: 0 0 14px var(--gold-light);
+.hunt-slot.filled {
+  border: 1px solid var(--gold-primary);
+  background: var(--glass-bg);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 18px var(--gold-glow);
+}
+.hunt-slot__socket {
+  font-size: 0.85rem;
+  color: rgba(230, 194, 128, 0.4);
+  flex-shrink: 0;
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+.hunt-slot.filled .hunt-slot__socket {
+  color: var(--gold-light);
+  text-shadow: 0 0 10px var(--gold-primary);
+  transform: scale(1.25);
+}
+.hunt-slot__text {
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: clamp(0.9rem, 3vw, 1.15rem);
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.6s var(--ease-celestial) 0.15s, transform 0.6s var(--ease-celestial) 0.15s;
+}
+.hunt-slot.filled .hunt-slot__text {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .portal-key {
@@ -787,14 +690,14 @@ svg { display: block; }
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.7);
-  width: 80px;
-  height: 80px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   border: 1px solid var(--gold-light);
   background: radial-gradient(circle, rgba(230,194,128,0.4) 0%, transparent 70%);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-celestial), box-shadow 0.8s ease;
+  transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-celestial);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -815,29 +718,29 @@ svg { display: block; }
 }
 
 /* ============================================================
-   СЦЕНА VI: СВЯЩЕННОЕ ПИСЬМО (СУРГУЧНАЯ ПЕЧАТЬ)
+   СЦЕНА VI: ПИСЬМО С ЗАБЛОКИРОВАННОЙ ПЕЧАТЬЮ
    ============================================================ */
 #s-letter {
-  min-height: 100dvh;
-  height: auto;
-  align-items: center;
-  padding: clamp(60px, 8vh, 100px) clamp(16px, 4vw, 36px);
   background: radial-gradient(ellipse at 50% 25%, #1b1236 0%, #06040d 85%);
-  scroll-snap-align: start;
 }
 .letter-parchment {
   max-width: 620px;
   width: 100%;
   margin: 0 auto;
-  padding: clamp(1.8rem, 5.5vw, 3.2rem);
-  background: rgba(20, 15, 38, 0.78);
+  padding: clamp(1.6rem, 4.5vw, 2.8rem);
+  background: rgba(20, 15, 38, 0.82);
   border: 1px solid var(--gold-primary);
   border-radius: 20px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   box-shadow: 0 30px 70px rgba(0,0,0,0.7), 0 0 40px var(--gold-glow);
   position: relative;
+  max-height: calc(100dvh - clamp(40px, 8vh, 80px));
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+.letter-parchment::-webkit-scrollbar { display: none; }
+
 .letter-parchment::before {
   content: '✦ ✧ ✦';
   position: absolute;
@@ -858,7 +761,7 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(12, 9, 22, 0.94);
+  background: rgba(12, 9, 22, 0.95);
   border-radius: 20px;
   z-index: 50;
   cursor: pointer;
@@ -884,9 +787,23 @@ svg { display: block; }
   color: var(--gold-light);
   font-family: var(--serif-title);
   font-size: 1.8rem;
-  transition: transform 0.4s var(--ease-elastic);
+  transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s ease;
 }
 .wax-seal:hover { transform: scale(1.08) rotate(4deg); }
+.wax-seal-wrapper.locked .wax-seal {
+  background: radial-gradient(circle, #42304d 0%, #1e1528 80%);
+  border-color: rgba(230, 194, 128, 0.4);
+  box-shadow: 0 0 15px rgba(0,0,0,0.8);
+}
+.wax-seal-wrapper.locked.shake .wax-seal {
+  animation: sealShake 0.4s ease;
+}
+@keyframes sealShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px) rotate(-4deg); }
+  75% { transform: translateX(8px) rotate(4deg); }
+}
+
 .wax-seal-hint {
   font-family: var(--sans);
   font-size: 0.72rem;
@@ -894,34 +811,34 @@ svg { display: block; }
   text-transform: uppercase;
   color: var(--gold-light);
   margin-top: 16px;
+  transition: color 0.3s ease;
+}
+.wax-seal-wrapper.locked .wax-seal-hint {
+  color: var(--ink-dim);
 }
 
 .letter-content p {
   font-family: var(--serif-body);
-  font-size: clamp(1.1rem, 3.8vw, 1.4rem);
-  line-height: 1.8;
+  font-size: clamp(1.05rem, 3.4vw, 1.35rem);
+  line-height: 1.75;
   color: var(--ink-dim);
-  margin-bottom: 1.2em;
+  margin-bottom: 1.1em;
   opacity: 0;
   filter: blur(8px);
   transform: translateY(14px);
   transition: opacity 1s var(--ease-celestial), filter 1s var(--ease-celestial), transform 1s var(--ease-celestial);
 }
-.letter-content p.revealed {
-  opacity: 1;
-  filter: blur(0);
-  transform: translateY(0);
-}
+.letter-content p.revealed { opacity: 1; filter: blur(0); transform: translateY(0); }
 .letter-content p:first-child {
   color: var(--gold-light);
   font-family: var(--serif-title);
-  font-size: clamp(1.5rem, 5vw, 2.1rem);
+  font-size: clamp(1.4rem, 4.5vw, 2rem);
   letter-spacing: 0.06em;
 }
 .letter-content .dropcap {
   float: left;
   font-family: var(--serif-title);
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   line-height: 0.8;
   margin: 6px 10px 0 0;
   color: var(--gold-primary);
@@ -931,36 +848,35 @@ svg { display: block; }
   text-align: right;
   color: var(--gold-primary);
   font-family: var(--serif-body);
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-style: italic;
-  margin-top: 1.8rem;
+  margin-top: 1.5rem;
   margin-bottom: 0;
 }
 
 /* ============================================================
-   СЦЕНА VII: НЕБЕСНЫЕ ФОНАРИКИ
+   СЦЕНА VII: ФОНАРИКИ И СЕРДЦЕ СОЗВЕЗДИЯ
    ============================================================ */
 #s-future .future-grid-field {
   position: relative;
   width: 100%;
-  max-width: 680px;
+  max-width: 660px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  justify-content: space-around;
+  height: 100%;
 }
 .sky-lanterns-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(12px, 2.5vh, 22px);
+  gap: clamp(10px, 2vh, 18px);
   width: 100%;
 }
 @media (max-width: 480px) {
-  .sky-lanterns-grid {
-    grid-template-columns: 1fr;
-  }
+  .sky-lanterns-grid { grid-template-columns: 1fr; }
 }
 .sky-lantern {
-  padding: clamp(14px, 2.4vh, 20px) 14px;
+  padding: clamp(12px, 2vh, 18px) 14px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
@@ -969,8 +885,8 @@ svg { display: block; }
   box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(230, 194, 128, 0.1);
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(0.95rem, 3.2vw, 1.2rem);
-  line-height: 1.4;
+  font-size: clamp(0.95rem, 3vw, 1.15rem);
+  line-height: 1.35;
   color: var(--ink);
   text-align: center;
   cursor: pointer;
@@ -979,72 +895,76 @@ svg { display: block; }
 }
 .sky-lantern:nth-child(even) { animation-delay: 2s; }
 .sky-lantern:nth-child(3) { animation-delay: 3.5s; }
-.sky-lantern.full {
-  grid-column: 1 / -1;
-  max-width: 320px;
-  margin: 0 auto;
-  width: 100%;
-}
+.sky-lantern.full { grid-column: 1 / -1; max-width: 320px; margin: 0 auto; width: 100%; }
 
 @keyframes lanternSway {
   0% { transform: translateY(0px) rotate(-1.5deg); }
-  100% { transform: translateY(-12px) rotate(1.5deg); }
+  100% { transform: translateY(-10px) rotate(1.5deg); }
 }
 .sky-lantern.lit {
   border-color: var(--gold-light);
   box-shadow: 0 12px 40px rgba(230, 194, 128, 0.35), inset 0 0 18px rgba(230, 194, 128, 0.2);
   color: #fff;
 }
-.sky-lantern.mystery {
-  border: 1px dashed var(--gold-primary);
-  color: var(--gold-light);
-}
+.sky-lantern.mystery { border: 1px dashed var(--gold-primary); color: var(--gold-light); }
 
-#s-future .future-caption {
+/* ЗОНА ПРЕВРАЩЕНИЯ НАДПИСИ В СЕРДЦЕ СОЗВЕЗДИЯ */
+.future-action-area {
+  position: relative;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.future-caption {
   text-align: center;
   font-family: var(--serif-body);
   font-style: italic;
   color: var(--gold-primary);
   font-size: clamp(1.05rem, 3.5vw, 1.35rem);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.future-caption.hidden {
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  position: absolute;
+}
+
+.constellation-heart-btn {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.7);
+  pointer-events: none;
+  transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-elastic);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 35px;
+  background: radial-gradient(circle, rgba(230,194,128,0.3) 0%, rgba(20,15,38,0.9) 100%);
+  border: 1.5px solid var(--gold-light);
+  box-shadow: 0 0 35px var(--gold-glow);
+  color: var(--gold-light);
+  font-family: var(--serif-title);
+  font-size: clamp(0.85rem, 3vw, 1.05rem);
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  animation: heartThrob 2.4s ease-in-out infinite alternate;
+}
+.constellation-heart-btn.ready {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+@keyframes heartThrob {
+  0% { transform: scale(0.96); box-shadow: 0 0 25px 6px var(--gold-glow); }
+  100% { transform: scale(1.06); box-shadow: 0 0 50px 16px var(--gold-light); }
 }
 
 /* ============================================================
-   СЦЕНА VIII: ФИНАЛ И ДАР ВСЕЛЕННОЙ
+   МОДАЛЬНЫЙ ПОДАРОК
    ============================================================ */
-#s-final {
-  flex-direction: column;
-  gap: clamp(24px, 4.5vh, 40px);
-  text-align: center;
-}
-#s-final .final-title {
-  font-family: var(--serif-title);
-  font-size: clamp(1.4rem, 4.8vw, 2.2rem);
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  text-shadow: 0 0 30px rgba(230,194,128,0.4);
-}
-.cosmic-orb-btn {
-  width: 86px;
-  height: 86px;
-  border-radius: 50%;
-  border: 1px solid var(--gold-light);
-  background: radial-gradient(circle, #fff 0%, var(--gold-light) 40%, var(--gold-primary) 70%, transparent 100%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1.4s var(--ease-celestial), transform 0.4s ease;
-  cursor: pointer;
-}
-.cosmic-orb-btn.ready {
-  opacity: 1;
-  pointer-events: auto;
-  box-shadow: 0 0 60px 18px var(--gold-glow);
-  animation: finalOrbThrob 2.8s ease-in-out infinite alternate;
-}
-@keyframes finalOrbThrob {
-  0% { transform: scale(0.93); box-shadow: 0 0 35px 8px var(--gold-glow); }
-  100% { transform: scale(1.15); box-shadow: 0 0 75px 22px var(--gold-light); }
-}
-
 .celestial-gift-modal {
   position: fixed;
   inset: 0;
@@ -1054,22 +974,16 @@ svg { display: block; }
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 20px;
-  padding: clamp(24px, 5vh, 48px) clamp(20px, 5vw, 40px);
+  padding: 30px 20px;
   text-align: center;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.5s var(--ease-celestial), visibility 0.5s;
-  overflow-y: auto;
 }
-.celestial-gift-modal.shown {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
+.celestial-gift-modal.shown { opacity: 1; visibility: visible; pointer-events: auto; }
 .gift-modal-card {
-  max-width: 480px;
+  max-width: 460px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1077,9 +991,8 @@ svg { display: block; }
   gap: 18px;
 }
 .gift-halo-avatar {
-  width: 110px;
-  height: 110px;
-  flex-shrink: 0;
+  width: 105px;
+  height: 105px;
   border-radius: 50%;
   border: 1px solid var(--gold-primary);
   background: radial-gradient(circle, rgba(230,194,128,0.25) 0%, transparent 75%);
@@ -1088,18 +1001,11 @@ svg { display: block; }
   align-items: center;
   justify-content: center;
 }
-.gift-halo-avatar svg {
-  width: 48px;
-  height: 48px;
-  stroke: var(--gold-light);
-  fill: none;
-  stroke-width: 1.4;
-}
-
+.gift-halo-avatar svg { width: 46px; height: 46px; stroke: var(--gold-light); fill: none; stroke-width: 1.4; }
 .celestial-gift-modal p {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.15rem, 4vw, 1.5rem);
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
   color: var(--ink);
   line-height: 1.6;
 }
@@ -1109,21 +1015,15 @@ svg { display: block; }
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: var(--gold-primary);
-  margin-top: 12px;
-  cursor: pointer;
-  padding: 10px 20px;
+  margin-top: 10px;
+  padding: 10px 22px;
   border: 1px solid rgba(230, 194, 128, 0.35);
   border-radius: 30px;
-  transition: background 0.3s ease, border-color 0.3s ease;
+  transition: background 0.3s ease;
 }
-.gift-modal-close:hover {
-  background: rgba(230, 194, 128, 0.15);
-  border-color: var(--gold-primary);
-}
+.gift-modal-close:hover { background: rgba(230, 194, 128, 0.15); }
 
-/* ============================================================
-   ПЛАВАЮЩИЙ АУДИОПЛЕЕР
-   ============================================================ */
+/* ПЛЕЕР */
 #audio-control {
   position: fixed;
   right: 20px;
@@ -1144,18 +1044,8 @@ svg { display: block; }
   pointer-events: none;
   transition: opacity 0.8s ease, transform 0.3s ease;
 }
-#audio-control.shown {
-  opacity: 0.95;
-  pointer-events: auto;
-}
-#audio-control:hover { transform: scale(1.08); }
-#audio-control svg {
-  width: 19px;
-  height: 19px;
-  stroke: var(--gold-light);
-  fill: none;
-  stroke-width: 1.5;
-}
+#audio-control.shown { opacity: 0.95; pointer-events: auto; }
+#audio-control svg { width: 19px; height: 19px; stroke: var(--gold-light); fill: none; stroke-width: 1.5; }
 #audio-control .icon-muted { display: none; }
 #audio-control.muted .icon-playing { display: none; }
 #audio-control.muted .icon-muted { display: block; }
@@ -1163,7 +1053,6 @@ svg { display: block; }
 </head>
 <body>
 
-<!-- АТМОСФЕРНЫЕ ХОЛСТЫ -->
 <div class="nebula"></div>
 <canvas id="space-canvas"></canvas>
 <canvas id="sparkle-trail"></canvas>
@@ -1184,10 +1073,10 @@ svg { display: block; }
   </div>
 </div>
 
-<!-- ОСНОВНАЯ ИСТОРИЯ -->
+<!-- ОСНОВНОЙ СТОРИБУК -->
 <main id="story">
 
-  <!-- ГЛАВА 1: ЗАРОЖДЕНИЕ -->
+  <!-- ГЛАВА 1 -->
   <section class="scene" id="s-open">
     <svg class="constellation-sign" viewBox="0 0 120 120">
       <line x1="25" y1="90" x2="50" y2="60"></line>
@@ -1220,7 +1109,7 @@ svg { display: block; }
     </p>
   </section>
 
-  <!-- ГЛАВА 2: СОКРОВЕННЫЙ ОСКОЛОК -->
+  <!-- ГЛАВА 2 -->
   <section class="scene" id="s-mem2">
     <div class="field-wrap">
       <div class="mem-desktop-layout">
@@ -1263,7 +1152,7 @@ svg { display: block; }
     </div>
   </section>
 
-  <!-- ГЛАВА 3: ЗВЁЗДНАЯ ВУАЛЬ (СКРЕТЧ) -->
+  <!-- ГЛАВА 3 (СКРЕТЧ) -->
   <section class="scene" id="s-mem3">
     <div class="frost-scratch-box rise" style="--d:0">
       <div class="photo-card">
@@ -1282,7 +1171,7 @@ svg { display: block; }
     <p class="scratch-story" data-scratch-text><span class="edit-hint">[Тот день на закате, когда время просто остановилось для нас двоих]</span></p>
   </section>
 
-  <!-- ГЛАВА 4: ЧЕРТЫ ДУШИ -->
+  <!-- ГЛАВА 4 -->
   <section class="scene" id="s-about">
     <div class="orbit-field">
       <div class="orbit-pill left rise" style="--d:0"><span class="edit-hint">То, как искренне ты радуешься мелочам</span></div>
@@ -1293,50 +1182,66 @@ svg { display: block; }
     </div>
   </section>
 
-  <!-- ГЛАВА 5: ОХОТА НА СВЕТЛЯЧКОВ -->
+  <!-- ГЛАВА 5 (СВЕТЛЯЧКИ + СЛОТЫ) -->
   <section class="scene" id="s-hunt">
     <div class="hunt-container">
-      <p class="hunt-quest-hud" data-hunt-hud>Поймай 5 блуждающих светлячков, чтобы открыть путь к сердцу сказки</p>
+      <p class="hunt-quest-hud" data-hunt-hud>Поймай 5 блуждающих светлячков созвездия</p>
 
-      <div class="firefly-entity" data-firefly data-index="0">
-        <div class="firefly-core"></div>
-        <div class="firefly-bubble"><span class="edit-hint">[Искра I: Твоя улыбка освещает мой мир]</span></div>
-      </div>
-      <div class="firefly-entity" data-firefly data-index="1">
-        <div class="firefly-core"></div>
-        <div class="firefly-bubble"><span class="edit-hint">[Искра II: Твой смех — моя любимая музыка]</span></div>
-      </div>
-      <div class="firefly-entity" data-firefly data-index="2">
-        <div class="firefly-core"></div>
-        <div class="firefly-bubble"><span class="edit-hint">[Искра III: С тобой я дома в любой точке земли]</span></div>
-      </div>
-      <div class="firefly-entity" data-firefly data-index="3">
-        <div class="firefly-core"></div>
-        <div class="firefly-bubble"><span class="edit-hint">[Искра IV: Каждая мечта обретает смысл]</span></div>
-      </div>
-      <div class="firefly-entity" data-firefly data-index="4">
-        <div class="firefly-core"></div>
-        <div class="firefly-bubble"><span class="edit-hint">[Искра V: Ты — самое прекрасное чудо]</span></div>
+      <div class="hunt-flight-arena" data-flight-arena>
+        <div class="firefly-entity" data-firefly data-index="0" data-msg="[Искра I: Твоя улыбка освещает мой мир]">
+          <div class="firefly-core"></div>
+        </div>
+        <div class="firefly-entity" data-firefly data-index="1" data-msg="[Искра II: Твой смех — моя любимая музыка]">
+          <div class="firefly-core"></div>
+        </div>
+        <div class="firefly-entity" data-firefly data-index="2" data-msg="[Искра III: С тобой я дома в любой точке земли]">
+          <div class="firefly-core"></div>
+        </div>
+        <div class="firefly-entity" data-firefly data-index="3" data-msg="[Искра IV: Каждая мечта с тобой обретает смысл]">
+          <div class="firefly-core"></div>
+        </div>
+        <div class="firefly-entity" data-firefly data-index="4" data-msg="[Искра V: Ты — самое прекрасное чудо]">
+          <div class="firefly-core"></div>
+        </div>
       </div>
 
-      <div class="hunt-progress-line" data-hunt-bars>
-        <div class="hunt-progress-dot"></div>
-        <div class="hunt-progress-dot"></div>
-        <div class="hunt-progress-dot"></div>
-        <div class="hunt-progress-dot"></div>
-        <div class="hunt-progress-dot"></div>
+      <!-- Фиксированные позиции для приземления -->
+      <div class="hunt-slots-dock">
+        <div class="hunt-slot" data-slot="0">
+          <span class="hunt-slot__socket">✧</span>
+          <span class="hunt-slot__text"></span>
+        </div>
+        <div class="hunt-slot" data-slot="1">
+          <span class="hunt-slot__socket">✧</span>
+          <span class="hunt-slot__text"></span>
+        </div>
+        <div class="hunt-slot" data-slot="2">
+          <span class="hunt-slot__socket">✧</span>
+          <span class="hunt-slot__text"></span>
+        </div>
+        <div class="hunt-slot" data-slot="3">
+          <span class="hunt-slot__socket">✧</span>
+          <span class="hunt-slot__text"></span>
+        </div>
+        <div class="hunt-slot" data-slot="4">
+          <span class="hunt-slot__socket">✧</span>
+          <span class="hunt-slot__text"></span>
+        </div>
       </div>
 
       <button class="portal-key" data-hunt-unlock aria-label="открыть послание">✦</button>
     </div>
   </section>
 
-  <!-- ГЛАВА 6: СОКРОВЕННОЕ ПИСЬМО -->
+  <!-- ГЛАВА 6 (ПИСЬМО) -->
   <section class="scene" id="s-letter">
     <div class="letter-parchment">
-      <div class="wax-seal-wrapper" data-wax-seal>
-        <div class="wax-seal">✦</div>
-        <span class="wax-seal-hint">коснись печати, чтобы открыть</span>
+      <!-- Заблокировано до светлячков -->
+      <div class="wax-seal-wrapper locked" data-wax-seal>
+        <div class="wax-seal">
+          <span class="seal-icon">🔒</span>
+        </div>
+        <span class="wax-seal-hint">собери 5 светлячков в главе V</span>
       </div>
 
       <div class="letter-content" data-letter-body>
@@ -1351,37 +1256,41 @@ svg { display: block; }
     </div>
   </section>
 
-  <!-- ГЛАВА 7: НЕБО ЖЕЛАНИЙ -->
+  <!-- ГЛАВА 7 (ФОНАРИКИ И СЕРДЦЕ СОЗВЕЗДИЯ) -->
   <section class="scene" id="s-future">
     <div class="future-grid-field">
       <div class="sky-lanterns-grid">
         <div class="sky-lantern" data-lantern><span class="edit-hint">[Встретить рассвет на берегу океана]</span></div>
         <div class="sky-lantern" data-lantern><span class="edit-hint">[Сбежать в уютный домик в горах]</span></div>
         <div class="sky-lantern" data-lantern><span class="edit-hint">[Танцевать под тёплым дождём]</span></div>
-        <div class="sky-lantern mystery" data-lantern><span>✧ наше общее желание ✧</span></div>
+        <div class="sky-lantern mystery" data-lantern><span>✧ наше общее сокровенное желание ✧</span></div>
         <div class="sky-lantern full mystery" data-lantern><span>✧ миллион счастливых дорог ✧</span></div>
       </div>
-      <p class="future-caption">прикоснись к фонарику, чтобы зажечь мечту...</p>
-    </div>
-  </section>
-
-  <!-- ГЛАВА 8: ФИНАЛ И ПОДАРОК -->
-  <section class="scene" id="s-final">
-    <h2 class="final-title rise" style="--d:0">В самом сердце созвездия</h2>
-    <button class="cosmic-orb-btn" data-final-trigger aria-label="открыть подарок"></button>
-    
-    <div class="celestial-gift-modal" data-gift-dialog>
-      <div class="gift-modal-card">
-        <div class="gift-halo-avatar">
-          <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-        </div>
-        <p><span class="edit-hint">[Здесь твой сюрприз: билеты на концерт любимой группы, путешествие, координаты романтического вечера или тайное признание]</span></p>
-        <button class="gift-modal-close" data-gift-dismiss>✦ вернуться к звёздам ✦</button>
+      
+      <!-- Зона трансформации надписи в сердце -->
+      <div class="future-action-area">
+        <p class="future-caption" data-future-caption>прикоснись к фонарику, чтобы зажечь мечту...</p>
+        
+        <button class="constellation-heart-btn" data-heart-trigger aria-label="Сердце созвездия">
+          <span>✦</span>
+          <span>Сердце созвездия</span>
+        </button>
       </div>
     </div>
   </section>
 
 </main>
+
+<!-- МОДАЛЬНОЕ ОКНО ПОДАРКА -->
+<div class="celestial-gift-modal" data-gift-dialog>
+  <div class="gift-modal-card">
+    <div class="gift-halo-avatar">
+      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+    <p><span class="edit-hint">[Здесь твой сюрприз: билеты на концерт любимой группы, путешествие, координаты романтического вечера или тайное признание]</span></p>
+    <button class="gift-modal-close" data-gift-dismiss>✦ вернуться к звёздам ✦</button>
+  </div>
+</div>
 
 <!-- КНОПКА ЗВУКА -->
 <button id="audio-control" aria-label="управление звуком">
@@ -1400,9 +1309,7 @@ svg { display: block; }
 (function(){
   'use strict';
 
-  /* ============================================================
-     1. АУДИОДВИЖОК: СИНТЕЗАТОР И ПЕНТАТОНИКА
-     ============================================================ */
+  /* 1. АУДИОДВИЖОК */
   var audioState = null;
   var ambientTimer = null;
   var audioBtn = document.getElementById('audio-control');
@@ -1414,16 +1321,13 @@ svg { display: block; }
     try {
       var ctx = audioState.ctx;
       var now = ctx.currentTime;
-
       var osc = ctx.createOscillator();
       var gain = ctx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, now);
-
       gain.gain.setValueAtTime(0.0001, now);
       gain.gain.linearRampToValueAtTime(gainLevel || 0.05, now + 0.04);
       gain.gain.exponentialRampToValueAtTime(0.00001, now + 2.4);
-
       osc.connect(gain);
       gain.connect(audioState.master);
       osc.start(now);
@@ -1443,7 +1347,6 @@ svg { display: block; }
     try {
       var AudioCtx = window.AudioContext || window.webkitAudioContext;
       var ctx = new AudioCtx();
-
       var master = ctx.createGain();
       master.gain.setValueAtTime(0.0001, ctx.currentTime);
       master.connect(ctx.destination);
@@ -1454,10 +1357,8 @@ svg { display: block; }
         var filter = ctx.createBiquadFilter();
         osc.type = i % 2 === 0 ? 'sine' : 'triangle';
         osc.frequency.setValueAtTime(freq, ctx.currentTime);
-
         filter.type = 'lowpass';
         filter.frequency.setValueAtTime(380, ctx.currentTime);
-
         g.gain.setValueAtTime(0.04 / (i + 1), ctx.currentTime);
         osc.connect(filter);
         filter.connect(g);
@@ -1466,15 +1367,12 @@ svg { display: block; }
       });
 
       audioState = { ctx: ctx, master: master, muted: false };
-
       var unlockPromise = (ctx.state === 'suspended') ? ctx.resume() : Promise.resolve();
       unlockPromise.then(function(){
         master.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 2.5);
         ambientTimer = setTimeout(scheduleCelestialAmbience, 1500);
       });
-    } catch(e) {
-      audioState = null;
-    }
+    } catch(e) { audioState = null; }
   }
 
   function toggleAudioMute() {
@@ -1482,7 +1380,6 @@ svg { display: block; }
     audioState.muted = !audioState.muted;
     var now = audioState.ctx.currentTime;
     audioState.master.gain.cancelScheduledValues(now);
-
     if (audioState.muted) {
       audioState.master.gain.setValueAtTime(audioState.master.gain.value, now);
       audioState.master.gain.linearRampToValueAtTime(0.0001, now + 0.2);
@@ -1496,28 +1393,13 @@ svg { display: block; }
   }
   audioBtn.addEventListener('click', toggleAudioMute);
 
-  document.addEventListener('visibilitychange', function() {
-    if (!audioState) return;
-    if (document.hidden) {
-      audioState.ctx.suspend();
-      if (ambientTimer) { clearTimeout(ambientTimer); ambientTimer = null; }
-    } else {
-      if (!audioState.muted) {
-        audioState.ctx.resume();
-        scheduleCelestialAmbience();
-      }
-    }
-  });
-
   function triggerHaptic(duration) {
     if ('vibrate' in navigator) {
       try { navigator.vibrate(duration || 18); } catch(e) {}
     }
   }
 
-  /* ============================================================
-     2. КАНВАС: ЗВЁЗДНОЕ НЕБО И МЕТЕОРЫ (RETINA-READY)
-     ============================================================ */
+  /* 2. КАНВАС КОСМОСА */
   (function(){
     var canvas = document.getElementById('space-canvas');
     var ctx = canvas.getContext('2d');
@@ -1533,14 +1415,12 @@ svg { display: block; }
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
 
-      var count = Math.min(140, Math.floor((w * h) / 10000));
+      var count = Math.min(130, Math.floor((w * h) / 10000));
       stars = [];
       for (var i = 0; i < count; i++) {
         stars.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 1.5 + 0.35,
-          alpha: Math.random() * 0.7 + 0.3,
+          x: Math.random() * w, y: Math.random() * h,
+          r: Math.random() * 1.5 + 0.35, alpha: Math.random() * 0.7 + 0.3,
           phase: Math.random() * Math.PI * 2
         });
       }
@@ -1551,12 +1431,9 @@ svg { display: block; }
     function spawnMeteor() {
       if (meteors.length < 2 && Math.random() < 0.015) {
         meteors.push({
-          x: Math.random() * w,
-          y: Math.random() * (h * 0.4),
-          len: Math.random() * 100 + 60,
-          speed: Math.random() * 8 + 7,
-          angle: (Math.PI / 4) + (Math.random() - 0.5) * 0.2,
-          opacity: 1
+          x: Math.random() * w, y: Math.random() * (h * 0.4),
+          len: Math.random() * 100 + 60, speed: Math.random() * 8 + 7,
+          angle: (Math.PI / 4) + (Math.random() - 0.5) * 0.2, opacity: 1
         });
       }
     }
@@ -1564,7 +1441,6 @@ svg { display: block; }
     function render(now) {
       ctx.clearRect(0, 0, w, h);
       var t = now / 1000;
-
       for (var i = 0; i < stars.length; i++) {
         var s = stars[i];
         var shimmer = 0.5 + 0.5 * Math.sin(t * 2 + s.phase);
@@ -1573,40 +1449,31 @@ svg { display: block; }
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       }
-
       spawnMeteor();
       for (var j = meteors.length - 1; j >= 0; j--) {
         var m = meteors[j];
         var dx = Math.cos(m.angle) * m.len;
         var dy = Math.sin(m.angle) * m.len;
-
         var grad = ctx.createLinearGradient(m.x, m.y, m.x - dx, m.y - dy);
         grad.addColorStop(0, 'rgba(255,255,255,' + m.opacity + ')');
         grad.addColorStop(1, 'rgba(230,194,128,0)');
-
         ctx.strokeStyle = grad;
         ctx.lineWidth = 1.5;
         ctx.beginPath();
         ctx.moveTo(m.x, m.y);
         ctx.lineTo(m.x - dx, m.y - dy);
         ctx.stroke();
-
         m.x += Math.cos(m.angle) * m.speed;
         m.y += Math.sin(m.angle) * m.speed;
         m.opacity -= 0.018;
-
-        if (m.opacity <= 0 || m.x > w + 100 || m.y > h + 100) {
-          meteors.splice(j, 1);
-        }
+        if (m.opacity <= 0 || m.x > w + 100 || m.y > h + 100) meteors.splice(j, 1);
       }
       requestAnimationFrame(render);
     }
     requestAnimationFrame(render);
   })();
 
-  /* ============================================================
-     3. ЗВЁЗДНЫЙ ШЛЕЙФ КАСАНИЯ
-     ============================================================ */
+  /* 3. ЗВЁЗДНЫЕ ИСКРЫ ПРИ КАСАНИИ */
   (function(){
     var canvas = document.getElementById('sparkle-trail');
     var ctx = canvas.getContext('2d');
@@ -1631,48 +1498,18 @@ svg { display: block; }
         var angle = Math.random() * Math.PI * 2;
         var spd = Math.random() * 3 + 1;
         particles.push({
-          x: x, y: y,
-          vx: Math.cos(angle) * spd,
-          vy: Math.sin(angle) * spd,
-          life: 1,
-          decay: Math.random() * 0.025 + 0.015,
-          size: Math.random() * 2.5 + 1.2
+          x: x, y: y, vx: Math.cos(angle) * spd, vy: Math.sin(angle) * spd,
+          life: 1, decay: Math.random() * 0.025 + 0.015, size: Math.random() * 2.5 + 1.2
         });
       }
     };
-
-    function addSparkle(x, y) {
-      for (var i = 0; i < 2; i++) {
-        particles.push({
-          x: x + (Math.random() - 0.5) * 6,
-          y: y + (Math.random() - 0.5) * 6,
-          vx: (Math.random() - 0.5) * 1.2,
-          vy: (Math.random() - 0.5) * 1.2 - 0.3,
-          life: 1,
-          decay: Math.random() * 0.03 + 0.02,
-          size: Math.random() * 2.2 + 0.8
-        });
-      }
-    }
-
-    window.addEventListener('pointermove', function(e){
-      if (e.pointerType === 'touch') return;
-      addSparkle(e.clientX, e.clientY);
-    }, { passive: true });
 
     function update() {
       ctx.clearRect(0, 0, w, h);
       for (var i = particles.length - 1; i >= 0; i--) {
         var p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.life -= p.decay;
-
-        if (p.life <= 0) {
-          particles.splice(i, 1);
-          continue;
-        }
-
+        p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+        if (p.life <= 0) { particles.splice(i, 1); continue; }
         ctx.fillStyle = 'rgba(255, 235, 170, ' + p.life.toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
@@ -1683,29 +1520,20 @@ svg { display: block; }
     requestAnimationFrame(update);
   })();
 
-  /* ============================================================
-     4. НАБЛЮДАТЕЛЬ СЦЕН И 3D-TILT
-     ============================================================ */
+  /* 4. НАБЛЮДАТЕЛЬ СЦЕН */
   var sceneObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
-      if (entry.isIntersecting && entry.intersectionRatio > 0.25) {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
         var el = entry.target;
         el.classList.add('in-view');
-
         if (el.id === 's-hunt') {
           var hud = el.querySelector('[data-hunt-hud]');
           if (hud) setTimeout(function(){ hud.classList.add('active'); }, 400);
-        } else if (el.id === 's-final') {
-          setTimeout(function(){
-            var orb = document.querySelector('[data-final-trigger]');
-            if (orb) orb.classList.add('ready');
-          }, 1200);
         }
       }
     });
-  }, { threshold: [0.25] });
+  }, { threshold: [0.3] });
 
-  // Запуск логики после нажатия на Врата
   gate.addEventListener('click', function(){
     initAudioEngine();
     playHarmonicChime(1046.5, 0.06);
@@ -1713,50 +1541,11 @@ svg { display: block; }
     gate.classList.add('hidden');
     setTimeout(function(){
       audioBtn.classList.add('shown');
-      document.querySelectorAll('.scene').forEach(function(s){
-        sceneObserver.observe(s);
-      });
+      document.querySelectorAll('.scene').forEach(function(s){ sceneObserver.observe(s); });
     }, 400);
   }, { once: true });
 
-  // 3D-Tilt только для карточек в текущей сцене
-  (function(){
-    var hasPointer = window.matchMedia('(pointer: fine)').matches;
-    if (!hasPointer) return;
-
-    var targetX = 0, targetY = 0;
-    var currentX = 0, currentY = 0;
-
-    window.addEventListener('mousemove', function(e){
-      var cx = window.innerWidth / 2;
-      var cy = window.innerHeight / 2;
-      targetX = (e.clientX - cx) / cx;
-      targetY = (e.clientY - cy) / cy;
-    }, { passive: true });
-
-    function loopTilt() {
-      currentX += (targetX - currentX) * 0.08;
-      currentY += (targetY - currentY) * 0.08;
-
-      var rotY = (currentX * 12).toFixed(3) + 'deg';
-      var rotX = (-currentY * 12).toFixed(3) + 'deg';
-
-      var activeScene = document.querySelector('.scene.in-view');
-      if (activeScene) {
-        var visibleCards = activeScene.querySelectorAll('[data-tilt]');
-        for (var i = 0; i < visibleCards.length; i++) {
-          visibleCards[i].style.setProperty('--ry', rotY);
-          visibleCards[i].style.setProperty('--rx', rotX);
-        }
-      }
-      requestAnimationFrame(loopTilt);
-    }
-    requestAnimationFrame(loopTilt);
-  })();
-
-  /* ============================================================
-     5. СЦЕНА II: ВСПЛЫВАЮЩИЙ МЕДАЛЬОН
-     ============================================================ */
+  /* 5. МЕДАЛЬОН ВО 2 ГЛАВЕ */
   (function(){
     var medallion = document.querySelector('[data-secret-trigger]');
     var secretPopup = document.querySelector('[data-secret-modal]');
@@ -1778,9 +1567,7 @@ svg { display: block; }
     });
   })();
 
-  /* ============================================================
-     6. СЦЕНА III: СКРЕТЧ-СЛОЙ С МАТЕМАТИЧЕСКИМ РАСЧЁТОМ
-     ============================================================ */
+  /* 6. ГЛАВА 3: УСЛОЖНЕННЫЙ СКРЕТЧ-СЛОЙ (ТРЕБУЕТСЯ 68% ОЧИСТКИ) */
   (function(){
     var box = document.querySelector('.frost-scratch-box');
     if (!box) return;
@@ -1790,7 +1577,7 @@ svg { display: block; }
     var story = document.querySelector('[data-scratch-text]');
     var isErasing = false, cleared = false, scratchReady = false;
     var dpr = 1;
-    var cells = 12;
+    var cells = 14;
     var erasedMap = {};
     var erasedTotal = 0;
 
@@ -1814,26 +1601,24 @@ svg { display: block; }
       ctx2d.fillRect(0, 0, w, h);
 
       ctx2d.fillStyle = 'rgba(255, 235, 170, 0.6)';
-      for (var i = 0; i < 45; i++) {
+      for (var i = 0; i < 50; i++) {
         ctx2d.beginPath();
         ctx2d.arc(Math.random() * w, Math.random() * h, Math.random() * 2, 0, Math.PI * 2);
         ctx2d.fill();
       }
       scratchReady = true;
     }
-
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initScratch);
-    } else {
-      initScratch();
-    }
+    } else { initScratch(); }
     window.addEventListener('load', initScratch);
 
     function scratchAt(x, y) {
       if (cleared) return;
       var cw = canvas.clientWidth;
       var ch = canvas.clientHeight;
-      var radius = Math.max(cw, ch) * 0.15;
+      // Уменьшенный радиус кисти для тщательного стирания
+      var radius = Math.max(cw, ch) * 0.085;
 
       ctx2d.save();
       ctx2d.globalCompositeOperation = 'destination-out';
@@ -1849,8 +1634,7 @@ svg { display: block; }
         for (var c = 0; c < cells; c++) {
           var cellCenterX = (c + 0.5) * cellW;
           var cellCenterY = (r + 0.5) * cellH;
-          var dist = Math.hypot(cellCenterX - x, cellCenterY - y);
-          if (dist <= radius) {
+          if (Math.hypot(cellCenterX - x, cellCenterY - y) <= radius) {
             var key = c + ':' + r;
             if (!erasedMap[key]) {
               erasedMap[key] = true;
@@ -1860,7 +1644,8 @@ svg { display: block; }
         }
       }
 
-      if (erasedTotal / (cells * cells) > 0.45 && !cleared) {
+      // Раскрывается только после стирания 68% карточки
+      if ((erasedTotal / (cells * cells)) > 0.68 && !cleared) {
         cleared = true;
         canvas.style.opacity = '0';
         canvas.style.pointerEvents = 'none';
@@ -1882,13 +1667,11 @@ svg { display: block; }
       var pos = getPos(e);
       scratchAt(pos.x, pos.y);
     });
-
     canvas.addEventListener('pointermove', function(e){
       if (!isErasing) return;
       var pos = getPos(e);
       scratchAt(pos.x, pos.y);
     });
-
     function endScratch(e) {
       isErasing = false;
       try { canvas.releasePointerCapture(e.pointerId); } catch(err) {}
@@ -1897,23 +1680,23 @@ svg { display: block; }
     canvas.addEventListener('pointercancel', endScratch);
   })();
 
-  /* ============================================================
-     7. СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (GPU TRANSLATE)
-     ============================================================ */
+  /* 7. ГЛАВА 5: СВЕТЛЯЧКИ БЕЗ ОБРЕЗАНИЙ И ПЕРЕЛЁТ В СЛОТЫ */
+  var allFirefliesCaught = false;
+
   (function(){
-    var container = document.querySelector('#s-hunt .hunt-container');
+    var arena = document.querySelector('[data-flight-arena]');
     var fireflies = Array.prototype.slice.call(document.querySelectorAll('[data-firefly]'));
-    var progressDots = Array.prototype.slice.call(document.querySelectorAll('.hunt-progress-dot'));
+    var slots = Array.prototype.slice.call(document.querySelectorAll('.hunt-slot'));
     var unlockBtn = document.querySelector('[data-hunt-unlock]');
     var capturedCount = 0;
-    var activeBubbleTimer = null;
 
+    // Траектории сдвинуты строго внутрь арены (без задевания краев)
     var orbits = fireflies.map(function(_, i){
       return {
-        baseX: 18 + (i % 3) * 32,
-        baseY: 22 + Math.floor(i / 3) * 35,
-        ampX: 10 + Math.random() * 8,
-        ampY: 8 + Math.random() * 8,
+        baseX: 20 + (i % 3) * 28, // 20%, 48%, 76% (безопасный коридор)
+        baseY: 22 + Math.floor(i / 3) * 36, // 22%, 58%
+        ampX: 7 + Math.random() * 5,
+        ampY: 6 + Math.random() * 5,
         freqX: 0.6 + Math.random() * 0.4,
         freqY: 0.5 + Math.random() * 0.4,
         phase: (i * Math.PI) / 2.5
@@ -1922,8 +1705,8 @@ svg { display: block; }
 
     function loopFly(now) {
       var t = now / 1000;
-      var cw = container ? container.clientWidth : 300;
-      var ch = container ? container.clientHeight : 300;
+      var aw = arena ? arena.clientWidth : 300;
+      var ah = arena ? arena.clientHeight : 200;
 
       for (var i = 0; i < fireflies.length; i++) {
         var el = fireflies[i];
@@ -1932,8 +1715,8 @@ svg { display: block; }
         var xPct = o.baseX + Math.sin(t * o.freqX + o.phase) * o.ampX;
         var yPct = o.baseY + Math.cos(t * o.freqY + o.phase) * o.ampY;
 
-        var px = (xPct / 100) * cw;
-        var py = (yPct / 100) * ch;
+        var px = (xPct / 100) * aw - 25;
+        var py = (yPct / 100) * ah - 25;
 
         el.style.transform = 'translate3d(' + px.toFixed(1) + 'px, ' + py.toFixed(1) + 'px, 0)';
       }
@@ -1941,40 +1724,49 @@ svg { display: block; }
     }
     requestAnimationFrame(loopFly);
 
-    function hideAllBubbles() {
-      fireflies.forEach(function(f){
-        var b = f.querySelector('.firefly-bubble');
-        if (b) b.classList.remove('shown');
-      });
-    }
-
     fireflies.forEach(function(fly){
       fly.addEventListener('pointerdown', function(e){
         e.stopPropagation();
         if (fly.classList.contains('captured')) return;
         fly.classList.add('captured');
+
+        var slotIndex = capturedCount;
         capturedCount++;
+        var targetSlot = slots[slotIndex];
 
-        hideAllBubbles();
-        var bubble = fly.querySelector('.firefly-bubble');
-        if (bubble) {
-          bubble.classList.add('shown');
-          if (activeBubbleTimer) clearTimeout(activeBubbleTimer);
-          activeBubbleTimer = setTimeout(hideAllBubbles, 3600);
-        }
+        var flyRect = fly.getBoundingClientRect();
+        var slotRect = targetSlot.getBoundingClientRect();
 
-        var rect = fly.getBoundingClientRect();
-        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
-        triggerHaptic(20);
+        // Полёт к заготовленной ячейке
+        var dx = (slotRect.left + 16) - flyRect.left;
+        var dy = (slotRect.top + slotRect.height / 2 - 25) - flyRect.top;
+
+        fly.style.transition = 'transform 0.6s var(--ease-celestial), opacity 0.5s ease 0.3s';
+        fly.style.transform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale(0.6)';
+        fly.style.opacity = '0';
+
+        var msg = fly.getAttribute('data-msg');
+        setTimeout(function(){
+          targetSlot.classList.add('filled');
+          var txt = targetSlot.querySelector('.hunt-slot__text');
+          if (txt) txt.textContent = msg;
+          targetSlot.querySelector('.hunt-slot__socket').textContent = '✦';
+          if (window.addBurstAt) window.addBurstAt(slotRect.left + 24, slotRect.top + slotRect.height / 2, 8);
+        }, 550);
 
         playHarmonicChime(chimeFrequencies[capturedCount % chimeFrequencies.length], 0.06);
-        if (progressDots[capturedCount - 1]) {
-          progressDots[capturedCount - 1].classList.add('active');
-        }
+        triggerHaptic(20);
 
         if (capturedCount === fireflies.length) {
+          allFirefliesCaught = true;
+          // Разблокировка сургучной печати в Главе VI
+          var sealWrapper = document.querySelector('[data-wax-seal]');
+          if (sealWrapper) {
+            sealWrapper.classList.remove('locked');
+            sealWrapper.querySelector('.seal-icon').textContent = '✦';
+            sealWrapper.querySelector('.wax-seal-hint').textContent = 'чары рассеялись • коснись печати';
+          }
           setTimeout(function(){
-            hideAllBubbles();
             if (unlockBtn) unlockBtn.classList.add('ready');
             playHarmonicChime(1567.98, 0.08);
             triggerHaptic(40);
@@ -1990,15 +1782,27 @@ svg { display: block; }
     }
   })();
 
-  /* ============================================================
-     8. СЦЕНА VI: СУРГУЧНАЯ ПЕЧАТЬ И ПИСЬМО
-     ============================================================ */
+  /* 8. ГЛАВА 6: СУРГУЧНАЯ ПЕЧАТЬ (ЗАБЛОКИРОВАНА ДО ПОИМКИ ВСЕХ СВЕТЛЯЧКОВ) */
   (function(){
     var seal = document.querySelector('[data-wax-seal]');
     var letterBody = document.querySelector('[data-letter-body]');
     if (!seal || !letterBody) return;
 
     seal.addEventListener('click', function(){
+      if (!allFirefliesCaught) {
+        // Эффект попытки взлома запечатанного письма
+        seal.classList.add('shake');
+        playHarmonicChime(329.63, 0.06);
+        triggerHaptic([30, 40, 30]);
+        var hint = seal.querySelector('.wax-seal-hint');
+        hint.textContent = 'Звёзды скрыты! Сначала поймай светлячков';
+        hint.style.color = 'var(--gold-primary)';
+        setTimeout(function(){
+          seal.classList.remove('shake');
+        }, 500);
+        return;
+      }
+
       var rect = seal.getBoundingClientRect();
       if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
       seal.classList.add('broken');
@@ -2007,59 +1811,60 @@ svg { display: block; }
 
       var paras = letterBody.querySelectorAll('p');
       paras.forEach(function(p, idx){
-        setTimeout(function(){
-          p.classList.add('revealed');
-        }, idx * 300 + 100);
+        setTimeout(function(){ p.classList.add('revealed'); }, idx * 280 + 100);
       });
     });
   })();
 
-  /* ============================================================
-     9. СЦЕНА VII: НЕБЕСНЫЕ ФОНАРИКИ
-     ============================================================ */
-  document.querySelectorAll('[data-lantern]').forEach(function(lantern){
-    lantern.addEventListener('click', function(){
-      this.classList.toggle('lit');
-      var rect = this.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 6);
-      playHarmonicChime(880, 0.04);
-      triggerHaptic(15);
-    });
-  });
-
-  /* ============================================================
-     10. СЦЕНА VIII: СФЕРА СЕРДЦА И ДИАЛОГ ПОДАРКА
-     ============================================================ */
+  /* 9. ГЛАВА 7: ФОНАРИКИ И ПОЯВЛЕНИЕ «СЕРДЦА СОЗВЕЗДИЯ» */
   (function(){
-    var trigger = document.querySelector('[data-final-trigger]');
+    var lanterns = Array.prototype.slice.call(document.querySelectorAll('[data-lantern]'));
+    var caption = document.querySelector('[data-future-caption]');
+    var heartBtn = document.querySelector('[data-heart-trigger]');
     var modal = document.querySelector('[data-gift-dialog]');
+    var litCount = 0;
+
+    lanterns.forEach(function(lantern){
+      lantern.addEventListener('click', function(){
+        if (!lantern.classList.contains('lit')) {
+          lantern.classList.add('lit');
+          litCount++;
+          var rect = lantern.getBoundingClientRect();
+          if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 6);
+          playHarmonicChime(chimeFrequencies[litCount % chimeFrequencies.length], 0.04);
+          triggerHaptic(15);
+
+          // Когда зажглись ВСЕ фонарики — появляется Сердце Созвездия
+          if (litCount === lanterns.length) {
+            setTimeout(function(){
+              if (caption) caption.classList.add('hidden');
+              if (heartBtn) heartBtn.classList.add('ready');
+              playHarmonicChime(1318.5, 0.08);
+              triggerHaptic([30, 40, 50]);
+            }, 600);
+          }
+        }
+      });
+    });
+
+    if (heartBtn && modal) {
+      heartBtn.addEventListener('click', function(){
+        var rect = heartBtn.getBoundingClientRect();
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 25);
+        modal.classList.add('shown');
+        playHarmonicChime(1567.98, 0.09);
+        triggerHaptic([40, 60, 50]);
+      });
+    }
+
     var dismiss = document.querySelector('[data-gift-dismiss]');
-    if (!trigger || !modal) return;
-
-    function openModal() {
-      var rect = trigger.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 25);
-      modal.classList.add('shown');
-      playHarmonicChime(1318.5, 0.09);
-      triggerHaptic([30, 60, 40]);
+    if (dismiss && modal) {
+      dismiss.addEventListener('click', function(){ modal.classList.remove('shown'); });
+      modal.addEventListener('click', function(e){ if (e.target === modal) modal.classList.remove('shown'); });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && modal.classList.contains('shown')) modal.classList.remove('shown');
+      });
     }
-
-    function closeModal() {
-      modal.classList.remove('shown');
-    }
-
-    trigger.addEventListener('click', openModal);
-    if (dismiss) dismiss.addEventListener('click', closeModal);
-
-    modal.addEventListener('click', function(e){
-      if (e.target === modal) closeModal();
-    });
-
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && modal.classList.contains('shown')) {
-        closeModal();
-      }
-    });
   })();
 
 })();
