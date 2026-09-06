@@ -2,14 +2,14 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
 <title>Для Зарины ✨</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   ДИЗАЙН-СИСТЕМА: РОЗОВЫЙ НЕОН, КОСМИЧЕСКИЙ ШЁЛК И ЗВЁЗДЫ
+   ДИЗАЙН-СИСТЕМА И БАЗОВЫЕ ПАРАМЕТРЫ
    ============================================================ */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -17,23 +17,25 @@
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
-  --bg-void: #07040c;
-  --bg-deep: #12071a;
-  --rose-primary: #f472b6;
-  --rose-light: #ffe4ef;
-  --rose-glow: rgba(244, 114, 182, 0.48);
-  --rose-halo: rgba(251, 113, 133, 0.22);
-  --rose-deep: #e11d48;
-  --violet-mist: rgba(168, 85, 247, 0.18);
-  --cyan-mist: rgba(56, 189, 248, 0.10);
-  --ink: #fdfafd;
-  --ink-dim: #d9cadf;
-  --glass-bg: rgba(28, 14, 38, 0.72);
-  --glass-border: rgba(244, 114, 182, 0.32);
-  --glass-specular: rgba(255, 255, 255, 0.15);
+  --bg-void: #05040a;
+  --bg-deep: #0c0919;
+  --gold-primary: #e6c280;
+  --gold-light: #fff2d1;
+  --gold-glow: rgba(230, 194, 128, 0.45);
+  --gold-halo: rgba(255, 230, 160, 0.15);
+  --rose-mist: rgba(244, 114, 182, 0.16);
+  --violet-mist: rgba(147, 51, 234, 0.20);
+  --cyan-mist: rgba(56, 189, 248, 0.14);
+  --ink: #fdfbf7;
+  --ink-dim: #c8c3dc;
+  --ink-faint: #81789c;
+  --glass-bg: rgba(18, 14, 36, 0.72);
+  --glass-border: rgba(230, 194, 128, 0.28);
+  --glass-specular: rgba(255, 255, 255, 0.12);
   --serif-title: 'Cinzel', Georgia, serif;
   --serif-body: 'Cormorant Garamond', Garamond, serif;
   --sans: 'Montserrat', -apple-system, sans-serif;
@@ -48,14 +50,9 @@ html, body {
   color: var(--ink);
   font-family: var(--sans);
   overflow: hidden;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.letter-content, .secret-popup, .celestial-gift-modal p, 
-.photo-card__caption, .moment-lead, .orbit-pill, .hunt-slot__text {
-  user-select: text;
-  -webkit-user-select: text;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 button {
@@ -67,8 +64,12 @@ button {
   outline: none;
 }
 svg { display: block; }
-::selection { background: rgba(244, 114, 182, 0.38); color: #fff; }
+p, span, h1, h2, h3 {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
 
+/* Холсты звёздного окружения */
 #space-canvas, #sparkle-trail {
   position: fixed;
   inset: 0;
@@ -88,20 +89,20 @@ svg { display: block; }
   pointer-events: none;
   background: 
     radial-gradient(ellipse 65% 45% at 80% 20%, var(--violet-mist) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 50% at 20% 80%, var(--rose-glow) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 50% at 20% 80%, var(--rose-mist) 0%, transparent 65%),
     radial-gradient(ellipse 70% 60% at 50% 50%, var(--cyan-mist) 0%, transparent 75%);
-  filter: blur(55px);
-  animation: auroraBreathe 16s ease-in-out infinite alternate;
-  opacity: 0.88;
+  filter: blur(50px);
+  animation: auroraBreathe 18s ease-in-out infinite alternate;
+  opacity: 0.85;
 }
 @keyframes auroraBreathe {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.75; }
-  50% { transform: scale(1.06) translate(-1%, 2%); opacity: 0.95; }
-  100% { transform: scale(0.97) translate(1%, -1%); opacity: 0.8; }
+  0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
+  50% { transform: scale(1.05) translate(-1%, 2%); opacity: 0.95; }
+  100% { transform: scale(0.98) translate(1%, -1%); opacity: 0.75; }
 }
 
 /* ============================================================
-   ВРАТА (PORTAL GATE)
+   ВРАТА ПЕРВОЗДАННОГО СВЕТА (PORTAL GATE)
    ============================================================ */
 #gate {
   position: fixed;
@@ -111,10 +112,10 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 45%, #240e32 0%, #07030c 100%);
+  background: radial-gradient(circle at 50% 45%, #181133 0%, #06040d 100%);
   cursor: pointer;
-  transition: opacity 1.4s var(--ease-celestial), visibility 1.4s;
-  padding: 2rem;
+  transition: opacity 1.2s var(--ease-celestial), visibility 1.2s;
+  padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
   text-align: center;
 }
 #gate.hidden {
@@ -122,98 +123,91 @@ svg { display: block; }
   visibility: hidden;
   pointer-events: none;
 }
+
 .astrolabe-portal {
   position: relative;
-  width: clamp(120px, 25vw, 150px);
-  height: clamp(120px, 25vw, 150px);
+  width: clamp(110px, 26vw, 150px);
+  height: clamp(110px, 26vw, 150px);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.8rem;
 }
 .astrolabe-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px dashed rgba(244, 114, 182, 0.45);
+  border: 1px dashed rgba(230, 194, 128, 0.4);
   animation: spinSlow 32s linear infinite;
 }
 .astrolabe-ring:nth-child(2) {
-  inset: 14px;
-  border: 1px solid rgba(255, 228, 239, 0.3);
-  border-left-color: var(--rose-primary);
-  border-right-color: var(--rose-primary);
+  inset: 12px;
+  border: 1px solid rgba(255, 242, 209, 0.25);
+  border-left-color: var(--gold-primary);
+  border-right-color: var(--gold-primary);
   animation: spinSlow 20s linear infinite reverse;
 }
 .astrolabe-ring:nth-child(3) {
-  inset: 28px;
-  border: 1px dotted rgba(244, 114, 182, 0.65);
+  inset: 24px;
+  border: 1px dotted rgba(230, 194, 128, 0.6);
   animation: spinSlow 12s linear infinite;
 }
 @keyframes spinSlow { to { transform: rotate(360deg); } }
 
 .gate__crystal {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 0%, var(--rose-light) 35%, var(--rose-primary) 70%, transparent 100%);
-  box-shadow: 0 0 42px 12px var(--rose-glow), inset 0 0 8px #fff;
+  background: radial-gradient(circle, #fff 0%, var(--gold-light) 35%, var(--gold-primary) 70%, transparent 100%);
+  box-shadow: 0 0 35px 8px var(--gold-glow), inset 0 0 8px #fff;
   animation: crystalPulse 3s ease-in-out infinite alternate;
 }
 @keyframes crystalPulse {
-  0% { transform: scale(0.92); box-shadow: 0 0 25px 6px var(--rose-glow); }
-  100% { transform: scale(1.12); box-shadow: 0 0 60px 18px var(--rose-light); }
+  0% { transform: scale(0.92); box-shadow: 0 0 25px 6px var(--gold-glow); }
+  100% { transform: scale(1.12); box-shadow: 0 0 50px 14px var(--gold-light); }
 }
 
 .gate__title {
   font-family: var(--serif-title);
-  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 5.5vw, 2.5rem);
   letter-spacing: 0.16em;
   color: var(--ink);
-  text-shadow: 0 0 32px rgba(244, 114, 182, 0.55);
-  animation: textFloatIn 1.8s var(--ease-celestial) forwards;
+  text-shadow: 0 0 30px rgba(230, 194, 128, 0.5);
 }
 .gate__subtitle {
   font-family: var(--serif-body);
-  font-size: clamp(1.1rem, 3.5vw, 1.45rem);
+  font-size: clamp(1rem, 3.6vw, 1.45rem);
   font-style: italic;
-  color: var(--rose-primary);
-  margin-top: 0.8rem;
+  color: var(--gold-primary);
+  margin-top: 0.6rem;
   letter-spacing: 0.04em;
   opacity: 0.95;
 }
-@keyframes textFloatIn {
-  from { opacity: 0; transform: translateY(20px); filter: blur(8px); }
-  to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-
 .gate__cta {
   position: absolute;
-  bottom: max(6%, env(safe-area-inset-bottom, 24px));
+  bottom: max(6%, env(safe-area-inset-bottom, 20px));
   font-size: 0.72rem;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--rose-light);
+  color: var(--gold-light);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  opacity: 0;
-  animation: fadeInDelayed 1.4s ease 1.2s forwards;
+  gap: 6px;
+  opacity: 0.85;
 }
-@keyframes fadeInDelayed { to { opacity: 0.85; } }
 .gate__cta-icon {
   font-size: 1rem;
-  color: var(--rose-primary);
-  animation: bounceLight 2.2s infinite ease-in-out;
+  color: var(--gold-primary);
+  animation: bounceLight 2s infinite ease-in-out;
 }
 @keyframes bounceLight {
-  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 3px var(--rose-light)); }
-  50% { transform: translateY(5px); filter: drop-shadow(0 0 12px var(--rose-primary)); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); filter: drop-shadow(0 0 8px var(--gold-light)); }
 }
 
 /* ============================================================
-   СКРОЛЛ-КОНТЕЙНЕР (1 СВАЙП = 1 СЕКЦИЯ)
+   СКРОЛЛ-ХОЛСТ И СТРУКТУРА СЦЕН (С ЗАЩИТОЙ ОТ ПЕРЕПОЛНЕНИЯ)
    ============================================================ */
 #story {
   height: 100dvh;
@@ -221,76 +215,180 @@ svg { display: block; }
   overflow-y: scroll;
   overflow-x: hidden;
   scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
   scrollbar-width: none;
   position: relative;
   z-index: 10;
+  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
 }
 #story::-webkit-scrollbar { display: none; }
 
 .scene {
   position: relative;
-  height: 100dvh;
   min-height: 100dvh;
-  max-height: 100dvh;
+  height: 100dvh;
   width: 100%;
   scroll-snap-align: start;
   scroll-snap-stop: always;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: clamp(20px, 4vh, 40px) clamp(16px, 4vw, 36px);
+  justify-content: space-between;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: max(16px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  scrollbar-width: none;
 }
+.scene::-webkit-scrollbar { display: none; }
 
+/* Подъём элементов */
 .rise {
-  --px: 0px;
-  --py: 0px;
-  --rot: 0deg;
   opacity: 0;
   filter: blur(8px);
-  transform: translate3d(var(--px), calc(var(--py) + 24px), 0) rotate(var(--rot)) scale(0.96);
-  transition: opacity 1.2s var(--ease-celestial), filter 1.2s var(--ease-celestial), transform 1.2s var(--ease-celestial);
+  transform: translateY(18px) scale(0.98);
+  transition: opacity 1s var(--ease-celestial), filter 1s var(--ease-celestial), transform 1s var(--ease-celestial);
   transition-delay: calc(var(--d, 0) * 1s);
-  will-change: transform, opacity, filter;
 }
 .scene.in-view .rise {
   opacity: 1;
   filter: blur(0);
-  transform: translate3d(var(--px), var(--py), 0) rotate(var(--rot)) scale(1);
+  transform: translateY(0) scale(1);
 }
 
-/* КАРТОЧКИ С 3D TILT */
+/* КВЕСТ-БАННЕР И КНОПКА ПЕРЕХОДА */
+.quest-hud {
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(18, 14, 36, 0.65);
+  border: 1px solid rgba(230, 194, 128, 0.3);
+  border-radius: 30px;
+  font-size: clamp(0.7rem, 2.5vw, 0.82rem);
+  letter-spacing: 0.08em;
+  color: var(--gold-light);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  z-index: 25;
+  flex-shrink: 0;
+}
+.quest-hud.solved {
+  border-color: #55f2a3;
+  color: #cffff0;
+  box-shadow: 0 0 15px rgba(85, 242, 163, 0.3);
+}
+.quest-hud-icon {
+  color: var(--gold-primary);
+  font-size: 0.9rem;
+  animation: pulseDot 2s infinite alternate;
+}
+@keyframes pulseDot {
+  from { opacity: 0.6; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 6px var(--gold-light)); }
+}
+
+.quest-next-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: linear-gradient(135deg, rgba(230, 194, 128, 0.25), rgba(147, 51, 234, 0.25));
+  border: 1px solid var(--gold-light);
+  border-radius: 30px;
+  color: var(--gold-light);
+  font-family: var(--sans);
+  font-size: clamp(0.72rem, 2.5vw, 0.82rem);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  box-shadow: 0 0 20px var(--gold-glow);
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.5s var(--ease-celestial), transform 0.5s var(--ease-celestial);
+  flex-shrink: 0;
+  z-index: 30;
+}
+.quest-next-btn.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  animation: questPulse 2.4s infinite ease-in-out;
+}
+@keyframes questPulse {
+  0%, 100% { box-shadow: 0 0 16px var(--gold-glow); }
+  50% { box-shadow: 0 0 28px rgba(255, 242, 209, 0.7); transform: scale(1.02); }
+}
+
+/* ЗАВЕСА ЗАБЛОКИРОВАННОЙ ГЛАВЫ */
+.scene-curtain {
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 4, 13, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  transition: opacity 0.8s ease, visibility 0.8s;
+}
+.scene-curtain.unlocked {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.scene-curtain p {
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: clamp(1.1rem, 3.8vw, 1.35rem);
+  color: var(--gold-light);
+  max-width: 18em;
+  margin-bottom: 12px;
+}
+.scene-curtain span {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ============================================================
+   ЛЮКСОВЫЕ КАРТОЧКИ
+   ============================================================ */
 .photo-card {
-  --w: 210px;
-  --h: 280px;
+  --w: clamp(140px, 42vw, 195px);
+  --h: clamp(185px, 55vw, 255px);
   position: relative;
   width: var(--w);
   height: var(--h);
   flex-shrink: 0;
-  padding: 10px 10px 8px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.02) 100%);
+  padding: 8px 8px 6px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.02) 100%);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  box-shadow: 0 20px 45px -10px rgba(0,0,0,0.7), 0 0 26px var(--rose-glow), inset 0 1px 1px var(--glass-specular);
+  border-radius: 14px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 16px 36px -8px rgba(0,0,0,0.7), 0 0 20px rgba(230, 194, 128, 0.1);
   display: flex;
   flex-direction: column;
-  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transform-style: preserve-3d;
-  will-change: transform;
 }
 .photo-card::before {
   content: '✦';
   position: absolute;
-  top: -11px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--rose-light);
-  font-size: 13px;
-  text-shadow: 0 0 10px var(--rose-primary);
+  color: var(--gold-light);
+  font-size: 11px;
+  text-shadow: 0 0 10px var(--gold-primary);
   z-index: 5;
 }
 .photo-card__view {
@@ -298,7 +396,7 @@ svg { display: block; }
   flex: 1;
   border-radius: 10px;
   overflow: hidden;
-  background: linear-gradient(155deg, #2a1138, #0e0416);
+  background: linear-gradient(155deg, #1d1538, #0c081d);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 .photo-card__view img {
@@ -307,207 +405,214 @@ svg { display: block; }
   object-fit: cover;
   display: block;
 }
-.photo-card__sheen {
-  position: absolute;
-  inset: -150%;
-  background: linear-gradient(110deg, transparent 40%, rgba(255, 228, 239, 0.25) 50%, transparent 60%);
-  animation: cosmicSheen 10s ease-in-out infinite;
-  pointer-events: none;
-}
-@keyframes cosmicSheen {
-  0%, 100% { transform: translate(-30%, -30%); }
-  50% { transform: translate(30%, 30%); }
-}
 .photo-card__footer {
-  min-height: 36px;
+  min-height: 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 4px 2px;
-  gap: 8px;
+  padding: 6px 2px 2px;
+  gap: 6px;
 }
 .photo-card__tag {
   font-family: var(--serif-title);
-  font-size: 0.65rem;
-  letter-spacing: 0.16em;
-  color: var(--rose-primary);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--gold-primary);
   font-weight: 600;
 }
 .photo-card__caption {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--ink-dim);
   text-align: right;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.edit-hint {
-  position: relative;
-  border-bottom: 1px dashed rgba(244, 114, 182, 0.45);
-}
 
-/* СЦЕНА I */
-#s-open {
-  flex-direction: column;
-  gap: clamp(12px, 2vh, 20px);
-  text-align: center;
-}
-.constellation-sign {
-  width: clamp(70px, 14vw, 95px);
-  height: clamp(70px, 14vw, 95px);
-  filter: drop-shadow(0 0 14px var(--rose-glow));
-}
-.constellation-sign line {
-  stroke: var(--rose-primary);
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-dasharray: 60;
-  stroke-dashoffset: 60;
-  transition: stroke-dashoffset 1.4s var(--ease-celestial);
-}
-.scene.in-view .constellation-sign line { stroke-dashoffset: 0; }
-.constellation-sign circle { fill: #fff; filter: drop-shadow(0 0 6px var(--rose-light)); }
-.constellation-sign circle.hub {
-  fill: var(--rose-light);
-  animation: hubStarlight 2.6s ease-in-out infinite alternate;
-}
-@keyframes hubStarlight {
-  0% { r: 3.5; filter: drop-shadow(0 0 6px var(--rose-primary)); }
-  100% { r: 5; filter: drop-shadow(0 0 16px #fff); }
-}
+/* ============================================================
+   СЦЕНА I: СОЗВЕЗДИЕ НАЧАЛА
+   ============================================================ */
 #s-open .chapter-date {
   font-family: var(--serif-title);
-  font-size: clamp(0.72rem, 2.2vw, 0.85rem);
-  letter-spacing: 0.24em;
+  font-size: clamp(0.7rem, 2.2vw, 0.82rem);
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--rose-primary);
-}
-#s-open .photo-card {
-  --w: clamp(170px, 46vw, 210px);
-  --h: clamp(230px, 60vw, 280px);
+  color: var(--gold-primary);
+  text-align: center;
 }
 #s-open .moment-lead {
   font-family: var(--serif-body);
-  font-size: clamp(1.1rem, 3.8vw, 1.5rem);
+  font-size: clamp(1.05rem, 3.5vw, 1.45rem);
   font-style: italic;
   max-width: 22em;
-  line-height: 1.45;
+  line-height: 1.35;
   color: var(--ink);
-  padding: 0 10px;
+  text-align: center;
+  padding: 0 8px;
 }
-
-/* СЦЕНА II */
-#s-mem2 .field-wrap {
+.constellation-interactive-box {
   position: relative;
-  width: 100%;
-  height: 100%;
-  max-width: 800px;
+  width: clamp(210px, 58vw, 260px);
+  height: clamp(100px, 20vh, 130px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#s-mem2 .mem-desktop-layout {
-  position: relative;
+.constellation-svg {
   width: 100%;
   height: 100%;
+  filter: drop-shadow(0 0 10px var(--gold-glow));
 }
-@media (min-width: 651px) {
-  #s-mem2 .card-wrap-p1 { position: absolute; top: 6%; left: 4%; }
-  #s-mem2 .card-wrap-p1 .photo-card { --w: clamp(150px, 24vw, 200px); --h: clamp(200px, 32vw, 260px); }
-  #s-mem2 .card-wrap-p2 { position: absolute; bottom: 8%; right: 4%; z-index: 2; }
-  #s-mem2 .card-wrap-p2 .photo-card { --w: clamp(155px, 25vw, 205px); --h: clamp(205px, 33vw, 265px); }
-  #s-mem2 .center-quote { position: absolute; top: 40%; left: 8%; right: 8%; z-index: 3; pointer-events: none; text-align: center; }
-  #s-mem2 .secret-medallion { position: absolute; bottom: 32%; left: 16%; z-index: 4; }
+.constellation-svg line {
+  stroke: rgba(230, 194, 128, 0.2);
+  stroke-width: 2;
+  stroke-dasharray: 4;
+  transition: stroke 0.4s ease, stroke-width 0.4s ease;
 }
-@media (max-width: 650px) {
-  #s-mem2 .mem-desktop-layout {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-  #s-mem2 .card-wrap-p1 { align-self: flex-start; margin-left: 6px; }
-  #s-mem2 .card-wrap-p1 .photo-card { --w: 145px; --h: 190px; }
-  #s-mem2 .card-wrap-p2 { align-self: flex-end; margin-right: 6px; }
-  #s-mem2 .card-wrap-p2 .photo-card { --w: 145px; --h: 190px; }
-  #s-mem2 .center-quote { text-align: center; order: 2; margin: 4px 0; }
-  #s-mem2 .secret-medallion { order: 3; margin: 4px 0; }
+.constellation-svg line.lit {
+  stroke: var(--gold-light);
+  stroke-width: 2.5;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 0 8px #fff);
 }
-#s-mem2 .center-quote p {
+.star-node {
+  cursor: pointer;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.star-node circle.core {
+  fill: #fff;
+  transition: fill 0.3s ease;
+}
+.star-node circle.hitbox {
+  fill: transparent;
+}
+.star-node text {
+  font-family: var(--serif-title);
+  font-size: 9px;
+  fill: var(--gold-light);
+  pointer-events: none;
+}
+.star-node.lit circle.core {
+  fill: var(--gold-light);
+  filter: drop-shadow(0 0 10px #fff);
+}
+.star-node.error circle.core {
+  fill: #ff6079;
+  filter: drop-shadow(0 0 10px #ff6079);
+}
+
+/* ============================================================
+   СЦЕНА II: СОКРОВЕННЫЙ ОСКОЛОК ВРЕМЕНИ
+   ============================================================ */
+#s-mem2 .field-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(8px, 1.8vh, 16px);
+  margin: auto 0;
+}
+.mem-duo-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 24px);
+  width: 100%;
+}
+.mem-duo-row .photo-card:first-child { transform: rotate(-2deg); }
+.mem-duo-row .photo-card:last-child { transform: rotate(2deg); }
+
+#s-mem2 .center-quote {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.15rem, 3.8vw, 1.65rem);
-  line-height: 1.4;
+  font-size: clamp(1.05rem, 3.4vw, 1.4rem);
+  line-height: 1.35;
+  text-align: center;
   color: var(--ink);
-  max-width: 16em;
-  margin: 0 auto;
-  text-shadow: 0 0 25px rgba(244, 114, 182, 0.45);
+  max-width: 18em;
+  padding: 0 10px;
 }
-.secret-medallion {
-  width: 46px;
-  height: 46px;
+
+/* 3 скрытые искры воспоминаний */
+.memory-rune-spark {
+  position: absolute;
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.25) 0%, transparent 70%);
+  z-index: 40;
+  font-size: 1.1rem;
+  color: var(--gold-light);
+  text-shadow: 0 0 10px var(--gold-primary);
+  animation: runeFloat 2.6s infinite ease-in-out alternate;
 }
-.secret-medallion::after {
-  content: '✦';
-  font-size: 1.6rem;
-  color: var(--rose-light);
-  filter: drop-shadow(0 0 10px var(--rose-primary));
-  animation: medallionOrbit 3s ease-in-out infinite alternate;
+.memory-rune-spark.collected {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.1);
+  transition: all 0.5s ease;
 }
-@keyframes medallionOrbit {
-  0% { transform: scale(0.9) rotate(0deg); }
-  100% { transform: scale(1.25) rotate(60deg); filter: drop-shadow(0 0 20px #fff); }
+@keyframes runeFloat {
+  0% { transform: translateY(0) scale(0.9); }
+  100% { transform: translateY(-6px) scale(1.15); filter: drop-shadow(0 0 12px #fff); }
 }
+
 .secret-popup {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.92);
+  transform: translate(-50%, -50%) scale(0.9);
   width: 90%;
   max-width: 360px;
-  padding: 22px 24px;
+  padding: 20px 22px;
   background: var(--glass-bg);
-  border: 1px solid var(--rose-primary);
+  border: 1px solid var(--gold-primary);
   border-radius: 18px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--rose-glow);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--gold-glow);
   font-family: var(--serif-body);
   font-size: 1.15rem;
-  line-height: 1.6;
+  line-height: 1.55;
   text-align: center;
   color: var(--ink);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s var(--ease-celestial), transform 0.4s var(--ease-elastic);
-  z-index: 50;
+  z-index: 100;
 }
-.secret-popup.active { opacity: 1; transform: translate(-50%, -50%) scale(1); pointer-events: auto; }
+.secret-popup.active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
 
-/* СЦЕНА III (СКРЕТЧ) */
-#s-mem3 {
-  flex-direction: column;
-  gap: clamp(12px, 2vh, 18px);
-  text-align: center;
-}
+/* ============================================================
+   СЦЕНА III: ЗВЁЗДНАЯ ВУАЛЬ (СКРЕТЧ)
+   ============================================================ */
 .frost-scratch-box {
   position: relative;
-  --w: clamp(200px, 54vw, 260px);
-  --h: clamp(270px, 72vw, 345px);
+  --w: clamp(180px, 52vw, 235px);
+  --h: clamp(235px, 68vw, 305px);
   width: var(--w);
   height: var(--h);
   border-radius: 16px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 35px var(--rose-glow);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.7), 0 0 30px var(--rose-mist);
+  margin: auto 0;
 }
-.frost-scratch-box .photo-card { position: absolute; inset: 0; width: 100%; height: 100%; }
+.frost-scratch-box .photo-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
 .frost-scratch-box canvas {
   position: absolute;
   inset: 0;
@@ -516,243 +621,206 @@ svg { display: block; }
   border-radius: 16px;
   touch-action: none;
   cursor: grab;
-  z-index: 10;
+  z-index: 15;
   transition: opacity 0.8s var(--ease-celestial);
 }
-.frost-scratch-box canvas:active { cursor: grabbing; }
-#s-mem3 .scratch-prompt {
-  font-family: var(--sans);
-  font-size: clamp(0.68rem, 2vw, 0.78rem);
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--rose-light);
-  transition: opacity 0.6s ease;
+.hidden-beacon-star {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  margin-top: -12px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  font-size: 0.9rem;
+  z-index: 12;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.5s ease, transform 0.5s var(--ease-elastic);
 }
+.hidden-beacon-star.revealed {
+  opacity: 1;
+  transform: scale(1.1);
+  text-shadow: 0 0 14px #fff, 0 0 25px var(--gold-primary);
+}
+
 #s-mem3 .scratch-story {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.1rem, 3.8vw, 1.45rem);
-  color: var(--rose-light);
-  max-width: 22em;
+  font-size: clamp(1.05rem, 3.6vw, 1.35rem);
+  color: var(--gold-light);
+  max-width: 20em;
+  text-align: center;
   opacity: 0;
   transform: translateY(10px);
-  transition: opacity 1s var(--ease-celestial), transform 1s var(--ease-celestial);
-  padding: 0 14px;
+  transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-celestial);
+  padding: 0 10px;
 }
-#s-mem3 .scratch-story.revealed { opacity: 1; transform: translateY(0); }
+#s-mem3 .scratch-story.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-/* СЦЕНА IV */
+/* ============================================================
+   СЦЕНА IV: ОРБИТЫ ДУШИ (РЕЗОНАНС)
+   ============================================================ */
 #s-about .orbit-field {
   position: relative;
   width: 100%;
-  max-width: 660px;
+  max-width: 440px;
   display: flex;
   flex-direction: column;
-  gap: clamp(10px, 1.8vh, 16px);
+  gap: clamp(7px, 1.5vh, 12px);
+  margin: auto 0;
 }
 .orbit-pill {
   position: relative;
-  padding: clamp(10px, 1.8vh, 14px) clamp(16px, 3.5vw, 24px);
+  padding: clamp(8px, 1.5vh, 12px) clamp(14px, 3.5vw, 20px);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(244, 114, 182, 0.3);
+  border: 1px solid rgba(230, 194, 128, 0.25);
   border-radius: 40px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(0.95rem, 3.2vw, 1.3rem);
+  font-size: clamp(0.92rem, 3vw, 1.15rem);
   color: var(--ink-dim);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
-  max-width: 90%;
-  transition: transform 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.orbit-pill:hover { transform: scale(1.02) translateX(4px); border-color: var(--rose-primary); color: #fff; }
-.orbit-pill::before { content: '✦ '; color: var(--rose-light); font-style: normal; margin-right: 4px; }
-.orbit-pill.left { align-self: flex-start; }
-.orbit-pill.right { align-self: flex-end; text-align: right; }
+.orbit-pill.awakened {
+  border-color: var(--gold-light);
+  color: #fff;
+  background: linear-gradient(135deg, rgba(230, 194, 128, 0.25), rgba(147, 51, 234, 0.2));
+  box-shadow: 0 0 18px var(--gold-glow);
+  transform: scale(1.02);
+}
+.orbit-pill-badge {
+  font-size: 0.72rem;
+  color: var(--gold-primary);
+  font-style: normal;
+}
+.orbit-pill.awakened .orbit-pill-badge {
+  color: #fff;
+  text-shadow: 0 0 8px var(--gold-light);
+}
 
 /* ============================================================
-   СЦЕНА V: СВЕТЛЯЧКИ + АВТОМАТИЧЕСКИЕ СОЗВЕЗДИЯ-СЛОТЫ
+   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (СОЗВЕЗДИЕ СЛОВ)
    ============================================================ */
 #s-hunt .hunt-container {
   position: relative;
   width: 100%;
-  height: 100%;
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px 0 20px;
-}
-#s-hunt .hunt-quest-hud {
-  text-align: center;
-  font-family: var(--serif-body);
-  font-size: clamp(1.05rem, 3.5vw, 1.3rem);
-  font-style: italic;
-  color: var(--rose-light);
-  opacity: 0;
-  transition: opacity 1s var(--ease-celestial);
-  padding: 0 16px;
-  z-index: 10;
-}
-#s-hunt .hunt-quest-hud.active { opacity: 1; }
-
-.hunt-flight-arena {
-  position: relative;
-  width: 100%;
-  flex: 1;
-  min-height: 160px;
+  height: clamp(260px, 45vh, 360px);
+  max-width: 480px;
+  margin: auto 0;
+  border-radius: 18px;
+  border: 1px dashed rgba(230, 194, 128, 0.2);
+  overflow: hidden;
 }
 
 .firefly-entity {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
+  margin-left: -24px;
+  margin-top: -24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 20;
+  z-index: 15;
   cursor: pointer;
   touch-action: none;
-  will-change: transform;
 }
 .firefly-core {
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 20%, var(--rose-light) 60%, transparent 95%);
-  box-shadow: 0 0 22px 7px var(--rose-light);
+  background: radial-gradient(circle, #fff 20%, var(--gold-light) 60%, transparent 95%);
+  box-shadow: 0 0 18px 5px var(--gold-light);
   animation: fireflyShine 2.2s ease-in-out infinite alternate;
 }
 @keyframes fireflyShine {
-  0% { transform: scale(0.8); opacity: 0.7; box-shadow: 0 0 14px 4px var(--rose-primary); }
-  100% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 28px 8px #fff; }
+  0% { transform: scale(0.8); opacity: 0.7; }
+  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 24px 8px #fff; }
 }
 .firefly-entity.captured {
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  opacity: 0.25;
+  transform: scale(0.5);
+  transition: all 0.5s ease;
 }
 
-.hunt-slots-dock {
+.hunt-ribbon {
   width: 100%;
+  max-width: 440px;
+  min-height: 40px;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  z-index: 15;
-}
-.hunt-slot {
-  height: clamp(38px, 6vh, 46px);
-  border-radius: 24px;
-  border: 1px dashed rgba(244, 114, 182, 0.25);
-  background: rgba(28, 14, 38, 0.4);
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 12px;
-  transition: border-color 0.6s var(--ease-celestial), background 0.6s var(--ease-celestial), box-shadow 0.6s var(--ease-celestial);
-}
-.hunt-slot.filled {
-  border: 1px solid var(--rose-primary);
-  background: var(--glass-bg);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 20px var(--rose-glow);
-}
-.hunt-slot__socket {
-  font-size: 0.85rem;
-  color: rgba(244, 114, 182, 0.4);
-  flex-shrink: 0;
-  transition: color 0.4s ease, transform 0.4s ease;
-}
-.hunt-slot.filled .hunt-slot__socket {
-  color: var(--rose-light);
-  text-shadow: 0 0 10px var(--rose-primary);
-  transform: scale(1.25);
-}
-.hunt-slot__text {
-  font-family: var(--serif-body);
-  font-style: italic;
-  font-size: clamp(0.9rem, 3vw, 1.15rem);
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: opacity 0.6s var(--ease-celestial) 0.15s, transform 0.6s var(--ease-celestial) 0.15s;
-}
-.hunt-slot.filled .hunt-slot__text {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.portal-key {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  border: 1.5px solid var(--rose-light);
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.4) 0%, transparent 70%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-celestial);
-  display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
-  color: var(--rose-light);
-  z-index: 40;
+  gap: 6px;
+  padding: 6px 10px;
 }
-.portal-key.ready {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translate(-50%, -50%) scale(1);
-  box-shadow: 0 0 45px 14px var(--rose-glow);
-  animation: keyPulse 2.2s ease-in-out infinite alternate;
+.hunt-slot {
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(230, 194, 128, 0.2);
+  background: rgba(18, 14, 36, 0.5);
+  font-family: var(--serif-body);
+  font-style: italic;
+  font-size: clamp(0.85rem, 2.7vw, 1rem);
+  color: var(--ink-faint);
+  transition: all 0.4s ease;
 }
-@keyframes keyPulse {
-  0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 30px 8px var(--rose-glow); }
-  100% { transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 0 55px 18px var(--rose-light); }
+.hunt-slot.filled {
+  color: var(--gold-light);
+  border-color: var(--gold-primary);
+  background: rgba(230, 194, 128, 0.15);
+  box-shadow: 0 0 12px var(--gold-glow);
 }
 
 /* ============================================================
-   СЦЕНА VI: ПИСЬМО С ЗАБЛОКИРОВАННОЙ ПЕЧАТЬЮ
+   СЦЕНА VI: СВЯЩЕННОЕ ПИСЬМО (ТАКТИЛЬНЫЙ СУРГУЧ)
    ============================================================ */
 #s-letter {
-  background: radial-gradient(ellipse at 50% 25%, #251033 0%, #07030c 85%);
+  height: auto;
+  min-height: 100dvh;
+  justify-content: flex-start;
+  gap: 16px;
+  padding-top: max(24px, env(safe-area-inset-top));
+  padding-bottom: max(32px, env(safe-area-inset-bottom));
 }
 .letter-parchment {
-  max-width: 620px;
+  max-width: 540px;
   width: 100%;
-  margin: 0 auto;
-  padding: clamp(1.6rem, 4.5vw, 2.8rem);
-  background: rgba(30, 14, 40, 0.82);
-  border: 1px solid var(--rose-primary);
+  padding: clamp(1.4rem, 4vw, 2.4rem);
+  background: rgba(20, 15, 38, 0.78);
+  border: 1px solid var(--gold-primary);
   border-radius: 20px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  box-shadow: 0 30px 70px rgba(0,0,0,0.7), 0 0 42px var(--rose-glow);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 35px var(--gold-glow);
   position: relative;
-  max-height: calc(100dvh - clamp(40px, 8vh, 80px));
-  overflow-y: auto;
-  scrollbar-width: none;
+  margin: 10px 0;
 }
-.letter-parchment::-webkit-scrollbar { display: none; }
-
 .letter-parchment::before {
   content: '✦ ✧ ✦';
   position: absolute;
-  top: -13px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #251033;
-  padding: 0 14px;
-  color: var(--rose-light);
-  letter-spacing: 0.28em;
-  font-size: 0.85rem;
+  background: #171030;
+  padding: 0 12px;
+  color: var(--gold-light);
+  letter-spacing: 0.24em;
+  font-size: 0.8rem;
 }
 
 .wax-seal-wrapper {
@@ -762,12 +830,12 @@ svg { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(18, 8, 26, 0.95);
+  background: rgba(12, 9, 22, 0.95);
   border-radius: 20px;
   z-index: 50;
   cursor: pointer;
   transition: opacity 0.8s var(--ease-celestial), visibility 0.8s;
-  padding: 20px;
+  padding: 16px;
   text-align: center;
 }
 .wax-seal-wrapper.broken {
@@ -775,277 +843,265 @@ svg { display: block; }
   visibility: hidden;
   pointer-events: none;
 }
-.wax-seal {
-  width: 86px;
-  height: 86px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #e11d48 0%, #881337 80%);
-  border: 2px solid var(--rose-primary);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 32px rgba(225, 29, 72, 0.5);
+.wax-seal-press {
+  position: relative;
+  width: 90px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--rose-light);
+}
+.wax-seal-circle {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #b9274e 0%, #681026 80%);
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 30px rgba(171, 35, 70, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
   font-family: var(--serif-title);
-  font-size: 1.8rem;
-  transition: transform 0.4s var(--ease-elastic), box-shadow 0.4s ease;
+  font-size: 1.6rem;
+  transition: transform 0.3s ease;
 }
-.wax-seal:hover { transform: scale(1.08) rotate(4deg); }
-.wax-seal-wrapper.locked .wax-seal {
-  background: radial-gradient(circle, #3b1836 0%, #1c0a1a 80%);
-  border-color: rgba(244, 114, 182, 0.4);
-  box-shadow: 0 0 15px rgba(0,0,0,0.8);
+.wax-seal-progress-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
 }
-.wax-seal-wrapper.locked.shake .wax-seal {
-  animation: sealShake 0.4s ease;
+.wax-seal-progress-svg circle {
+  fill: none;
+  stroke: var(--gold-light);
+  stroke-width: 3;
+  stroke-dasharray: 264;
+  stroke-dashoffset: 264;
+  transition: stroke-dashoffset 0.1s linear;
 }
-@keyframes sealShake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-8px) rotate(-4deg); }
-  75% { transform: translateX(8px) rotate(4deg); }
-}
-
 .wax-seal-hint {
   font-family: var(--sans);
   font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--rose-light);
-  margin-top: 16px;
-  transition: color 0.3s ease;
-}
-.wax-seal-wrapper.locked .wax-seal-hint {
-  color: var(--ink-dim);
+  color: var(--gold-light);
+  margin-top: 14px;
 }
 
 .letter-content p {
   font-family: var(--serif-body);
-  font-size: clamp(1.05rem, 3.4vw, 1.35rem);
-  line-height: 1.75;
+  font-size: clamp(1rem, 3.4vw, 1.25rem);
+  line-height: 1.7;
   color: var(--ink-dim);
   margin-bottom: 1.1em;
   opacity: 0;
-  filter: blur(8px);
-  transform: translateY(14px);
-  transition: opacity 1s var(--ease-celestial), filter 1s var(--ease-celestial), transform 1s var(--ease-celestial);
+  transform: translateY(12px);
+  transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-celestial);
 }
-.letter-content p.revealed { opacity: 1; filter: blur(0); transform: translateY(0); }
+.letter-content p.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
 .letter-content p:first-child {
-  color: var(--rose-light);
+  color: var(--gold-light);
   font-family: var(--serif-title);
-  font-size: clamp(1.4rem, 4.5vw, 2rem);
-  letter-spacing: 0.06em;
+  font-size: clamp(1.4rem, 4.6vw, 1.9rem);
 }
 .letter-content .dropcap {
   float: left;
   font-family: var(--serif-title);
   font-size: 3.2rem;
   line-height: 0.8;
-  margin: 6px 10px 0 0;
-  color: var(--rose-primary);
-  text-shadow: 0 0 14px var(--rose-glow);
+  margin: 4px 8px 0 0;
+  color: var(--gold-primary);
 }
 .letter-content .letter-author {
   text-align: right;
-  color: var(--rose-primary);
+  color: var(--gold-primary);
   font-family: var(--serif-body);
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-style: italic;
   margin-top: 1.5rem;
   margin-bottom: 0;
 }
 
 /* ============================================================
-   СЦЕНА VII: ФОНАРИКИ И СЕРДЦЕ СОЗВЕЗДИЯ
+   СЦЕНА VII: НЕБЕСНЫЕ ФОНАРИКИ
    ============================================================ */
-#s-future .future-grid-field {
-  position: relative;
-  width: 100%;
-  max-width: 660px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 100%;
-}
-.sky-lanterns-grid {
+#s-future .sky-lanterns-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(10px, 2vh, 18px);
+  gap: clamp(8px, 1.8vh, 14px);
   width: 100%;
-}
-@media (max-width: 480px) {
-  .sky-lanterns-grid { grid-template-columns: 1fr; }
+  max-width: 440px;
+  margin: auto 0;
 }
 .sky-lantern {
-  padding: clamp(12px, 2vh, 18px) 14px;
+  padding: clamp(10px, 2vh, 16px) 10px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  box-shadow: 0 12px 30px rgba(0,0,0,0.5), 0 0 20px rgba(244, 114, 182, 0.15);
+  border-radius: 14px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.4);
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(0.95rem, 3vw, 1.15rem);
+  font-size: clamp(0.85rem, 2.7vw, 1.05rem);
   line-height: 1.35;
   color: var(--ink);
   text-align: center;
   cursor: pointer;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
-  animation: lanternSway 6s ease-in-out infinite alternate;
-}
-.sky-lantern:nth-child(even) { animation-delay: 2s; }
-.sky-lantern:nth-child(3) { animation-delay: 3.5s; }
-.sky-lantern.full { grid-column: 1 / -1; max-width: 320px; margin: 0 auto; width: 100%; }
-
-@keyframes lanternSway {
-  0% { transform: translateY(0px) rotate(-1.5deg); }
-  100% { transform: translateY(-10px) rotate(1.5deg); }
+  transition: all 0.4s ease;
 }
 .sky-lantern.lit {
-  border-color: var(--rose-light);
-  box-shadow: 0 12px 40px rgba(244, 114, 182, 0.45), inset 0 0 18px rgba(244, 114, 182, 0.25);
+  border-color: var(--gold-light);
+  box-shadow: 0 8px 30px rgba(230, 194, 128, 0.4), inset 0 0 15px rgba(230, 194, 128, 0.2);
   color: #fff;
 }
-.sky-lantern.mystery { border: 1px dashed var(--rose-primary); color: var(--rose-light); }
-
-.future-action-area {
-  position: relative;
-  min-height: 54px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.future-caption {
-  text-align: center;
-  font-family: var(--serif-body);
-  font-style: italic;
-  color: var(--rose-primary);
-  font-size: clamp(1.05rem, 3.5vw, 1.35rem);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.future-caption.hidden {
-  opacity: 0;
-  transform: scale(0.85);
+.sky-lantern.master-lantern {
+  grid-column: span 2;
+  border: 1px dashed var(--gold-primary);
+  color: var(--gold-light);
+  opacity: 0.4;
   pointer-events: none;
-  position: absolute;
 }
-
-.constellation-heart-btn {
-  position: absolute;
-  opacity: 0;
-  transform: scale(0.7);
-  pointer-events: none;
-  transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-elastic);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 28px;
-  border-radius: 35px;
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.35) 0%, rgba(28, 14, 38, 0.92) 100%);
-  border: 1.5px solid var(--rose-light);
-  box-shadow: 0 0 35px var(--rose-glow);
-  color: var(--rose-light);
-  font-family: var(--serif-title);
-  font-size: clamp(0.85rem, 3vw, 1.05rem);
-  letter-spacing: 0.14em;
-  cursor: pointer;
-  animation: heartThrob 2.4s ease-in-out infinite alternate;
-}
-.constellation-heart-btn.ready {
+.sky-lantern.master-lantern.unlocked {
   opacity: 1;
-  transform: scale(1);
   pointer-events: auto;
+  border: 1px solid var(--gold-light);
+  animation: masterGlow 2.4s infinite alternate;
 }
-@keyframes heartThrob {
-  0% { transform: scale(0.96); box-shadow: 0 0 25px 6px var(--rose-glow); }
-  100% { transform: scale(1.06); box-shadow: 0 0 52px 18px var(--rose-light); }
+@keyframes masterGlow {
+  0% { box-shadow: 0 0 15px var(--gold-glow); }
+  100% { box-shadow: 0 0 35px var(--gold-light); }
 }
 
 /* ============================================================
-   МОДАЛЬНЫЙ ПОДАРОК
+   СЦЕНА VIII: ФИНАЛ И ДАР ВСЕЛЕННОЙ
    ============================================================ */
+#s-final .final-title {
+  font-family: var(--serif-title);
+  font-size: clamp(1.3rem, 4.4vw, 2rem);
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-align: center;
+  text-shadow: 0 0 30px rgba(230,194,128,0.4);
+}
+.cosmic-orb-btn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-light);
+  background: radial-gradient(circle, #fff 0%, var(--gold-light) 40%, var(--gold-primary) 70%, transparent 100%);
+  box-shadow: 0 0 45px 12px var(--gold-glow);
+  cursor: pointer;
+  margin: auto 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: finalPulse 2.8s ease-in-out infinite alternate;
+}
+@keyframes finalPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 30px 8px var(--gold-glow); }
+  100% { transform: scale(1.1); box-shadow: 0 0 65px 18px var(--gold-light); }
+}
+
 .celestial-gift-modal {
   position: fixed;
   inset: 0;
   z-index: 950;
-  background: radial-gradient(circle at 50% 50%, rgba(36, 14, 50, 0.96) 0%, rgba(7, 3, 12, 0.98) 100%);
+  background: radial-gradient(circle at 50% 50%, #1a1133 0%, #06040d 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 30px 20px;
+  gap: 16px;
+  padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
   text-align: center;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.5s var(--ease-celestial), visibility 0.5s;
+  transition: opacity 0.6s var(--ease-celestial), visibility 0.6s;
+  overflow-y: auto;
 }
-.celestial-gift-modal.shown { opacity: 1; visibility: visible; pointer-events: auto; }
-.gift-modal-card {
-  max-width: 460px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
+.celestial-gift-modal.shown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 .gift-halo-avatar {
-  width: 105px;
-  height: 105px;
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
   border-radius: 50%;
-  border: 1px solid var(--rose-primary);
-  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 75%);
-  box-shadow: 0 0 45px var(--rose-glow);
+  border: 1px solid var(--gold-primary);
+  background: radial-gradient(circle, rgba(230,194,128,0.25) 0%, transparent 75%);
+  box-shadow: 0 0 35px var(--gold-glow);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.gift-halo-avatar svg { width: 46px; height: 46px; stroke: var(--rose-light); fill: none; stroke-width: 1.4; }
+.gift-halo-avatar svg {
+  width: 42px;
+  height: 42px;
+  stroke: var(--gold-light);
+  fill: none;
+  stroke-width: 1.4;
+}
 .celestial-gift-modal p {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.15rem, 4vw, 1.45rem);
+  font-size: clamp(1.1rem, 3.8vw, 1.45rem);
   color: var(--ink);
-  line-height: 1.6;
+  max-width: 24em;
+  line-height: 1.55;
 }
 .gift-modal-close {
   font-family: var(--sans);
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--rose-primary);
-  margin-top: 10px;
+  letter-spacing: 0.2em;
+  color: var(--gold-primary);
   padding: 10px 22px;
-  border: 1px solid rgba(244, 114, 182, 0.4);
+  border: 1px solid rgba(230, 194, 128, 0.35);
   border-radius: 30px;
-  transition: background 0.3s ease;
+  margin-top: 10px;
 }
-.gift-modal-close:hover { background: rgba(244, 114, 182, 0.2); }
 
-/* ПЛЕЕР */
+/* ============================================================
+   ПЛАВАЮЩИЙ АУДИОПЛЕЕР
+   ============================================================ */
 #audio-control {
   position: fixed;
-  right: 20px;
-  bottom: max(20px, env(safe-area-inset-bottom, 20px));
+  right: 18px;
+  bottom: max(18px, env(safe-area-inset-bottom, 18px));
   z-index: 800;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--rose-primary);
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--gold-primary);
   border-radius: 50%;
   background: var(--glass-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 0 20px var(--rose-glow);
+  box-shadow: 0 0 20px var(--gold-glow);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.8s ease, transform 0.3s ease;
+  transition: opacity 0.8s ease;
 }
-#audio-control.shown { opacity: 0.95; pointer-events: auto; }
-#audio-control svg { width: 19px; height: 19px; stroke: var(--rose-light); fill: none; stroke-width: 1.5; }
+#audio-control.shown {
+  opacity: 0.95;
+  pointer-events: auto;
+}
+#audio-control svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--gold-light);
+  fill: none;
+  stroke-width: 1.5;
+}
 #audio-control .icon-muted { display: none; }
 #audio-control.muted .icon-playing { display: none; }
 #audio-control.muted .icon-muted { display: block; }
@@ -1053,6 +1109,7 @@ svg { display: block; }
 </head>
 <body>
 
+<!-- АТМОСФЕРНЫЕ ХОЛСТЫ -->
 <div class="nebula"></div>
 <canvas id="space-canvas"></canvas>
 <canvas id="sparkle-trail"></canvas>
@@ -1073,221 +1130,335 @@ svg { display: block; }
   </div>
 </div>
 
-<!-- ОСНОВНОЙ СТОРИБУК -->
+<!-- ОСНОВНАЯ ИСТОРИЯ -->
 <main id="story">
 
-  <!-- ГЛАВА 1 -->
+  <!-- ГЛАВА 1: ЗАРОЖДЕНИЕ -->
   <section class="scene" id="s-open">
-    <svg class="constellation-sign" viewBox="0 0 120 120">
-      <line x1="25" y1="90" x2="50" y2="60"></line>
-      <line x1="50" y1="60" x2="75" y2="70"></line>
-      <line x1="75" y1="70" x2="95" y2="35"></line>
-      <line x1="95" y1="35" x2="60" y2="20"></line>
-      <circle cx="25" cy="90" r="2.5"></circle>
-      <circle cx="50" cy="60" r="2.8"></circle>
-      <circle cx="75" cy="70" r="2.5"></circle>
-      <circle cx="95" cy="35" r="3"></circle>
-      <circle class="hub" cx="60" cy="20" r="4.5"></circle>
-    </svg>
-    <p class="chapter-date rise" style="--d:0.2">
-      <span class="edit-hint">[14 февраля • день, когда зажёгся свет]</span>
+    <div class="quest-hud" id="hud-q1">
+      <span class="quest-hud-icon">✦</span>
+      <span id="txt-q1">Зажги созвездие: соедини звёзды по порядку (I → IV)</span>
+    </div>
+
+    <p class="chapter-date rise" style="--d:0.1">
+      <span>[14 февраля • день, когда зажёгся свет]</span>
     </p>
-    <div class="rise" style="--d:0.4;--rot:-1.5deg">
-      <div class="photo-card" data-tilt="1">
-        <div class="photo-card__view">
-          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80" alt="Первый миг" loading="eager">
-          <div class="photo-card__sheen"></div>
-        </div>
-        <div class="photo-card__footer">
-          <span class="photo-card__tag">ГЛАВА I</span>
-          <span class="photo-card__caption edit-hint">[первая улыбка]</span>
-        </div>
+
+    <div class="constellation-interactive-box rise" style="--d:0.2">
+      <svg class="constellation-svg" viewBox="0 0 240 120" id="constellation-svg">
+        <line id="line-0-1" x1="40" y1="90" x2="90" y2="45"></line>
+        <line id="line-1-2" x1="90" y1="45" x2="155" y2="75"></line>
+        <line id="line-2-3" x1="155" y1="75" x2="205" y2="30"></line>
+
+        <g class="star-node" data-idx="0" transform="translate(40, 90)">
+          <circle class="hitbox" r="22"></circle>
+          <circle class="core" r="4.5"></circle>
+          <text x="-6" y="-10">I</text>
+        </g>
+        <g class="star-node" data-idx="1" transform="translate(90, 45)">
+          <circle class="hitbox" r="22"></circle>
+          <circle class="core" r="5"></circle>
+          <text x="-6" y="-10">II</text>
+        </g>
+        <g class="star-node" data-idx="2" transform="translate(155, 75)">
+          <circle class="hitbox" r="22"></circle>
+          <circle class="core" r="4.5"></circle>
+          <text x="-6" y="-10">III</text>
+        </g>
+        <g class="star-node" data-idx="3" transform="translate(205, 30)">
+          <circle class="hitbox" r="22"></circle>
+          <circle class="core" r="6"></circle>
+          <text x="-8" y="-12">IV</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="photo-card rise" style="--d:0.3">
+      <div class="photo-card__view">
+        <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80" alt="Первый миг" loading="eager">
+      </div>
+      <div class="photo-card__footer">
+        <span class="photo-card__tag">ГЛАВА I</span>
+        <span class="photo-card__caption">[первая улыбка]</span>
       </div>
     </div>
-    <p class="moment-lead rise" style="--d:0.7">
-      <span class="edit-hint">«С того самого мгновения даже тишина рядом с тобой наполнилась смыслом...»</span>
+
+    <p class="moment-lead rise" style="--d:0.4">
+      «С того самого мгновения даже тишина рядом с тобой наполнилась смыслом...»
     </p>
+
+    <button class="quest-next-btn" id="btn-next-1" data-next="s-mem2">
+      <span>Шагнуть в воспоминания ↓</span>
+    </button>
   </section>
 
-  <!-- ГЛАВА 2 -->
+  <!-- ГЛАВА 2: СОКРОВЕННЫЙ ОСКОЛОК -->
   <section class="scene" id="s-mem2">
+    <div class="scene-curtain" id="curtain-s2">
+      <p>«Это созвездие пока скрыто туманностью...»</p>
+      <span>Зажги созвездие в первой главе ✦</span>
+    </div>
+
+    <div class="quest-hud" id="hud-q2">
+      <span class="quest-hud-icon">✦</span>
+      <span id="txt-q2">Отыщи 3 мерцающие искры воспоминаний (<span id="spark-count">0</span>/3)</span>
+    </div>
+
     <div class="field-wrap">
-      <div class="mem-desktop-layout">
-        <div class="card-wrap-p1 rise" style="--d:0;--rot:-3deg">
-          <div class="photo-card p1" data-tilt="1">
-            <div class="photo-card__view">
-              <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Взгляд" loading="lazy">
-              <div class="photo-card__sheen"></div>
-            </div>
-            <div class="photo-card__footer">
-              <span class="photo-card__tag">ГЛАВА II</span>
-              <span class="photo-card__caption edit-hint">[твой смех]</span>
-            </div>
+      <div class="mem-duo-row">
+        <div class="photo-card rise" style="--d:0.1">
+          <!-- Скрытая искра 1 -->
+          <div class="memory-rune-spark" id="spark-1" style="top: -10px; right: -10px;">✦</div>
+          <div class="photo-card__view">
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Взгляд" loading="lazy">
+          </div>
+          <div class="photo-card__footer">
+            <span class="photo-card__tag">ГЛАВА II</span>
+            <span class="photo-card__caption">[твой смех]</span>
           </div>
         </div>
 
-        <div class="center-quote rise" style="--d:0.3">
-          <p><span class="edit-hint">Ты превращаешь самые простые дни в страницы волшебной книги.</span></p>
-        </div>
-
-        <div class="card-wrap-p2 rise" style="--d:0.5;--rot:3deg">
-          <div class="photo-card p2" data-tilt="1">
-            <div class="photo-card__view">
-              <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80" alt="Тепло" loading="lazy">
-              <div class="photo-card__sheen"></div>
-            </div>
-            <div class="photo-card__footer">
-              <span class="photo-card__tag">ГЛАВА III</span>
-              <span class="photo-card__caption edit-hint">[вечер под звёздами]</span>
-            </div>
+        <div class="photo-card rise" style="--d:0.2">
+          <!-- Скрытая искра 2 -->
+          <div class="memory-rune-spark" id="spark-2" style="bottom: -10px; left: -10px;">✦</div>
+          <div class="photo-card__view">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80" alt="Тепло" loading="lazy">
+          </div>
+          <div class="photo-card__footer">
+            <span class="photo-card__tag">ГЛАВА III</span>
+            <span class="photo-card__caption">[вечер под звёздами]</span>
           </div>
         </div>
-
-        <button class="secret-medallion rise" style="--d:0.8" aria-label="открыть тайну" data-secret-trigger></button>
       </div>
 
-      <div class="secret-popup" data-secret-modal>
-        <span class="edit-hint">«Среди миллиардов людей во Вселенной есть те, чей свет виден даже с закрытыми глазами. Ты — мой свет.»</span>
+      <div class="center-quote rise" style="position: relative;">
+        <!-- Скрытая искра 3 -->
+        <div class="memory-rune-spark" id="spark-3" style="top: -14px; left: 50%; transform: translateX(-50%);">✦</div>
+        <p>Ты превращаешь самые простые дни в страницы волшебной книги.</p>
+      </div>
+
+      <div class="secret-popup" id="secret-popup-modal">
+        «Среди миллиардов людей во Вселенной есть те, чей свет виден даже с закрытыми глазами. Ты — мой свет.»
       </div>
     </div>
+
+    <button class="quest-next-btn" id="btn-next-2" data-next="s-mem3">
+      <span>К звёздной вуали ↓</span>
+    </button>
   </section>
 
-  <!-- ГЛАВА 3 (СКРЕТЧ) -->
+  <!-- ГЛАВА 3: ЗВЁЗДНАЯ ВУАЛЬ (СКРЕТЧ) -->
   <section class="scene" id="s-mem3">
-    <div class="frost-scratch-box rise" style="--d:0">
+    <div class="scene-curtain" id="curtain-s3">
+      <p>«Осколок прошлого запечатан...»</p>
+      <span>Собери 3 искры во 2-й главе ✦</span>
+    </div>
+
+    <div class="quest-hud" id="hud-q3">
+      <span class="quest-hud-icon">✦</span>
+      <span id="txt-q3">Сотри звёздную пыль и найди 3 скрытых маяка (<span id="beacon-count">0</span>/3)</span>
+    </div>
+
+    <div class="frost-scratch-box rise" style="--d:0.1">
       <div class="photo-card">
         <div class="photo-card__view">
           <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Скрытое воспоминание" loading="lazy">
-          <div class="photo-card__sheen"></div>
+          <!-- 3 скрытых маяка под скретчем -->
+          <div class="hidden-beacon-star" id="beacon-1" style="left: 25%; top: 25%;">★</div>
+          <div class="hidden-beacon-star" id="beacon-2" style="left: 75%; top: 40%;">★</div>
+          <div class="hidden-beacon-star" id="beacon-3" style="left: 50%; top: 75%;">★</div>
         </div>
         <div class="photo-card__footer">
           <span class="photo-card__tag">ГЛАВА IV</span>
-          <span class="photo-card__caption edit-hint">[неизгладимый миг]</span>
+          <span class="photo-card__caption">[неизгладимый миг]</span>
         </div>
       </div>
-      <canvas data-scratch-layer></canvas>
+      <canvas id="scratch-canvas"></canvas>
     </div>
-    <p class="scratch-prompt rise" style="--d:0.3" data-scratch-hint>✦ сотри звёздную пыль прикосновением ✦</p>
-    <p class="scratch-story" data-scratch-text><span class="edit-hint">[Тот день на закате, когда время просто остановилось для нас двоих]</span></p>
+
+    <p class="scratch-story" id="scratch-story-text">
+      [Тот день на закате, когда время просто остановилось для нас двоих]
+    </p>
+
+    <button class="quest-next-btn" id="btn-next-3" data-next="s-about">
+      <span>Чертоги души ↓</span>
+    </button>
   </section>
 
-  <!-- ГЛАВА 4 -->
+  <!-- ГЛАВА 4: ЧЕРТЫ ДУШИ -->
   <section class="scene" id="s-about">
+    <div class="scene-curtain" id="curtain-s4">
+      <p>«Вуаль скрывает глубину...»</p>
+      <span>Найди 3 звёздных маяка в 3-й главе ✦</span>
+    </div>
+
+    <div class="quest-hud" id="hud-q4">
+      <span class="quest-hud-icon">✦</span>
+      <span id="txt-q4">Настрой резонанс: пробуди все 5 качеств души (<span id="soul-count">0</span>/5)</span>
+    </div>
+
     <div class="orbit-field">
-      <div class="orbit-pill left rise" style="--d:0"><span class="edit-hint">То, как искренне ты радуешься мелочам</span></div>
-      <div class="orbit-pill right rise" style="--d:0.15"><span class="edit-hint">Твой голос, возвращающий душевное спокойствие</span></div>
-      <div class="orbit-pill left rise" style="--d:0.3"><span class="edit-hint">Неповторимая нежность в каждом твоём взгляде</span></div>
-      <div class="orbit-pill right rise" style="--d:0.45"><span class="edit-hint">Наши понятные только нам двоим шутки</span></div>
-      <div class="orbit-pill left rise" style="--d:0.6"><span class="edit-hint">Твоя удивительная способность согревать словом</span></div>
+      <div class="orbit-pill" data-freq="523.25">
+        <span>То, как искренне ты радуешься мелочам</span>
+        <span class="orbit-pill-badge">I</span>
+      </div>
+      <div class="orbit-pill" data-freq="587.33">
+        <span>Твой голос, возвращающий душевное спокойствие</span>
+        <span class="orbit-pill-badge">II</span>
+      </div>
+      <div class="orbit-pill" data-freq="659.25">
+        <span>Неповторимая нежность в каждом твоём взгляде</span>
+        <span class="orbit-pill-badge">III</span>
+      </div>
+      <div class="orbit-pill" data-freq="783.99">
+        <span>Наши понятные только нам двоим шутки</span>
+        <span class="orbit-pill-badge">IV</span>
+      </div>
+      <div class="orbit-pill" data-freq="880.00">
+        <span>Твоя способность согревать словом</span>
+        <span class="orbit-pill-badge">V</span>
+      </div>
     </div>
+
+    <button class="quest-next-btn" id="btn-next-4" data-next="s-hunt">
+      <span>В сад светлячков ↓</span>
+    </button>
   </section>
 
-  <!-- ГЛАВА 5 (СВЕТЛЯЧКИ + СЛОТЫ) -->
+  <!-- ГЛАВА 5: ОХОТА НА СВЕТЛЯЧКОВ (ИНТЕРАКТИВ) -->
   <section class="scene" id="s-hunt">
-    <div class="hunt-container">
-      <p class="hunt-quest-hud" data-hunt-hud>Поймай 5 блуждающих светлячков созвездия</p>
-
-      <div class="hunt-flight-arena" data-flight-arena>
-        <div class="firefly-entity" data-firefly data-index="0" data-msg="[Искра I: Твоя улыбка освещает мой мир]">
-          <div class="firefly-core"></div>
-        </div>
-        <div class="firefly-entity" data-firefly data-index="1" data-msg="[Искра II: Твой смех — моя любимая музыка]">
-          <div class="firefly-core"></div>
-        </div>
-        <div class="firefly-entity" data-firefly data-index="2" data-msg="[Искра III: С тобой я дома в любой точке земли]">
-          <div class="firefly-core"></div>
-        </div>
-        <div class="firefly-entity" data-firefly data-index="3" data-msg="[Искра IV: Каждая мечта с тобой обретает смысл]">
-          <div class="firefly-core"></div>
-        </div>
-        <div class="firefly-entity" data-firefly data-index="4" data-msg="[Искра V: Ты — самое прекрасное чудо]">
-          <div class="firefly-core"></div>
-        </div>
-      </div>
-
-      <div class="hunt-slots-dock">
-        <div class="hunt-slot" data-slot="0">
-          <span class="hunt-slot__socket">✧</span>
-          <span class="hunt-slot__text"></span>
-        </div>
-        <div class="hunt-slot" data-slot="1">
-          <span class="hunt-slot__socket">✧</span>
-          <span class="hunt-slot__text"></span>
-        </div>
-        <div class="hunt-slot" data-slot="2">
-          <span class="hunt-slot__socket">✧</span>
-          <span class="hunt-slot__text"></span>
-        </div>
-        <div class="hunt-slot" data-slot="3">
-          <span class="hunt-slot__socket">✧</span>
-          <span class="hunt-slot__text"></span>
-        </div>
-        <div class="hunt-slot" data-slot="4">
-          <span class="hunt-slot__socket">✧</span>
-          <span class="hunt-slot__text"></span>
-        </div>
-      </div>
-
-      <button class="portal-key" data-hunt-unlock aria-label="открыть послание">✦</button>
+    <div class="scene-curtain" id="curtain-s5">
+      <p>«Орбиты души ещё молчат...»</p>
+      <span>Настрой резонанс чувств в 4-й главе ✦</span>
     </div>
+
+    <div class="quest-hud" id="hud-q5">
+      <span class="quest-hud-icon">✦</span>
+      <span id="txt-q5">Поймай 5 странствующих светлячков для сборки фразы</span>
+    </div>
+
+    <div class="hunt-container" id="hunt-container">
+      <div class="firefly-entity" data-word="Твоя улыбка" data-idx="0">
+        <div class="firefly-core"></div>
+      </div>
+      <div class="firefly-entity" data-word="согревает сердце" data-idx="1">
+        <div class="firefly-core"></div>
+      </div>
+      <div class="firefly-entity" data-word="ярче любых звёзд" data-idx="2">
+        <div class="firefly-core"></div>
+      </div>
+      <div class="firefly-entity" data-word="во Вселенной" data-idx="3">
+        <div class="firefly-core"></div>
+      </div>
+      <div class="firefly-entity" data-word="✦ навсегда ✦" data-idx="4">
+        <div class="firefly-core"></div>
+      </div>
+    </div>
+
+    <div class="hunt-ribbon" id="hunt-ribbon">
+      <div class="hunt-slot" id="slot-0">...</div>
+      <div class="hunt-slot" id="slot-1">...</div>
+      <div class="hunt-slot" id="slot-2">...</div>
+      <div class="hunt-slot" id="slot-3">...</div>
+      <div class="hunt-slot" id="slot-4">...</div>
+    </div>
+
+    <button class="quest-next-btn" id="btn-next-5" data-next="s-letter">
+      <span>Распечатать послание ↓</span>
+    </button>
   </section>
 
-  <!-- ГЛАВА 6 (ПИСЬМО) -->
+  <!-- ГЛАВА 6: СОКРОВЕННОЕ ПИСЬМО -->
   <section class="scene" id="s-letter">
+    <div class="scene-curtain" id="curtain-s6">
+      <p>«Печать не сорвана...»</p>
+      <span>Собери фразу светлячков в 5-й главе ✦</span>
+    </div>
+
+    <div class="quest-hud" id="hud-q6">
+      <span class="quest-hud-icon">✦</span>
+      <span id="txt-q6">Удерживай пальчик на печати (1.5 сек), чтобы растопить её</span>
+    </div>
+
     <div class="letter-parchment">
-      <div class="wax-seal-wrapper locked" data-wax-seal>
-        <div class="wax-seal">
-          <span class="seal-icon">🔒</span>
+      <div class="wax-seal-wrapper" id="wax-seal-wrapper">
+        <div class="wax-seal-press" id="wax-press-btn">
+          <svg class="wax-seal-progress-svg" viewBox="0 0 90 90">
+            <circle cx="45" cy="45" r="42" id="wax-progress-circle"></circle>
+          </svg>
+          <div class="wax-seal-circle">✦</div>
         </div>
-        <span class="wax-seal-hint">собери 5 светлячков в главе V</span>
+        <span class="wax-seal-hint" id="wax-hint">коснись и удерживай</span>
       </div>
 
-      <div class="letter-content" data-letter-body>
+      <div class="letter-content" id="letter-content-body">
         <p>Зарина,</p>
         <p><span class="dropcap">Е</span>сли ты читаешь это письмо — значит, все рассеянные светлячки нашли путь домой. Настоящее волшебство не требует спешки: оно расцветает в моменты чуткости и внимания.</p>
         <p>Мне хотелось подарить тебе нечто неподвластное времени. Не просто открытку или слова, а целое звёздное убежище, сотканное исключительно ради тебя и твоей улыбки.</p>
-        <p class="edit-hint">[Здесь напиши самое важное: слова, которые ты бережёшь для неё, искреннюю благодарность за её присутствие в твоей жизни, клятву или обещание всегда быть рядом.]</p>
+        <p>[Здесь напиши самое важное: слова, которые ты бережёшь для неё, искреннюю благодарность за её присутствие в твоей жизни, клятву или обещание всегда быть рядом.]</p>
         <p>В мире, который вечно куда-то спешит, ты остаёшься моим самым глубоким спокойствием и вдохновением.</p>
         <p>Эта сказка не имеет последней страницы, ведь мы пишем её каждый день.</p>
-        <p class="letter-author edit-hint">[Твоё имя или «Всегда твой»]</p>
+        <p class="letter-author">[Твоё имя или «Всегда твой»]</p>
       </div>
     </div>
+
+    <button class="quest-next-btn" id="btn-next-6" data-next="s-future">
+      <span>Зажечь небо желаний ↓</span>
+    </button>
   </section>
 
-  <!-- ГЛАВА 7 (ФОНАРИКИ И СЕРДЦЕ СОЗВЕЗДИЯ) -->
+  <!-- ГЛАВА 7: НЕБО ЖЕЛАНИЙ (ФОНАРИКИ) -->
   <section class="scene" id="s-future">
-    <div class="future-grid-field">
-      <div class="sky-lanterns-grid">
-        <div class="sky-lantern" data-lantern><span class="edit-hint">[Встретить рассвет на берегу океана]</span></div>
-        <div class="sky-lantern" data-lantern><span class="edit-hint">[Сбежать в уютный домик в горах]</span></div>
-        <div class="sky-lantern" data-lantern><span class="edit-hint">[Танцевать под тёплым дождём]</span></div>
-        <div class="sky-lantern mystery" data-lantern><span>✧ наше общее сокровенное желание ✧</span></div>
-        <div class="sky-lantern full mystery" data-lantern><span>✧ миллион счастливых дорог ✧</span></div>
+    <div class="scene-curtain" id="curtain-s7">
+      <p>«Письмо ещё хранит тайну...»</p>
+      <span>Растопи печать в 6-й главе ✦</span>
+    </div>
+
+    <div class="quest-hud" id="hud-q7">
+      <span class="quest-hud-icon">✦</span>
+      <span id="txt-q7">Зажги 3 фонарика, чтобы открыть сокровенное желание (<span id="lantern-count">0</span>/3)</span>
+    </div>
+
+    <div class="sky-lanterns-grid">
+      <div class="sky-lantern" data-type="minor"><span>[Встретить рассвет на берегу океана]</span></div>
+      <div class="sky-lantern" data-type="minor"><span>[Сбежать в уютный домик в горах]</span></div>
+      <div class="sky-lantern" data-type="minor"><span>[Танцевать под тёплым дождём]</span></div>
+      <div class="sky-lantern master-lantern" id="master-lantern">
+        <span id="master-lantern-txt">🔒 [Сокровенное общее желание заблокировано]</span>
       </div>
-      
-      <div class="future-action-area">
-        <p class="future-caption" data-future-caption>прикоснись к фонарику, чтобы зажечь мечту...</p>
-        
-        <button class="constellation-heart-btn" data-heart-trigger aria-label="Сердце созвездия">
-          <span>✦</span>
-          <span>Сердце созвездия</span>
-        </button>
+    </div>
+
+    <button class="quest-next-btn" id="btn-next-7" data-next="s-final">
+      <span>К сердцу созвездия ↓</span>
+    </button>
+  </section>
+
+  <!-- ГЛАВА 8: ФИНАЛ И ПОДАРОК -->
+  <section class="scene" id="s-final">
+    <div class="scene-curtain" id="curtain-s8">
+      <p>«Сердце Вселенной заперто...»</p>
+      <span>Зажги общее желание в 7-й главе ✦</span>
+    </div>
+
+    <div class="quest-hud" id="hud-q8">
+      <span class="quest-hud-icon">✦</span>
+      <span id="txt-q8">Коснись сферы 3 раза в унисон с пульсом (<span id="pulse-count">0</span>/3)</span>
+    </div>
+
+    <h2 class="final-title rise" style="--d:0.1">В самом сердце созвездия</h2>
+
+    <button class="cosmic-orb-btn" id="cosmic-orb-trigger" aria-label="открыть подарок"></button>
+
+    <div class="celestial-gift-modal" id="celestial-gift-dialog">
+      <div class="gift-halo-avatar">
+        <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
       </div>
+      <p>[Здесь твой сюрприз: билеты на концерт любимой группы, путешествие, координаты романтического вечера или тайное признание]</p>
+      <button class="gift-modal-close" id="gift-modal-dismiss">✦ вернуться к звёздам ✦</button>
     </div>
   </section>
 
 </main>
-
-<!-- МОДАЛЬНОЕ ОКНО ПОДАРКА -->
-<div class="celestial-gift-modal" data-gift-dialog>
-  <div class="gift-modal-card">
-    <div class="gift-halo-avatar">
-      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </div>
-    <p><span class="edit-hint">[Здесь твой сюрприз: билеты на концерт любимой группы, путешествие, координаты романтического вечера или тайное признание]</span></p>
-    <button class="gift-modal-close" data-gift-dismiss>✦ вернуться к звёздам ✦</button>
-  </div>
-</div>
 
 <!-- КНОПКА ЗВУКА -->
 <button id="audio-control" aria-label="управление звуком">
@@ -1306,14 +1477,15 @@ svg { display: block; }
 (function(){
   'use strict';
 
-  /* 1. АУДИОДВИЖОК */
+  /* ============================================================
+     1. АУДИОДВИЖОК
+     ============================================================ */
   var audioState = null;
-  var ambientTimer = null;
   var audioBtn = document.getElementById('audio-control');
   var gate = document.getElementById('gate');
-  var chimeFrequencies = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+  var chimeScale = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50, 1174.66, 1318.51];
 
-  function playHarmonicChime(freq, gainLevel) {
+  function playTone(freq, gainLevel, dur) {
     if (!audioState || audioState.muted) return;
     try {
       var ctx = audioState.ctx;
@@ -1322,30 +1494,34 @@ svg { display: block; }
       var gain = ctx.createGain();
       osc.type = 'sine';
       osc.frequency.setValueAtTime(freq, now);
+
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.linearRampToValueAtTime(gainLevel || 0.05, now + 0.04);
-      gain.gain.exponentialRampToValueAtTime(0.00001, now + 2.4);
+      gain.gain.linearRampToValueAtTime(gainLevel || 0.05, now + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.00001, now + (dur || 1.8));
+
       osc.connect(gain);
       gain.connect(audioState.master);
       osc.start(now);
-      osc.stop(now + 2.5);
+      osc.stop(now + (dur || 1.8) + 0.1);
     } catch(e) {}
   }
 
-  function scheduleCelestialAmbience() {
-    if (!audioState || audioState.muted) return;
-    var f = chimeFrequencies[Math.floor(Math.random() * chimeFrequencies.length)];
-    playHarmonicChime(f, 0.025);
-    ambientTimer = setTimeout(scheduleCelestialAmbience, 3200 + Math.random() * 3800);
+  function playChord(freqs, gainLevel) {
+    freqs.forEach(function(f, i){
+      setTimeout(function(){ playTone(f, gainLevel || 0.04, 2.2); }, i * 90);
+    });
   }
 
-  function initAudioEngine() {
+  function initAudio() {
     if (audioState) return;
     try {
       var AudioCtx = window.AudioContext || window.webkitAudioContext;
       var ctx = new AudioCtx();
+      if (ctx.state === 'suspended') ctx.resume();
+
       var master = ctx.createGain();
       master.gain.setValueAtTime(0.0001, ctx.currentTime);
+      master.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 2.5);
       master.connect(ctx.destination);
 
       [130.81, 196.00, 261.63, 329.63].forEach(function(freq, i){
@@ -1355,8 +1531,8 @@ svg { display: block; }
         osc.type = i % 2 === 0 ? 'sine' : 'triangle';
         osc.frequency.setValueAtTime(freq, ctx.currentTime);
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(380, ctx.currentTime);
-        g.gain.setValueAtTime(0.04 / (i + 1), ctx.currentTime);
+        filter.frequency.setValueAtTime(360, ctx.currentTime);
+        g.gain.setValueAtTime(0.03 / (i + 1), ctx.currentTime);
         osc.connect(filter);
         filter.connect(g);
         g.connect(master);
@@ -1364,44 +1540,43 @@ svg { display: block; }
       });
 
       audioState = { ctx: ctx, master: master, muted: false };
-      var unlockPromise = (ctx.state === 'suspended') ? ctx.resume() : Promise.resolve();
-      unlockPromise.then(function(){
-        master.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 2.5);
-        ambientTimer = setTimeout(scheduleCelestialAmbience, 1500);
-      });
-    } catch(e) { audioState = null; }
+    } catch(e) {
+      audioState = null;
+    }
   }
 
-  function toggleAudioMute() {
+  function toggleMute() {
     if (!audioState) return;
     audioState.muted = !audioState.muted;
     var now = audioState.ctx.currentTime;
-    audioState.master.gain.cancelScheduledValues(now);
-    if (audioState.muted) {
-      audioState.master.gain.setValueAtTime(audioState.master.gain.value, now);
-      audioState.master.gain.linearRampToValueAtTime(0.0001, now + 0.2);
-      if (ambientTimer) { clearTimeout(ambientTimer); ambientTimer = null; }
-    } else {
-      audioState.master.gain.setValueAtTime(audioState.master.gain.value, now);
-      audioState.master.gain.linearRampToValueAtTime(0.07, now + 0.3);
-      scheduleCelestialAmbience();
-    }
+    var target = audioState.muted ? 0.0001 : 0.07;
+    audioState.master.gain.setValueAtTime(audioState.master.gain.value, now);
+    audioState.master.gain.linearRampToValueAtTime(target, now + 0.3);
     audioBtn.classList.toggle('muted', audioState.muted);
   }
-  audioBtn.addEventListener('click', toggleAudioMute);
+  audioBtn.addEventListener('click', toggleMute);
 
-  function triggerHaptic(duration) {
+  function triggerHaptic(ms) {
     if ('vibrate' in navigator) {
-      try { navigator.vibrate(duration || 18); } catch(e) {}
+      try { navigator.vibrate(ms || 18); } catch(e) {}
     }
   }
 
-  /* 2. КАНВАС ЗВЁЗДНОГО НЕБА */
+  gate.addEventListener('click', function(){
+    initAudio();
+    playTone(1046.5, 0.06, 2.5);
+    triggerHaptic(25);
+    gate.classList.add('hidden');
+    setTimeout(function(){ audioBtn.classList.add('shown'); }, 1200);
+  }, { once: true });
+
+  /* ============================================================
+     2. КАНВАС ЗВЁЗД И ЧАСТИЦ
+     ============================================================ */
   (function(){
     var canvas = document.getElementById('space-canvas');
     var ctx = canvas.getContext('2d');
-    var w = 0, h = 0, dpr = 1;
-    var stars = [], meteors = [];
+    var w = 0, h = 0, dpr = 1, stars = [];
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1409,15 +1584,15 @@ svg { display: block; }
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
-
-      var count = Math.min(130, Math.floor((w * h) / 10000));
       stars = [];
+      var count = Math.min(100, Math.floor((w * h) / 12000));
       for (var i = 0; i < count; i++) {
         stars.push({
-          x: Math.random() * w, y: Math.random() * h,
-          r: Math.random() * 1.5 + 0.35, alpha: Math.random() * 0.7 + 0.3,
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.4 + 0.4,
+          alpha: Math.random() * 0.7 + 0.3,
           phase: Math.random() * Math.PI * 2
         });
       }
@@ -1425,57 +1600,26 @@ svg { display: block; }
     window.addEventListener('resize', resize, { passive: true });
     resize();
 
-    function spawnMeteor() {
-      if (meteors.length < 2 && Math.random() < 0.015) {
-        meteors.push({
-          x: Math.random() * w, y: Math.random() * (h * 0.4),
-          len: Math.random() * 100 + 60, speed: Math.random() * 8 + 7,
-          angle: (Math.PI / 4) + (Math.random() - 0.5) * 0.2, opacity: 1
-        });
-      }
-    }
-
     function render(now) {
       ctx.clearRect(0, 0, w, h);
       var t = now / 1000;
       for (var i = 0; i < stars.length; i++) {
         var s = stars[i];
         var shimmer = 0.5 + 0.5 * Math.sin(t * 2 + s.phase);
-        ctx.fillStyle = 'rgba(255, 230, 245, ' + (s.alpha * shimmer).toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(255, 248, 230, ' + (s.alpha * shimmer).toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
-      }
-      spawnMeteor();
-      for (var j = meteors.length - 1; j >= 0; j--) {
-        var m = meteors[j];
-        var dx = Math.cos(m.angle) * m.len;
-        var dy = Math.sin(m.angle) * m.len;
-        var grad = ctx.createLinearGradient(m.x, m.y, m.x - dx, m.y - dy);
-        grad.addColorStop(0, 'rgba(255,255,255,' + m.opacity + ')');
-        grad.addColorStop(1, 'rgba(244,114,182,0)');
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.5;
-        ctx.beginPath();
-        ctx.moveTo(m.x, m.y);
-        ctx.lineTo(m.x - dx, m.y - dy);
-        ctx.stroke();
-        m.x += Math.cos(m.angle) * m.speed;
-        m.y += Math.sin(m.angle) * m.speed;
-        m.opacity -= 0.018;
-        if (m.opacity <= 0 || m.x > w + 100 || m.y > h + 100) meteors.splice(j, 1);
       }
       requestAnimationFrame(render);
     }
     requestAnimationFrame(render);
   })();
 
-  /* 3. ЗВЁЗДНЫЕ ИСКРЫ (ШЛЕЙФ РОЗОВОГО СВЕТА) */
   (function(){
     var canvas = document.getElementById('sparkle-trail');
     var ctx = canvas.getContext('2d');
-    var w = 0, h = 0, dpr = 1;
-    var particles = [];
+    var w = 0, h = 0, dpr = 1, particles = [];
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1483,20 +1627,23 @@ svg { display: block; }
       h = window.innerHeight;
       canvas.width = Math.floor(w * dpr);
       canvas.height = Math.floor(h * dpr);
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.scale(dpr, dpr);
     }
     window.addEventListener('resize', resize, { passive: true });
     resize();
 
     window.addBurstAt = function(x, y, count) {
-      count = count || 12;
+      count = count || 14;
       for (var i = 0; i < count; i++) {
         var angle = Math.random() * Math.PI * 2;
-        var spd = Math.random() * 3 + 1;
+        var spd = Math.random() * 3 + 1.2;
         particles.push({
-          x: x, y: y, vx: Math.cos(angle) * spd, vy: Math.sin(angle) * spd,
-          life: 1, decay: Math.random() * 0.025 + 0.015, size: Math.random() * 2.5 + 1.2
+          x: x, y: y,
+          vx: Math.cos(angle) * spd,
+          vy: Math.sin(angle) * spd,
+          life: 1,
+          decay: Math.random() * 0.025 + 0.015,
+          size: Math.random() * 2.2 + 1
         });
       }
     };
@@ -1505,9 +1652,14 @@ svg { display: block; }
       ctx.clearRect(0, 0, w, h);
       for (var i = particles.length - 1; i >= 0; i--) {
         var p = particles[i];
-        p.x += p.vx; p.y += p.vy; p.life -= p.decay;
-        if (p.life <= 0) { particles.splice(i, 1); continue; }
-        ctx.fillStyle = 'rgba(255, 215, 235, ' + p.life.toFixed(3) + ')';
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.fillStyle = 'rgba(255, 235, 170, ' + p.life.toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
         ctx.fill();
@@ -1517,69 +1669,165 @@ svg { display: block; }
     requestAnimationFrame(update);
   })();
 
-  /* 4. НАБЛЮДАТЕЛЬ СЦЕН */
+  /* ============================================================
+     3. НАБЛЮДАТЕЛЬ ЗА СЦЕНАМИ И ПЕРЕХОДЫ
+     ============================================================ */
   var sceneObserver = new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
       if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-        var el = entry.target;
-        el.classList.add('in-view');
-        if (el.id === 's-hunt') {
-          var hud = el.querySelector('[data-hunt-hud]');
-          if (hud) setTimeout(function(){ hud.classList.add('active'); }, 400);
+        entry.target.classList.add('in-view');
+        if (entry.target.id === 's-mem3' && window.initScratchLayer) {
+          window.initScratchLayer();
         }
       }
     });
   }, { threshold: [0.3] });
+  document.querySelectorAll('.scene').forEach(function(s){ sceneObserver.observe(s); });
 
-  gate.addEventListener('click', function(){
-    initAudioEngine();
-    playHarmonicChime(1046.5, 0.06);
-    triggerHaptic(25);
-    gate.classList.add('hidden');
-    setTimeout(function(){
-      audioBtn.classList.add('shown');
-      document.querySelectorAll('.scene').forEach(function(s){ sceneObserver.observe(s); });
-    }, 400);
-  }, { once: true });
-
-  /* 5. МЕДАЛЬОН ВО 2 ГЛАВЕ */
-  (function(){
-    var medallion = document.querySelector('[data-secret-trigger]');
-    var secretPopup = document.querySelector('[data-secret-modal]');
-    if (!medallion || !secretPopup) return;
-
-    medallion.addEventListener('click', function(e){
-      e.stopPropagation();
-      var rect = medallion.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
-      secretPopup.classList.toggle('active');
-      playHarmonicChime(880, 0.05);
-      triggerHaptic(18);
-    });
-
-    document.addEventListener('click', function(e){
-      if (!secretPopup.contains(e.target) && e.target !== medallion) {
-        secretPopup.classList.remove('active');
+  document.querySelectorAll('.quest-next-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var targetId = this.getAttribute('data-next');
+      var targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth' });
       }
+    });
+  });
+
+  /* ============================================================
+     4. КВЕСТ 1: СОЗВЕЗДИЕ НАЧАЛА
+     ============================================================ */
+  (function(){
+    var nodes = document.querySelectorAll('.star-node');
+    var expected = 0;
+    var lines = [
+      document.getElementById('line-0-1'),
+      document.getElementById('line-1-2'),
+      document.getElementById('line-2-3')
+    ];
+    var nextBtn = document.getElementById('btn-next-1');
+    var hud = document.getElementById('hud-q1');
+    var hudTxt = document.getElementById('txt-q1');
+    var curtainS2 = document.getElementById('curtain-s2');
+
+    nodes.forEach(function(node){
+      node.addEventListener('click', function(e){
+        e.stopPropagation();
+        var idx = parseInt(this.getAttribute('data-idx'), 10);
+        var rect = this.getBoundingClientRect();
+
+        if (idx === expected) {
+          this.classList.add('lit');
+          playTone(chimeScale[idx * 2], 0.05, 1.2);
+          triggerHaptic(16);
+          if (window.addBurstAt) window.addBurstAt(rect.left + rect.width/2, rect.top + rect.height/2, 6);
+
+          if (expected > 0 && lines[expected - 1]) {
+            lines[expected - 1].classList.add('lit');
+          }
+          expected++;
+
+          if (expected === 4) {
+            hud.classList.add('solved');
+            hudTxt.textContent = '✦ Созвездие озарено! Путь открыт ✦';
+            nextBtn.classList.add('active');
+            curtainS2.classList.add('unlocked');
+            playChord([523.25, 659.25, 783.99, 1046.5], 0.06);
+            triggerHaptic(40);
+          }
+        } else if (expected < 4) {
+          // Ошибка последовательности
+          nodes.forEach(function(n){ n.classList.add('error'); });
+          playTone(220, 0.05, 0.4);
+          triggerHaptic([30, 50, 30]);
+          setTimeout(function(){
+            nodes.forEach(function(n){ n.classList.remove('lit', 'error'); });
+            lines.forEach(function(l){ l.classList.remove('lit'); });
+            expected = 0;
+          }, 450);
+        }
+      });
     });
   })();
 
-  /* 6. ГЛАВА 3: СКРЕТЧ-СЛОЙ С РОЗОВЫМ МЕРЦАНИЕМ */
+  /* ============================================================
+     5. КВЕСТ 2: 3 СКРЫТЫЕ ИСКРЫ ПАМЯТИ
+     ============================================================ */
+  (function(){
+    var sparks = [
+      document.getElementById('spark-1'),
+      document.getElementById('spark-2'),
+      document.getElementById('spark-3')
+    ];
+    var countEl = document.getElementById('spark-count');
+    var collected = 0;
+    var popup = document.getElementById('secret-popup-modal');
+    var nextBtn = document.getElementById('btn-next-2');
+    var hud = document.getElementById('hud-q2');
+    var hudTxt = document.getElementById('txt-q2');
+    var curtainS3 = document.getElementById('curtain-s3');
+
+    sparks.forEach(function(spark){
+      spark.addEventListener('click', function(e){
+        e.stopPropagation();
+        if (this.classList.contains('collected')) return;
+        this.classList.add('collected');
+        collected++;
+        countEl.textContent = collected;
+
+        var rect = this.getBoundingClientRect();
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width/2, rect.top + rect.height/2, 10);
+        playTone(chimeScale[collected + 1], 0.05, 1.4);
+        triggerHaptic(18);
+
+        if (collected === 3) {
+          hud.classList.add('solved');
+          hudTxt.textContent = '✦ Все искры памяти воссоединены ✦';
+          popup.classList.add('active');
+          nextBtn.classList.add('active');
+          curtainS3.classList.add('unlocked');
+          playChord([659.25, 783.99, 1046.50, 1318.51], 0.06);
+          triggerHaptic(45);
+
+          setTimeout(function(){
+            document.addEventListener('click', function popClose(evt){
+              if (!popup.contains(evt.target)) {
+                popup.classList.remove('active');
+                document.removeEventListener('click', popClose);
+              }
+            });
+          }, 400);
+        }
+      });
+    });
+  })();
+
+  /* ============================================================
+     6. КВЕСТ 3: СКРЕТЧ-СЛОЙ И 3 ПОЛЯРНЫХ СВЕТИЛА
+     ============================================================ */
   (function(){
     var box = document.querySelector('.frost-scratch-box');
-    if (!box) return;
-    var canvas = box.querySelector('[data-scratch-layer]');
+    var canvas = document.getElementById('scratch-canvas');
     var ctx2d = canvas.getContext('2d');
-    var hint = document.querySelector('[data-scratch-hint]');
-    var story = document.querySelector('[data-scratch-text]');
-    var isErasing = false, cleared = false, scratchReady = false;
-    var dpr = 1;
-    var cells = 14;
-    var erasedMap = {};
-    var erasedTotal = 0;
+    var beacons = [
+      document.getElementById('beacon-1'),
+      document.getElementById('beacon-2'),
+      document.getElementById('beacon-3')
+    ];
+    var beaconCountEl = document.getElementById('beacon-count');
+    var story = document.getElementById('scratch-story-text');
+    var nextBtn = document.getElementById('btn-next-3');
+    var hud = document.getElementById('hud-q3');
+    var hudTxt = document.getElementById('txt-q3');
+    var curtainS4 = document.getElementById('curtain-s4');
 
-    function initScratch() {
-      if (cleared || scratchReady) return;
+    var isDrawing = false, cleared = false;
+    var beaconsFound = [false, false, false];
+    var foundCount = 0;
+    var dpr = 1;
+
+    function initCanvas() {
+      if (cleared) return;
       var w = box.clientWidth;
       var h = box.clientHeight;
       if (!w || !h) return;
@@ -1591,270 +1839,357 @@ svg { display: block; }
       ctx2d.scale(dpr, dpr);
 
       var grad = ctx2d.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, '#240d2d');
-      grad.addColorStop(0.5, '#421447');
-      grad.addColorStop(1, '#1a0720');
+      grad.addColorStop(0, '#1a1336');
+      grad.addColorStop(0.5, '#2e1f4e');
+      grad.addColorStop(1, '#130c26');
       ctx2d.fillStyle = grad;
       ctx2d.fillRect(0, 0, w, h);
 
-      ctx2d.fillStyle = 'rgba(255, 215, 235, 0.65)';
-      for (var i = 0; i < 50; i++) {
+      ctx2d.fillStyle = 'rgba(255, 235, 170, 0.6)';
+      for (var i = 0; i < 35; i++) {
         ctx2d.beginPath();
         ctx2d.arc(Math.random() * w, Math.random() * h, Math.random() * 2, 0, Math.PI * 2);
         ctx2d.fill();
       }
-      scratchReady = true;
     }
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initScratch);
-    } else { initScratch(); }
-    window.addEventListener('load', initScratch);
+    window.initScratchLayer = initCanvas;
+    window.addEventListener('resize', initCanvas, { passive: true });
 
-    function scratchAt(x, y) {
-      if (cleared) return;
-      var cw = canvas.clientWidth;
-      var ch = canvas.clientHeight;
-      var radius = Math.max(cw, ch) * 0.085;
+    function checkBeacons(x, y) {
+      beacons.forEach(function(b, i){
+        if (beaconsFound[i]) return;
+        var bRect = b.getBoundingClientRect();
+        var cRect = canvas.getBoundingClientRect();
+        var bx = bRect.left - cRect.left + bRect.width / 2;
+        var by = bRect.top - cRect.top + bRect.height / 2;
+        var dist = Math.hypot(x - bx, y - by);
+
+        if (dist < 40) {
+          beaconsFound[i] = true;
+          foundCount++;
+          beaconCountEl.textContent = foundCount;
+          b.classList.add('revealed');
+          playTone(chimeScale[foundCount + 2], 0.06, 1.5);
+          triggerHaptic(20);
+
+          if (foundCount === 3 && !cleared) {
+            cleared = true;
+            canvas.style.opacity = '0';
+            canvas.style.pointerEvents = 'none';
+            story.classList.add('revealed');
+            hud.classList.add('solved');
+            hudTxt.textContent = '✦ Все маяки открыты сквозь вуаль ✦';
+            nextBtn.classList.add('active');
+            curtainS4.classList.add('unlocked');
+            playChord([783.99, 1046.50, 1318.51], 0.07);
+            triggerHaptic(40);
+          }
+        }
+      });
+    }
+
+    function scratch(e) {
+      if (!isDrawing) return;
+      var rect = canvas.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
 
       ctx2d.save();
       ctx2d.globalCompositeOperation = 'destination-out';
       ctx2d.beginPath();
-      ctx2d.arc(x, y, radius, 0, Math.PI * 2);
+      ctx2d.arc(x, y, 32, 0, Math.PI * 2);
       ctx2d.fill();
       ctx2d.restore();
 
-      var cellW = cw / cells;
-      var cellH = ch / cells;
-
-      for (var r = 0; r < cells; r++) {
-        for (var c = 0; c < cells; c++) {
-          var cellCenterX = (c + 0.5) * cellW;
-          var cellCenterY = (r + 0.5) * cellH;
-          if (Math.hypot(cellCenterX - x, cellCenterY - y) <= radius) {
-            var key = c + ':' + r;
-            if (!erasedMap[key]) {
-              erasedMap[key] = true;
-              erasedTotal++;
-            }
-          }
-        }
-      }
-
-      if ((erasedTotal / (cells * cells)) > 0.65 && !cleared) {
-        cleared = true;
-        canvas.style.opacity = '0';
-        canvas.style.pointerEvents = 'none';
-        if (story) story.classList.add('revealed');
-        playHarmonicChime(1318.5, 0.06);
-        triggerHaptic(35);
-      }
-    }
-
-    function getPos(e) {
-      var r = canvas.getBoundingClientRect();
-      return { x: e.clientX - r.left, y: e.clientY - r.top };
+      checkBeacons(x, y);
     }
 
     canvas.addEventListener('pointerdown', function(e){
-      isErasing = true;
+      isDrawing = true;
       try { canvas.setPointerCapture(e.pointerId); } catch(err) {}
-      if (hint) hint.style.opacity = '0';
-      var pos = getPos(e);
-      scratchAt(pos.x, pos.y);
+      scratch(e);
     });
-    canvas.addEventListener('pointermove', function(e){
-      if (!isErasing) return;
-      var pos = getPos(e);
-      scratchAt(pos.x, pos.y);
-    });
-    function endScratch(e) {
-      isErasing = false;
+    canvas.addEventListener('pointermove', scratch);
+    function stopScratch(e) {
+      isDrawing = false;
       try { canvas.releasePointerCapture(e.pointerId); } catch(err) {}
     }
-    canvas.addEventListener('pointerup', endScratch);
-    canvas.addEventListener('pointercancel', endScratch);
+    canvas.addEventListener('pointerup', stopScratch);
+    canvas.addEventListener('pointercancel', stopScratch);
   })();
 
-  /* 7. ГЛАВА 5: СВЕТЛЯЧКИ И ПЕРЕЛЁТ В СЛОТЫ */
-  var allFirefliesCaught = false;
-
+  /* ============================================================
+     7. КВЕСТ 4: ОРБИТЫ ДУШИ
+     ============================================================ */
   (function(){
-    var arena = document.querySelector('[data-flight-arena]');
-    var fireflies = Array.prototype.slice.call(document.querySelectorAll('[data-firefly]'));
-    var slots = Array.prototype.slice.call(document.querySelectorAll('.hunt-slot'));
-    var unlockBtn = document.querySelector('[data-hunt-unlock]');
-    var capturedCount = 0;
+    var pills = document.querySelectorAll('.orbit-pill');
+    var soulCountEl = document.getElementById('soul-count');
+    var nextBtn = document.getElementById('btn-next-4');
+    var hud = document.getElementById('hud-q4');
+    var hudTxt = document.getElementById('txt-q4');
+    var curtainS5 = document.getElementById('curtain-s5');
+    var count = 0;
 
-    var orbits = fireflies.map(function(_, i){
+    pills.forEach(function(pill){
+      pill.addEventListener('click', function(){
+        if (this.classList.contains('awakened')) return;
+        this.classList.add('awakened');
+        count++;
+        soulCountEl.textContent = count;
+
+        var freq = parseFloat(this.getAttribute('data-freq'));
+        playTone(freq, 0.05, 1.6);
+        triggerHaptic(18);
+
+        var rect = this.getBoundingClientRect();
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
+
+        if (count === pills.length) {
+          hud.classList.add('solved');
+          hudTxt.textContent = '✦ Созвучие сердец настроено ✦';
+          nextBtn.classList.add('active');
+          curtainS5.classList.add('unlocked');
+          playChord([523.25, 659.25, 783.99, 880.00, 1046.50], 0.07);
+          triggerHaptic(40);
+        }
+      });
+    });
+  })();
+
+  /* ============================================================
+     8. КВЕСТ 5: СВЕТЛЯЧКИ И СБОРКА ФРАЗЫ
+     ============================================================ */
+  (function(){
+    var flies = Array.prototype.slice.call(document.querySelectorAll('[data-word]'));
+    var slots = [
+      document.getElementById('slot-0'),
+      document.getElementById('slot-1'),
+      document.getElementById('slot-2'),
+      document.getElementById('slot-3'),
+      document.getElementById('slot-4')
+    ];
+    var nextBtn = document.getElementById('btn-next-5');
+    var hud = document.getElementById('hud-q5');
+    var hudTxt = document.getElementById('txt-q5');
+    var curtainS6 = document.getElementById('curtain-s6');
+    var caught = 0;
+
+    var orbits = flies.map(function(_, i){
       return {
-        baseX: 20 + (i % 3) * 28,
-        baseY: 22 + Math.floor(i / 3) * 36,
-        ampX: 7 + Math.random() * 5,
-        ampY: 6 + Math.random() * 5,
+        baseX: 18 + (i % 3) * 32,
+        baseY: 22 + Math.floor(i / 3) * 44,
+        ampX: 10 + Math.random() * 8,
+        ampY: 8 + Math.random() * 8,
         freqX: 0.6 + Math.random() * 0.4,
         freqY: 0.5 + Math.random() * 0.4,
-        phase: (i * Math.PI) / 2.5
+        phase: i * 1.3
       };
     });
 
-    function loopFly(now) {
+    function flyLoop(now) {
       var t = now / 1000;
-      var aw = arena ? arena.clientWidth : 300;
-      var ah = arena ? arena.clientHeight : 200;
-
-      for (var i = 0; i < fireflies.length; i++) {
-        var el = fireflies[i];
+      for (var i = 0; i < flies.length; i++) {
+        var el = flies[i];
         if (el.classList.contains('captured')) continue;
         var o = orbits[i];
-        var xPct = o.baseX + Math.sin(t * o.freqX + o.phase) * o.ampX;
-        var yPct = o.baseY + Math.cos(t * o.freqY + o.phase) * o.ampY;
-
-        var px = (xPct / 100) * aw - 25;
-        var py = (yPct / 100) * ah - 25;
-
-        el.style.transform = 'translate3d(' + px.toFixed(1) + 'px, ' + py.toFixed(1) + 'px, 0)';
+        var x = o.baseX + Math.sin(t * o.freqX + o.phase) * o.ampX;
+        var y = o.baseY + Math.cos(t * o.freqY + o.phase) * o.ampY;
+        el.style.left = x.toFixed(2) + '%';
+        el.style.top = y.toFixed(2) + '%';
       }
-      requestAnimationFrame(loopFly);
+      requestAnimationFrame(flyLoop);
     }
-    requestAnimationFrame(loopFly);
+    requestAnimationFrame(flyLoop);
 
-    fireflies.forEach(function(fly){
-      fly.addEventListener('pointerdown', function(e){
+    flies.forEach(function(fly){
+      fly.addEventListener('click', function(e){
         e.stopPropagation();
         if (fly.classList.contains('captured')) return;
         fly.classList.add('captured');
 
-        var slotIndex = capturedCount;
-        capturedCount++;
-        var targetSlot = slots[slotIndex];
+        var idx = parseInt(fly.getAttribute('data-idx'), 10);
+        var word = fly.getAttribute('data-word');
+        if (slots[idx]) {
+          slots[idx].textContent = word;
+          slots[idx].classList.add('filled');
+        }
+        caught++;
 
-        var flyRect = fly.getBoundingClientRect();
-        var slotRect = targetSlot.getBoundingClientRect();
+        var rect = fly.getBoundingClientRect();
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
+        playTone(chimeScale[caught], 0.05, 1.4);
+        triggerHaptic(18);
 
-        var dx = (slotRect.left + 16) - flyRect.left;
-        var dy = (slotRect.top + slotRect.height / 2 - 25) - flyRect.top;
-
-        fly.style.transition = 'transform 0.6s var(--ease-celestial), opacity 0.5s ease 0.3s';
-        fly.style.transform = 'translate3d(' + dx + 'px, ' + dy + 'px, 0) scale(0.6)';
-        fly.style.opacity = '0';
-
-        var msg = fly.getAttribute('data-msg');
-        setTimeout(function(){
-          targetSlot.classList.add('filled');
-          var txt = targetSlot.querySelector('.hunt-slot__text');
-          if (txt) txt.textContent = msg;
-          targetSlot.querySelector('.hunt-slot__socket').textContent = '✦';
-          if (window.addBurstAt) window.addBurstAt(slotRect.left + 24, slotRect.top + slotRect.height / 2, 8);
-        }, 550);
-
-        playHarmonicChime(chimeFrequencies[capturedCount % chimeFrequencies.length], 0.06);
-        triggerHaptic(20);
-
-        if (capturedCount === fireflies.length) {
-          allFirefliesCaught = true;
-          var sealWrapper = document.querySelector('[data-wax-seal]');
-          if (sealWrapper) {
-            sealWrapper.classList.remove('locked');
-            sealWrapper.querySelector('.seal-icon').textContent = '✦';
-            sealWrapper.querySelector('.wax-seal-hint').textContent = 'чары рассеялись • коснись печати';
-          }
-          setTimeout(function(){
-            if (unlockBtn) unlockBtn.classList.add('ready');
-            playHarmonicChime(1567.98, 0.08);
-            triggerHaptic(40);
-          }, 800);
+        if (caught === flies.length) {
+          hud.classList.add('solved');
+          hudTxt.textContent = '✦ Звёздное послание собрано воедино ✦';
+          nextBtn.classList.add('active');
+          curtainS6.classList.add('unlocked');
+          playChord([659.25, 783.99, 1046.50, 1318.51], 0.07);
+          triggerHaptic(40);
         }
       });
     });
-
-    if (unlockBtn) {
-      unlockBtn.addEventListener('click', function(){
-        document.getElementById('s-letter').scrollIntoView({ behavior: 'smooth' });
-      });
-    }
   })();
 
-  /* 8. ГЛАВА 6: СУРГУЧНАЯ ПЕЧАТЬ */
+  /* ============================================================
+     9. КВЕСТ 6: СУРГУЧНАЯ ТЕРМО-ПЕЧАТЬ
+     ============================================================ */
   (function(){
-    var seal = document.querySelector('[data-wax-seal]');
-    var letterBody = document.querySelector('[data-letter-body]');
-    if (!seal || !letterBody) return;
+    var pressBtn = document.getElementById('wax-press-btn');
+    var progressCircle = document.getElementById('wax-progress-circle');
+    var sealWrapper = document.getElementById('wax-seal-wrapper');
+    var hint = document.getElementById('wax-hint');
+    var letterBody = document.getElementById('letter-content-body');
+    var nextBtn = document.getElementById('btn-next-6');
+    var hud = document.getElementById('hud-q6');
+    var hudTxt = document.getElementById('txt-q6');
+    var curtainS7 = document.getElementById('curtain-s7');
 
-    seal.addEventListener('click', function(){
-      if (!allFirefliesCaught) {
-        seal.classList.add('shake');
-        playHarmonicChime(329.63, 0.06);
-        triggerHaptic([30, 40, 30]);
-        var hint = seal.querySelector('.wax-seal-hint');
-        hint.textContent = 'Звёзды скрыты! Сначала поймай светлячков';
-        hint.style.color = 'var(--rose-primary)';
-        setTimeout(function(){
-          seal.classList.remove('shake');
-        }, 500);
-        return;
+    var holdTimer = null, startTime = 0, isHolding = false;
+    var duration = 1500;
+    var circumference = 264;
+
+    function frameProgress() {
+      if (!isHolding) return;
+      var elapsed = Date.now() - startTime;
+      var p = Math.min(1, elapsed / duration);
+      progressCircle.style.strokeDashoffset = (circumference * (1 - p)).toFixed(1);
+
+      if (p < 1) {
+        requestAnimationFrame(frameProgress);
+      } else {
+        meltSeal();
       }
+    }
 
-      var rect = seal.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
-      seal.classList.add('broken');
-      playHarmonicChime(1046.5, 0.08);
-      triggerHaptic(45);
+    function startHold(e) {
+      e.preventDefault();
+      isHolding = true;
+      startTime = Date.now();
+      hint.textContent = 'растопление теплом...';
+      playTone(440, 0.03, 1.5);
+      triggerHaptic(20);
+      requestAnimationFrame(frameProgress);
+    }
+
+    function cancelHold() {
+      if (!isHolding) return;
+      isHolding = false;
+      progressCircle.style.strokeDashoffset = circumference;
+      hint.textContent = 'удерживай чуть дольше';
+      triggerHaptic(12);
+    }
+
+    function meltSeal() {
+      isHolding = false;
+      sealWrapper.classList.add('broken');
+      hud.classList.add('solved');
+      hudTxt.textContent = '✦ Письмо распечатано ✦';
+      nextBtn.classList.add('active');
+      curtainS7.classList.add('unlocked');
+
+      var rect = pressBtn.getBoundingClientRect();
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 25);
+      playChord([523.25, 659.25, 783.99, 1046.50, 1318.51], 0.08);
+      triggerHaptic([30, 40, 60]);
 
       var paras = letterBody.querySelectorAll('p');
-      paras.forEach(function(p, idx){
-        setTimeout(function(){ p.classList.add('revealed'); }, idx * 280 + 100);
+      paras.forEach(function(p, i){
+        setTimeout(function(){ p.classList.add('revealed'); }, i * 300 + 100);
       });
-    });
+    }
+
+    pressBtn.addEventListener('pointerdown', startHold);
+    pressBtn.addEventListener('pointerup', cancelHold);
+    pressBtn.addEventListener('pointerleave', cancelHold);
+    pressBtn.addEventListener('pointercancel', cancelHold);
   })();
 
-  /* 9. ГЛАВА 7: ФОНАРИКИ И ПОЯВЛЕНИЕ СЕРДЦА СОЗВЕЗДИЯ */
+  /* ============================================================
+     10. КВЕСТ 7: НЕБЕСНЫЕ ФОНАРИКИ
+     ============================================================ */
   (function(){
-    var lanterns = Array.prototype.slice.call(document.querySelectorAll('[data-lantern]'));
-    var caption = document.querySelector('[data-future-caption]');
-    var heartBtn = document.querySelector('[data-heart-trigger]');
-    var modal = document.querySelector('[data-gift-dialog]');
+    var minorLanterns = document.querySelectorAll('.sky-lantern[data-type="minor"]');
+    var masterLantern = document.getElementById('master-lantern');
+    var masterLanternTxt = document.getElementById('master-lantern-txt');
+    var countEl = document.getElementById('lantern-count');
+    var nextBtn = document.getElementById('btn-next-7');
+    var hud = document.getElementById('hud-q7');
+    var hudTxt = document.getElementById('txt-q7');
+    var curtainS8 = document.getElementById('curtain-s8');
     var litCount = 0;
 
-    lanterns.forEach(function(lantern){
+    minorLanterns.forEach(function(lantern){
       lantern.addEventListener('click', function(){
-        if (!lantern.classList.contains('lit')) {
-          lantern.classList.add('lit');
-          litCount++;
-          var rect = lantern.getBoundingClientRect();
-          if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 6);
-          playHarmonicChime(chimeFrequencies[litCount % chimeFrequencies.length], 0.04);
-          triggerHaptic(15);
+        if (this.classList.contains('lit')) return;
+        this.classList.add('lit');
+        litCount++;
+        countEl.textContent = litCount;
 
-          if (litCount === lanterns.length) {
-            setTimeout(function(){
-              if (caption) caption.classList.add('hidden');
-              if (heartBtn) heartBtn.classList.add('ready');
-              playHarmonicChime(1318.5, 0.08);
-              triggerHaptic([30, 40, 50]);
-            }, 600);
-          }
+        var rect = this.getBoundingClientRect();
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 8);
+        playTone(chimeScale[litCount + 1], 0.05, 1.6);
+        triggerHaptic(18);
+
+        if (litCount === minorLanterns.length) {
+          masterLantern.classList.add('unlocked');
+          masterLanternTxt.textContent = '✧ Наше общее сокровенное желание — быть счастливыми вместе ✧';
+          hud.classList.add('solved');
+          hudTxt.textContent = '✦ Прикоснись к главному фонарику желаний ✦';
+          playChord([659.25, 880.00, 1046.50], 0.06);
+          triggerHaptic(30);
         }
       });
     });
 
-    if (heartBtn && modal) {
-      heartBtn.addEventListener('click', function(){
-        var rect = heartBtn.getBoundingClientRect();
-        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 25);
-        modal.classList.add('shown');
-        playHarmonicChime(1567.98, 0.09);
-        triggerHaptic([40, 60, 50]);
-      });
-    }
+    masterLantern.addEventListener('click', function(){
+      if (!this.classList.contains('unlocked') || this.classList.contains('lit')) return;
+      this.classList.add('lit');
+      var rect = this.getBoundingClientRect();
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
+      playChord([783.99, 1046.50, 1318.51, 1567.98], 0.08);
+      triggerHaptic([30, 50]);
+      nextBtn.classList.add('active');
+      curtainS8.classList.add('unlocked');
+      hudTxt.textContent = '✦ Желание устремилось к звёздам! ✦';
+    });
+  })();
 
-    var dismiss = document.querySelector('[data-gift-dismiss]');
-    if (dismiss && modal) {
-      dismiss.addEventListener('click', function(){ modal.classList.remove('shown'); });
-      modal.addEventListener('click', function(e){ if (e.target === modal) modal.classList.remove('shown'); });
-      document.addEventListener('keydown', function(e){
-        if (e.key === 'Escape' && modal.classList.contains('shown')) modal.classList.remove('shown');
-      });
-    }
+  /* ============================================================
+     11. КВЕСТ 8: СЕРДЦЕ ВСЕЛЕННОЙ
+     ============================================================ */
+  (function(){
+    var orb = document.getElementById('cosmic-orb-trigger');
+    var modal = document.getElementById('celestial-gift-dialog');
+    var dismiss = document.getElementById('gift-modal-dismiss');
+    var pulseCountEl = document.getElementById('pulse-count');
+    var hud = document.getElementById('hud-q8');
+    var hudTxt = document.getElementById('txt-q8');
+    var taps = 0;
+
+    orb.addEventListener('click', function(){
+      taps++;
+      pulseCountEl.textContent = taps;
+      var rect = orb.getBoundingClientRect();
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 8 * taps);
+      playTone(523.25 * Math.pow(1.2, taps), 0.06, 1.5);
+      triggerHaptic(20 * taps);
+
+      if (taps === 3) {
+        hud.classList.add('solved');
+        hudTxt.textContent = '✦ Кристалл Вселенной пробуждён ✦';
+        setTimeout(function(){
+          modal.classList.add('shown');
+          playChord([523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98], 0.1);
+          triggerHaptic([40, 60, 80]);
+        }, 400);
+      }
+    });
+
+    dismiss.addEventListener('click', function(){
+      modal.classList.remove('shown');
+    });
   })();
 
 })();
