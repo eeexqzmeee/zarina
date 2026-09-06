@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
-<title>Для Зарины ✨</title>
+<title>Для Зарины 🌸</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   ДИЗАЙН-СИСТЕМА И БАЗОВЫЕ ПАРАМЕТРЫ
+   ДИЗАЙН-СИСТЕМА: РОЗОВЫЙ КОСМОС И НЕОНОВЫЙ КВАРЦ
    ============================================================ */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -21,26 +21,26 @@
 }
 
 :root {
-  --bg-void: #05040a;
-  --bg-deep: #0c0919;
-  --gold-primary: #e6c280;
-  --gold-light: #fff2d1;
-  --gold-glow: rgba(230, 194, 128, 0.45);
-  --gold-halo: rgba(255, 230, 160, 0.15);
-  --rose-mist: rgba(244, 114, 182, 0.16);
-  --violet-mist: rgba(147, 51, 234, 0.20);
-  --cyan-mist: rgba(56, 189, 248, 0.14);
-  --ink: #fdfbf7;
-  --ink-dim: #c8c3dc;
-  --ink-faint: #81789c;
-  --glass-bg: rgba(18, 14, 36, 0.72);
-  --glass-border: rgba(230, 194, 128, 0.28);
-  --glass-specular: rgba(255, 255, 255, 0.12);
+  --bg-void: #07030a;
+  --bg-deep: #12071a;
+  --rose-primary: #f472b6;
+  --rose-light: #ffe4e6;
+  --rose-bright: #fb7185;
+  --rose-vivid: #f43f5e;
+  --rose-glow: rgba(244, 114, 182, 0.55);
+  --rose-halo: rgba(251, 113, 133, 0.22);
+  --violet-glow: rgba(192, 132, 252, 0.35);
+  --ink: #fff5f7;
+  --ink-dim: #e2cad4;
+  --ink-faint: #9c8291;
+  --glass-bg: rgba(26, 12, 34, 0.72);
+  --glass-border: rgba(244, 114, 182, 0.32);
+  --glass-specular: rgba(255, 255, 255, 0.25);
   --serif-title: 'Cinzel', Georgia, serif;
   --serif-body: 'Cormorant Garamond', Garamond, serif;
   --sans: 'Montserrat', -apple-system, sans-serif;
   --ease-celestial: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-elastic: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-elastic: cubic-bezier(0.34, 1.45, 0.64, 1);
 }
 
 html, body {
@@ -52,7 +52,7 @@ html, body {
   overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
-  -webkit-touch-callout: none;
+  touch-action: manipulation;
 }
 
 button {
@@ -64,12 +64,8 @@ button {
   outline: none;
 }
 svg { display: block; }
-p, span, h1, h2, h3 {
-  overflow-wrap: break-word;
-  word-break: normal;
-}
 
-/* Холсты звёздного окружения */
+/* Фоновые холсты */
 #space-canvas, #sparkle-trail {
   position: fixed;
   inset: 0;
@@ -82,27 +78,27 @@ p, span, h1, h2, h3 {
 
 .nebula {
   position: fixed;
-  inset: -10%;
-  width: 120%;
-  height: 120%;
+  inset: -20%;
+  width: 140%;
+  height: 140%;
   z-index: 1;
   pointer-events: none;
   background: 
-    radial-gradient(ellipse 65% 45% at 80% 20%, var(--violet-mist) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 50% at 20% 80%, var(--rose-mist) 0%, transparent 65%),
-    radial-gradient(ellipse 70% 60% at 50% 50%, var(--cyan-mist) 0%, transparent 75%);
-  filter: blur(50px);
-  animation: auroraBreathe 18s ease-in-out infinite alternate;
-  opacity: 0.85;
+    radial-gradient(ellipse 65% 50% at 80% 20%, rgba(244, 63, 94, 0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 55% at 20% 80%, rgba(217, 70, 239, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 50% 50%, rgba(244, 114, 182, 0.15) 0%, transparent 75%);
+  filter: blur(55px);
+  animation: nebulaFloat 20s ease-in-out infinite alternate;
+  opacity: 0.9;
 }
-@keyframes auroraBreathe {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.7; }
-  50% { transform: scale(1.05) translate(-1%, 2%); opacity: 0.95; }
-  100% { transform: scale(0.98) translate(1%, -1%); opacity: 0.75; }
+@keyframes nebulaFloat {
+  0% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.06) rotate(1.5deg); }
+  100% { transform: scale(0.96) rotate(-1.5deg); }
 }
 
 /* ============================================================
-   ВРАТА ПЕРВОЗДАННОГО СВЕТА (PORTAL GATE)
+   ВРАТА ПЕРВОЗДАННОГО СВЕТА
    ============================================================ */
 #gate {
   position: fixed;
@@ -112,7 +108,7 @@ p, span, h1, h2, h3 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 45%, #181133 0%, #06040d 100%);
+  background: radial-gradient(circle at 50% 45%, #240c2b 0%, #08030d 100%);
   cursor: pointer;
   transition: opacity 1.2s var(--ease-celestial), visibility 1.2s;
   padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
@@ -126,88 +122,89 @@ p, span, h1, h2, h3 {
 
 .astrolabe-portal {
   position: relative;
-  width: clamp(110px, 26vw, 150px);
-  height: clamp(110px, 26vw, 150px);
+  width: clamp(120px, 30vw, 160px);
+  height: clamp(120px, 30vw, 160px);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1.8rem;
+  margin-bottom: 2rem;
 }
 .astrolabe-ring {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  border: 1px dashed rgba(230, 194, 128, 0.4);
-  animation: spinSlow 32s linear infinite;
+  border: 1px dashed rgba(244, 114, 182, 0.45);
+  animation: spinSlow 30s linear infinite;
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.15);
 }
 .astrolabe-ring:nth-child(2) {
-  inset: 12px;
-  border: 1px solid rgba(255, 242, 209, 0.25);
-  border-left-color: var(--gold-primary);
-  border-right-color: var(--gold-primary);
-  animation: spinSlow 20s linear infinite reverse;
+  inset: 14px;
+  border: 1px solid rgba(254, 205, 211, 0.35);
+  border-left-color: var(--rose-primary);
+  border-right-color: var(--rose-primary);
+  animation: spinSlow 18s linear infinite reverse;
 }
 .astrolabe-ring:nth-child(3) {
-  inset: 24px;
-  border: 1px dotted rgba(230, 194, 128, 0.6);
+  inset: 28px;
+  border: 1.5px dotted rgba(251, 113, 133, 0.6);
   animation: spinSlow 12s linear infinite;
 }
 @keyframes spinSlow { to { transform: rotate(360deg); } }
 
 .gate__crystal {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 0%, var(--gold-light) 35%, var(--gold-primary) 70%, transparent 100%);
-  box-shadow: 0 0 35px 8px var(--gold-glow), inset 0 0 8px #fff;
-  animation: crystalPulse 3s ease-in-out infinite alternate;
+  background: radial-gradient(circle, #fff 0%, var(--rose-light) 40%, var(--rose-primary) 80%, transparent 100%);
+  box-shadow: 0 0 40px 10px var(--rose-glow), inset 0 0 8px #fff;
+  animation: crystalPulse 2.8s ease-in-out infinite alternate;
 }
 @keyframes crystalPulse {
-  0% { transform: scale(0.92); box-shadow: 0 0 25px 6px var(--gold-glow); }
-  100% { transform: scale(1.12); box-shadow: 0 0 50px 14px var(--gold-light); }
+  0% { transform: scale(0.9); box-shadow: 0 0 25px 6px var(--rose-glow); }
+  100% { transform: scale(1.15); box-shadow: 0 0 55px 16px var(--rose-bright); }
 }
 
 .gate__title {
   font-family: var(--serif-title);
-  font-size: clamp(1.5rem, 5.5vw, 2.5rem);
-  letter-spacing: 0.16em;
+  font-size: clamp(1.6rem, 5.8vw, 2.6rem);
+  letter-spacing: 0.18em;
   color: var(--ink);
-  text-shadow: 0 0 30px rgba(230, 194, 128, 0.5);
+  text-shadow: 0 0 35px var(--rose-glow);
 }
 .gate__subtitle {
   font-family: var(--serif-body);
-  font-size: clamp(1rem, 3.6vw, 1.45rem);
+  font-size: clamp(1.05rem, 3.8vw, 1.5rem);
   font-style: italic;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   margin-top: 0.6rem;
-  letter-spacing: 0.04em;
-  opacity: 0.95;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 15px rgba(244, 114, 182, 0.4);
 }
 .gate__cta {
   position: absolute;
-  bottom: max(6%, env(safe-area-inset-bottom, 20px));
-  font-size: 0.72rem;
-  letter-spacing: 0.22em;
+  bottom: max(6%, env(safe-area-inset-bottom, 22px));
+  font-size: 0.74rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: var(--rose-light);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  opacity: 0.85;
+  opacity: 0.88;
 }
 .gate__cta-icon {
-  font-size: 1rem;
-  color: var(--gold-primary);
-  animation: bounceLight 2s infinite ease-in-out;
+  font-size: 1.1rem;
+  color: var(--rose-bright);
+  animation: bounceSoft 2s infinite ease-in-out;
 }
-@keyframes bounceLight {
+@keyframes bounceSoft {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); filter: drop-shadow(0 0 8px var(--gold-light)); }
+  50% { transform: translateY(6px); filter: drop-shadow(0 0 10px var(--rose-primary)); }
 }
 
 /* ============================================================
-   СКРОЛЛ-ХОЛСТ И СТРУКТУРА СЦЕН (С ЗАЩИТОЙ ОТ ПЕРЕПОЛНЕНИЯ)
+   СКРОЛЛ-ХОЛСТ И СЦЕНЫ
    ============================================================ */
 #story {
   height: 100dvh;
@@ -236,16 +233,15 @@ p, span, h1, h2, h3 {
   justify-content: space-between;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: max(16px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(18px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
+  padding: max(16px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(20px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
   scrollbar-width: none;
 }
 .scene::-webkit-scrollbar { display: none; }
 
-/* Подъём элементов */
 .rise {
   opacity: 0;
-  filter: blur(8px);
-  transform: translateY(18px) scale(0.98);
+  filter: blur(10px);
+  transform: translateY(22px) scale(0.97);
   transition: opacity 1s var(--ease-celestial), filter 1s var(--ease-celestial), transform 1s var(--ease-celestial);
   transition-delay: calc(var(--d, 0) * 1s);
 }
@@ -255,7 +251,7 @@ p, span, h1, h2, h3 {
   transform: translateY(0) scale(1);
 }
 
-/* КВЕСТ-БАННЕР И КНОПКА ПЕРЕХОДА */
+/* КВЕСТ-БАННЕРЫ И КНОПКИ */
 .quest-hud {
   width: 100%;
   max-width: 440px;
@@ -263,52 +259,56 @@ p, span, h1, h2, h3 {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 6px 14px;
-  background: rgba(18, 14, 36, 0.65);
-  border: 1px solid rgba(230, 194, 128, 0.3);
+  padding: 8px 16px;
+  background: rgba(36, 15, 48, 0.7);
+  border: 1px solid var(--glass-border);
   border-radius: 30px;
-  font-size: clamp(0.7rem, 2.5vw, 0.82rem);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  font-size: clamp(0.72rem, 2.6vw, 0.85rem);
   letter-spacing: 0.08em;
-  color: var(--gold-light);
+  color: var(--rose-light);
   text-align: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5), inset 0 1px 1px var(--glass-specular);
   z-index: 25;
   flex-shrink: 0;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 .quest-hud.solved {
-  border-color: #55f2a3;
-  color: #cffff0;
-  box-shadow: 0 0 15px rgba(85, 242, 163, 0.3);
+  border-color: #6ee7b7;
+  color: #d1fae5;
+  box-shadow: 0 0 20px rgba(110, 231, 183, 0.35);
 }
 .quest-hud-icon {
-  color: var(--gold-primary);
-  font-size: 0.9rem;
-  animation: pulseDot 2s infinite alternate;
+  color: var(--rose-bright);
+  font-size: 0.95rem;
+  animation: pulseIcon 2s infinite alternate;
 }
-@keyframes pulseDot {
+@keyframes pulseIcon {
   from { opacity: 0.6; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1.15); filter: drop-shadow(0 0 6px var(--gold-light)); }
+  to { opacity: 1; transform: scale(1.2); filter: drop-shadow(0 0 8px var(--rose-primary)); }
 }
 
 .quest-next-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 22px;
-  background: linear-gradient(135deg, rgba(230, 194, 128, 0.25), rgba(147, 51, 234, 0.25));
-  border: 1px solid var(--gold-light);
+  gap: 10px;
+  padding: 12px 26px;
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.35), rgba(192, 132, 252, 0.3));
+  border: 1px solid var(--rose-light);
   border-radius: 30px;
-  color: var(--gold-light);
+  color: #fff;
   font-family: var(--sans);
-  font-size: clamp(0.72rem, 2.5vw, 0.82rem);
+  font-size: clamp(0.74rem, 2.6vw, 0.85rem);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  box-shadow: 0 0 20px var(--gold-glow);
+  font-weight: 500;
+  box-shadow: 0 0 25px var(--rose-glow);
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(10px);
+  transform: translateY(14px);
   transition: opacity 0.5s var(--ease-celestial), transform 0.5s var(--ease-celestial);
   flex-shrink: 0;
   z-index: 30;
@@ -317,20 +317,20 @@ p, span, h1, h2, h3 {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
-  animation: questPulse 2.4s infinite ease-in-out;
+  animation: btnPulseGlow 2.4s infinite ease-in-out;
 }
-@keyframes questPulse {
-  0%, 100% { box-shadow: 0 0 16px var(--gold-glow); }
-  50% { box-shadow: 0 0 28px rgba(255, 242, 209, 0.7); transform: scale(1.02); }
+@keyframes btnPulseGlow {
+  0%, 100% { box-shadow: 0 0 18px var(--rose-glow); transform: scale(1); }
+  50% { box-shadow: 0 0 35px rgba(251, 113, 133, 0.75); transform: scale(1.03); }
 }
 
-/* ЗАВЕСА ЗАБЛОКИРОВАННОЙ ГЛАВЫ */
+/* ЗАВЕСА БЛОКИРОВКИ ГЛАВЫ */
 .scene-curtain {
   position: absolute;
   inset: 0;
-  background: rgba(6, 4, 13, 0.86);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: radial-gradient(circle at 50% 50%, rgba(20, 8, 28, 0.94), rgba(7, 3, 10, 0.98));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   z-index: 80;
   display: flex;
   flex-direction: column;
@@ -338,7 +338,7 @@ p, span, h1, h2, h3 {
   justify-content: center;
   padding: 24px;
   text-align: center;
-  transition: opacity 0.8s ease, visibility 0.8s;
+  transition: opacity 0.8s var(--ease-celestial), visibility 0.8s;
 }
 .scene-curtain.unlocked {
   opacity: 0;
@@ -348,56 +348,56 @@ p, span, h1, h2, h3 {
 .scene-curtain p {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.1rem, 3.8vw, 1.35rem);
-  color: var(--gold-light);
+  font-size: clamp(1.15rem, 4vw, 1.45rem);
+  color: var(--rose-light);
   max-width: 18em;
   margin-bottom: 12px;
+  text-shadow: 0 0 20px var(--rose-glow);
 }
 .scene-curtain span {
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
 
 /* ============================================================
-   ЛЮКСОВЫЕ КАРТОЧКИ
+   КАРТОЧКИ ВОСПОМИНАНИЙ
    ============================================================ */
 .photo-card {
-  --w: clamp(140px, 42vw, 195px);
-  --h: clamp(185px, 55vw, 255px);
+  --w: clamp(145px, 42vw, 195px);
+  --h: clamp(190px, 56vw, 260px);
   position: relative;
   width: var(--w);
   height: var(--h);
   flex-shrink: 0;
   padding: 8px 8px 6px;
-  background: linear-gradient(135deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.02) 100%);
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.16) 0%, rgba(244, 114, 182, 0.06) 50%, rgba(0, 0, 0, 0.3) 100%);
   border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 16px 36px -8px rgba(0,0,0,0.7), 0 0 20px rgba(230, 194, 128, 0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 40px -10px rgba(0,0,0,0.8), 0 0 25px rgba(244, 114, 182, 0.18), inset 0 1px 1px var(--glass-specular);
   display: flex;
   flex-direction: column;
 }
 .photo-card::before {
-  content: '✦';
+  content: '🌸';
   position: absolute;
-  top: -10px;
+  top: -11px;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--gold-light);
-  font-size: 11px;
-  text-shadow: 0 0 10px var(--gold-primary);
+  font-size: 13px;
+  filter: drop-shadow(0 0 8px var(--rose-primary));
   z-index: 5;
 }
 .photo-card__view {
   position: relative;
   flex: 1;
-  border-radius: 10px;
+  border-radius: 11px;
   overflow: hidden;
-  background: linear-gradient(155deg, #1d1538, #0c081d);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(155deg, #261133, #0d0614);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 .photo-card__view img {
   width: 100%;
@@ -415,15 +415,15 @@ p, span, h1, h2, h3 {
 }
 .photo-card__tag {
   font-family: var(--serif-title);
-  font-size: 0.62rem;
+  font-size: 0.64rem;
   letter-spacing: 0.14em;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   font-weight: 600;
 }
 .photo-card__caption {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--ink-dim);
   text-align: right;
   white-space: nowrap;
@@ -436,26 +436,28 @@ p, span, h1, h2, h3 {
    ============================================================ */
 #s-open .chapter-date {
   font-family: var(--serif-title);
-  font-size: clamp(0.7rem, 2.2vw, 0.82rem);
+  font-size: clamp(0.72rem, 2.4vw, 0.85rem);
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   text-align: center;
+  text-shadow: 0 0 15px rgba(244, 114, 182, 0.35);
 }
 #s-open .moment-lead {
   font-family: var(--serif-body);
-  font-size: clamp(1.05rem, 3.5vw, 1.45rem);
+  font-size: clamp(1.1rem, 3.8vw, 1.5rem);
   font-style: italic;
   max-width: 22em;
-  line-height: 1.35;
+  line-height: 1.4;
   color: var(--ink);
   text-align: center;
   padding: 0 8px;
 }
+
 .constellation-interactive-box {
   position: relative;
-  width: clamp(210px, 58vw, 260px);
-  height: clamp(100px, 20vh, 130px);
+  width: clamp(230px, 64vw, 280px);
+  height: clamp(110px, 20vh, 140px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -463,45 +465,45 @@ p, span, h1, h2, h3 {
 .constellation-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 0 10px var(--gold-glow));
+  filter: drop-shadow(0 0 12px var(--rose-glow));
 }
 .constellation-svg line {
-  stroke: rgba(230, 194, 128, 0.2);
+  stroke: rgba(244, 114, 182, 0.25);
   stroke-width: 2;
   stroke-dasharray: 4;
   transition: stroke 0.4s ease, stroke-width 0.4s ease;
 }
 .constellation-svg line.lit {
-  stroke: var(--gold-light);
-  stroke-width: 2.5;
+  stroke: var(--rose-light);
+  stroke-width: 3;
   stroke-dasharray: none;
-  filter: drop-shadow(0 0 8px #fff);
+  filter: drop-shadow(0 0 10px #fff);
 }
 .star-node {
   cursor: pointer;
   transform-origin: center;
-  transition: transform 0.3s ease;
 }
 .star-node circle.core {
   fill: #fff;
-  transition: fill 0.3s ease;
+  transition: all 0.35s ease;
+  filter: drop-shadow(0 0 6px var(--rose-primary));
 }
-.star-node circle.hitbox {
-  fill: transparent;
-}
+.star-node circle.hitbox { fill: transparent; }
 .star-node text {
   font-family: var(--serif-title);
-  font-size: 9px;
-  fill: var(--gold-light);
+  font-size: 10px;
+  fill: var(--rose-light);
   pointer-events: none;
+  font-weight: 600;
 }
 .star-node.lit circle.core {
-  fill: var(--gold-light);
-  filter: drop-shadow(0 0 10px #fff);
+  fill: var(--rose-bright);
+  filter: drop-shadow(0 0 14px #fff);
+  transform: scale(1.3);
 }
 .star-node.error circle.core {
-  fill: #ff6079;
-  filter: drop-shadow(0 0 10px #ff6079);
+  fill: #f43f5e;
+  filter: drop-shadow(0 0 14px #f43f5e);
 }
 
 /* ============================================================
@@ -521,47 +523,59 @@ p, span, h1, h2, h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(8px, 3vw, 24px);
+  gap: clamp(10px, 3vw, 24px);
   width: 100%;
 }
-.mem-duo-row .photo-card:first-child { transform: rotate(-2deg); }
-.mem-duo-row .photo-card:last-child { transform: rotate(2deg); }
+.mem-duo-row .photo-card:first-child { transform: rotate(-2.5deg); }
+.mem-duo-row .photo-card:last-child { transform: rotate(2.5deg); }
 
 #s-mem2 .center-quote {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.05rem, 3.4vw, 1.4rem);
+  font-size: clamp(1.1rem, 3.6vw, 1.45rem);
   line-height: 1.35;
   text-align: center;
   color: var(--ink);
-  max-width: 18em;
+  max-width: 19em;
   padding: 0 10px;
+  text-shadow: 0 0 20px rgba(244, 114, 182, 0.3);
 }
 
-/* 3 скрытые искры воспоминаний */
 .memory-rune-spark {
   position: absolute;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 40;
-  font-size: 1.1rem;
-  color: var(--gold-light);
-  text-shadow: 0 0 10px var(--gold-primary);
-  animation: runeFloat 2.6s infinite ease-in-out alternate;
+  font-size: 1.3rem;
+  color: var(--rose-light);
+  text-shadow: 0 0 12px var(--rose-bright);
+  animation: sparkFloat 2.6s infinite ease-in-out alternate;
+}
+.memory-rune-spark::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.4) 0%, transparent 70%);
+  animation: haloBreathe 2s infinite alternate;
+}
+@keyframes haloBreathe {
+  from { transform: scale(0.8); opacity: 0.4; }
+  to { transform: scale(1.4); opacity: 0.9; }
 }
 .memory-rune-spark.collected {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.1);
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
 }
-@keyframes runeFloat {
-  0% { transform: translateY(0) scale(0.9); }
-  100% { transform: translateY(-6px) scale(1.15); filter: drop-shadow(0 0 12px #fff); }
+@keyframes sparkFloat {
+  0% { transform: translateY(0) scale(0.95); }
+  100% { transform: translateY(-8px) scale(1.2); filter: drop-shadow(0 0 16px #fff); }
 }
 
 .secret-popup {
@@ -571,16 +585,16 @@ p, span, h1, h2, h3 {
   transform: translate(-50%, -50%) scale(0.9);
   width: 90%;
   max-width: 360px;
-  padding: 20px 22px;
+  padding: 24px;
   background: var(--glass-bg);
-  border: 1px solid var(--gold-primary);
-  border-radius: 18px;
+  border: 1px solid var(--rose-primary);
+  border-radius: 20px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 35px var(--gold-glow);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 40px var(--rose-glow);
   font-family: var(--serif-body);
-  font-size: 1.15rem;
-  line-height: 1.55;
+  font-size: 1.2rem;
+  line-height: 1.6;
   text-align: center;
   color: var(--ink);
   opacity: 0;
@@ -599,12 +613,12 @@ p, span, h1, h2, h3 {
    ============================================================ */
 .frost-scratch-box {
   position: relative;
-  --w: clamp(180px, 52vw, 235px);
-  --h: clamp(235px, 68vw, 305px);
+  --w: clamp(190px, 54vw, 240px);
+  --h: clamp(245px, 70vw, 310px);
   width: var(--w);
   height: var(--h);
-  border-radius: 16px;
-  box-shadow: 0 16px 40px rgba(0,0,0,0.7), 0 0 30px var(--rose-mist);
+  border-radius: 18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.75), 0 0 35px var(--rose-halo);
   margin: auto 0;
 }
 .frost-scratch-box .photo-card {
@@ -618,7 +632,7 @@ p, span, h1, h2, h3 {
   inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: 18px;
   touch-action: none;
   cursor: grab;
   z-index: 15;
@@ -626,36 +640,36 @@ p, span, h1, h2, h3 {
 }
 .hidden-beacon-star {
   position: absolute;
-  width: 24px;
-  height: 24px;
-  margin-left: -12px;
-  margin-top: -12px;
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  margin-top: -14px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold-light);
-  font-size: 0.9rem;
+  color: #fff;
+  font-size: 1rem;
   z-index: 12;
   opacity: 0;
-  transform: scale(0.5);
+  transform: scale(0.4);
   transition: opacity 0.5s ease, transform 0.5s var(--ease-elastic);
 }
 .hidden-beacon-star.revealed {
   opacity: 1;
-  transform: scale(1.1);
-  text-shadow: 0 0 14px #fff, 0 0 25px var(--gold-primary);
+  transform: scale(1.2);
+  text-shadow: 0 0 14px #fff, 0 0 25px var(--rose-bright);
 }
 
 #s-mem3 .scratch-story {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.05rem, 3.6vw, 1.35rem);
-  color: var(--gold-light);
+  font-size: clamp(1.1rem, 3.8vw, 1.4rem);
+  color: var(--rose-light);
   max-width: 20em;
   text-align: center;
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(12px);
   transition: opacity 0.8s var(--ease-celestial), transform 0.8s var(--ease-celestial);
   padding: 0 10px;
 }
@@ -665,7 +679,7 @@ p, span, h1, h2, h3 {
 }
 
 /* ============================================================
-   СЦЕНА IV: ОРБИТЫ ДУШИ (РЕЗОНАНС)
+   СЦЕНА IV: ОРБИТЫ ДУШИ
    ============================================================ */
 #s-about .orbit-field {
   position: relative;
@@ -673,64 +687,67 @@ p, span, h1, h2, h3 {
   max-width: 440px;
   display: flex;
   flex-direction: column;
-  gap: clamp(7px, 1.5vh, 12px);
+  gap: clamp(8px, 1.6vh, 13px);
   margin: auto 0;
 }
 .orbit-pill {
   position: relative;
-  padding: clamp(8px, 1.5vh, 12px) clamp(14px, 3.5vw, 20px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(230, 194, 128, 0.25);
+  padding: clamp(9px, 1.6vh, 13px) clamp(16px, 4vw, 22px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(244, 114, 182, 0.04));
+  border: 1px solid var(--glass-border);
   border-radius: 40px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(0.92rem, 3vw, 1.15rem);
+  font-size: clamp(0.96rem, 3.2vw, 1.2rem);
   color: var(--ink-dim);
   cursor: pointer;
   transition: all 0.35s ease;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
 }
 .orbit-pill.awakened {
-  border-color: var(--gold-light);
+  border-color: var(--rose-light);
   color: #fff;
-  background: linear-gradient(135deg, rgba(230, 194, 128, 0.25), rgba(147, 51, 234, 0.2));
-  box-shadow: 0 0 18px var(--gold-glow);
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.3), rgba(217, 70, 239, 0.25));
+  box-shadow: 0 0 25px var(--rose-glow), inset 0 1px 1px #fff;
   transform: scale(1.02);
 }
 .orbit-pill-badge {
-  font-size: 0.72rem;
-  color: var(--gold-primary);
+  font-size: 0.74rem;
+  color: var(--rose-primary);
   font-style: normal;
+  font-weight: 600;
 }
 .orbit-pill.awakened .orbit-pill-badge {
   color: #fff;
-  text-shadow: 0 0 8px var(--gold-light);
+  text-shadow: 0 0 8px var(--rose-light);
 }
 
 /* ============================================================
-   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (СОЗВЕЗДИЕ СЛОВ)
+   СЦЕНА V: ЖИВЫЕ СВЕТЛЯЧКИ (ФРАЗА)
    ============================================================ */
 #s-hunt .hunt-container {
   position: relative;
   width: 100%;
-  height: clamp(260px, 45vh, 360px);
+  height: clamp(260px, 46vh, 360px);
   max-width: 480px;
   margin: auto 0;
-  border-radius: 18px;
-  border: 1px dashed rgba(230, 194, 128, 0.2);
+  border-radius: 20px;
+  border: 1px dashed rgba(244, 114, 182, 0.25);
   overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, rgba(36, 15, 48, 0.3), transparent 70%);
 }
 
 .firefly-entity {
   position: absolute;
-  width: 48px;
-  height: 48px;
-  margin-left: -24px;
-  margin-top: -24px;
+  width: 50px;
+  height: 50px;
+  margin-left: -25px;
+  margin-top: -25px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -739,28 +756,28 @@ p, span, h1, h2, h3 {
   touch-action: none;
 }
 .firefly-core {
-  width: 13px;
-  height: 13px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 20%, var(--gold-light) 60%, transparent 95%);
-  box-shadow: 0 0 18px 5px var(--gold-light);
-  animation: fireflyShine 2.2s ease-in-out infinite alternate;
+  background: radial-gradient(circle, #fff 20%, var(--rose-light) 50%, var(--rose-primary) 90%);
+  box-shadow: 0 0 20px 6px var(--rose-bright);
+  animation: fireflyBreathe 2.4s ease-in-out infinite alternate;
 }
-@keyframes fireflyShine {
-  0% { transform: scale(0.8); opacity: 0.7; }
-  100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 24px 8px #fff; }
+@keyframes fireflyBreathe {
+  0% { transform: scale(0.75); opacity: 0.7; }
+  100% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 28px 10px #fff; }
 }
 .firefly-entity.captured {
   pointer-events: none;
   opacity: 0.25;
-  transform: scale(0.5);
+  transform: scale(0.4);
   transition: all 0.5s ease;
 }
 
 .hunt-ribbon {
   width: 100%;
   max-width: 440px;
-  min-height: 40px;
+  min-height: 44px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -769,25 +786,25 @@ p, span, h1, h2, h3 {
   padding: 6px 10px;
 }
 .hunt-slot {
-  padding: 4px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(230, 194, 128, 0.2);
-  background: rgba(18, 14, 36, 0.5);
+  padding: 5px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(244, 114, 182, 0.25);
+  background: rgba(28, 12, 38, 0.6);
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(0.85rem, 2.7vw, 1rem);
+  font-size: clamp(0.88rem, 2.8vw, 1.05rem);
   color: var(--ink-faint);
   transition: all 0.4s ease;
 }
 .hunt-slot.filled {
-  color: var(--gold-light);
-  border-color: var(--gold-primary);
-  background: rgba(230, 194, 128, 0.15);
-  box-shadow: 0 0 12px var(--gold-glow);
+  color: #fff;
+  border-color: var(--rose-light);
+  background: rgba(244, 114, 182, 0.25);
+  box-shadow: 0 0 16px var(--rose-glow);
 }
 
 /* ============================================================
-   СЦЕНА VI: СВЯЩЕННОЕ ПИСЬМО (ТАКТИЛЬНЫЙ СУРГУЧ)
+   СЦЕНА VI: СВЯЩЕННОЕ ПИСЬМО (ТЕРМО-СУРГУЧ)
    ============================================================ */
 #s-letter {
   height: auto;
@@ -800,27 +817,27 @@ p, span, h1, h2, h3 {
 .letter-parchment {
   max-width: 540px;
   width: 100%;
-  padding: clamp(1.4rem, 4vw, 2.4rem);
-  background: rgba(20, 15, 38, 0.78);
-  border: 1px solid var(--gold-primary);
-  border-radius: 20px;
+  padding: clamp(1.5rem, 4.2vw, 2.5rem);
+  background: rgba(26, 11, 35, 0.85);
+  border: 1px solid var(--rose-primary);
+  border-radius: 22px;
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 0 35px var(--gold-glow);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 40px var(--rose-glow);
   position: relative;
   margin: 10px 0;
 }
 .letter-parchment::before {
-  content: '✦ ✧ ✦';
+  content: '🌸 ✧ 🌸';
   position: absolute;
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: #171030;
-  padding: 0 12px;
-  color: var(--gold-light);
+  background: #1e0b27;
+  padding: 0 14px;
+  color: var(--rose-light);
   letter-spacing: 0.24em;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
 }
 
 .wax-seal-wrapper {
@@ -830,8 +847,8 @@ p, span, h1, h2, h3 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(12, 9, 22, 0.95);
-  border-radius: 20px;
+  background: rgba(14, 6, 20, 0.96);
+  border-radius: 22px;
   z-index: 50;
   cursor: pointer;
   transition: opacity 0.8s var(--ease-celestial), visibility 0.8s;
@@ -845,25 +862,25 @@ p, span, h1, h2, h3 {
 }
 .wax-seal-press {
   position: relative;
-  width: 90px;
-  height: 90px;
+  width: 94px;
+  height: 94px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .wax-seal-circle {
-  width: 76px;
-  height: 76px;
+  width: 78px;
+  height: 78px;
   border-radius: 50%;
-  background: radial-gradient(circle, #b9274e 0%, #681026 80%);
-  border: 2px solid var(--gold-primary);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 30px rgba(171, 35, 70, 0.4);
+  background: radial-gradient(circle, #fb7185 0%, #be123c 75%);
+  border: 2px solid var(--rose-light);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 30px rgba(251, 113, 133, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold-light);
+  color: #fff;
   font-family: var(--serif-title);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   transition: transform 0.3s ease;
 }
 .wax-seal-progress-svg {
@@ -875,25 +892,25 @@ p, span, h1, h2, h3 {
 }
 .wax-seal-progress-svg circle {
   fill: none;
-  stroke: var(--gold-light);
-  stroke-width: 3;
-  stroke-dasharray: 264;
-  stroke-dashoffset: 264;
+  stroke: var(--rose-light);
+  stroke-width: 3.5;
+  stroke-dasharray: 276;
+  stroke-dashoffset: 276;
   transition: stroke-dashoffset 0.1s linear;
 }
 .wax-seal-hint {
   font-family: var(--sans);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
+  font-size: 0.74rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold-light);
-  margin-top: 14px;
+  color: var(--rose-light);
+  margin-top: 16px;
 }
 
 .letter-content p {
   font-family: var(--serif-body);
-  font-size: clamp(1rem, 3.4vw, 1.25rem);
-  line-height: 1.7;
+  font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+  line-height: 1.75;
   color: var(--ink-dim);
   margin-bottom: 1.1em;
   opacity: 0;
@@ -905,25 +922,26 @@ p, span, h1, h2, h3 {
   transform: translateY(0);
 }
 .letter-content p:first-child {
-  color: var(--gold-light);
+  color: var(--rose-light);
   font-family: var(--serif-title);
-  font-size: clamp(1.4rem, 4.6vw, 1.9rem);
+  font-size: clamp(1.45rem, 4.8vw, 2rem);
+  letter-spacing: 0.05em;
 }
 .letter-content .dropcap {
   float: left;
   font-family: var(--serif-title);
-  font-size: 3.2rem;
+  font-size: 3.4rem;
   line-height: 0.8;
-  margin: 4px 8px 0 0;
-  color: var(--gold-primary);
+  margin: 4px 10px 0 0;
+  color: var(--rose-bright);
 }
 .letter-content .letter-author {
   text-align: right;
-  color: var(--gold-primary);
+  color: var(--rose-primary);
   font-family: var(--serif-body);
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-style: italic;
-  margin-top: 1.5rem;
+  margin-top: 1.6rem;
   margin-bottom: 0;
 }
 
@@ -933,49 +951,57 @@ p, span, h1, h2, h3 {
 #s-future .sky-lanterns-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: clamp(8px, 1.8vh, 14px);
+  gap: clamp(9px, 2vh, 16px);
   width: 100%;
   max-width: 440px;
   margin: auto 0;
 }
 .sky-lantern {
-  padding: clamp(10px, 2vh, 16px) 10px;
+  padding: clamp(12px, 2.2vh, 18px) 12px;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  border-radius: 14px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.4);
+  border-radius: 16px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(0.85rem, 2.7vw, 1.05rem);
+  font-size: clamp(0.9rem, 2.9vw, 1.1rem);
   line-height: 1.35;
   color: var(--ink);
   text-align: center;
   cursor: pointer;
   transition: all 0.4s ease;
+  animation: lanternBob 5s infinite ease-in-out alternate;
+}
+.sky-lantern:nth-child(even) { animation-delay: 1.5s; }
+.sky-lantern:nth-child(3) { animation-delay: 3s; }
+@keyframes lanternBob {
+  0% { transform: translateY(0) rotate(-1deg); }
+  100% { transform: translateY(-10px) rotate(1deg); }
 }
 .sky-lantern.lit {
-  border-color: var(--gold-light);
-  box-shadow: 0 8px 30px rgba(230, 194, 128, 0.4), inset 0 0 15px rgba(230, 194, 128, 0.2);
+  border-color: var(--rose-light);
+  box-shadow: 0 10px 35px var(--rose-glow), inset 0 0 20px rgba(244, 114, 182, 0.3);
   color: #fff;
+  transform: translateY(-8px);
 }
 .sky-lantern.master-lantern {
   grid-column: span 2;
-  border: 1px dashed var(--gold-primary);
-  color: var(--gold-light);
+  border: 1px dashed var(--rose-primary);
+  color: var(--rose-light);
   opacity: 0.4;
   pointer-events: none;
 }
 .sky-lantern.master-lantern.unlocked {
   opacity: 1;
   pointer-events: auto;
-  border: 1px solid var(--gold-light);
-  animation: masterGlow 2.4s infinite alternate;
+  border: 1px solid var(--rose-light);
+  animation: masterRoseGlow 2.4s infinite alternate;
 }
-@keyframes masterGlow {
-  0% { box-shadow: 0 0 15px var(--gold-glow); }
-  100% { box-shadow: 0 0 35px var(--gold-light); }
+@keyframes masterRoseGlow {
+  0% { box-shadow: 0 0 15px var(--rose-glow); }
+  100% { box-shadow: 0 0 40px var(--rose-bright); }
 }
 
 /* ============================================================
@@ -983,39 +1009,40 @@ p, span, h1, h2, h3 {
    ============================================================ */
 #s-final .final-title {
   font-family: var(--serif-title);
-  font-size: clamp(1.3rem, 4.4vw, 2rem);
-  letter-spacing: 0.08em;
+  font-size: clamp(1.4rem, 4.6vw, 2.1rem);
+  letter-spacing: 0.1em;
   color: var(--ink);
   text-align: center;
-  text-shadow: 0 0 30px rgba(230,194,128,0.4);
+  text-shadow: 0 0 35px var(--rose-glow);
 }
 .cosmic-orb-btn {
-  width: 80px;
-  height: 80px;
+  width: 86px;
+  height: 86px;
   border-radius: 50%;
-  border: 1px solid var(--gold-light);
-  background: radial-gradient(circle, #fff 0%, var(--gold-light) 40%, var(--gold-primary) 70%, transparent 100%);
-  box-shadow: 0 0 45px 12px var(--gold-glow);
+  border: 1.5px solid var(--rose-light);
+  background: radial-gradient(circle, #fff 0%, var(--rose-light) 30%, var(--rose-primary) 70%, transparent 100%);
+  box-shadow: 0 0 50px 14px var(--rose-glow);
   cursor: pointer;
   margin: auto 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: finalPulse 2.8s ease-in-out infinite alternate;
+  animation: roseHeartbeat 2.6s infinite ease-in-out alternate;
 }
-@keyframes finalPulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 30px 8px var(--gold-glow); }
-  100% { transform: scale(1.1); box-shadow: 0 0 65px 18px var(--gold-light); }
+@keyframes roseHeartbeat {
+  0% { transform: scale(0.94); box-shadow: 0 0 30px 8px var(--rose-glow); }
+  50% { transform: scale(1.08); box-shadow: 0 0 60px 18px var(--rose-bright); }
+  100% { transform: scale(0.98); box-shadow: 0 0 40px 10px var(--rose-glow); }
 }
 
 .celestial-gift-modal {
   position: fixed;
   inset: 0;
   z-index: 950;
-  background: radial-gradient(circle at 50% 50%, #1a1133 0%, #06040d 100%);
+  background: radial-gradient(circle at 50% 50%, #290d33 0%, #08030e 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   padding: max(24px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
   text-align: center;
   opacity: 0;
@@ -1030,42 +1057,43 @@ p, span, h1, h2, h3 {
   pointer-events: auto;
 }
 .gift-halo-avatar {
-  width: 90px;
-  height: 90px;
+  width: 96px;
+  height: 96px;
   flex-shrink: 0;
   border-radius: 50%;
-  border: 1px solid var(--gold-primary);
-  background: radial-gradient(circle, rgba(230,194,128,0.25) 0%, transparent 75%);
-  box-shadow: 0 0 35px var(--gold-glow);
+  border: 1px solid var(--rose-primary);
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.3) 0%, transparent 75%);
+  box-shadow: 0 0 40px var(--rose-glow);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .gift-halo-avatar svg {
-  width: 42px;
-  height: 42px;
-  stroke: var(--gold-light);
+  width: 44px;
+  height: 44px;
+  stroke: var(--rose-light);
   fill: none;
   stroke-width: 1.4;
 }
 .celestial-gift-modal p {
   font-family: var(--serif-body);
   font-style: italic;
-  font-size: clamp(1.1rem, 3.8vw, 1.45rem);
+  font-size: clamp(1.15rem, 4vw, 1.5rem);
   color: var(--ink);
   max-width: 24em;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 .gift-modal-close {
   font-family: var(--sans);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--gold-primary);
-  padding: 10px 22px;
-  border: 1px solid rgba(230, 194, 128, 0.35);
+  letter-spacing: 0.22em;
+  color: var(--rose-light);
+  padding: 11px 24px;
+  border: 1px solid var(--glass-border);
   border-radius: 30px;
   margin-top: 10px;
+  background: rgba(244, 114, 182, 0.15);
 }
 
 /* ============================================================
@@ -1076,14 +1104,14 @@ p, span, h1, h2, h3 {
   right: 18px;
   bottom: max(18px, env(safe-area-inset-bottom, 18px));
   z-index: 800;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--gold-primary);
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--rose-primary);
   border-radius: 50%;
   background: var(--glass-bg);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 0 20px var(--gold-glow);
+  box-shadow: 0 0 22px var(--rose-glow);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1096,9 +1124,9 @@ p, span, h1, h2, h3 {
   pointer-events: auto;
 }
 #audio-control svg {
-  width: 18px;
-  height: 18px;
-  stroke: var(--gold-light);
+  width: 19px;
+  height: 19px;
+  stroke: var(--rose-light);
   fill: none;
   stroke-width: 1.5;
 }
@@ -1109,7 +1137,7 @@ p, span, h1, h2, h3 {
 </head>
 <body>
 
-<!-- АТМОСФЕРНЫЕ ХОЛСТЫ -->
+<!-- ХОЛСТЫ -->
 <div class="nebula"></div>
 <canvas id="space-canvas"></canvas>
 <canvas id="sparkle-trail"></canvas>
@@ -1125,7 +1153,7 @@ p, span, h1, h2, h3 {
   <h1 class="gate__title">ДЛЯ ЗАРИНЫ</h1>
   <p class="gate__subtitle">история, написанная мерцанием звёзд</p>
   <div class="gate__cta">
-    <span class="gate__cta-icon">✦</span>
+    <span class="gate__cta-icon">🌸</span>
     <span>прикоснись к тайне</span>
   </div>
 </div>
@@ -1136,7 +1164,7 @@ p, span, h1, h2, h3 {
   <!-- ГЛАВА 1: ЗАРОЖДЕНИЕ -->
   <section class="scene" id="s-open">
     <div class="quest-hud" id="hud-q1">
-      <span class="quest-hud-icon">✦</span>
+      <span class="quest-hud-icon">🌸</span>
       <span id="txt-q1">Зажги созвездие: соедини звёзды по порядку (I → IV)</span>
     </div>
 
@@ -1151,24 +1179,24 @@ p, span, h1, h2, h3 {
         <line id="line-2-3" x1="155" y1="75" x2="205" y2="30"></line>
 
         <g class="star-node" data-idx="0" transform="translate(40, 90)">
-          <circle class="hitbox" r="22"></circle>
+          <circle class="hitbox" r="24"></circle>
           <circle class="core" r="4.5"></circle>
-          <text x="-6" y="-10">I</text>
+          <text x="-6" y="-12">I</text>
         </g>
         <g class="star-node" data-idx="1" transform="translate(90, 45)">
-          <circle class="hitbox" r="22"></circle>
+          <circle class="hitbox" r="24"></circle>
           <circle class="core" r="5"></circle>
-          <text x="-6" y="-10">II</text>
+          <text x="-6" y="-12">II</text>
         </g>
         <g class="star-node" data-idx="2" transform="translate(155, 75)">
-          <circle class="hitbox" r="22"></circle>
+          <circle class="hitbox" r="24"></circle>
           <circle class="core" r="4.5"></circle>
-          <text x="-6" y="-10">III</text>
+          <text x="-6" y="-12">III</text>
         </g>
         <g class="star-node" data-idx="3" transform="translate(205, 30)">
-          <circle class="hitbox" r="22"></circle>
+          <circle class="hitbox" r="24"></circle>
           <circle class="core" r="6"></circle>
-          <text x="-8" y="-12">IV</text>
+          <text x="-8" y="-14">IV</text>
         </g>
       </svg>
     </div>
@@ -1196,18 +1224,17 @@ p, span, h1, h2, h3 {
   <section class="scene" id="s-mem2">
     <div class="scene-curtain" id="curtain-s2">
       <p>«Это созвездие пока скрыто туманностью...»</p>
-      <span>Зажги созвездие в первой главе ✦</span>
+      <span>Зажги созвездие в первой главе 🌸</span>
     </div>
 
     <div class="quest-hud" id="hud-q2">
-      <span class="quest-hud-icon">✦</span>
+      <span class="quest-hud-icon">🌸</span>
       <span id="txt-q2">Отыщи 3 мерцающие искры воспоминаний (<span id="spark-count">0</span>/3)</span>
     </div>
 
     <div class="field-wrap">
       <div class="mem-duo-row">
         <div class="photo-card rise" style="--d:0.1">
-          <!-- Скрытая искра 1 -->
           <div class="memory-rune-spark" id="spark-1" style="top: -10px; right: -10px;">✦</div>
           <div class="photo-card__view">
             <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Взгляд" loading="lazy">
@@ -1219,7 +1246,6 @@ p, span, h1, h2, h3 {
         </div>
 
         <div class="photo-card rise" style="--d:0.2">
-          <!-- Скрытая искра 2 -->
           <div class="memory-rune-spark" id="spark-2" style="bottom: -10px; left: -10px;">✦</div>
           <div class="photo-card__view">
             <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80" alt="Тепло" loading="lazy">
@@ -1232,8 +1258,7 @@ p, span, h1, h2, h3 {
       </div>
 
       <div class="center-quote rise" style="position: relative;">
-        <!-- Скрытая искра 3 -->
-        <div class="memory-rune-spark" id="spark-3" style="top: -14px; left: 50%; transform: translateX(-50%);">✦</div>
+        <div class="memory-rune-spark" id="spark-3" style="top: -16px; left: 50%; transform: translateX(-50%);">✦</div>
         <p>Ты превращаешь самые простые дни в страницы волшебной книги.</p>
       </div>
 
@@ -1251,11 +1276,11 @@ p, span, h1, h2, h3 {
   <section class="scene" id="s-mem3">
     <div class="scene-curtain" id="curtain-s3">
       <p>«Осколок прошлого запечатан...»</p>
-      <span>Собери 3 искры во 2-й главе ✦</span>
+      <span>Собери 3 искры во 2-й главе 🌸</span>
     </div>
 
     <div class="quest-hud" id="hud-q3">
-      <span class="quest-hud-icon">✦</span>
+      <span class="quest-hud-icon">🌸</span>
       <span id="txt-q3">Сотри звёздную пыль и найди 3 скрытых маяка (<span id="beacon-count">0</span>/3)</span>
     </div>
 
@@ -1263,7 +1288,6 @@ p, span, h1, h2, h3 {
       <div class="photo-card">
         <div class="photo-card__view">
           <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Скрытое воспоминание" loading="lazy">
-          <!-- 3 скрытых маяка под скретчем -->
           <div class="hidden-beacon-star" id="beacon-1" style="left: 25%; top: 25%;">★</div>
           <div class="hidden-beacon-star" id="beacon-2" style="left: 75%; top: 40%;">★</div>
           <div class="hidden-beacon-star" id="beacon-3" style="left: 50%; top: 75%;">★</div>
@@ -1289,32 +1313,32 @@ p, span, h1, h2, h3 {
   <section class="scene" id="s-about">
     <div class="scene-curtain" id="curtain-s4">
       <p>«Вуаль скрывает глубину...»</p>
-      <span>Найди 3 звёздных маяка в 3-й главе ✦</span>
+      <span>Найди 3 звёздных маяка в 3-й главе 🌸</span>
     </div>
 
     <div class="quest-hud" id="hud-q4">
-      <span class="quest-hud-icon">✦</span>
+      <span class="quest-hud-icon">🌸</span>
       <span id="txt-q4">Настрой резонанс: пробуди все 5 качеств души (<span id="soul-count">0</span>/5)</span>
     </div>
 
     <div class="orbit-field">
-      <div class="orbit-pill" data-freq="523.25">
+      <div class="orbit-pill" data-freq="587.33">
         <span>То, как искренне ты радуешься мелочам</span>
         <span class="orbit-pill-badge">I</span>
       </div>
-      <div class="orbit-pill" data-freq="587.33">
+      <div class="orbit-pill" data-freq="659.25">
         <span>Твой голос, возвращающий душевное спокойствие</span>
         <span class="orbit-pill-badge">II</span>
       </div>
-      <div class="orbit-pill" data-freq="659.25">
+      <div class="orbit-pill" data-freq="739.99">
         <span>Неповторимая нежность в каждом твоём взгляде</span>
         <span class="orbit-pill-badge">III</span>
       </div>
-      <div class="orbit-pill" data-freq="783.99">
+      <div class="orbit-pill" data-freq="880.00">
         <span>Наши понятные только нам двоим шутки</span>
         <span class="orbit-pill-badge">IV</span>
       </div>
-      <div class="orbit-pill" data-freq="880.00">
+      <div class="orbit-pill" data-freq="987.77">
         <span>Твоя способность согревать словом</span>
         <span class="orbit-pill-badge">V</span>
       </div>
@@ -1325,15 +1349,15 @@ p, span, h1, h2, h3 {
     </button>
   </section>
 
-  <!-- ГЛАВА 5: ОХОТА НА СВЕТЛЯЧКОВ (ИНТЕРАКТИВ) -->
+  <!-- ГЛАВА 5: ОХОТА НА СВЕТЛЯЧКОВ -->
   <section class="scene" id="s-hunt">
     <div class="scene-curtain" id="curtain-s5">
       <p>«Орбиты души ещё молчат...»</p>
-      <span>Настрой резонанс чувств в 4-й главе ✦</span>
+      <span>Настрой резонанс чувств в 4-й главе 🌸</span>
     </div>
 
     <div class="quest-hud" id="hud-q5">
-      <span class="quest-hud-icon">✦</span>
+      <span class="quest-hud-icon">🌸</span>
       <span id="txt-q5">Поймай 5 странствующих светлячков для сборки фразы</span>
     </div>
 
@@ -1350,7 +1374,7 @@ p, span, h1, h2, h3 {
       <div class="firefly-entity" data-word="во Вселенной" data-idx="3">
         <div class="firefly-core"></div>
       </div>
-      <div class="firefly-entity" data-word="✦ навсегда ✦" data-idx="4">
+      <div class="firefly-entity" data-word="🌸 навсегда 🌸" data-idx="4">
         <div class="firefly-core"></div>
       </div>
     </div>
@@ -1372,21 +1396,21 @@ p, span, h1, h2, h3 {
   <section class="scene" id="s-letter">
     <div class="scene-curtain" id="curtain-s6">
       <p>«Печать не сорвана...»</p>
-      <span>Собери фразу светлячков в 5-й главе ✦</span>
+      <span>Собери фразу светлячков в 5-й главе 🌸</span>
     </div>
 
     <div class="quest-hud" id="hud-q6">
-      <span class="quest-hud-icon">✦</span>
+      <span class="quest-hud-icon">🌸</span>
       <span id="txt-q6">Удерживай пальчик на печати (1.5 сек), чтобы растопить её</span>
     </div>
 
     <div class="letter-parchment">
       <div class="wax-seal-wrapper" id="wax-seal-wrapper">
         <div class="wax-seal-press" id="wax-press-btn">
-          <svg class="wax-seal-progress-svg" viewBox="0 0 90 90">
-            <circle cx="45" cy="45" r="42" id="wax-progress-circle"></circle>
+          <svg class="wax-seal-progress-svg" viewBox="0 0 94 94">
+            <circle cx="47" cy="47" r="44" id="wax-progress-circle"></circle>
           </svg>
-          <div class="wax-seal-circle">✦</div>
+          <div class="wax-seal-circle">🌸</div>
         </div>
         <span class="wax-seal-hint" id="wax-hint">коснись и удерживай</span>
       </div>
@@ -1411,11 +1435,11 @@ p, span, h1, h2, h3 {
   <section class="scene" id="s-future">
     <div class="scene-curtain" id="curtain-s7">
       <p>«Письмо ещё хранит тайну...»</p>
-      <span>Растопи печать в 6-й главе ✦</span>
+      <span>Растопи печать в 6-й главе 🌸</span>
     </div>
 
     <div class="quest-hud" id="hud-q7">
-      <span class="quest-hud-icon">✦</span>
+      <span class="quest-hud-icon">🌸</span>
       <span id="txt-q7">Зажги 3 фонарика, чтобы открыть сокровенное желание (<span id="lantern-count">0</span>/3)</span>
     </div>
 
@@ -1437,12 +1461,12 @@ p, span, h1, h2, h3 {
   <section class="scene" id="s-final">
     <div class="scene-curtain" id="curtain-s8">
       <p>«Сердце Вселенной заперто...»</p>
-      <span>Зажги общее желание в 7-й главе ✦</span>
+      <span>Зажги общее желание в 7-й главе 🌸</span>
     </div>
 
     <div class="quest-hud" id="hud-q8">
-      <span class="quest-hud-icon">✦</span>
-      <span id="txt-q8">Коснись сферы 3 раза в унисон с пульсом (<span id="pulse-count">0</span>/3)</span>
+      <span class="quest-hud-icon">🌸</span>
+      <span id="txt-q8">Коснись сферы 3 раза в ритме биения сердца (<span id="pulse-count">0</span>/3)</span>
     </div>
 
     <h2 class="final-title rise" style="--d:0.1">В самом сердце созвездия</h2>
@@ -1454,7 +1478,7 @@ p, span, h1, h2, h3 {
         <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
       </div>
       <p>[Здесь твой сюрприз: билеты на концерт любимой группы, путешествие, координаты романтического вечера или тайное признание]</p>
-      <button class="gift-modal-close" id="gift-modal-dismiss">✦ вернуться к звёздам ✦</button>
+      <button class="gift-modal-close" id="gift-modal-dismiss">🌸 вернуться к звёздам 🌸</button>
     </div>
   </section>
 
@@ -1478,12 +1502,13 @@ p, span, h1, h2, h3 {
   'use strict';
 
   /* ============================================================
-     1. АУДИОДВИЖОК
+     1. АУДИОДВИЖОК: ГАРМОНИЧЕСКАЯ РОЗОВАЯ ГАММА
      ============================================================ */
   var audioState = null;
   var audioBtn = document.getElementById('audio-control');
   var gate = document.getElementById('gate');
-  var chimeScale = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50, 1174.66, 1318.51];
+  // Мечтательный лад Ре-диез / Фа-диез мажор
+  var chimeScale = [587.33, 659.25, 739.99, 880.00, 987.77, 1174.66, 1318.51, 1479.98];
 
   function playTone(freq, gainLevel, dur) {
     if (!audioState || audioState.muted) return;
@@ -1496,7 +1521,7 @@ p, span, h1, h2, h3 {
       osc.frequency.setValueAtTime(freq, now);
 
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.linearRampToValueAtTime(gainLevel || 0.05, now + 0.03);
+      gain.gain.linearRampToValueAtTime(gainLevel || 0.05, now + 0.04);
       gain.gain.exponentialRampToValueAtTime(0.00001, now + (dur || 1.8));
 
       osc.connect(gain);
@@ -1521,18 +1546,19 @@ p, span, h1, h2, h3 {
 
       var master = ctx.createGain();
       master.gain.setValueAtTime(0.0001, ctx.currentTime);
-      master.gain.linearRampToValueAtTime(0.07, ctx.currentTime + 2.5);
+      master.gain.linearRampToValueAtTime(0.08, ctx.currentTime + 2.5);
       master.connect(ctx.destination);
 
-      [130.81, 196.00, 261.63, 329.63].forEach(function(freq, i){
+      // Фоновые тёплые гармоники
+      [146.83, 220.00, 293.66, 369.99].forEach(function(freq, i){
         var osc = ctx.createOscillator();
         var g = ctx.createGain();
         var filter = ctx.createBiquadFilter();
         osc.type = i % 2 === 0 ? 'sine' : 'triangle';
         osc.frequency.setValueAtTime(freq, ctx.currentTime);
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(360, ctx.currentTime);
-        g.gain.setValueAtTime(0.03 / (i + 1), ctx.currentTime);
+        filter.frequency.setValueAtTime(340, ctx.currentTime);
+        g.gain.setValueAtTime(0.035 / (i + 1), ctx.currentTime);
         osc.connect(filter);
         filter.connect(g);
         g.connect(master);
@@ -1549,34 +1575,34 @@ p, span, h1, h2, h3 {
     if (!audioState) return;
     audioState.muted = !audioState.muted;
     var now = audioState.ctx.currentTime;
-    var target = audioState.muted ? 0.0001 : 0.07;
+    var target = audioState.muted ? 0.0001 : 0.08;
     audioState.master.gain.setValueAtTime(audioState.master.gain.value, now);
     audioState.master.gain.linearRampToValueAtTime(target, now + 0.3);
     audioBtn.classList.toggle('muted', audioState.muted);
   }
   audioBtn.addEventListener('click', toggleMute);
 
-  function triggerHaptic(ms) {
+  function triggerHaptic(pattern) {
     if ('vibrate' in navigator) {
-      try { navigator.vibrate(ms || 18); } catch(e) {}
+      try { navigator.vibrate(pattern || 18); } catch(e) {}
     }
   }
 
   gate.addEventListener('click', function(){
     initAudio();
-    playTone(1046.5, 0.06, 2.5);
+    playTone(1174.66, 0.06, 2.5);
     triggerHaptic(25);
     gate.classList.add('hidden');
     setTimeout(function(){ audioBtn.classList.add('shown'); }, 1200);
   }, { once: true });
 
   /* ============================================================
-     2. КАНВАС ЗВЁЗД И ЧАСТИЦ
+     2. КАНВАС: ЗВЁЗДНОЕ НЕБО, РОЗОВЫЕ МЕТЕОРЫ И ИСКРЫ
      ============================================================ */
   (function(){
     var canvas = document.getElementById('space-canvas');
     var ctx = canvas.getContext('2d');
-    var w = 0, h = 0, dpr = 1, stars = [];
+    var w = 0, h = 0, dpr = 1, stars = [], meteors = [];
 
     function resize() {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -1586,12 +1612,12 @@ p, span, h1, h2, h3 {
       canvas.height = Math.floor(h * dpr);
       ctx.scale(dpr, dpr);
       stars = [];
-      var count = Math.min(100, Math.floor((w * h) / 12000));
+      var count = Math.min(110, Math.floor((w * h) / 11000));
       for (var i = 0; i < count; i++) {
         stars.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          r: Math.random() * 1.4 + 0.4,
+          r: Math.random() * 1.5 + 0.4,
           alpha: Math.random() * 0.7 + 0.3,
           phase: Math.random() * Math.PI * 2
         });
@@ -1600,16 +1626,54 @@ p, span, h1, h2, h3 {
     window.addEventListener('resize', resize, { passive: true });
     resize();
 
+    function spawnMeteor() {
+      if (meteors.length < 2 && Math.random() < 0.02) {
+        meteors.push({
+          x: Math.random() * w,
+          y: Math.random() * (h * 0.35),
+          len: Math.random() * 90 + 50,
+          speed: Math.random() * 7 + 6,
+          angle: (Math.PI / 4) + (Math.random() - 0.5) * 0.2,
+          opacity: 1
+        });
+      }
+    }
+
     function render(now) {
       ctx.clearRect(0, 0, w, h);
       var t = now / 1000;
       for (var i = 0; i < stars.length; i++) {
         var s = stars[i];
         var shimmer = 0.5 + 0.5 * Math.sin(t * 2 + s.phase);
-        ctx.fillStyle = 'rgba(255, 248, 230, ' + (s.alpha * shimmer).toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(255, 228, 230, ' + (s.alpha * shimmer).toFixed(3) + ')';
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
+      }
+
+      spawnMeteor();
+      for (var j = meteors.length - 1; j >= 0; j--) {
+        var m = meteors[j];
+        var dx = Math.cos(m.angle) * m.len;
+        var dy = Math.sin(m.angle) * m.len;
+        var grad = ctx.createLinearGradient(m.x, m.y, m.x - dx, m.y - dy);
+        grad.addColorStop(0, 'rgba(255, 255, 255, ' + m.opacity + ')');
+        grad.addColorStop(0.4, 'rgba(244, 114, 182, ' + (m.opacity * 0.8) + ')');
+        grad.addColorStop(1, 'rgba(244, 63, 94, 0)');
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(m.x - dx, m.y - dy);
+        ctx.stroke();
+
+        m.x += Math.cos(m.angle) * m.speed;
+        m.y += Math.sin(m.angle) * m.speed;
+        m.opacity -= 0.02;
+        if (m.opacity <= 0 || m.x > w + 100 || m.y > h + 100) {
+          meteors.splice(j, 1);
+        }
       }
       requestAnimationFrame(render);
     }
@@ -1633,20 +1697,38 @@ p, span, h1, h2, h3 {
     resize();
 
     window.addBurstAt = function(x, y, count) {
-      count = count || 14;
+      count = count || 16;
       for (var i = 0; i < count; i++) {
         var angle = Math.random() * Math.PI * 2;
-        var spd = Math.random() * 3 + 1.2;
+        var spd = Math.random() * 3.5 + 1.2;
         particles.push({
           x: x, y: y,
           vx: Math.cos(angle) * spd,
           vy: Math.sin(angle) * spd,
           life: 1,
           decay: Math.random() * 0.025 + 0.015,
-          size: Math.random() * 2.2 + 1
+          size: Math.random() * 2.5 + 1.2
         });
       }
     };
+
+    function addSparkle(x, y) {
+      for (var i = 0; i < 2; i++) {
+        particles.push({
+          x: x + (Math.random() - 0.5) * 6,
+          y: y + (Math.random() - 0.5) * 6,
+          vx: (Math.random() - 0.5) * 1.2,
+          vy: (Math.random() - 0.5) * 1.2 - 0.3,
+          life: 1,
+          decay: Math.random() * 0.03 + 0.02,
+          size: Math.random() * 2 + 0.8
+        });
+      }
+    }
+
+    window.addEventListener('pointermove', function(e){
+      addSparkle(e.clientX, e.clientY);
+    }, { passive: true });
 
     function update() {
       ctx.clearRect(0, 0, w, h);
@@ -1659,10 +1741,13 @@ p, span, h1, h2, h3 {
           particles.splice(i, 1);
           continue;
         }
-        ctx.fillStyle = 'rgba(255, 235, 170, ' + p.life.toFixed(3) + ')';
+        ctx.fillStyle = 'rgba(254, 205, 211, ' + p.life.toFixed(3) + ')';
+        ctx.shadowColor = 'rgba(244, 114, 182, ' + (p.life * 0.8).toFixed(3) + ')';
+        ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
         ctx.fill();
+        ctx.shadowBlur = 0;
       }
       requestAnimationFrame(update);
     }
@@ -1719,8 +1804,8 @@ p, span, h1, h2, h3 {
         if (idx === expected) {
           this.classList.add('lit');
           playTone(chimeScale[idx * 2], 0.05, 1.2);
-          triggerHaptic(16);
-          if (window.addBurstAt) window.addBurstAt(rect.left + rect.width/2, rect.top + rect.height/2, 6);
+          triggerHaptic(18);
+          if (window.addBurstAt) window.addBurstAt(rect.left + rect.width/2, rect.top + rect.height/2, 8);
 
           if (expected > 0 && lines[expected - 1]) {
             lines[expected - 1].classList.add('lit');
@@ -1729,16 +1814,15 @@ p, span, h1, h2, h3 {
 
           if (expected === 4) {
             hud.classList.add('solved');
-            hudTxt.textContent = '✦ Созвездие озарено! Путь открыт ✦';
+            hudTxt.textContent = '🌸 Созвездие озарено! Путь открыт 🌸';
             nextBtn.classList.add('active');
             curtainS2.classList.add('unlocked');
-            playChord([523.25, 659.25, 783.99, 1046.5], 0.06);
-            triggerHaptic(40);
+            playChord([587.33, 739.99, 880.00, 1174.66], 0.07);
+            triggerHaptic(45);
           }
         } else if (expected < 4) {
-          // Ошибка последовательности
           nodes.forEach(function(n){ n.classList.add('error'); });
-          playTone(220, 0.05, 0.4);
+          playTone(260, 0.05, 0.4);
           triggerHaptic([30, 50, 30]);
           setTimeout(function(){
             nodes.forEach(function(n){ n.classList.remove('lit', 'error'); });
@@ -1751,7 +1835,7 @@ p, span, h1, h2, h3 {
   })();
 
   /* ============================================================
-     5. КВЕСТ 2: 3 СКРЫТЫЕ ИСКРЫ ПАМЯТИ
+     5. КВЕСТ 2: 3 ИСКРЫ ПАМЯТИ
      ============================================================ */
   (function(){
     var sparks = [
@@ -1776,18 +1860,18 @@ p, span, h1, h2, h3 {
         countEl.textContent = collected;
 
         var rect = this.getBoundingClientRect();
-        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width/2, rect.top + rect.height/2, 10);
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width/2, rect.top + rect.height/2, 14);
         playTone(chimeScale[collected + 1], 0.05, 1.4);
-        triggerHaptic(18);
+        triggerHaptic(20);
 
         if (collected === 3) {
           hud.classList.add('solved');
-          hudTxt.textContent = '✦ Все искры памяти воссоединены ✦';
+          hudTxt.textContent = '🌸 Все искры памяти воссоединены 🌸';
           popup.classList.add('active');
           nextBtn.classList.add('active');
           curtainS3.classList.add('unlocked');
-          playChord([659.25, 783.99, 1046.50, 1318.51], 0.06);
-          triggerHaptic(45);
+          playChord([659.25, 880.00, 1174.66, 1479.98], 0.07);
+          triggerHaptic([30, 50]);
 
           setTimeout(function(){
             document.addEventListener('click', function popClose(evt){
@@ -1803,7 +1887,7 @@ p, span, h1, h2, h3 {
   })();
 
   /* ============================================================
-     6. КВЕСТ 3: СКРЕТЧ-СЛОЙ И 3 ПОЛЯРНЫХ СВЕТИЛА
+     6. КВЕСТ 3: РОЗОВЫЙ СКРЕТЧ И 3 МАЯКА
      ============================================================ */
   (function(){
     var box = document.querySelector('.frost-scratch-box');
@@ -1838,15 +1922,16 @@ p, span, h1, h2, h3 {
       ctx2d.setTransform(1, 0, 0, 1, 0, 0);
       ctx2d.scale(dpr, dpr);
 
+      // Розово-хрустальный градиент
       var grad = ctx2d.createLinearGradient(0, 0, w, h);
-      grad.addColorStop(0, '#1a1336');
-      grad.addColorStop(0.5, '#2e1f4e');
-      grad.addColorStop(1, '#130c26');
+      grad.addColorStop(0, '#2b0f38');
+      grad.addColorStop(0.5, '#4a194f');
+      grad.addColorStop(1, '#1b0826');
       ctx2d.fillStyle = grad;
       ctx2d.fillRect(0, 0, w, h);
 
-      ctx2d.fillStyle = 'rgba(255, 235, 170, 0.6)';
-      for (var i = 0; i < 35; i++) {
+      ctx2d.fillStyle = 'rgba(254, 205, 211, 0.55)';
+      for (var i = 0; i < 40; i++) {
         ctx2d.beginPath();
         ctx2d.arc(Math.random() * w, Math.random() * h, Math.random() * 2, 0, Math.PI * 2);
         ctx2d.fill();
@@ -1864,13 +1949,14 @@ p, span, h1, h2, h3 {
         var by = bRect.top - cRect.top + bRect.height / 2;
         var dist = Math.hypot(x - bx, y - by);
 
-        if (dist < 40) {
+        if (dist < 42) {
           beaconsFound[i] = true;
           foundCount++;
           beaconCountEl.textContent = foundCount;
           b.classList.add('revealed');
           playTone(chimeScale[foundCount + 2], 0.06, 1.5);
-          triggerHaptic(20);
+          triggerHaptic(22);
+          if (window.addBurstAt) window.addBurstAt(bRect.left + bRect.width / 2, bRect.top + bRect.height / 2, 10);
 
           if (foundCount === 3 && !cleared) {
             cleared = true;
@@ -1878,11 +1964,11 @@ p, span, h1, h2, h3 {
             canvas.style.pointerEvents = 'none';
             story.classList.add('revealed');
             hud.classList.add('solved');
-            hudTxt.textContent = '✦ Все маяки открыты сквозь вуаль ✦';
+            hudTxt.textContent = '🌸 Все маяки открыты сквозь вуаль 🌸';
             nextBtn.classList.add('active');
             curtainS4.classList.add('unlocked');
-            playChord([783.99, 1046.50, 1318.51], 0.07);
-            triggerHaptic(40);
+            playChord([739.99, 987.77, 1318.51], 0.08);
+            triggerHaptic([30, 60]);
           }
         }
       });
@@ -1938,19 +2024,19 @@ p, span, h1, h2, h3 {
         soulCountEl.textContent = count;
 
         var freq = parseFloat(this.getAttribute('data-freq'));
-        playTone(freq, 0.05, 1.6);
-        triggerHaptic(18);
+        playTone(freq, 0.06, 1.6);
+        triggerHaptic(20);
 
         var rect = this.getBoundingClientRect();
-        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 8);
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
 
         if (count === pills.length) {
           hud.classList.add('solved');
-          hudTxt.textContent = '✦ Созвучие сердец настроено ✦';
+          hudTxt.textContent = '🌸 Созвучие сердец настроено 🌸';
           nextBtn.classList.add('active');
           curtainS5.classList.add('unlocked');
-          playChord([523.25, 659.25, 783.99, 880.00, 1046.50], 0.07);
-          triggerHaptic(40);
+          playChord([587.33, 739.99, 880.00, 987.77, 1174.66], 0.08);
+          triggerHaptic(45);
         }
       });
     });
@@ -2016,17 +2102,17 @@ p, span, h1, h2, h3 {
         caught++;
 
         var rect = fly.getBoundingClientRect();
-        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10);
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 12);
         playTone(chimeScale[caught], 0.05, 1.4);
         triggerHaptic(18);
 
         if (caught === flies.length) {
           hud.classList.add('solved');
-          hudTxt.textContent = '✦ Звёздное послание собрано воедино ✦';
+          hudTxt.textContent = '🌸 Звёздное послание собрано воедино 🌸';
           nextBtn.classList.add('active');
           curtainS6.classList.add('unlocked');
-          playChord([659.25, 783.99, 1046.50, 1318.51], 0.07);
-          triggerHaptic(40);
+          playChord([659.25, 880.00, 1174.66, 1479.98], 0.08);
+          triggerHaptic([30, 50]);
         }
       });
     });
@@ -2046,9 +2132,9 @@ p, span, h1, h2, h3 {
     var hudTxt = document.getElementById('txt-q6');
     var curtainS7 = document.getElementById('curtain-s7');
 
-    var holdTimer = null, startTime = 0, isHolding = false;
+    var startTime = 0, isHolding = false;
     var duration = 1500;
-    var circumference = 264;
+    var circumference = 276;
 
     function frameProgress() {
       if (!isHolding) return;
@@ -2068,8 +2154,8 @@ p, span, h1, h2, h3 {
       isHolding = true;
       startTime = Date.now();
       hint.textContent = 'растопление теплом...';
-      playTone(440, 0.03, 1.5);
-      triggerHaptic(20);
+      playTone(493.88, 0.04, 1.5);
+      triggerHaptic(22);
       requestAnimationFrame(frameProgress);
     }
 
@@ -2085,18 +2171,18 @@ p, span, h1, h2, h3 {
       isHolding = false;
       sealWrapper.classList.add('broken');
       hud.classList.add('solved');
-      hudTxt.textContent = '✦ Письмо распечатано ✦';
+      hudTxt.textContent = '🌸 Письмо распечатано 🌸';
       nextBtn.classList.add('active');
       curtainS7.classList.add('unlocked');
 
       var rect = pressBtn.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 25);
-      playChord([523.25, 659.25, 783.99, 1046.50, 1318.51], 0.08);
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 28);
+      playChord([587.33, 739.99, 880.00, 1174.66, 1479.98], 0.09);
       triggerHaptic([30, 40, 60]);
 
       var paras = letterBody.querySelectorAll('p');
       paras.forEach(function(p, i){
-        setTimeout(function(){ p.classList.add('revealed'); }, i * 300 + 100);
+        setTimeout(function(){ p.classList.add('revealed'); }, i * 280 + 100);
       });
     }
 
@@ -2128,17 +2214,17 @@ p, span, h1, h2, h3 {
         countEl.textContent = litCount;
 
         var rect = this.getBoundingClientRect();
-        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 8);
+        if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + 10, 10);
         playTone(chimeScale[litCount + 1], 0.05, 1.6);
-        triggerHaptic(18);
+        triggerHaptic(20);
 
         if (litCount === minorLanterns.length) {
           masterLantern.classList.add('unlocked');
-          masterLanternTxt.textContent = '✧ Наше общее сокровенное желание — быть счастливыми вместе ✧';
+          masterLanternTxt.textContent = '🌸 Наше общее сокровенное желание — быть счастливыми вместе 🌸';
           hud.classList.add('solved');
-          hudTxt.textContent = '✦ Прикоснись к главному фонарику желаний ✦';
-          playChord([659.25, 880.00, 1046.50], 0.06);
-          triggerHaptic(30);
+          hudTxt.textContent = '🌸 Прикоснись к главному фонарику желаний 🌸';
+          playChord([739.99, 987.77, 1174.66], 0.07);
+          triggerHaptic(35);
         }
       });
     });
@@ -2147,12 +2233,12 @@ p, span, h1, h2, h3 {
       if (!this.classList.contains('unlocked') || this.classList.contains('lit')) return;
       this.classList.add('lit');
       var rect = this.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 20);
-      playChord([783.99, 1046.50, 1318.51, 1567.98], 0.08);
-      triggerHaptic([30, 50]);
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 24);
+      playChord([880.00, 1174.66, 1479.98], 0.09);
+      triggerHaptic([30, 60]);
       nextBtn.classList.add('active');
       curtainS8.classList.add('unlocked');
-      hudTxt.textContent = '✦ Желание устремилось к звёздам! ✦';
+      hudTxt.textContent = '🌸 Желание устремилось к звёздам! 🌸';
     });
   })();
 
@@ -2172,17 +2258,17 @@ p, span, h1, h2, h3 {
       taps++;
       pulseCountEl.textContent = taps;
       var rect = orb.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 8 * taps);
-      playTone(523.25 * Math.pow(1.2, taps), 0.06, 1.5);
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10 * taps);
+      playTone(587.33 * Math.pow(1.15, taps), 0.06, 1.5);
       triggerHaptic(20 * taps);
 
       if (taps === 3) {
         hud.classList.add('solved');
-        hudTxt.textContent = '✦ Кристалл Вселенной пробуждён ✦';
+        hudTxt.textContent = '🌸 Кристалл Вселенной пробуждён 🌸';
         setTimeout(function(){
           modal.classList.add('shown');
-          playChord([523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98], 0.1);
-          triggerHaptic([40, 60, 80]);
+          playChord([587.33, 739.99, 880.00, 1174.66, 1479.98], 0.1);
+          triggerHaptic([40, 70, 90]);
         }, 400);
       }
     });
