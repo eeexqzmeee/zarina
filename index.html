@@ -18,6 +18,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 :root {
@@ -54,6 +55,7 @@ html, body {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  overscroll-behavior: none;
 }
 
 button {
@@ -210,10 +212,12 @@ svg { display: block; }
    СКРОЛЛ-ХОЛСТ И СЦЕНЫ
    ============================================================ */
 #story {
+  height: 100vh;
   height: 100dvh;
   width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
   scroll-snap-type: y mandatory;
   scrollbar-width: none;
   position: relative;
@@ -225,7 +229,9 @@ svg { display: block; }
 
 .scene {
   position: relative;
+  min-height: 100vh;
   min-height: 100dvh;
+  height: 100vh;
   height: 100dvh;
   width: 100%;
   scroll-snap-align: start;
@@ -243,6 +249,7 @@ svg { display: block; }
 
 #s-letter {
   height: auto;
+  min-height: 100vh;
   min-height: 100dvh;
 }
 
@@ -627,7 +634,7 @@ svg { display: block; }
 }
 @keyframes haloBreathe {
   from { transform: scale(0.85); opacity: 0.4; }
-  to { transform: scale(1.4); opacity: 0.95); }
+  to { transform: scale(1.4); opacity: 0.95; }
 }
 .memory-rune-spark.collected {
   opacity: 0 !important;
@@ -1033,6 +1040,9 @@ svg { display: block; }
   color: #fff;
   animation: lanternSoar 3s infinite ease-in-out alternate !important;
 }
+.sky-lantern.wide {
+  grid-column: span 2;
+}
 .sky-lantern.master-lantern {
   grid-column: span 2;
   border: 1px dashed var(--rose-primary);
@@ -1215,6 +1225,16 @@ svg { display: block; }
 #audio-control .icon-muted { display: none; }
 #audio-control.muted .icon-playing { display: none; }
 #audio-control.muted .icon-muted { display: block; }
+
+/* Уважение к настройке "уменьшить анимацию" на устройстве */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -1406,7 +1426,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q4">
       <div class="quest-hud-icon"><span class="quest-flower-symbol">🌸</span></div>
-      <span class="quest-hud-text" id="txt-q4">Созвездие чувств: коснись качеств в правильном порядке</span>
+      <span class="quest-hud-text" id="txt-q4">Созвездие чувств: качества перемешались — коснись их по порядку цифр</span>
     </div>
 
     <div class="orbit-field">
@@ -1427,7 +1447,7 @@ svg { display: block; }
         <span class="orbit-pill-badge">IV</span>
       </div>
       <div class="orbit-pill" data-step="4" data-freq="987.77">
-        <span>Твой способность согревать словом</span>
+        <span>Твоя способность согревать словом</span>
         <span class="orbit-pill-badge">V</span>
       </div>
     </div>
@@ -1534,7 +1554,7 @@ svg { display: block; }
     <div class="sky-lanterns-grid">
       <div class="sky-lantern" data-type="minor"><span>[Жить вместе без ссор и разногласий]</span></div>
       <div class="sky-lantern" data-type="minor"><span>[Познакомиться с нашими родителями]</span></div>
-      <div class="sky-lantern" data-type="minor"><span>[Пожениться и завести ребенка</span></div>
+      <div class="sky-lantern wide" data-type="minor"><span>[Пожениться и завести ребенка]</span></div>
       <div class="sky-lantern master-lantern" id="master-lantern">
         <span id="master-lantern-txt">🔒 [Сокровенное общее желание заблокировано]</span>
       </div>
@@ -1554,7 +1574,7 @@ svg { display: block; }
 
     <div class="quest-hud" id="hud-q8">
       <div class="quest-hud-icon"><span class="quest-flower-symbol">🌸</span></div>
-      <span class="quest-hud-text" id="txt-q8">Коснись сферы 3 раза в унисон её пульсу (<span id="pulse-count">0</span>/3)</span>
+      <span class="quest-hud-text" id="txt-q8">Пробуди сердце Вселенной: 4 касания подряд, не дай ритму угаснуть (<span id="pulse-count">0</span>/4)</span>
     </div>
 
     <h2 class="final-title rise" style="--d:0.1">В самом сердце созвездия</h2>
@@ -1574,7 +1594,7 @@ svg { display: block; }
   <div class="gift-halo-avatar">
     <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
   </div>
-  <p>[Я люблюю тебя больше всех на свете]</p>
+  <p>[Я люблю тебя больше всех на свете]</p>
   <button class="gift-modal-close" id="gift-modal-dismiss">🌸 вернуться к звёздам 🌸</button>
 </div>
 
@@ -2052,7 +2072,7 @@ svg { display: block; }
   (function(){
     var box = document.querySelector('.frost-scratch-box');
     var canvas = document.getElementById('scratch-canvas');
-    var ctx2d = canvas.getContext('2d');
+    var ctx2d = canvas.getContext('2d', { willReadFrequently: true });
     var beacons = [
       document.getElementById('beacon-1'),
       document.getElementById('beacon-2'),
@@ -2066,14 +2086,18 @@ svg { display: block; }
     var curtainS4 = document.getElementById('curtain-s4');
 
     var isDrawing = false, cleared = false;
+    var interactionStarted = false;
     var beaconsFound = [false, false, false];
     var foundCount = 0;
-    var scratchedPixels = 0;
+    var lastMeasureTime = 0;
+    var CLEAR_THRESHOLD = 0.45;
     var lastX = 0, lastY = 0;
     var dpr = 1;
 
     function initCanvas() {
-      if (cleared) return;
+      // Как только зритель начал стирать иней, больше не пересоздаём холст —
+      // иначе прогресс стирания будет теряться при повороте экрана или повторном скролле.
+      if (cleared || interactionStarted) return;
       var w = box.clientWidth;
       var h = box.clientHeight;
       if (!w || !h) return;
@@ -2099,12 +2123,38 @@ svg { display: block; }
       }
     }
     window.initScratchLayer = initCanvas;
-    window.addEventListener('resize', initCanvas, { passive: true });
+    window.addEventListener('resize', function(){
+      if (!interactionStarted) initCanvas();
+    }, { passive: true });
+
+    function measureClearedRatio() {
+      var w = canvas.width, h = canvas.height;
+      if (!w || !h) return 0;
+      var step = 6;
+      var data;
+      try {
+        data = ctx2d.getImageData(0, 0, w, h).data;
+      } catch (e) {
+        return 0;
+      }
+      var total = 0, clearedN = 0;
+      for (var y = 0; y < h; y += step) {
+        for (var x = 0; x < w; x += step) {
+          var idx = (y * w + x) * 4 + 3;
+          total++;
+          if (data[idx] < 40) clearedN++;
+        }
+      }
+      return total ? (clearedN / total) : 0;
+    }
 
     function checkClearedPercentage() {
       if (cleared) return;
-      scratchedPixels++;
-      if (foundCount === 3 && scratchedPixels > 30) {
+      var now = Date.now();
+      if (now - lastMeasureTime < 120) return;
+      lastMeasureTime = now;
+
+      if (foundCount === 3 && measureClearedRatio() >= CLEAR_THRESHOLD) {
         cleared = true;
         canvas.style.opacity = '0';
         canvas.style.pointerEvents = 'none';
@@ -2153,6 +2203,7 @@ svg { display: block; }
     }
 
     canvas.addEventListener('pointerdown', function(e){
+      interactionStarted = true;
       isDrawing = true;
       try { canvas.setPointerCapture(e.pointerId); } catch(err) {}
       var rect = canvas.getBoundingClientRect();
@@ -2179,6 +2230,18 @@ svg { display: block; }
      8. КВЕСТ 4: КАМЕРТОН ДУШИ
      ============================================================ */
   (function(){
+    // Перемешиваем визуальный порядок карточек — теперь нужно ориентироваться
+    // на римские цифры-метки, а не просто нажимать сверху вниз.
+    var orbitField = document.querySelector('.orbit-field');
+    if (orbitField) {
+      var shuffled = Array.prototype.slice.call(orbitField.children);
+      for (var s = shuffled.length - 1; s > 0; s--) {
+        var r = Math.floor(Math.random() * (s + 1));
+        var tmp = shuffled[s]; shuffled[s] = shuffled[r]; shuffled[r] = tmp;
+      }
+      shuffled.forEach(function(el){ orbitField.appendChild(el); });
+    }
+
     var pills = document.querySelectorAll('.orbit-pill');
     var nextBtn = document.getElementById('btn-next-4');
     var hud = document.getElementById('hud-q4');
@@ -2247,12 +2310,14 @@ svg { display: block; }
     window.addEventListener('resize', updateContainerSize, { passive: true });
     updateContainerSize();
 
+    // Координаты хранятся как доли ширины/высоты контейнера и пересчитываются
+    // каждый кадр — при повороте экрана светлячки не "прыгают" мимо контейнера.
     var flyStates = flies.map(function(_, i){
       return {
-        baseX: (0.16 + (i % 3) * 0.34) * cw,
-        baseY: (0.2 + Math.floor(i / 3) * 0.44) * ch,
-        ampX: 14 + Math.random() * 8,
-        ampY: 10 + Math.random() * 8,
+        fracX: 0.16 + (i % 3) * 0.34,
+        fracY: 0.2 + Math.floor(i / 3) * 0.44,
+        ampX: 14 + i * 2.2 + Math.random() * 8,
+        ampY: 10 + i * 1.6 + Math.random() * 8,
         freqX: 0.6 + Math.random() * 0.4,
         freqY: 0.5 + Math.random() * 0.4,
         phase: i * 1.4,
@@ -2273,8 +2338,10 @@ svg { display: block; }
         p.evadeX += (p.targetEvadeX - p.evadeX) * 0.08;
         p.evadeY += (p.targetEvadeY - p.evadeY) * 0.08;
 
-        var x = p.baseX + Math.sin(t * p.freqX + p.phase) * p.ampX + p.evadeX;
-        var y = p.baseY + Math.cos(t * p.freqY + p.phase) * p.ampY + p.evadeY;
+        var baseX = p.fracX * cw;
+        var baseY = p.fracY * ch;
+        var x = baseX + Math.sin(t * p.freqX + p.phase) * p.ampX + p.evadeX;
+        var y = baseY + Math.cos(t * p.freqY + p.phase) * p.ampY + p.evadeY;
 
         el.style.transform = 'translate3d(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px, 0)';
       }
@@ -2289,8 +2356,8 @@ svg { display: block; }
 
       flyStates.forEach(function(p, i){
         if (flies[i].getAttribute('data-captured') === 'true') return;
-        var curX = p.baseX + p.evadeX;
-        var curY = p.baseY + p.evadeY;
+        var curX = p.fracX * cw + p.evadeX;
+        var curY = p.fracY * ch + p.evadeY;
         var dist = Math.hypot(mx - curX, my - curY);
 
         if (dist < 55) {
@@ -2348,6 +2415,7 @@ svg { display: block; }
      ============================================================ */
   (function(){
     var pressBtn = document.getElementById('wax-press-btn');
+    var waxCircle = document.querySelector('.wax-seal-circle');
     var progressCircle = document.getElementById('wax-progress-circle');
     var sealWrapper = document.getElementById('wax-seal-wrapper');
     var hint = document.getElementById('wax-hint');
@@ -2381,6 +2449,8 @@ svg { display: block; }
       try { pressBtn.setPointerCapture(e.pointerId); } catch(err) {}
       isHolding = true;
       startTime = Date.now();
+      progressCircle.style.transition = 'stroke-dashoffset 0.08s linear';
+      if (waxCircle) waxCircle.style.transform = 'scale(0.93)';
       hint.textContent = 'печать топится...';
       playTone(493.88, 0.04, 2.0);
       triggerHaptic(24);
@@ -2390,7 +2460,9 @@ svg { display: block; }
     function cancelHold() {
       if (!isHolding || isBroken) return;
       isHolding = false;
+      progressCircle.style.transition = 'stroke-dashoffset 0.6s ease-out';
       progressCircle.style.strokeDashoffset = circumference;
+      if (waxCircle) waxCircle.style.transform = 'scale(1)';
       hint.textContent = 'удерживай чуть дольше';
       triggerHaptic(12);
     }
@@ -2468,7 +2540,7 @@ svg { display: block; }
   })();
 
   /* ============================================================
-     12. КВЕСТ 8: СЕРДЦЕ СОЗВЕЗДИЯ (АНТИ-СПАМ ЗАЩИТА)
+     12. КВЕСТ 8: СЕРДЦЕ СОЗВЕЗДИЯ (РИТМ БЕЗ РЕЗКИХ СБРОСОВ)
      ============================================================ */
   (function(){
     var orb = document.getElementById('cosmic-orb-trigger');
@@ -2477,30 +2549,63 @@ svg { display: block; }
     var pulseCountEl = document.getElementById('pulse-count');
     var hud = document.getElementById('hud-q8');
     var hudTxt = document.getElementById('txt-q8');
-    
+    var originalHudHTML = hudTxt.innerHTML;
+
+    var REQUIRED_TAPS = 4;
+    var MIN_GAP = 300;   // защита от случайного двойного срабатывания одного касания
+    var MAX_GAP = 1500;  // сколько можно ждать до следующего касания, не потеряв ритм
+
     var taps = 0;
     var isOrbFinished = false;
     var lastTapTime = 0;
+    var fadeTimer = null;
+
+    function resetRhythm() {
+      taps = 0;
+      if (pulseCountEl) pulseCountEl.textContent = taps;
+      hudTxt.style.opacity = '0';
+      setTimeout(function(){
+        if (isOrbFinished) return;
+        hudTxt.textContent = '🌸 Ритм угас... начни заново 🌸';
+        hudTxt.style.opacity = '1';
+        setTimeout(function(){
+          if (isOrbFinished) return;
+          hudTxt.style.opacity = '0';
+          setTimeout(function(){
+            if (isOrbFinished) return;
+            hudTxt.innerHTML = originalHudHTML;
+            pulseCountEl = document.getElementById('pulse-count');
+            hudTxt.style.opacity = '1';
+          }, 300);
+        }, 1000);
+      }, 200);
+    }
 
     orb.addEventListener('click', function(){
       if (isOrbFinished) return;
-
       var now = Date.now();
-      if (now - lastTapTime < 450) {
+
+      if (taps > 0 && (now - lastTapTime) > MAX_GAP) {
+        if (fadeTimer) { clearTimeout(fadeTimer); fadeTimer = null; }
+        lastTapTime = now;
+        triggerHaptic([15, 15]);
+        resetRhythm();
         return;
       }
+      if (now - lastTapTime < MIN_GAP) return;
+
       lastTapTime = now;
+      if (fadeTimer) { clearTimeout(fadeTimer); fadeTimer = null; }
 
       taps++;
-      if (taps > 3) taps = 3;
-      pulseCountEl.textContent = taps;
+      if (pulseCountEl) pulseCountEl.textContent = taps;
 
       var rect = orb.getBoundingClientRect();
-      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 10 + taps * 4);
-      playTone(587.33 * Math.pow(1.15, taps), 0.055, 1.5);
-      triggerHaptic(18 * taps);
+      if (window.addBurstAt) window.addBurstAt(rect.left + rect.width / 2, rect.top + rect.height / 2, 8 + taps * 4);
+      playTone(587.33 * Math.pow(1.12, taps), 0.055, 1.4);
+      triggerHaptic(16 * taps);
 
-      if (taps === 3) {
+      if (taps === REQUIRED_TAPS) {
         isOrbFinished = true;
         orb.style.pointerEvents = 'none';
 
@@ -2510,6 +2615,10 @@ svg { display: block; }
             triggerHaptic([35, 60, 80]);
           }, 450);
         });
+      } else {
+        fadeTimer = setTimeout(function(){
+          if (!isOrbFinished) resetRhythm();
+        }, MAX_GAP);
       }
     });
 
